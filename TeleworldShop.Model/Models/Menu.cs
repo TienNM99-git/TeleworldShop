@@ -10,12 +10,15 @@ namespace TeleworldShop.Model.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
+        [MaxLength(50)]
         public string Name { get; set; }
         [Required]
+        [MaxLength(256)]
         public string URL { get; set; }
         public int? DisplayOrder { get; set; }
         [Required]     
         public int GroupId { get; set; }
+        [MaxLength(10)]
         public int Target { get; set; }
         [Required]
         public bool Status { get; set; }
