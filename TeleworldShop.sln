@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeleworldShop.Common", "TeleworldShop.Common\TeleworldShop.Common.csproj", "{80C118C3-7967-4E92-A9E2-D6BB25CA90F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeleworldShop.Model", "TeleworldShop.Model\TeleworldShop.Model.csproj", "{81459DAE-F778-401A-8670-46F8935FC521}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeleworldShop.Data", "TeleworldShop.Data\TeleworldShop.Data.csproj", "{1C6E189B-D8EE-4CCF-8687-259666909285}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeleworldShop.Service", "TeleworldShop.Service\TeleworldShop.Service.csproj", "{FB056B4D-1BA0-404E-9B4B-DEED99B29A63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeleworldShop.UnitTest", "TeleworldShop.UnitTest\TeleworldShop.UnitTest.csproj", "{A8FCEAF7-E2E3-4818-832A-3F96D0B3A5ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeleworldShop.Web", "TeleworldShop.Web\TeleworldShop.Web.csproj", "{A2AF2BEA-A0ED-4BC7-927F-6F73CE564FBB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{80C118C3-7967-4E92-A9E2-D6BB25CA90F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80C118C3-7967-4E92-A9E2-D6BB25CA90F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80C118C3-7967-4E92-A9E2-D6BB25CA90F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80C118C3-7967-4E92-A9E2-D6BB25CA90F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81459DAE-F778-401A-8670-46F8935FC521}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81459DAE-F778-401A-8670-46F8935FC521}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81459DAE-F778-401A-8670-46F8935FC521}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81459DAE-F778-401A-8670-46F8935FC521}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C6E189B-D8EE-4CCF-8687-259666909285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C6E189B-D8EE-4CCF-8687-259666909285}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C6E189B-D8EE-4CCF-8687-259666909285}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C6E189B-D8EE-4CCF-8687-259666909285}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB056B4D-1BA0-404E-9B4B-DEED99B29A63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB056B4D-1BA0-404E-9B4B-DEED99B29A63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB056B4D-1BA0-404E-9B4B-DEED99B29A63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB056B4D-1BA0-404E-9B4B-DEED99B29A63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8FCEAF7-E2E3-4818-832A-3F96D0B3A5ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8FCEAF7-E2E3-4818-832A-3F96D0B3A5ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8FCEAF7-E2E3-4818-832A-3F96D0B3A5ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8FCEAF7-E2E3-4818-832A-3F96D0B3A5ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2AF2BEA-A0ED-4BC7-927F-6F73CE564FBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2AF2BEA-A0ED-4BC7-927F-6F73CE564FBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2AF2BEA-A0ED-4BC7-927F-6F73CE564FBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2AF2BEA-A0ED-4BC7-927F-6F73CE564FBB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6991080B-2E1B-493B-96F5-58C8DEDCE645}
+	EndGlobalSection
+EndGlobal
