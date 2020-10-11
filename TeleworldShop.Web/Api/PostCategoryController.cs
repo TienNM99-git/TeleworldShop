@@ -1,10 +1,14 @@
-﻿using System.Net;
+﻿using AutoMapper;
+using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TeleworldShop.Model.Models;
 using TeleworldShop.Service;
 using TeleworldShop.Web.Infrastructure.Core;
-
+using TeleworldShop.Web.Mappings;
+using TeleworldShop.Web.Models;
+using TeleworldShop.Web.Infrastructure.Extensions;
 namespace TeleworldShop.Web.Api
 {
     [RoutePrefix("api/postcategory")]
@@ -22,13 +26,15 @@ namespace TeleworldShop.Web.Api
         {
             return CreateHttpResponse(requestMessage, () =>
             {
-                var listCategory = _postCategoryService.GetAll();
-                HttpResponseMessage responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, listCategory);
+                var listPostCategory = _postCategoryService.GetAll();
+                var mapper = new Mapper(AutoMapperConfiguration.Configure());
+                var listPostCategoryVm = mapper.Map<List<PostCategoryViewModel>>(listPostCategory);
+                HttpResponseMessage responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, listPostCategoryVm);
                 return responseMessage;
             });
         }
-
-        public HttpResponseMessage Post(HttpRequestMessage requestMessage, PostCategory postCategory)
+        [Route("add")]
+        public HttpResponseMessage Post(HttpRequestMessage requestMessage, PostCategoryViewModel postCategoryVm)
         {
             return CreateHttpResponse(requestMessage, () =>
             {
@@ -39,6 +45,8 @@ namespace TeleworldShop.Web.Api
                 }
                 else
                 {
+                    PostCategory postCategory = new PostCategory();
+                    postCategory.UpdatePostCategory(postCategoryVm);
                     var category = _postCategoryService.Add(postCategory);
                     _postCategoryService.Save();
                     responseMessage = requestMessage.CreateResponse(HttpStatusCode.Created, category);
@@ -46,8 +54,8 @@ namespace TeleworldShop.Web.Api
                 return responseMessage;
             });
         }
-
-        public HttpResponseMessage Put(HttpRequestMessage requestMessage, PostCategory postCategory)
+        [Route("update")]
+        public HttpResponseMessage Put(HttpRequestMessage requestMessage, PostCategoryViewModel postCategoryVm)
         {
             return CreateHttpResponse(requestMessage, () =>
             {
@@ -58,7 +66,9 @@ namespace TeleworldShop.Web.Api
                 }
                 else
                 {
-                    _postCategoryService.Update(postCategory);
+                    var postCategoryDb = _postCategoryService.GetById(postCategoryVm.Id);
+                    postCategoryDb.UpdatePostCategory(postCategoryVm);
+                    _postCategoryService.Update(postCategoryDb);
                     _postCategoryService.Save();
                     responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK);
                 }
