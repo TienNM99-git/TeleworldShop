@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,7 +9,7 @@ using TeleworldShop.Model.Models;
 
 namespace TeleworldShop.Data
 {
-    public class TeleworldShopDbContext : DbContext
+    public class TeleworldShopDbContext : IdentityDbContext<ApplicationUser>
     {
         public TeleworldShopDbContext() : base("TeleworldShopConnection")
         {
@@ -33,9 +34,16 @@ namespace TeleworldShop.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<VisitorStatistic> VisitorStatistics { get; set; }
         public DbSet<Error> Errors { get; set; }
+        public static TeleworldShopDbContext Create()
+        {
+            return new TeleworldShopDbContext();
+        }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId }).ToTable("ApplicationUserRoles");
+            modelBuilder.Entity<IdentityUserLogin>().HasKey(i => i.UserId).ToTable("ApplicationUserLogins");
+            modelBuilder.Entity<IdentityRole>().ToTable("ApplicationRoles");
+            modelBuilder.Entity<IdentityUserClaim>().HasKey(i => i.UserId).ToTable("ApplicationUserClaims");
         }
     }
 }
