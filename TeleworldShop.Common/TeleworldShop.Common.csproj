@@ -49,5 +49,8 @@
     <Compile Include="StringHelper.cs" />
     <Compile Include="ViewModels\RevenueStatisticViewModel.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="package.json" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
