@@ -246,6 +246,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\app.routes.js" />
+    <Content Include="app\app.js" />
+    <Content Include="app\components\products\productEditController.js" />
+    <Content Include="app\components\products\productAddController.js" />
+    <Content Include="app\components\products\product.routes.js" />
+    <Content Include="app\components\products\productListController.js" />
+    <Content Include="app\components\products\productAddView.html" />
+    <Content Include="app\components\products\productEditView.html" />
+    <Content Include="app\components\products\productListView.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\plugins\angular\angular-animate.js" />
@@ -1059,7 +1068,18 @@
     <Content Include="Scripts\version.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\admin\" />
+    <Folder Include="app\components\orders\" />
+    <Folder Include="app\components\product_categories\" />
+    <Folder Include="app\components\roles\" />
+    <Folder Include="app\components\users\" />
+    <Folder Include="app\shared\directive\" />
+    <Folder Include="app\shared\footer\" />
+    <Folder Include="app\shared\navigation\" />
+    <Folder Include="app\shared\services\" />
+    <Folder Include="Assets\admin\css\" />
+    <Folder Include="Assets\admin\img\" />
+    <Folder Include="Assets\admin\js\" />
+    <Folder Include="Assets\admin\libs\" />
     <Folder Include="Assets\client\" />
   </ItemGroup>
   <ItemGroup>
