@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "directories": {
+    "lib": ".Assets/admin/libs"
+  },
+  "devDependencies": {
+    "angular": "~1.5.5",
+    "@uirouter/angularjs": "latest",
+    "@uirouter/visualizer": "latest"
+  }
+}
