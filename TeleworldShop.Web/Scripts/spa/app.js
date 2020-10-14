@@ -1,6 +1,7 @@
 ﻿var myApp = angular.module("myModule", []);
 
 myApp.controller("schoolController", schoolController);
+myApp.directive("teleworldShopDirective", teleworldShopDirective);
 myApp.service("Validator", Validator);
 schoolController.$inject = ["$scope", "Validator"];
 function schoolController($scope, Validator) {
@@ -21,4 +22,10 @@ function Validator($window) {
             return "This is odd";
         }
     }
+}
+function teleworldShopDirective() {
+    return {
+        restrict:"A",
+        templateUrl: "/Scripts/spa/teleworldShopDirective.html"
+    };
 }
