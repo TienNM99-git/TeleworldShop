@@ -4,14 +4,23 @@
 
 <!DOCTYPE html>
 
-<html>
+<html ng-app="myModule">
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
     <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/spa/app.js"></script>
 </head>
 <body>
-    <div>
+    <div ng-controller="schoolController">
+        <div teleworld-shop-directive>
+
+        </div>
+        <input type="number" ng-model="num"/> Value of textbox:{{num}}
+        <button ng-click="checkNumber()">Check number</button>
+        <br/>
+        {{message}}
     </div>
+   
 </body>
 </html>
