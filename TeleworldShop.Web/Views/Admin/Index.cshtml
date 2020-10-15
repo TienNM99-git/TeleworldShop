@@ -179,21 +179,21 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../../index.html" class="nav-link">
+                                    <a ui-sref="product_edit" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v1</p>
+                                        <p>Edit</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../../index2.html" class="nav-link">
+                                    <a ui-sref="product_add" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v2</p>
+                                        <p>Add product</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../../index3.html" class="nav-link">
+                                    <a ui-sref="products" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v3</p>
+                                        <p>Product List</p>
                                     </a>
                                 </li>
                             </ul>
@@ -731,9 +731,11 @@
     <!--Begin embed angularJS-->
     <script src="~/Assets/admin/libs/angular/angular.js"></script>
     <script src="~/Assets/admin/libs/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="~/app/shared/modules/teleworldshop.common.js"></script>    <script src="~/app/components/products/products.module.js"></script>
+    <script src="~/app/shared/modules/teleworldshop.common.js"></script>
+    <script src="~/app/components/products/products.module.js"></script>
     <script src="~/app/app.js"></script>
     <script src="~/app/components/products/productAddController.js"></script>
+    <script src="~/app/components/products/productEditController.js"></script>
     <script src="~/app/components/products/productListController.js"></script>
     <script src="~/app/components/home/homeController.js"></script>
 </body>
