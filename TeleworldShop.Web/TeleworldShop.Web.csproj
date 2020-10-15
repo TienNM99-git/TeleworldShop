@@ -258,7 +258,6 @@
     <Content Include="app\components\products\productListController.js" />
     <Content Include="app\components\products\productEditView.html" />
     <Content Include="app\components\products\productListView.html" />
-    <Content Include="Resources\TeleworldShop.sql" />
     <Content Include="Assets\admin\css\adminlte.css" />
     <Content Include="Assets\admin\css\adminlte.min.css" />
     <Content Include="Assets\admin\css\alt\adminlte.components.css" />
@@ -1994,6 +1993,7 @@
     <Folder Include="app\shared\navigation\" />
     <Folder Include="app\shared\services\" />
     <Folder Include="Assets\client\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2129,7 +2129,6 @@
     <Content Include="Assets\admin\libs\angular-ui-router\CONTRIBUTING.md" />
     <Content Include="Assets\admin\libs\angular-ui-router\LICENSE" />
     <Content Include="Assets\admin\libs\angular-ui-router\README.md" />
-    <Content Include="Resources\AdminLTE-3.0.5.zip" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
