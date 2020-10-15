@@ -2124,8 +2124,6 @@
     <Content Include="Assets\admin\js\adminlte.js.map" />
     <Content Include="Assets\admin\js\adminlte.min.js.map" />
     <Content Include="app\shared\modules\teleworldshop.common.js" />
-    <Content Include="Assets\admin\libs\angular-ui-router\.bower.json" />
-    <Content Include="Assets\admin\libs\angular-ui-router\bower.json" />
     <Content Include="Assets\admin\libs\angular-ui-router\CHANGELOG.md" />
     <Content Include="Assets\admin\libs\angular-ui-router\CONTRIBUTING.md" />
     <Content Include="Assets\admin\libs\angular-ui-router\LICENSE" />
