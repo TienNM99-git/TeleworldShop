@@ -16,7 +16,7 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" ng-app="teleworldshop">
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->
@@ -145,7 +145,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="../../index3.html" class="brand-link">
-                <img src="../../dist/img/AdminLTELogo.png"
+                <img src="~/Assets/admin/img/AdminLTELogo.png"
                      alt="AdminLTE Logo"
                      class="brand-image img-circle elevation-3"
                      style="opacity: .8">
@@ -702,55 +702,11 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Blank Page</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Blank Page</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div><!-- /.container-fluid -->
-            </section>
+            <div ui-view>
 
-            <!-- Main content -->
-            <section class="content">
-
-                <!-- Default box -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Title</h3>
-
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        Start creating your amazing application!
-                    </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer">
-                        Footer
-                    </div>
-                    <!-- /.card-footer-->
-                </div>
-                <!-- /.card -->
-            </section>
-            <!-- /.content -->
+            </div>
         </div>
         <!-- /.content-wrapper -->
-
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 3.0.5
@@ -772,7 +728,13 @@
     <script src="~/Assets/admin/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/Assets/admin/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="~/Assets/admin/js/demo.js"></script>
+    <!--Begin embed angularJS-->
+    <script src="~/Assets/admin/libs/angular/angular.js"></script>
+    <script src="~/Assets/admin/libs/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="~/app/shared/modules/teleworldshop.common.js"></script>    <script src="~/app/components/products/products.module.js"></script>
+    <script src="~/app/app.js"></script>
+    <script src="~/app/components/products/productAddController.js"></script>
+    <script src="~/app/components/products/productListController.js"></script>
+    <script src="~/app/components/home/homeController.js"></script>
 </body>
 </html>

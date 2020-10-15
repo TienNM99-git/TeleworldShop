@@ -248,11 +248,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\app.routes.js" />
     <Content Include="app\app.js" />
+    <Content Include="app\components\home\homeController.js" />
+    <Content Include="app\components\home\homeView.html" />
     <Content Include="app\components\products\productEditController.js" />
     <Content Include="app\components\products\productAddController.js" />
-    <Content Include="app\components\products\product.routes.js" />
+    <Content Include="app\components\products\products.module.js" />
     <Content Include="app\components\products\productListController.js" />
     <Content Include="app\components\products\productAddView.html" />
     <Content Include="app\components\products\productEditView.html" />
@@ -1972,7 +1973,6 @@
     <Content Include="Assets\admin\libs\toastr\toastr.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="package.json" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2031,12 +2031,6 @@
     <Content Include="Assets\admin\libs\angular-local-storage\LICENSE" />
     <Content Include="Assets\admin\libs\angular-local-storage\package.json" />
     <Content Include="Assets\admin\libs\angular-local-storage\README.md" />
-    <Content Include="Assets\admin\libs\angular-ui-router\.bower.json" />
-    <Content Include="Assets\admin\libs\angular-ui-router\bower.json" />
-    <Content Include="Assets\admin\libs\angular-ui-router\CHANGELOG.md" />
-    <Content Include="Assets\admin\libs\angular-ui-router\CONTRIBUTING.md" />
-    <Content Include="Assets\admin\libs\angular-ui-router\LICENSE" />
-    <Content Include="Assets\admin\libs\angular-ui-router\README.md" />
     <Content Include="Assets\admin\libs\angular\.bower.json" />
     <Content Include="Assets\admin\libs\angular\angular.min.js.gzip" />
     <Content Include="Assets\admin\libs\angular\angular.min.js.map" />
@@ -2129,6 +2123,13 @@
     <Content Include="Assets\admin\css\alt\adminlte.plugins.min.css.map" />
     <Content Include="Assets\admin\js\adminlte.js.map" />
     <Content Include="Assets\admin\js\adminlte.min.js.map" />
+    <Content Include="app\shared\modules\teleworldshop.common.js" />
+    <Content Include="Assets\admin\libs\angular-ui-router\.bower.json" />
+    <Content Include="Assets\admin\libs\angular-ui-router\bower.json" />
+    <Content Include="Assets\admin\libs\angular-ui-router\CHANGELOG.md" />
+    <Content Include="Assets\admin\libs\angular-ui-router\CONTRIBUTING.md" />
+    <Content Include="Assets\admin\libs\angular-ui-router\LICENSE" />
+    <Content Include="Assets\admin\libs\angular-ui-router\README.md" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
