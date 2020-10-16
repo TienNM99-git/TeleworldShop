@@ -8,9 +8,9 @@ namespace TeleworldShop.Service
 {
     public interface IProductCategoryService
     {
-        ProductCategory Add(ProductCategory ProductCategory);
+        ProductCategory Add(ProductCategory productCategory);
 
-        void Update(ProductCategory ProductCategory);
+        void Update(ProductCategory productCategory);
 
         ProductCategory Delete(int id);
 
@@ -27,47 +27,47 @@ namespace TeleworldShop.Service
 
     public class ProductCategoryService : IProductCategoryService
     {
-        private IProductCategoryRepository _ProductCategoryRepository;
+        private IProductCategoryRepository _productCategoryRepository;
         private IUnitOfWork _unitOfWork;
 
-        public ProductCategoryService(IProductCategoryRepository ProductCategoryRepository, IUnitOfWork unitOfWork)
+        public ProductCategoryService(IProductCategoryRepository productCategoryRepository, IUnitOfWork unitOfWork)
         {
-            this._ProductCategoryRepository = ProductCategoryRepository;
+            this._productCategoryRepository = productCategoryRepository;
             this._unitOfWork = unitOfWork;
         }
 
-        public ProductCategory Add(ProductCategory ProductCategory)
+        public ProductCategory Add(ProductCategory productCategory)
         {
-            return _ProductCategoryRepository.Add(ProductCategory);
+            return _productCategoryRepository.Add(productCategory);
         }
 
         public ProductCategory Delete(int id)
         {
-            return _ProductCategoryRepository.Delete(id);
+            return _productCategoryRepository.Delete(id);
         }
 
         public IEnumerable<ProductCategory> GetAll()
         {
-            return _ProductCategoryRepository.GetAll();
+            return _productCategoryRepository.GetAll();
         }
 
         public IEnumerable<ProductCategory> GetAll(string keyword)
         {
             if (!string.IsNullOrEmpty(keyword))
-                return _ProductCategoryRepository.GetMulti(x => x.Name.Contains(keyword) || x.Description.Contains(keyword));
+                return _productCategoryRepository.GetMulti(x => x.Name.Contains(keyword) || x.Description.Contains(keyword));
             else
-                return _ProductCategoryRepository.GetAll();
+                return _productCategoryRepository.GetAll();
 
         }
 
         public IEnumerable<ProductCategory> GetAllByParentId(int parentId)
         {
-            return _ProductCategoryRepository.GetMulti(x => x.Status && x.ParentId == parentId);
+            return _productCategoryRepository.GetMulti(x => x.Status && x.ParentId == parentId);
         }
 
         public ProductCategory GetById(int id)
         {
-            return _ProductCategoryRepository.GetSingleById(id);
+            return _productCategoryRepository.GetSingleById(id);
         }
 
         public void Save()
@@ -75,9 +75,9 @@ namespace TeleworldShop.Service
             _unitOfWork.Commit();
         }
 
-        public void Update(ProductCategory ProductCategory)
+        public void Update(ProductCategory productCategory)
         {
-            _ProductCategoryRepository.Update(ProductCategory);
+            _productCategoryRepository.Update(productCategory);
         }
     }
 }

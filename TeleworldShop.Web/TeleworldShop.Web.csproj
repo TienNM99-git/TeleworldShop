@@ -216,6 +216,8 @@
   <ItemGroup>
     <Compile Include="Api\AccountController.cs" />
     <Compile Include="Api\PostCategoryController.cs" />
+    <Compile Include="Api\ProductCategoryController.cs" />
+    <Compile Include="Api\ProductController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -229,6 +231,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Core\ApiControllerBase.cs" />
+    <Compile Include="Infrastructure\Core\PaginationSet.cs" />
     <Compile Include="Infrastructure\Extensions\EntityExtensions.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Models\ContactDetailViewModel.cs" />
@@ -258,6 +261,9 @@
     <Content Include="app\components\products\productListController.js" />
     <Content Include="app\components\products\productEditView.html" />
     <Content Include="app\components\products\productListView.html" />
+    <Content Include="app\components\product_categories\productCategoryListController.js" />
+    <Content Include="app\components\product_categories\productCategoryListView.html" />
+    <Content Include="app\shared\services\apiService.js" />
     <Content Include="Assets\admin\css\adminlte.css" />
     <Content Include="Assets\admin\css\adminlte.min.css" />
     <Content Include="Assets\admin\css\alt\adminlte.components.css" />
@@ -1985,13 +1991,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\components\orders\" />
-    <Folder Include="app\components\product_categories\" />
     <Folder Include="app\components\roles\" />
     <Folder Include="app\components\users\" />
     <Folder Include="app\shared\directive\" />
     <Folder Include="app\shared\footer\" />
     <Folder Include="app\shared\navigation\" />
-    <Folder Include="app\shared\services\" />
     <Folder Include="Assets\client\" />
     <Folder Include="Resources\" />
   </ItemGroup>
@@ -2129,6 +2133,7 @@
     <Content Include="Assets\admin\libs\angular-ui-router\CONTRIBUTING.md" />
     <Content Include="Assets\admin\libs\angular-ui-router\LICENSE" />
     <Content Include="Assets\admin\libs\angular-ui-router\README.md" />
+    <Content Include="app\components\product_categories\productCategories.module.js" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

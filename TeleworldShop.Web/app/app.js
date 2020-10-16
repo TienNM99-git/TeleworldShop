@@ -1,6 +1,10 @@
 ﻿/// <reference path="../assets/admin/libs/angular/angular.js" />
 (function () {
-    angular.module('teleworldshop',['teleworldshop.products', 'teleworldshop.common']).config(config);
+    angular.module('teleworldshop',
+        ['teleworldshop.products',
+        'teleworldshop.product_categories',
+        'teleworldshop.common'])
+        .config(config);
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
     function config($stateProvider, $urlRouterProvider) {
         $stateProvider.state('home', {
