@@ -338,8 +338,8 @@
     <Content Include="Assets\admin\libs\angular-local-storage\dist\angular-local-storage.js" />
     <Content Include="Assets\admin\libs\angular-local-storage\dist\angular-local-storage.min.js" />
     <Content Include="Assets\admin\libs\angular-local-storage\index.js" />
-    <Content Include="Assets\admin\libs\angular-ui-router\release\angular-ui-router.js" />
-    <Content Include="Assets\admin\libs\angular-ui-router\release\angular-ui-router.min.js" />
+    <Content Include="Assets\admin\libs\angular-ui-router\libs\angular-ui-router.js" />
+    <Content Include="Assets\admin\libs\angular-ui-router\libs\angular-ui-router.min.js" />
     <Content Include="Assets\admin\libs\angular-ui-router\src\common.js" />
     <Content Include="Assets\admin\libs\angular-ui-router\src\resolve.js" />
     <Content Include="Assets\admin\libs\angular-ui-router\src\state.js" />

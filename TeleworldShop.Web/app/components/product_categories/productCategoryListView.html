@@ -1,1 +1,65 @@
-﻿<h1>Product Categories</h1>
+﻿   <!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Home page</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Product</a></li>
+                    <li class="breadcrumb-item active">Product Categories</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Product Categories</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">Id</th>
+                                <th>Category name</th>
+                                <th>Created date</th>
+                                <th style="width: 40px">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in productCategories">
+                                <td>{{item.Id}}</td>
+                                <td>{{item.Name}}</td>
+                                <td>{{item.CreatedDate}}</td>
+                                <td><span class="badge bg-danger">{{item.Status}}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+            </div>
+            <!-- /.card-footer-->
+        </div>
+        <!-- /.card -->
+</section>
+<!-- /.content -->
