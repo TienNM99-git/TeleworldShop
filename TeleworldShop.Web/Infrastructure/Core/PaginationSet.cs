@@ -16,6 +16,8 @@ namespace TeleworldShop.Web.Infrastructure.Core
         }
 
         public int TotalPages { set; get; }
+       
+        //Total number of records
         public int TotalCount { set; get; }
         public int MaxPage { set; get; }
         public IEnumerable<T> Items { set; get; }
