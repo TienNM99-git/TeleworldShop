@@ -16,7 +16,7 @@ using TeleworldShop.Web.Mappings;
 namespace TeleworldShop.Web.Api
 {
     [RoutePrefix("api/productcategory")]
-    [Authorize]
+    //[Authorize]
     public class ProductCategoryController : ApiControllerBase
     {
         #region Initialize
