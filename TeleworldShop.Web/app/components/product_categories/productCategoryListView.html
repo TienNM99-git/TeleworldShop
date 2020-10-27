@@ -78,7 +78,7 @@
                         <tfoot>
                             <tr>
                                 <td colspan="5">
-                                    Total records: {{totalCount}}
+                                    <span class="pull-right">Page: {{page+1}} -- Total records: {{totalCount}}</span>
                                 </td>
                             </tr>
                         </tfoot>
@@ -92,7 +92,6 @@
                                  pages-count="{{pagesCount}}" 
                                  total-count="{{totalCount}}" 
                                  search-func="getProductCategories(page)">
-
                 </pager-directive>
             </div>
             <!-- /.card-footer-->
