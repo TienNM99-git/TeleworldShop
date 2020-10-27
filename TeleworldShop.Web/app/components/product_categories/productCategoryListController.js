@@ -8,9 +8,13 @@
         $scope.page = 0;
         $scope.pagesCount = 0;
         $scope.keyword = '';
-        $scope.getProductCagories = getProductCagories;
+        $scope.getProductCategories = getProductCategories;
 
-        function getProductCagories(page) {
+        $scope.search = search;
+        function search() {
+            getProductCategories();
+        }
+        function getProductCategories(page) {
             page = page || 0;
             var config = {
                 params: {
@@ -29,6 +33,6 @@
             });
         }
 
-        $scope.getProductCagories();
+        $scope.getProductCategories();
     }
 })(angular.module('teleworldshop.product_categories'));

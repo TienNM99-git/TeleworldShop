@@ -22,7 +22,6 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Product Categories</h3>
-
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i>
@@ -33,6 +32,16 @@
             </div>
         </div>
         <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" ng-model="keyword" placeholder="Keyword">
+                        <span class="input-group-append">
+                            <button class="btn btn-default" type="button" ng-click="search()" id="btnGroupAddon">Search</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-bordered">
@@ -66,6 +75,13 @@
                                 </td>
                             </tr>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">
+                                    Total records: {{totalCount}}
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -75,12 +91,13 @@
                                  custom-path="{{customPath}}" 
                                  pages-count="{{pagesCount}}" 
                                  total-count="{{totalCount}}" 
-                                 search-func="getProductCagories(page)">
+                                 search-func="getProductCategories(page)">
 
                 </pager-directive>
             </div>
             <!-- /.card-footer-->
         </div>
         <!-- /.card -->
+    </div>
 </section>
 <!-- /.content -->
