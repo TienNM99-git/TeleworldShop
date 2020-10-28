@@ -51,7 +51,6 @@
                 else if (failure != null) {
                     failure(error);
                 }
-
             });
         }
         function get(url, params, success, failure) {
