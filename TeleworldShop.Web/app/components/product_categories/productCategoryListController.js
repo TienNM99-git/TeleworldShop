@@ -27,9 +27,9 @@
                 if (result.data.TotalCount == 0) {
                     notificationService.displayWarning('No record found');
                 }
-                else {
-                    notificationService.displaySuccess('Found ' + result.data.TotalCount + (result.data.TotalCount == 1 ? ' record!!!':' records!!!'));
-                }
+                //else {
+                //    notificationService.displaySuccess('Found ' + result.data.TotalCount + (result.data.TotalCount == 1 ? ' record!!!':' records!!!'));
+                //}
                 $scope.productCategories = result.data.Items;
                 $scope.page = result.data.Page;
                 $scope.pagesCount = result.data.TotalPages;
