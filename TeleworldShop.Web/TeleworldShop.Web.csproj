@@ -285,6 +285,7 @@
     <Content Include="Assets\admin\css\alt\adminlte.pages.min.css" />
     <Content Include="Assets\admin\css\alt\adminlte.plugins.css" />
     <Content Include="Assets\admin\css\alt\adminlte.plugins.min.css" />
+    <Content Include="Assets\admin\css\custom.css" />
     <Content Include="Assets\admin\img\AdminLTELogo.png" />
     <Content Include="Assets\admin\img\avatar.png" />
     <Content Include="Assets\admin\img\avatar04.png" />
