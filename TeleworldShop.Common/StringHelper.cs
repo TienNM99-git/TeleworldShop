@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace TeleworldShop.Common
 {
+    //For convert a string to unsigned
     public class StringHelper
     {
         public static string ToUnsignString(string input)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -9,9 +10,7 @@ namespace TeleworldShop.Web.Models
     public class ProductViewModel
     {
         public int Id { set; get; }
-
         public string Name { set; get; }
-
         public string Alias { set; get; }
 
         public int CategoryId { set; get; }
