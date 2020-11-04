@@ -8,6 +8,7 @@
         $scope.page = 0;
         $scope.pagesCount = 0;
         $scope.keyword = '';
+        
         $scope.getProducts = getProducts;
         $scope.search = search;
 
