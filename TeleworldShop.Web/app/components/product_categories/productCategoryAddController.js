@@ -7,7 +7,7 @@
         $scope.productCategory = {
             CreatedDate: new Date(),
             Status: true,
-            Name: "Refridgerator",
+            //Name: "Refridgerator",
             Alias: "refridgerator",
             Description: "Refridgerator from Mitsubishi, Sharp, ...",
             DisplayOrder: 100,
