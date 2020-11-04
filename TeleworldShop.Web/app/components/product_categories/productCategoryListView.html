@@ -43,7 +43,8 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                     <button class="btn btn-success" type="button" ui-sref="add_product_category">Add new</button>
+                    <button class="btn btn-success" type="button" ui-sref="add_product_category">Add new</button>
+                    <button class="btn btn-danger" type="button" ng-click="deleteMultiple()" id="btnDelete" disabled="disabled">Delete</button>
                 </div>
             </div>
             <div class="row">
@@ -51,6 +52,7 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
+                                <td><label><input name="all" type="checkbox" ng-click="selectAll()" /></label></td>
                                 <th style="width: 5%">Id</th>
                                 <th style="width: 55%">Category name</th>
                                 <th style="width: 20%">Created date</th>
@@ -60,6 +62,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="item in productCategories">
+                                <td><input type="checkbox" ng-model="item.checked" name="all"/></td>
                                 <td>{{item.Id}}</td>
                                 <td>{{item.Name}}</td>
                                 <td>{{item.CreatedDate | date:'dd/MM/yyyy hh:mm:ss'}}</td>
@@ -73,7 +76,7 @@
                                     <button class="btn btn-sm btn-primary" ui-sref="edit_product_category({id:item.Id})">
                                         <i class="fa fa-pen"></i>
                                     </button>
-                                    <button class="btn btn-sm btn-danger">
+                                    <button class="btn btn-sm btn-danger" ng-click="deleteProductCategory(item.Id)">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </td>

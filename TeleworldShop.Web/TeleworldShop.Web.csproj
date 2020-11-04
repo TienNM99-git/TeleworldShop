@@ -364,6 +364,8 @@
     <Content Include="Assets\admin\libs\angular\angular.js" />
     <Content Include="Assets\admin\libs\angular\angular.min.js" />
     <Content Include="Assets\admin\libs\angular\index.js" />
+    <Content Include="Assets\admin\libs\bootbox\.gitignore" />
+    <Content Include="Assets\admin\libs\bootbox\bootbox.js" />
     <Content Include="Assets\admin\libs\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Assets\admin\libs\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
     <Content Include="Assets\admin\libs\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
@@ -1561,6 +1563,18 @@
     <Content Include="Assets\admin\libs\moment\moment-with-locales.js" />
     <Content Include="Assets\admin\libs\moment\moment-with-locales.min.js" />
     <Content Include="Assets\admin\libs\moment\moment.min.js" />
+    <Content Include="Assets\admin\libs\ngBootbox\dist\ngBootbox.js" />
+    <Content Include="Assets\admin\libs\ngBootbox\dist\ngBootbox.min.js" />
+    <Content Include="Assets\admin\libs\ngBootbox\examples\example-1\app.js" />
+    <Content Include="Assets\admin\libs\ngBootbox\examples\example-1\custom-dialog.tpl.html" />
+    <Content Include="Assets\admin\libs\ngBootbox\examples\example-1\index.html" />
+    <Content Include="Assets\admin\libs\ngBootbox\examples\example-2\app.js" />
+    <Content Include="Assets\admin\libs\ngBootbox\examples\example-2\index.html" />
+    <Content Include="Assets\admin\libs\ngBootbox\examples\example-2\main.js" />
+    <Content Include="Assets\admin\libs\ngBootbox\examples\example-2\require.js" />
+    <Content Include="Assets\admin\libs\ngBootbox\examples\index.html" />
+    <Content Include="Assets\admin\libs\ngBootbox\gulpfile.js" />
+    <Content Include="Assets\admin\libs\ngBootbox\ngBootbox.js" />
     <Content Include="Assets\admin\libs\overlayScrollbars\css\OverlayScrollbars.css" />
     <Content Include="Assets\admin\libs\overlayScrollbars\css\OverlayScrollbars.min.css" />
     <Content Include="Assets\admin\libs\overlayScrollbars\js\jquery.overlayScrollbars.js" />
@@ -2142,6 +2156,18 @@
     <Content Include="Assets\admin\libs\angular-ui-router\LICENSE" />
     <Content Include="Assets\admin\libs\angular-ui-router\README.md" />
     <Content Include="app\components\product_categories\productCategories.module.js" />
+    <Content Include="Assets\admin\libs\bootbox\.jshintrc" />
+    <Content Include="Assets\admin\libs\bootbox\.npmignore" />
+    <Content Include="Assets\admin\libs\bootbox\.travis.yml" />
+    <Content Include="Assets\admin\libs\bootbox\CONTRIBUTING.md" />
+    <Content Include="Assets\admin\libs\bootbox\LICENSE.md" />
+    <Content Include="Assets\admin\libs\bootbox\package.json" />
+    <Content Include="Assets\admin\libs\bootbox\README.md" />
+    <Content Include="Assets\admin\libs\ngBootbox\.bower.json" />
+    <Content Include="Assets\admin\libs\ngBootbox\bower.json" />
+    <Content Include="Assets\admin\libs\ngBootbox\package.json" />
+    <Content Include="Assets\admin\libs\ngBootbox\README.md" />
+    <Content Include="Assets\admin\libs\ngBootbox\tsd.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -2171,6 +2197,9 @@
     <TypeScriptCompile Include="Assets\admin\libs\fullcalendar-interaction\main.d.ts" />
     <TypeScriptCompile Include="Assets\admin\libs\fullcalendar-timegrid\main.d.ts" />
     <TypeScriptCompile Include="Assets\admin\libs\fullcalendar\main.d.ts" />
+    <TypeScriptCompile Include="Assets\admin\libs\ngBootbox\typings\angularjs\angular.d.ts" />
+    <TypeScriptCompile Include="Assets\admin\libs\ngBootbox\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Assets\admin\libs\ngBootbox\typings\tsd.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

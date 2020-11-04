@@ -1,3 +1,3 @@
 ﻿(function () {
-    angular.module('teleworldshop.common', ['ui.router'])
+    angular.module('teleworldshop.common', ['ui.router','ngBootbox'])
 })();
