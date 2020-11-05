@@ -29,19 +29,22 @@
         <form class="form-horizontal" novalidate name="frmAddProduct" role="form" ng-submit="AddProduct()">
             <div class="card-body">
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Product Name</label>
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Product name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" required name="name" ng-change="GetSeoTitle()" ng-maxlength="256" ng-model="product.Name">
+                        <input type="text" class="form-control" ng-change="GetSeoTitle()" ng-maxlength="256" required name="name" ng-model="product.Name">
                         <span ng-show="frmAddProduct.name.$invalid" class="has-error">Product name is required</span>
                         <span ng-show="frmAddProduct.name.$error.maxlength" class="has-error">Product name can not exceed 256 digits</span>
+
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">SEO Title</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="alias" ng-maxlength="256" required ng-model="product.Alias">
-                        <span ng-show="frmAddProduct.alias.$invalid" class="has-error">Alias is required</span>
-                        <span ng-show="frmAddProduct.alias.$error.maxlength" class="has-error">Alias can not exceed 256 digits</span>
+                        <input type="text" class="form-control" name="alias" required ng-model="product.Alias">
+                        <span ng-show="frmAddProduct.alias.$invalid" class="has-error">SEO Title</span>
+                        <span ng-show="frmAddProduct.alias.$error.maxlength" class="has-error">SEO title can not exceed 256 digits</span>
+
+
                     </div>
                 </div>
                 <div class="form-group row">
@@ -68,6 +71,13 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Original Price</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" name="originalPrice" required ng-model="product.OriginalPrice">
+                        <span ng-show="frmAddProduct.originalPrice.$invalid" class="has-error">Original price is required</span>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Price</label>
                     <div class="col-sm-10">
                         <input type="number" class="form-control" name="price" required ng-model="product.Price">
@@ -81,11 +91,26 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Số lượng</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" name="quantity" ng-model="product.Quantity">
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Image</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="image" ng-maxlength="256" ng-model="product.Image">
                         <span ng-show="frmAddProduct.image.$error.maxlength" class="has-error">Image can not exceed 256 digits</span>
                         <button class="btn btn-default" type="button" ng-click="ChooseImage()">Choose Image</button>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Choose More Image</label>
+                    <div class="col-sm-10">
+                        <ul class="list-inline">
+                            <li ng-repeat="img in moreImages"><img ng-src="{{img}}" width="100" /></li>
+                        </ul>
+                        <button class="btn btn-default" type="button" ng-click="ChooseMoreImage()">Choose Image</button>
                     </div>
                 </div>
                 <div class="form-group row">
