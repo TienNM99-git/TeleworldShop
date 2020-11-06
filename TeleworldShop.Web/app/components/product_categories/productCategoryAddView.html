@@ -31,19 +31,24 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Category Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="name" ng-model="productCategory.Name">
+                        <input type="text" class="form-control" required name="name" ng-change="GetSeoTitle()" ng-maxlength="256" ng-model="productCategory.Name">
+                        <span ng-show="frmAddProductCategory.name.$invalid" class="has-error">Category name is required</span>
+                        <span ng-show="frmAddProductCategory.name.$error.maxlength" class="has-error">Category name can not exceed 256 digits</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">SEO Title</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="alias" ng-model="productCategory.Alias" >
+                        <input type="text" class="form-control" name="alias" ng-maxlength="256" required ng-model="productCategory.Alias">
+                        <span ng-show="frmAddProductCategory.alias.$invalid" class="has-error">Alias is required</span>
+                        <span ng-show="frmAddProductCategory.alias.$error.maxlength" class="has-error">Alias can not exceed 256 digits</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Short Description</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="description" ng-model="productCategory.Description">
+                        <input type="text" class="form-control" name="description" ng-maxlength="500" ng-model="productCategory.Description">
+                        <span ng-show="frmAddProductCategory.description.$error.maxlength" class="has-error">Description can not exceed 500 digits</span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -58,13 +63,15 @@
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Display Order</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" name="displayOrder" ng-model="productCategory.DisplayOrder">
+                        <input type="number" class="form-control" name="displayOrder" required ng-model="productCategory.DisplayOrder">
+                        <span ng-show="frmAddProductCategory.displayOrder.$invalid" class="has-error">Display order is required</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Image</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="image" ng-model="productCategory.Image">
+                        <input type="text" class="form-control" name="image" ng-maxlength="256" ng-model="productCategory.Image">
+                        <span ng-show="frmAddProductCategory.image.$error.maxlength" class="has-error">Category name can not exceed 256 digits</span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -94,7 +101,7 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-                <button type="submit" class="btn btn-success">Save</button>
+                <button type="submit" ng-disabled="frmAddProductCategory.$invalid" class="btn btn-success">Save</button>
                 <button ui-sref="product_categories" class="btn btn-default float-right">Cancel</button>
             </div>
             <!-- /.card-footer -->

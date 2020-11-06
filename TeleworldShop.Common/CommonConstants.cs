@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeleworldShop.Common
 {
+    //Const variables for using
     public class CommonConstants
     {
         public const string ProductTag = "product";

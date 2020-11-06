@@ -10,193 +10,204 @@ using TeleworldShop.Model.Models;
 using TeleworldShop.Service;
 using TeleworldShop.Web.Infrastructure.Core;
 using TeleworldShop.Web.Infrastructure.Extensions;
+using TeleworldShop.Web.Mappings;
 using TeleworldShop.Web.Models;
 
 namespace TeleworldShop.Web.Api
 {
-    //[RoutePrefix("api/product")]
+    [RoutePrefix("api/product")]
     //[Authorize]
-    //public class ProductController : ApiControllerBase
-    //{
-    //    #region Initialize
-    //    private IProductService _productService;
+    public class ProductController : ApiControllerBase
+    {
+        #region Initialize
+        private IProductService _productService;
 
-    //    public ProductController(IErrorService errorService, IProductService productService)
-    //        : base(errorService)
-    //    {
-    //        this._productService = productService;
-    //    }
+        public ProductController(IErrorService errorService, IProductService productService)
+            : base(errorService)
+        {
+            this._productService = productService;
+        }
 
-    //    #endregion
+        #endregion
 
-    //    [Route("getallparents")]
-    //    [HttpGet]
-    //    public HttpResponseMessage GetAll(HttpRequestMessage request)
-    //    {
-    //        Func<HttpResponseMessage> func = () =>
-    //        {
-    //            var model = _productService.GetAll();
+        [Route("getallparents")]
+        [HttpGet]
+        public HttpResponseMessage GetAll(HttpRequestMessage request)
+        {
+            Func<HttpResponseMessage> func = () =>
+            {
+                var model = _productService.GetAll();
+                var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
-    //            var responseData = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(model);
+                var responseData = mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(model);
 
-    //            var response = request.CreateResponse(HttpStatusCode.OK, responseData);
-    //            return response;
-    //        };
-    //        return CreateHttpResponse(request, func);
-    //    }
-    //    [Route("getbyid/{id:int}")]
-    //    [HttpGet]
-    //    public HttpResponseMessage GetById(HttpRequestMessage request, int id)
-    //    {
-    //        return CreateHttpResponse(request, () =>
-    //        {
-    //            var model = _productService.GetById(id);
+                var response = request.CreateResponse(HttpStatusCode.OK, responseData);
+                return response;
+            };
+            return CreateHttpResponse(request, func);
+        }
+        [Route("getbyid/{id:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetById(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                var model = _productService.GetById(id);
 
-    //            var responseData = Mapper.Map<Product, ProductViewModel>(model);
+                var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
-    //            var response = request.CreateResponse(HttpStatusCode.OK, responseData);
+                var responseData = mapper.Map<Product, ProductViewModel>(model);
 
-    //            return response;
-    //        });
-    //    }
+                var response = request.CreateResponse(HttpStatusCode.OK, responseData);
 
-    //    [Route("getall")]
-    //    [HttpGet]
-    //    public HttpResponseMessage GetAll(HttpRequestMessage request, string keyword, int page, int pageSize = 20)
-    //    {
-    //        return CreateHttpResponse(request, () =>
-    //        {
-    //            int totalRow = 0;
-    //            var model = _productService.GetAll(keyword);
+                return response;
+            });
+        }
 
-    //            totalRow = model.Count();
-    //            var query = model.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
+        [Route("getall")]
+        [HttpGet]
+        public HttpResponseMessage GetAll(HttpRequestMessage request, string keyword, int page, int pageSize = 20)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                int totalRow = 0;
+                var model = _productService.GetAll(keyword);
 
-    //            var responseData = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(query.AsEnumerable());
+                totalRow = model.Count();
+                var query = model.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
+                
+                var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
-    //            var paginationSet = new PaginationSet<ProductViewModel>()
-    //            {
-    //                Items = responseData,
-    //                Page = page,
-    //                TotalCount = totalRow,
-    //                TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize)
-    //            };
-    //            var response = request.CreateResponse(HttpStatusCode.OK, paginationSet);
-    //            return response;
-    //        });
-    //    }
+                var responseData = mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(query.AsEnumerable());
+
+                var paginationSet = new PaginationSet<ProductViewModel>()
+                {
+                    Items = responseData,
+                    Page = page,
+                    TotalCount = totalRow,
+                    TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize)
+                };
+                var response = request.CreateResponse(HttpStatusCode.OK, paginationSet);
+                return response;
+            });
+        }
 
 
-    //    [Route("create")]
-    //    [HttpPost]
-    //    [AllowAnonymous]
-    //    public HttpResponseMessage Create(HttpRequestMessage request, ProductViewModel productCategoryVm)
-    //    {
-    //        return CreateHttpResponse(request, () =>
-    //        {
-    //            HttpResponseMessage response = null;
-    //            if (!ModelState.IsValid)
-    //            {
-    //                response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
-    //            }
-    //            else
-    //            {
-    //                var newProduct = new Product();
-    //                newProduct.UpdateProduct(productCategoryVm);
-    //                newProduct.CreatedDate = DateTime.Now;
-    //                newProduct.CreatedBy = User.Identity.Name;
-    //                _productService.Add(newProduct);
-    //                _productService.Save();
+        [Route("create")]
+        [HttpPost]
+        [AllowAnonymous]
+        public HttpResponseMessage Create(HttpRequestMessage request, ProductViewModel productVm)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    var newProduct = new Product();
+                    newProduct.UpdateProduct(productVm);
+                    newProduct.CreatedDate = DateTime.Now;
+                    //newProduct.CreatedBy = User.Identity.Name;
+                    _productService.Add(newProduct);
+                    _productService.Save();
 
-    //                var responseData = Mapper.Map<Product, ProductViewModel>(newProduct);
-    //                response = request.CreateResponse(HttpStatusCode.Created, responseData);
-    //            }
+                    var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
-    //            return response;
-    //        });
-    //    }
+                    var responseData = mapper.Map<Product, ProductViewModel>(newProduct);
+                    response = request.CreateResponse(HttpStatusCode.Created, responseData);
+                }
 
-    //    [Route("update")]
-    //    [HttpPut]
-    //    [AllowAnonymous]
-    //    public HttpResponseMessage Update(HttpRequestMessage request, ProductViewModel productVm)
-    //    {
-    //        return CreateHttpResponse(request, () =>
-    //        {
-    //            HttpResponseMessage response = null;
-    //            if (!ModelState.IsValid)
-    //            {
-    //                response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
-    //            }
-    //            else
-    //            {
-    //                var dbProduct = _productService.GetById(productVm.ID);
+                return response;
+            });
+        }
 
-    //                dbProduct.UpdateProduct(productVm);
-    //                dbProduct.UpdatedDate = DateTime.Now;
-    //                dbProduct.UpdatedBy = User.Identity.Name;
-    //                _productService.Update(dbProduct);
-    //                _productService.Save();
+        [Route("update")]
+        [HttpPut]
+        [AllowAnonymous]
+        public HttpResponseMessage Update(HttpRequestMessage request, ProductViewModel productVm)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    var dbProduct = _productService.GetById(productVm.Id);
 
-    //                var responseData = Mapper.Map<Product, ProductViewModel>(dbProduct);
-    //                response = request.CreateResponse(HttpStatusCode.Created, responseData);
-    //            }
+                    dbProduct.UpdateProduct(productVm);
+                    dbProduct.UpdatedDate = DateTime.Now;
+                    dbProduct.UpdatedBy = User.Identity.Name;
+                    _productService.Update(dbProduct);
+                    _productService.Save();
 
-    //            return response;
-    //        });
-    //    }
+                    var mapper = new Mapper(AutoMapperConfiguration.Configure());
+                    var responseData = mapper.Map<Product, ProductViewModel>(dbProduct);
+                    response = request.CreateResponse(HttpStatusCode.Created, responseData);
+                }
 
-    //    [Route("delete")]
-    //    [HttpDelete]
-    //    [AllowAnonymous]
-    //    public HttpResponseMessage Delete(HttpRequestMessage request, int id)
-    //    {
-    //        return CreateHttpResponse(request, () =>
-    //        {
-    //            HttpResponseMessage response = null;
-    //            if (!ModelState.IsValid)
-    //            {
-    //                response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
-    //            }
-    //            else
-    //            {
-    //                var oldProductCategory = _productService.Delete(id);
-    //                _productService.Save();
+                return response;
+            });
+        }
 
-    //                var responseData = Mapper.Map<Product, ProductViewModel>(oldProductCategory);
-    //                response = request.CreateResponse(HttpStatusCode.Created, responseData);
-    //            }
+        [Route("delete")]
+        [HttpDelete]
+        [AllowAnonymous]
+        public HttpResponseMessage Delete(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    var oldProduct = _productService.Delete(id);
+                    _productService.Save();
 
-    //            return response;
-    //        });
-    //    }
-    //    [Route("deletemulti")]
-    //    [HttpDelete]
-    //    [AllowAnonymous]
-    //    public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedProducts)
-    //    {
-    //        return CreateHttpResponse(request, () =>
-    //        {
-    //            HttpResponseMessage response = null;
-    //            if (!ModelState.IsValid)
-    //            {
-    //                response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
-    //            }
-    //            else
-    //            {
-    //                var listProductCategory = new JavaScriptSerializer().Deserialize<List<int>>(checkedProducts);
-    //                foreach (var item in listProductCategory)
-    //                {
-    //                    _productService.Delete(item);
-    //                }
+                    var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
-    //                _productService.Save();
+                    var responseData = mapper.Map<Product, ProductViewModel>(oldProduct);
+                    response = request.CreateResponse(HttpStatusCode.Created, responseData);
+                }
 
-    //                response = request.CreateResponse(HttpStatusCode.OK, listProductCategory.Count);
-    //            }
+                return response;
+            });
+        }
+        [Route("deletemulti")]
+        [HttpDelete]
+        [AllowAnonymous]
+        public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedProducts)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    var listProduct = new JavaScriptSerializer().Deserialize<List<int>>(checkedProducts);
+                    foreach (var item in listProduct)
+                    {
+                        _productService.Delete(item);
+                    }
 
-    //            return response;
-    //        });
-    //    }
-    //}
+                    _productService.Save();
+
+                    response = request.CreateResponse(HttpStatusCode.OK, listProduct.Count);
+                }
+
+                return response;
+            });
+        }
+    }
 }

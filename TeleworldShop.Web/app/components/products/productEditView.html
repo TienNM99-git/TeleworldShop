@@ -1,1 +1,151 @@
-﻿<h1>Edit product</h1>
+﻿   <!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Edit product</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home Page</a></li>
+                    <li class="breadcrumb-item"><a href="#">Product</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="products">Product list</a></li>
+                    <li class="breadcrumb-item active">Update product</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="card card-info">
+        <div class="card-header">
+            <h3 class="card-title">{{product.Name}}</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form class="form-horizontal" novalidate name="frmEditProduct" role="form" ng-submit="UpdateProduct()">
+            <div class="card-body">
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Product Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" required name="name" ng-change="GetSeoTitle()" ng-maxlength="256" ng-model="product.Name">
+                        <span ng-show="frmEditProduct.name.$invalid" class="has-error">Product name is required</span>
+                        <span ng-show="frmEditProduct.name.$error.maxlength" class="has-error">Product name can not exceed 256 digits</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">SEO Title</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="alias" ng-maxlength="256" required ng-model="product.Alias">
+                        <span ng-show="frmEditProduct.alias.$invalid" class="has-error">Alias is required</span>
+                        <span ng-show="frmEditProduct.alias.$error.maxlength" class="has-error">Alias can not exceed 256 digits</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Short Description</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="description" ng-maxlength="500" ng-model="product.Description">
+                        <span ng-show="frmEditProduct.description.$error.maxlength" class="has-error">Description can not exceed 500 digits</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Category</label>
+                    <div class="col-sm-10">
+                        <select name="parentId" class="form-control" required ng-model="product.CategoryId" ng-options="option.Id as option.Name for option in productCategories">
+                            <option value="">--Choose Category--</option>
+                        </select>
+                        <span ng-show="frmEditProduct.CategoryId.$invalid" class="has-error">Category is required</span>
+                        <input type="hidden" name="parentId" ng-model="product.CategoryId" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Warranty</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" name="warranty" ng-model="product.Warranty">(month)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Price</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" name="price" required ng-model="product.Price">
+                        <span ng-show="frmEditProduct.price.$invalid" class="has-error">Price is required</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Promotion Price</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" name="promotionPrice" ng-model="product.PromotionPrice">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Image</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="image" ng-maxlength="256" ng-model="product.Image">
+                        <span ng-show="frmEditProduct.image.$error.maxlength" class="has-error">Image can not exceed 256 digits</span>
+                        <button class="btn btn-default" type="button" ng-click="ChooseImage()">Choose Image</button>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Choose More Image</label>
+                    <div class="col-sm-10">
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item list-group-item-light" ng-repeat="img in moreImages"><img ng-src="{{img}}" width="100" /></li>
+                        </ul>
+                        <button class="btn btn-default" type="button" ng-click="ChooseMoreImage()">Choose Image</button>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Content</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" name="content" ckeditor="ckeditorOptions" ng-model="product.Content"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Tags</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="tags" ng-model="product.Tags">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Meta Keyword</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="metaKeyword" ng-model="product.MetaKeyword">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Meta Description</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" name="metaDescription" ng-model="product.MetaDescription"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="status" ng-model="product.Status" ng-checked="product.Status">
+                            <label class="form-check-label">Availability</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="homeFlag" ng-model="product.HomeFlag" ng-checked="product.HomeFlag">
+                            <label class="form-check-label">Display in Home Page</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="hotFlag" ng-model="product.HotFlag" ng-checked="product.HotFlag">
+                            <label class="form-check-label">Hot product</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="submit" ng-disabled="frmEditProduct.$invalid" class="btn btn-success">Save</button>
+                <button ui-sref="products" class="btn btn-default float-right">Cancel</button>
+            </div>
+            <!-- /.card-footer -->
+        </form>
+    </div>
+
+</section>
+<!-- /.content -->
