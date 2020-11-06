@@ -220,6 +220,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\AccountController.cs" />
+    <Compile Include="Api\HomeController.cs" />
     <Compile Include="Api\PostCategoryController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />
     <Compile Include="Api\ProductController.cs" />
@@ -279,6 +280,8 @@
     <Content Include="app\shared\directives\pagerDirective.js" />
     <Content Include="app\shared\filters\statusFilter.js" />
     <Content Include="app\shared\services\apiService.js" />
+    <Content Include="app\shared\services\authData.js" />
+    <Content Include="app\shared\services\authenticationService.js" />
     <Content Include="app\shared\services\commonService.js" />
     <Content Include="app\shared\services\loginService.js" />
     <Content Include="app\shared\services\notificationService.js" />
@@ -5555,8 +5558,6 @@
     <Content Include="Assets\admin\libs\angular-chart.js\package.json" />
     <Content Include="Assets\admin\libs\angular-chart.js\PULL_REQUEST_TEMPLATE.md" />
     <Content Include="Assets\admin\libs\angular-chart.js\README.md" />
-    <Content Include="Assets\admin\libs\angular-loading-bar\.bower.json" />
-    <Content Include="Assets\admin\libs\angular-loading-bar\bower.json" />
     <Content Include="Assets\admin\libs\angular-loading-bar\CHANGELOG.md" />
     <Content Include="Assets\admin\libs\angular-loading-bar\CONTRIBUTING.md" />
     <Content Include="Assets\admin\libs\angular-loading-bar\ISSUE_TEMPLATE.md" />
@@ -5564,8 +5565,6 @@
     <Content Include="Assets\admin\libs\angular-loading-bar\package.json" />
     <Content Include="Assets\admin\libs\angular-loading-bar\PULL_REQUEST_TEMPLATE.md" />
     <Content Include="Assets\admin\libs\angular-loading-bar\README.md" />
-    <Content Include="Assets\admin\libs\angular-local-storage\.bower.json" />
-    <Content Include="Assets\admin\libs\angular-local-storage\.bowerrc" />
     <Content Include="Assets\admin\libs\angular-local-storage\.editorconfig" />
     <Content Include="Assets\admin\libs\angular-local-storage\.travis.yml" />
     <Content Include="Assets\admin\libs\angular-local-storage\bower.json" />

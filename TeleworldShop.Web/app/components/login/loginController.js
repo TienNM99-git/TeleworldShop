@@ -1,10 +1,22 @@
-﻿(function (app) { 
-    app.controller('loginController', loginController);
-    loginController.$inject = ['$scope', '$state'];
+﻿(function (app) {
+    app.controller('loginController', ['$scope', 'loginService', '$injector', 'notificationService',
+        function ($scope, loginService, $injector, notificationService) {
 
-    function loginController($scope,$state) {
-        $scope.loginSubmit = function () {
-            $state.go('home');
-        }
-    }
+            $scope.loginData = {
+                userName: "",
+                password: ""
+            };
+
+            $scope.loginSubmit = function () {
+                loginService.login($scope.loginData.userName, $scope.loginData.password).then(function (response) {
+                    if (response != null && response.error != undefined) {
+                        notificationService.displayError("Access denied. Please check your username or password");
+                    }
+                    else {
+                        var stateService = $injector.get('$state');
+                        stateService.go('home');
+                    }
+                });
+            }
+        }]);
 })(angular.module('teleworldshop'));
