@@ -15,6 +15,7 @@
                     else {
                         var stateService = $injector.get('$state');
                         stateService.go('home');
+                        notificationService.displaySuccess("Access granted. Welcome, " + $scope.loginData.userName);
                     }
                 });
             }
