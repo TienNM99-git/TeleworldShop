@@ -25,7 +25,7 @@
                 templateUrl: "/app/components/home/homeView.html",
                 controller: "homeController"
             });
-        $urlRouterProvider.otherwise('/login');
+        $urlRouterProvider.otherwise('/home');
     }
     function configAuthentication($httpProvider) {
         $httpProvider.interceptors.push(function ($q, $location) {
