@@ -12,6 +12,7 @@ using TeleworldShop.Web.Infrastructure.Extensions;
 namespace TeleworldShop.Web.Api
 {
     [RoutePrefix("api/postcategory")]
+    [Authorize]
     public class PostCategoryController : ApiControllerBase
     {
         private IPostCategoryService _postCategoryService;

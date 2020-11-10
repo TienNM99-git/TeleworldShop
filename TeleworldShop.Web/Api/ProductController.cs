@@ -16,7 +16,7 @@ using TeleworldShop.Web.Models;
 namespace TeleworldShop.Web.Api
 {
     [RoutePrefix("api/product")]
-    //[Authorize]
+    [Authorize]
     public class ProductController : ApiControllerBase
     {
         #region Initialize
@@ -110,7 +110,7 @@ namespace TeleworldShop.Web.Api
                     var newProduct = new Product();
                     newProduct.UpdateProduct(productVm);
                     newProduct.CreatedDate = DateTime.Now;
-                    //newProduct.CreatedBy = User.Identity.Name;
+                    newProduct.CreatedBy = User.Identity.Name;
                     _productService.Add(newProduct);
                     _productService.Save();
 
