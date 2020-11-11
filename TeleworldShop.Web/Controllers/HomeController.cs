@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TeleworldShop.Common;
 using TeleworldShop.Model.Models;
 using TeleworldShop.Service;
 using TeleworldShop.Web.Mappings;
@@ -15,14 +16,39 @@ namespace TeleworldShop.Web.Controllers
     {
         IProductCategoryService _productCategoryService;
         ICommonService _commonService;
-        public HomeController(IProductCategoryService productCategoryService, ICommonService commonService)
+        IProductService _productService;
+        public HomeController(IProductCategoryService productCategoryService, ICommonService commonService, IProductService productService)
         {
             _productCategoryService = productCategoryService;
             _commonService = commonService;
+            _productService = productService;
         }
         public ActionResult Index()
         {
-            return View();
+            var slideModel = _commonService.GetSlides();
+            var mapper = new Mapper(AutoMapperConfiguration.Configure());
+            var slideView = mapper.Map<IEnumerable<Slide>, IEnumerable<SlideViewModel>>(slideModel);
+            var homeViewModel = new HomeViewModel();
+            homeViewModel.Slides = slideView;
+
+            var lastestProductModel = _productService.GetLastest(3);
+            var topSaleProductModel = _productService.GetHotProduct(3);
+            var lastestProductViewModel = mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(lastestProductModel);
+            var topSaleProductViewModel = mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(topSaleProductModel);
+            homeViewModel.LastestProducts = lastestProductViewModel;
+            homeViewModel.TopSaleProducts = topSaleProductViewModel;
+            //try
+            //{
+            //    homeViewModel.Title = _commonService.GetSystemConfig(CommonConstants.HomeTitle).ValueString;
+            //    homeViewModel.MetaKeyword = _commonService.GetSystemConfig(CommonConstants.HomeMetaKeyword).ValueString;
+            //    homeViewModel.MetaDescription = _commonService.GetSystemConfig(CommonConstants.HomeMetaDescription).ValueString;
+            //}
+            //catch
+            //{
+
+            //}
+
+            return View(homeViewModel);
         }
 
         public ActionResult About()
