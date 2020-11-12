@@ -7,10 +7,10 @@
             {
                 var url = "/" + category.Alias + ".pc-" + category.Id + ".html";
                 var childCategories = Model.Where(x => x.ParentId == category.Id);
-                <li>
-                    <a href="@url">@category.Name @(childCategories.Count() > 0 ? "<img class=\"arrow-img\" src=\"/Assets/client/images/arrow1.png\" alt=\"\" />":"") </a>
-                    @if (childCategories.Count() > 0)
-                    {
+            <li>
+                <a href="@url">@category.Name @(childCategories.Count() > 0 ? "<img class=\"arrow-img\" src=\"~/Assets/client/images/arrow1.png\" alt=\"\" />":"") </a>
+                @if (childCategories.Count() > 0)
+                {
                     <ul class="cute">
                         @foreach (var childCategory in childCategories)
                         {
@@ -18,8 +18,8 @@
                             <li class="subitem1"><a href="@childUrl">@childCategory.Name</a></li>
                         }
                     </ul>
-                    }
-                </li>
+                }
+            </li>
             }
         </ul>
     </div>
