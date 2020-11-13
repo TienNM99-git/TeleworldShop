@@ -711,7 +711,7 @@ p.m_text {
    -o-transition: all 0.3s ease-in-out;
    -ms-transition: all 0.3s ease-in-out;
    transition: all 0.3s ease-in-out;
-   margin: 0 auto;
+   margin: 25px auto;
 }
 .grid-view-left .mask {
   -webkit-transform: translateX(-300px);
