@@ -29,11 +29,11 @@ namespace TeleworldShop.Web
             defaults: new { controller = "Contact", action = "Index", id = UrlParameter.Optional },
             namespaces: new string[] { "Teleworld.Web.Controllers" });
 
-            //routes.MapRoute(
-            //name: "Search",
-            //url: "search.html",
-            //defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional },
-            //namespaces: new string[] { "TeleworldShop.Web.Controllers" });
+            routes.MapRoute(
+            name: "Search",
+            url: "search.html",
+            defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional },
+            namespaces: new string[] { "TeleworldShop.Web.Controllers" });
 
             routes.MapRoute(
             name: "Login",

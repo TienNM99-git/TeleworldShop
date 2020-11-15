@@ -66,9 +66,12 @@ namespace TeleworldShop.Web.Controllers
         {
             int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));
             int totalRow = 0;
-            var productModel = _productService.Search(keyword, page, pageSize, sort, out totalRow);
             var mapper = new Mapper(AutoMapperConfiguration.Configure());
+
+            var productModel = _productService.Search(keyword, page, pageSize, sort, out totalRow);
+
             var productViewModel = mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(productModel);
+
             int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
 
             ViewBag.Keyword = keyword;
@@ -92,7 +95,7 @@ namespace TeleworldShop.Web.Controllers
             var productViewModel = mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(productModel);
             int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
 
-            ViewBag.Tag = mapper.Map<Tag,TagViewModel>(_productService.GetTag(tagId));
+            ViewBag.Tag = mapper.Map<Tag, TagViewModel>(_productService.GetTag(tagId));
             var paginationSet = new PaginationSet<ProductViewModel>()
             {
                 Items = productViewModel,
@@ -107,6 +110,11 @@ namespace TeleworldShop.Web.Controllers
         public JsonResult GetListProductByName(string keyword)
         {
             var model = _productService.GetListProductByName(keyword);
+
+            //var mapper = new Mapper(AutoMapperConfiguration.Configure());
+
+            //var productViewModel = mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(model);
+
             return Json(new
             {
                 data = model
