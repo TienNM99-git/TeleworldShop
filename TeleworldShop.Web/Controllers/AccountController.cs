@@ -1,4 +1,4 @@
-﻿//using BotDetect.Web.Mvc;
+﻿using BotDetect.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -87,135 +87,135 @@ namespace TeleworldShop.Web.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng.");
+                    ModelState.AddModelError("", "Invalid username/password.");
                 }
             }
             return View(model);
         }
 
+
+       // POST: /Account/ExternalLogin
+       [HttpPost]
+       [AllowAnonymous]
+       [ValidateAntiForgeryToken]
+        public ActionResult ExternalLogin(string provider, string returnUrl)
+        {
+
+            // Request a redirect to the external login provider
+            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+        }
+
         //
-        // POST: /Account/ExternalLogin
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult ExternalLogin(string provider, string returnUrl)
-        //{
+        // GET: /Account/ExternalLoginCallback
+        [AllowAnonymous]
+        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
+        {
+            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+            if (loginInfo == null)
+            {
+                return RedirectToAction("Login");
+            }
 
-        //    // Request a redirect to the external login provider
-        //    return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
-        //}
+            // Sign in the user with this external login provider if the user already has a login
+            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return RedirectToLocal(returnUrl);
+                case SignInStatus.Failure:
+                default:
+                    // If the user does not have an account, then prompt the user to create an account
+                    ViewBag.ReturnUrl = returnUrl;
+                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+            }
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
+        {
 
-        ////
-        //// GET: /Account/ExternalLoginCallback
-        //[AllowAnonymous]
-        //public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
-        //{
-        //    var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
-        //    if (loginInfo == null)
-        //    {
-        //        return RedirectToAction("Login");
-        //    }
+            if (ModelState.IsValid)
+            {
+                // Get the information about the user from the external login provider
+                var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+                if (info == null)
+                {
+                    return View("ExternalLoginFailure");
+                }
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user);
+                if (result.Succeeded)
+                {
+                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    if (result.Succeeded)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        return RedirectToLocal(returnUrl);
+                    }
+                }
+                AddErrors(result);
+            }
 
-        //    // Sign in the user with this external login provider if the user already has a login
-        //    var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
-        //    switch (result)
-        //    {
-        //        case SignInStatus.Success:
-        //            return RedirectToLocal(returnUrl);
-        //        case SignInStatus.Failure:
-        //        default:
-        //            // If the user does not have an account, then prompt the user to create an account
-        //            ViewBag.ReturnUrl = returnUrl;
-        //            ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-        //            return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
-        //    }
-        //}
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
-        //{
+            ViewBag.ReturnUrl = returnUrl;
+            return View(model);
+        }
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View();
+        }
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        // Get the information about the user from the external login provider
-        //        var info = await AuthenticationManager.GetExternalLoginInfoAsync();
-        //        if (info == null)
-        //        {
-        //            return View("ExternalLoginFailure");
-        //        }
-        //        var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-        //        var result = await UserManager.CreateAsync(user);
-        //        if (result.Succeeded)
-        //        {
-        //            result = await UserManager.AddLoginAsync(user.Id, info.Login);
-        //            if (result.Succeeded)
-        //            {
-        //                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-        //                return RedirectToLocal(returnUrl);
-        //            }
-        //        }
-        //        AddErrors(result);
-        //    }
+        [HttpPost]
+        [CaptchaValidation("CaptchaCode", "registerCaptcha", "Invalid capcha")]
+        public async Task<ActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userByEmail = await _userManager.FindByEmailAsync(model.Email);
+                if (userByEmail != null)
+                {
+                    ModelState.AddModelError("email", "This email has been used");
+                    return View(model);
+                }
+                var userByUserName = await _userManager.FindByNameAsync(model.UserName);
+                if (userByUserName != null)
+                {
+                    ModelState.AddModelError("email", "Account has already existed");
+                    return View(model);
+                }
+                var user = new ApplicationUser()
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    EmailConfirmed = true,
+                    BirthDay = DateTime.Now,
+                    FullName = model.FullName,
+                    PhoneNumber = model.PhoneNumber,
+                    Address = model.Address
 
-        //    ViewBag.ReturnUrl = returnUrl;
-        //    return View(model);
-        //}
-        //[HttpGet]
-        //public ActionResult Register()
-        //{
-        //    return View();
-        //}
+                };
 
-        //[HttpPost]
-        //[CaptchaValidation("CaptchaCode", "registerCaptcha", "Invalid capcha")]
-        //public async Task<ActionResult> Register(RegisterViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var userByEmail = await _userManager.FindByEmailAsync(model.Email);
-        //        if (userByEmail != null)
-        //        {
-        //            ModelState.AddModelError("email", "This email has been used");
-        //            return View(model);
-        //        }
-        //        var userByUserName = await _userManager.FindByNameAsync(model.UserName);
-        //        if (userByUserName != null)
-        //        {
-        //            ModelState.AddModelError("email", "Account has already existed");
-        //            return View(model);
-        //        }
-        //        var user = new ApplicationUser()
-        //        {
-        //            UserName = model.UserName,
-        //            Email = model.Email,
-        //            EmailConfirmed = true,
-        //            BirthDay = DateTime.Now,
-        //            FullName = model.FullName,
-        //            PhoneNumber = model.PhoneNumber,
-        //            Address = model.Address
-
-        //        };
-
-        //        await _userManager.CreateAsync(user, model.Password);
+                await _userManager.CreateAsync(user, model.Password);
 
 
-        //        var adminUser = await _userManager.FindByEmailAsync(model.Email);
-        //        if (adminUser != null)
-        //            await _userManager.AddToRolesAsync(adminUser.Id, new string[] { "User" });
+                var adminUser = await _userManager.FindByEmailAsync(model.Email);
+                if (adminUser != null)
+                    await _userManager.AddToRolesAsync(adminUser.Id, new string[] { "User" });
 
-        //        string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/client/template/newuser.html"));
-        //        content = content.Replace("{{UserName}}", adminUser.FullName);
-        //        content = content.Replace("{{Link}}", ConfigHelper.GetByKey("CurrentLink") + "login.html");
+                string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/client/template/newuser.html"));
+                content = content.Replace("{{UserName}}", adminUser.FullName);
+                content = content.Replace("{{Link}}", ConfigHelper.GetByKey("CurrentLink") + "login.html");
 
-        //        MailHelper.SendMail(adminUser.Email, "Register successful", content);
+                MailHelper.SendMail(adminUser.Email, "Register successful", content);
 
 
-        //        ViewData["SuccessMsg"] = "Register successful";
-        //    }
+                ViewData["SuccessMsg"] = "Register successful";
+            }
 
-        //    return View();
-        //}
+            return View();
+        }
 
         [HttpPost]
 

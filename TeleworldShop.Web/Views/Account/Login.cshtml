@@ -1,0 +1,36 @@
+﻿@model TeleworldShop.Web.Models.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/Layouts.cshtml";
+}
+<div class="account_grid">
+    <div class="login-right">
+        <h3>Login</h3>
+        @using (Html.BeginForm("Login", "Account", new { returnUrl = @ViewBag.ReturnUrl }, FormMethod.Post))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "error" })
+            <div>
+                <span>Username<label>*</label></span>
+                @Html.TextBoxFor(model => model.UserName)
+            </div>
+            <div>
+                <span>Password<label>*</label></span>
+                @Html.PasswordFor(model => model.Password)
+            </div>
+            <div>
+                @Html.CheckBoxFor(model => model.RememberMe)
+                Remember?
+            </div>
+            <a class="forgot" href="#">Forgot Your Password?</a>
+            <input type="submit" value="Login">
+        }
+
+        @Html.Partial("_ExternalLoginsListPartial", new TeleworldShop.Web.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+    </div>
+    <div class="login-left">
+        <h3>Haven't got an account?</h3>
+        <p>Register here:</p>
+        <a class="acount-btn" href="/dang-ky.html">Register</a>
+    </div>
+    <div class="clearfix"> </div>
+</div>
