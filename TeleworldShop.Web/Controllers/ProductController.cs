@@ -30,7 +30,7 @@ namespace TeleworldShop.Web.Controllers
             var mapper = new Mapper(AutoMapperConfiguration.Configure());
             var viewModel = mapper.Map<Product, ProductViewModel>(productModel);
 
-            var relatedProduct = _productService.GetReatedProducts(productId, 6);
+            var relatedProduct = _productService.GetRelatedProducts(productId, 6);
             ViewBag.RelatedProducts = mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(relatedProduct);
 
             List<string> listImages = new JavaScriptSerializer().Deserialize<List<string>>(viewModel.MoreImages);
