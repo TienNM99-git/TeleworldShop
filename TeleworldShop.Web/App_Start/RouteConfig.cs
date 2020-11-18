@@ -78,11 +78,11 @@ namespace TeleworldShop.Web
             namespaces: new string[] { "TeleworldShop.Web.Controllers" }
             );
 
-            //routes.MapRoute(
-            //name: "TagList",
-            //url: "tag/{tagId}.html",
-            //defaults: new { controller = "Product", action = "ListByTag", tagId = UrlParameter.Optional },
-            //namespaces: new string[] { "TeleworldShop.Web.Controllers" });
+            routes.MapRoute(
+            name: "TagList",
+            url: "tag/{tagId}.html",
+            defaults: new { controller = "Product", action = "ListByTag", tagId = UrlParameter.Optional },
+            namespaces: new string[] { "TeleworldShop.Web.Controllers" });
 
             routes.MapRoute(
             name: "Default",
