@@ -169,8 +169,12 @@ namespace TeleworldShop.Service
                     query = query.OrderByDescending(x => x.PromotionPrice.HasValue);
                     break;
 
-                case "price":
+                case "lowtohigh":
                     query = query.OrderBy(x => x.Price);
+                    break;
+
+                case "hightolow":
+                    query = query.OrderByDescending(x => x.Price);
                     break;
 
                 default:
@@ -202,8 +206,12 @@ namespace TeleworldShop.Service
                     query = query.OrderByDescending(x => x.PromotionPrice.HasValue);
                     break;
 
-                case "price":
+                case "lowtohigh":
                     query = query.OrderBy(x => x.Price);
+                    break;
+
+                case "hightolow":
+                    query = query.OrderByDescending(x => x.Price);
                     break;
 
                 default:

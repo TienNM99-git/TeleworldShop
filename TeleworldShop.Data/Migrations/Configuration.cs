@@ -25,6 +25,13 @@
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
             CreateProductCategorySample(context);
+            //CreateUser(context);
+            CreateFooter(context);
+            CreateSlide(context);
+        }
+
+        private void CreateUser(TeleworldShopDbContext context)
+        {
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new TeleworldShopDbContext()));
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new TeleworldShopDbContext()));
             var user = new ApplicationUser()
@@ -99,7 +106,7 @@
                         Status =true,
                         Url ="#",
                         Image ="/Assets/client/images/bag1.jpg",
-                    Content=@"<h2>FLAT 50% 0FF</h2>
+                        Content=@"<h2>FLAT 50% 0FF</h2>
                                 <label>FOR ALL PURCHASE <b>VALUE</b></label>
 
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </ p >
@@ -119,8 +126,8 @@
                 {
                     var page = new Page()
                     {
-                        Name = "Giới thiệu",
-                        Alias = "gioi-thieu",
+                        Name = "Introduction",
+                        Alias = "introduction",
                         Content = @"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium ",
                         Status = true
                     };
