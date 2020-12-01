@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using TeleworldShop.Common;
 using TeleworldShop.Model.Models;
 using TeleworldShop.Service;
@@ -23,6 +24,7 @@ namespace TeleworldShop.Web.Controllers
             _commonService = commonService;
             _productService = productService;
         }
+        [OutputCache(Duration = 60,Location = OutputCacheLocation.Server)]
         public ActionResult Index()
         {
             var slideModel = _commonService.GetSlides();
@@ -47,7 +49,6 @@ namespace TeleworldShop.Web.Controllers
             //{
 
             //}
-
             return View(homeViewModel);
         }
 
@@ -65,6 +66,7 @@ namespace TeleworldShop.Web.Controllers
             return View();
         }
         [ChildActionOnly]
+        [OutputCache(Duration = 3600)]
         public ActionResult Footer()
         {
             var footerModel = _commonService.GetFooter();
@@ -80,6 +82,7 @@ namespace TeleworldShop.Web.Controllers
         }
 
         [ChildActionOnly]
+        [OutputCache(Duration = 3600)]
         public ActionResult Category()
         {
             var model = _productCategoryService.GetAll();
