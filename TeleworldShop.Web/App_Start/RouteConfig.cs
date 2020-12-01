@@ -59,11 +59,11 @@ namespace TeleworldShop.Web
             //defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },
             //namespaces: new string[] { "TeleworldShop.Web.Controllers" });
 
-            //routes.MapRoute(
-            //name: "Page",
-            //url: "page/{alias}.html",
-            //defaults: new { controller = "Page", action = "Checkout", alias = UrlParameter.Optional },
-            //namespaces: new string[] { "TeleworldShop.Web.Controllers" });
+            routes.MapRoute(
+            name: "Page",
+            url: "page/{alias}.html",
+            defaults: new { controller = "Page", action = "Index", alias = UrlParameter.Optional },
+            namespaces: new string[] { "TeleworldShop.Web.Controllers" });
 
             routes.MapRoute(
             name: "Product Category",

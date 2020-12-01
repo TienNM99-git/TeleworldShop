@@ -28,6 +28,7 @@
             //CreateUser(context);
             CreateFooter(context);
             CreateSlide(context);
+            CreatePage(context);
         }
 
         private void CreateUser(TeleworldShopDbContext context)
@@ -128,7 +129,7 @@
                     {
                         Name = "Introduction",
                         Alias = "introduction",
-                        Content = @"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium ",
+                        Content = @"Welcome to Teleworld Eletronics",
                         Status = true
                     };
                     context.Pages.Add(page);
@@ -156,13 +157,12 @@
         //        {
         //            var contactDetail = new TeleworldShop.Model.Models.ContactDetail()
         //            {
-        //                Name = "Shop thời trang TEDU",
-        //                Address = "Ngõ 77 Xuân La",
-        //                Email = "tedu@gmail.com",
+        //                Name = "Teleworld Eletronics",
+        //                Address = "51/39 10th Street, Linh Chieu, Thu Duc",
+        //                Email = "tiennm1999@gmail.com",
         //                Lat = 21.0633645,
         //                Lng = 105.8053274,
-        //                Phone = "095423233",
-        //                Website = "http://tedu.com.vn",
+        //                Phone = "0362537131",
         //                Other = "",
         //                Status = true
         //            };

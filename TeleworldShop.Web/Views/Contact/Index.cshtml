@@ -24,7 +24,7 @@
 <div class="main">
   <div class="reservation_top">
     <div class="contact_right">
-      <h3>Thông tin liên hệ</h3>
+      <h3>Contact Information</h3>
       <address class="address">
         <p>@Model.ContactDetail.Address</p>
         <dl>
@@ -40,15 +40,15 @@
 
   <div class="reservation_top">
     <div class="contact_right">
-      <h3>Gửi thông tin liên hệ</h3>
+      <h3>Send contact information</h3>
       <div class="contact-form">
         @using (Html.BeginForm("SendFeedback", "Contact", FormMethod.Post))
         {
           if (ViewData["SuccessMsg"] != null)
           {
                 <div class="alert alert-success" role="alert">
-                  <strong>Chúc mừng bạn! </strong> gửi phản hồi thành công.
-                  <br />Chúng tôi sẽ liên hệ lại sớm nhất có thể.
+                  <strong>Congratulations! </strong> you have sended feedback successful.
+                  <br />We'll contact you as soon as possible
                 </div>
           }
             @Html.ValidationSummary(false, "", new { @class = "error" });
@@ -61,7 +61,7 @@
             @Html.Captcha(contactCaptcha)
             @Html.TextBox("CaptchaCode") 
 
-        <input type="submit" value="Gửi đi">
+        <input type="submit" value="Send">
         <div class="clearfix"> </div>
         }
       </div>

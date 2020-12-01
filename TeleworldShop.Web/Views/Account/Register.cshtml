@@ -19,20 +19,20 @@
             </div>
         }
         <div class="register-top-grid">
-            <h3>Thông tin cá nhân</h3>
+            <h3>User's Information</h3>
             <div class="mation">
-                <span>Họ tên<label>*</label></span>
+                <span>Full Name<label>*</label></span>
                 @Html.TextBoxFor(model => model.FullName)
                 <span>Email<label>*</label></span>
                 @Html.TextBoxFor(model => model.Email)
-                <span>Địa chỉ<label>*</label></span>
+                <span>Adddress<label>*</label></span>
                 @Html.TextBoxFor(model => model.Address)
-                <span>Số điện thoại<label>*</label></span>
+                <span>Phone<label>*</label></span>
                 @Html.TextBoxFor(model => model.PhoneNumber)
 
-                <span>Tài khoản<label>*</label></span>
+                <span>Username<label>*</label></span>
                 @Html.TextBoxFor(model => model.UserName)
-                <span>Mật khẩu<label>*</label></span>
+                <span>Password<label>*</label></span>
                 @Html.PasswordFor(model => model.Password)
 
                 @{
@@ -46,7 +46,7 @@
         </div>
         <div class="clearfix"> </div>
         <div class="register-but">
-            <input type="submit" value="submit">
+            <input type="submit" value="S ubmit">
             <div class="clearfix"> </div>
         </div>
     }
