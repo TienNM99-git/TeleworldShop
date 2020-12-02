@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BotDetect.Web.Mvc;
-//using BotDetect.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +33,7 @@ namespace TeleworldShop.Web.Controllers
         }
 
         [HttpPost]
-        [CaptchaValidation("CaptchaCode", "contactCaptcha", "Invalid code")]
+        [CaptchaValidationActionFilter("CaptchaCode", "contactCaptcha", "Invalid captcha")]
         public ActionResult SendFeedback(FeedbackViewModel feedbackViewModel)
         {
             if (ModelState.IsValid)
@@ -47,7 +46,7 @@ namespace TeleworldShop.Web.Controllers
                 ViewData["SuccessMsg"] = "Feedback sent successfully";
 
 
-                string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/client/template/contact_template.html"));
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/Assets/client/template/contact_template.html"));
                 content = content.Replace("{{Name}}", feedbackViewModel.Name);
                 content = content.Replace("{{Email}}", feedbackViewModel.Email);
                 content = content.Replace("{{Message}}", feedbackViewModel.Message);
@@ -59,7 +58,7 @@ namespace TeleworldShop.Web.Controllers
                 feedbackViewModel.Email = "";
             }
             feedbackViewModel.ContactDetail = GetDetail();
-
+            MvcCaptcha.ResetCaptcha("contactCaptcha");
 
             return View("Index", feedbackViewModel);
         }

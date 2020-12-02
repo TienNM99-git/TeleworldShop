@@ -25,7 +25,7 @@
 <div class="main">
     <div class="reservation_top">
         <div class="contact_right">
-            <h3>Contact Information</h3>
+            <h3>Our Contact Information</h3>
             <address class="address">
                 <p>@Model.ContactDetail.Address</p>
                 <dl>
@@ -41,7 +41,7 @@
 
     <div class="reservation_top">
         <div class="contact_right">
-            <h3>Send contact information</h3>
+            <h3>Give Us Your Feedbacks</h3>
             <div class="contact-form">
                 @using (Html.BeginForm("SendFeedback", "Contact", FormMethod.Post))
                 {
@@ -53,14 +53,14 @@
                         </div>
                     }
                     @Html.ValidationSummary(false, "", new { @class = "error" });
-                    @Html.TextBoxFor(model => model.Name, new { @class = "textbox" });
-                    @Html.TextBoxFor(model => model.Email, new { @class = "textbox" });
-                    @Html.TextAreaFor(model => model.Message);
+                    @Html.TextBoxFor(model => model.Name, new { @class = "textbox", @placeholder = "Name" });
+                    @Html.TextBoxFor(model => model.Email, new { @class = "textbox", @placeholder = "Email" });
+                    @Html.TextAreaFor(model => model.Message, new { @placeholder = "Message" });
 
 
                     MvcCaptcha contactCaptcha = new MvcCaptcha("contactCaptcha");
-                    @Html.Captcha(contactCaptcha)
-                    @Html.TextBox("CaptchaCode")
+                    @Html.Captcha(contactCaptcha);
+                    @Html.TextBox("CaptchaCode");
 
                     <input type="submit" value="Send">
                     <div class="clearfix"> </div>
