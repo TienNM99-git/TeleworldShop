@@ -8,18 +8,18 @@
 <div class="register">
     @using (Html.BeginForm("Register", "Account", FormMethod.Post))
     {
-        @Html.AntiForgeryToken();
+        @Html.AntiForgeryToken(); //Prevent continuously submitting
         @Html.ValidationSummary(false, "", new { @class = "error" })
 
         if (ViewData["SuccessMsg"] != null)
         {
             <div class="alert alert-success" role="alert">
                 <strong>Congratulation!! </strong>You have registered successfully .
-                <br />Click <a href="/dang-nhap.html">here </a>to login.
+                <br />Click <a href="/login.html">here </a>to login.
             </div>
         }
         <div class="register-top-grid">
-            <h3>User's Information</h3>
+            <h3>ENTER USER INFORMATION</h3>
             <div class="mation">
                 <span>Full Name<label>*</label></span>
                 @Html.TextBoxFor(model => model.FullName)
@@ -46,7 +46,7 @@
         </div>
         <div class="clearfix"> </div>
         <div class="register-but">
-            <input type="submit" value="S ubmit">
+            <input type="submit" value="Submit">
             <div class="clearfix"> </div>
         </div>
     }

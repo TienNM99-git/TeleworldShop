@@ -24,7 +24,7 @@ namespace TeleworldShop.Web.Controllers
             _commonService = commonService;
             _productService = productService;
         }
-        [OutputCache(Duration = 60,Location = OutputCacheLocation.Server)]
+        [OutputCache(Duration = 60,Location = OutputCacheLocation.Client)]
         public ActionResult Index()
         {
             var slideModel = _commonService.GetSlides();

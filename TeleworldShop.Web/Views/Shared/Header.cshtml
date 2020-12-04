@@ -1,4 +1,5 @@
-﻿<div class="header">
+﻿@using Microsoft.AspNet.Identity;
+<div class="header">
     <div class="top-header">
         <div class="container">
             <div class="top-header-left">
@@ -58,11 +59,24 @@
                 <div class="clearfix"> </div>
             </div>
             <div class="header-bottom-right">
-                <div class="account"><a href="login.html"><span> </span>YOUR ACCOUNT</a></div>
-                <ul class="login">
-                    <li><a href="/login.html"><span> </span>LOGIN</a></li> |
-                    <li><a href="/register.html">SIGNUP</a></li>
-                </ul>
+                @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { @id = "frmLogout" }))
+                {
+                    if (Request.IsAuthenticated)
+                    {
+                        @Html.AntiForgeryToken()
+                        <ul class="login">
+                            <li><a href="/account.html"><span> </span>WELCOME: @User.Identity.GetUserName()</a></li> |
+                            <li><a href="#" id="btnLogout">LOGOUT</a></li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="login">
+                            <li><a href="/login.html"><span> </span>LOGIN</a></li> |
+                            <li><a href="/register.html">REGISTER</a></li>
+                        </ul>
+                    }
+                }
                 <div class="cart"><a href="/cart.html"><span> </span>CART</a></div>
                 <div class="clearfix"> </div>
             </div>
