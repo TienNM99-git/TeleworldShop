@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-//using BotDetect.Web.Mvc;
+using BotDetect.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,42 +27,41 @@ namespace TeleworldShop.Web.Controllers
         // GET: Contact
         public ActionResult Index()
         {
-
             FeedbackViewModel viewModel = new FeedbackViewModel();
             viewModel.ContactDetail = GetDetail();
             return View(viewModel);
         }
 
-        //[HttpPost]
-        //[CaptchaValidation("CaptchaCode", "contactCaptcha", "Mã xác nhận không đúng")]
-        //public ActionResult SendFeedback(FeedbackViewModel feedbackViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        Feedback newFeedback = new Feedback();
-        //        newFeedback.UpdateFeedback(feedbackViewModel);
-        //        _feedbackService.Create(newFeedback);
-        //        _feedbackService.Save();
+        [HttpPost]
+        [CaptchaValidationActionFilter("CaptchaCode", "contactCaptcha", "Invalid captcha")]
+        public ActionResult SendFeedback(FeedbackViewModel feedbackViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Feedback newFeedback = new Feedback();
+                newFeedback.UpdateFeedback(feedbackViewModel);
+                _feedbackService.Create(newFeedback);
+                _feedbackService.Save();
 
-        //        ViewData["SuccessMsg"] = "Gửi phản hồi thành công";
-             
-
-        //        string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/client/template/contact_template.html"));
-        //        content = content.Replace("{{Name}}", feedbackViewModel.Name);
-        //        content = content.Replace("{{Email}}", feedbackViewModel.Email);
-        //        content = content.Replace("{{Message}}", feedbackViewModel.Message);
-        //        var adminEmail = ConfigHelper.GetByKey("AdminEmail");
-        //        MailHelper.SendMail(adminEmail, "Thông tin liên hệ từ website", content);
-
-        //        feedbackViewModel.Name = "";
-        //        feedbackViewModel.Message = "";
-        //        feedbackViewModel.Email = "";
-        //    }
-        //    feedbackViewModel.ContactDetail = GetDetail();
+                ViewData["SuccessMsg"] = "Feedback sent successfully";
 
 
-        //    return View("Index", feedbackViewModel);
-        //}
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/Assets/client/template/contact_template.html"));
+                content = content.Replace("{{Name}}", feedbackViewModel.Name);
+                content = content.Replace("{{Email}}", feedbackViewModel.Email);
+                content = content.Replace("{{Message}}", feedbackViewModel.Message);
+                var adminEmail = ConfigHelper.GetByKey("AdminEmail");
+                MailHelper.SendMail(adminEmail, "Contact from website", content);
+
+                feedbackViewModel.Name = "";
+                feedbackViewModel.Message = "";
+                feedbackViewModel.Email = "";
+            }
+            feedbackViewModel.ContactDetail = GetDetail();
+            MvcCaptcha.ResetCaptcha("contactCaptcha");
+
+            return View("Index", feedbackViewModel);
+        }
 
         private ContactDetailViewModel GetDetail()
         {

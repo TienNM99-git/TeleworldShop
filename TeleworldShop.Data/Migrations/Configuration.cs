@@ -28,6 +28,8 @@
             //CreateUser(context);
             CreateFooter(context);
             CreateSlide(context);
+            CreatePage(context);
+            CreateContactDetail(context);
         }
 
         private void CreateUser(TeleworldShopDbContext context)
@@ -128,7 +130,7 @@
                     {
                         Name = "Introduction",
                         Alias = "introduction",
-                        Content = @"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium ",
+                        Content = @"Welcome to Teleworld Eletronics",
                         Status = true
                     };
                     context.Pages.Add(page);
@@ -148,39 +150,38 @@
             }
         }
 
-        //private void CreateContactDetail(TeleworldShopDbContext context)
-        //{
-        //    if (context.ContactDetails.Count() == 0)
-        //    {
-        //        try
-        //        {
-        //            var contactDetail = new TeleworldShop.Model.Models.ContactDetail()
-        //            {
-        //                Name = "Shop thời trang TEDU",
-        //                Address = "Ngõ 77 Xuân La",
-        //                Email = "tedu@gmail.com",
-        //                Lat = 21.0633645,
-        //                Lng = 105.8053274,
-        //                Phone = "095423233",
-        //                Website = "http://tedu.com.vn",
-        //                Other = "",
-        //                Status = true
-        //            };
-        //            context.ContactDetails.Add(contactDetail);
-        //            context.SaveChanges();
-        //        }
-        //        catch (DbEntityValidationException ex)
-        //        {
-        //            foreach (var eve in ex.EntityValidationErrors)
-        //            {
-        //                Trace.WriteLine($"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation error.");
-        //                foreach (var ve in eve.ValidationErrors)
-        //                {
-        //                    Trace.WriteLine($"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"");
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
+        private void CreateContactDetail(TeleworldShopDbContext context)
+        {
+            if (context.ContactDetails.Count() == 0)
+            {
+                try
+                {
+                    var contactDetail = new TeleworldShop.Model.Models.ContactDetail()
+                    {
+                        Name = "Teleworld Eletronics",
+                        Address = "Ho Chi Minh University of Technology and Education",
+                        Email = "tiennm1999@gmail.com",
+                        Lat = 10.850712647790509,                        
+                        Lng = 106.77189123837462,
+                        Phone = "0362537131",
+                        Other = "",
+                        Status = true
+                    };
+                    context.ContactDetails.Add(contactDetail);
+                    context.SaveChanges();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var eve in ex.EntityValidationErrors)
+                    {
+                        Trace.WriteLine($"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation error.");
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Trace.WriteLine($"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"");
+                        }
+                    }
+                }
+            }
+        }
     }
 }

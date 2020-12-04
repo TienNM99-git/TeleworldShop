@@ -168,7 +168,7 @@ namespace TeleworldShop.Web.Controllers
         }
 
         [HttpPost]
-        [CaptchaValidation("CaptchaCode", "registerCaptcha", "Invalid capcha")]
+        [CaptchaValidationActionFilter("CaptchaCode", "registerCaptcha", "Invalid captcha")]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -182,7 +182,7 @@ namespace TeleworldShop.Web.Controllers
                 var userByUserName = await _userManager.FindByNameAsync(model.UserName);
                 if (userByUserName != null)
                 {
-                    ModelState.AddModelError("email", "Account has already existed");
+                    ModelState.AddModelError("username", "Account has already existed");
                     return View(model);
                 }
                 var user = new ApplicationUser()
@@ -204,7 +204,7 @@ namespace TeleworldShop.Web.Controllers
                 if (adminUser != null)
                     await _userManager.AddToRolesAsync(adminUser.Id, new string[] { "User" });
 
-                string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/client/template/newuser.html"));
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/Assets/client/template/newuser.html"));
                 content = content.Replace("{{UserName}}", adminUser.FullName);
                 content = content.Replace("{{Link}}", ConfigHelper.GetByKey("CurrentLink") + "login.html");
 
@@ -218,7 +218,6 @@ namespace TeleworldShop.Web.Controllers
         }
 
         [HttpPost]
-
         [ValidateAntiForgeryToken]
         public ActionResult LogOut()
         {
