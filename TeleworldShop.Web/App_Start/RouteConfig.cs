@@ -47,17 +47,17 @@ namespace TeleworldShop.Web
             defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional },
             namespaces: new string[] { "TeleworldShop.Web.Controllers" });
 
-            //routes.MapRoute(
-            //name: "Cart",
-            //url: "cart.html",
-            //defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },
-            //namespaces: new string[] { "TeleworldShop.Web.Controllers" });
+            routes.MapRoute(
+            name: "Cart",
+            url: "cart.html",
+            defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },
+            namespaces: new string[] { "TeleworldShop.Web.Controllers" });
 
-            //routes.MapRoute(
-            //name: "Checkout",
-            //url: "check-out.html",
-            //defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },
-            //namespaces: new string[] { "TeleworldShop.Web.Controllers" });
+            routes.MapRoute(
+            name: "Checkout",
+            url: "check-out.html",
+            defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },
+            namespaces: new string[] { "TeleworldShop.Web.Controllers" });
 
             routes.MapRoute(
             name: "Page",
