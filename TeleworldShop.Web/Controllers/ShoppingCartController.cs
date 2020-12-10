@@ -124,7 +124,7 @@ namespace TeleworldShop.Web.Controllers
                     info.Total_amount = orderDetails.Sum(x => x.Quantity * x.Price).ToString();
                     info.fee_shipping = "0";
                     info.Discount_amount = "0";
-                    info.order_description = "Thanh toán đơn hàng tại TeleworldShop";
+                    info.order_description = "Making payment in TeleworldShop";
                     info.return_url = currentLink + "confirm-order.html";
                     info.cancel_url = currentLink + "cancel-order.html";
 
@@ -174,10 +174,10 @@ namespace TeleworldShop.Web.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult Add(int ProductId)
+        public JsonResult Add(int productId)
         {
             var cart = (List<ShoppingCartViewModel>)Session[CommonConstants.SessionCart];
-            var product = _productService.GetById(ProductId);
+            var product = _productService.GetById(productId);
             if (cart == null)
             {
                 cart = new List<ShoppingCartViewModel>();
@@ -190,11 +190,11 @@ namespace TeleworldShop.Web.Controllers
                     message = "This product is currently out of stock"
                 });
             }
-            if (cart.Any(x => x.ProductId == ProductId))
+            if (cart.Any(x => x.ProductId == productId))
             {
                 foreach (var item in cart)
                 {
-                    if (item.ProductId == ProductId)
+                    if (item.ProductId == productId)
                     {
                         item.Quantity += 1;
                     }
@@ -203,7 +203,7 @@ namespace TeleworldShop.Web.Controllers
             else
             {
                 ShoppingCartViewModel newItem = new ShoppingCartViewModel();
-                newItem.ProductId = ProductId;
+                newItem.ProductId = productId;
                 var mapper = new Mapper(AutoMapperConfiguration.Configure());
                 newItem.Product = mapper.Map<Product, ProductViewModel>(product);
                 newItem.Quantity = 1;

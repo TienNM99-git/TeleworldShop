@@ -11,17 +11,17 @@ namespace TeleworldShop.Web
             // BotDetect requests must not be routed
             routes.IgnoreRoute("{*botdetect}", new { botdetect = @"(.*)BotDetectCaptcha\.ashx" });
 
-            //routes.MapRoute(
-            //name: "Confirm Order",
-            //url: "confirm-order.html",
-            //defaults: new { controller = "ShoppingCart", action = "ConfirmOrder", id = UrlParameter.Optional },
-            //namespaces: new string[] { "TeleworldShop.Web.Controllers" });
+            routes.MapRoute(
+            name: "Confirm Order",
+            url: "confirm-order.html",
+            defaults: new { controller = "ShoppingCart", action = "ConfirmOrder", id = UrlParameter.Optional },
+            namespaces: new string[] { "TeleworldShop.Web.Controllers" });
 
-            //routes.MapRoute(
-            //name: "Cancel Order",
-            //url: "cancel-order.html",
-            //defaults: new { controller = "ShoppingCart", action = "CancelOrder", id = UrlParameter.Optional },
-            //namespaces: new string[] { "TeleworldShop.Web.Controllers" });
+            routes.MapRoute(
+            name: "Cancel Order",
+            url: "cancel-order.html",
+            defaults: new { controller = "ShoppingCart", action = "CancelOrder", id = UrlParameter.Optional },
+            namespaces: new string[] { "TeleworldShop.Web.Controllers" });
 
             routes.MapRoute(
             name: "Contact",
