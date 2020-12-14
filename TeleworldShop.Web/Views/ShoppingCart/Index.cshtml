@@ -3,9 +3,6 @@
     ViewBag.Title = "Cart and payment";
     Layout = "~/Views/Shared/Layouts.cshtml";
 }
-@section footerJS{
-    <script src="~/Assets/client/js/controllers/shoppingCart.js"></script>
-}
 <div class="single_top">
     <div class="single_grid">
         <div id="cartContent">
@@ -48,21 +45,17 @@
                             <input type="text" class="textbox" id="txtEmail" name="email" placeholder="Email">
                             <input type="text" class="textbox" id="txtPhone" name="phone" placeholder="Phone">
 
-                            <label><input type="radio" id="rdoCash" name="paymentMethod" value="CASH" checked="checked" /> Cash</label>
-                            <label><input type="radio" id="rdoNL" name="paymentMethod" value="NL" /> Ngan Luong Account</label>
-
-                            <label><input type="radio" id="rdoBank" value="ATM_ONLINE" name="paymentMethod" /> Domestic bank card</label>
-
+                            <label><input type="radio" id="rdoCash" name="paymentMethod" value="CASH" checked="checked" />Cash</label>
+                            <label><input type="radio" id="rdoNL" name="paymentMethod" value="NL" />Ngan Luong Account</label>
+                            <label><input type="radio" id="rdoBank" value="ATM_ONLINE" name="paymentMethod" />Domestic bank card</label>
                             <label><input type="radio" id="rdoVisa" name="paymentMethod" value="VISA" /> VISA</label>
                             <div id="bankContent" class="boxContent" style="display:none;">
                                 Domestic bank list:
                                 <ul class="cardList clearfix">
-
                                     <li class="bank-online-methods ">
                                         <label for="vcb_ck_on">
                                             <i class="VCB" title="Ngân hàng TMCP Ngoại Thương Việt Nam"></i>
                                             <input type="radio" ID="VCB" GroupName="bankcode" />
-
                                         </label>
                                     </li>
 
@@ -263,8 +256,8 @@
         <td>{{ProductName}}</td>
         <td><img src="{{Image}}" height="50" /></td>
         <td>{{PriceF}}</td>
-        <td><input type="number" data-id="{{ProductId}}" data-price="{{Price}}" value="{{Quantity}}" class="input txtQuantity" /></td>
+        <td><input type="number" min="0" data-id="{{ProductId}}" data-price="{{Price}}" value="{{Quantity}}" class="input txtQuantity" /></td>
         <td id="amount_{{ProductId}}">{{Amount}}</td>
-        <td><button class="btn btn-danger btnDeleteItem" data-id="{{ProductId}}"><i class="fa fa-close"></i></button></td>
+        <td><button class="btn btn-danger btnDeleteItem" data-id="{{ProductId}}"><i class="fa fa-trash"></i></button></td>
     </tr>
 </script>

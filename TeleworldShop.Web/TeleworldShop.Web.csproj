@@ -5656,6 +5656,7 @@
     <Content Include="Assets\client\images\baa.jpg" />
     <Content Include="Assets\client\images\bag.jpg" />
     <Content Include="Assets\client\images\bag1.jpg" />
+    <Content Include="Assets\client\images\bank_logo.png" />
     <Content Include="Assets\client\images\bo.jpg" />
     <Content Include="Assets\client\images\bott.jpg" />
     <Content Include="Assets\client\images\bottle.jpg" />

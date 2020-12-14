@@ -29,40 +29,48 @@ var cart = {
                     required: "Phone is required",
                     number: "Invalid phone number"
                 }
+            },          
+        });
+        $('.btnDeleteItem').off('click').on('click', function (e) {           
+            var result = confirm("Do you want to remove this item from cart?");
+            if (result) {
+                e.preventDefault();
+                var productId = parseInt($(this).data('id'));
+                cart.deleteItem(productId);
             }
         });
-        $('.btnDeleteItem').off('click').on('click', function (e) {
-            e.preventDefault();
-            var productId = parseInt($(this).data('id'));
-            cart.deleteItem(productId);
-        });
-        $('.txtQuantity').off('keyup').on('keyup', function () {
+        $('.txtQuantity').off('change').on('change', function () {
             var quantity = parseInt($(this).val());
             var productid = parseInt($(this).data('id'));
             var price = parseFloat($(this).data('price'));
+          
             if (isNaN(quantity) == false) {
-
                 var amount = quantity * price;
-
                 $('#amount_' + productid).text(numeral(amount).format('0,0'));
+            }
+            else if (quantity === 0) {
+                var result = confirm("Do you want to remove this item from cart?");
+                if (result) {
+                    cart.deleteItem(productId);
+                }
             }
             else {
                 $('#amount_' + productid).text(0);
             }
 
             $('#lblTotalOrder').text(numeral(cart.getTotalOrder()).format('0,0'));
-
-
             cart.updateAll();
-
         });
         $('#btnContinue').off('click').on('click', function (e) {
             e.preventDefault();
             window.location.href = "/";
         });
         $('#btnDeleteAll').off('click').on('click', function (e) {
-            e.preventDefault();
-            cart.deleteAll();
+            var result = confirm("Are you sure that you want to remove all item from cart?");
+            if (result) {
+                e.preventDefault();
+                cart.deleteAll();
+            }           
         });
         $('#btnCheckout').off('click').on('click', function (e) {
             e.preventDefault();
@@ -84,10 +92,22 @@ var cart = {
             if (isValid) {
                 cart.createOrder();
             }
-
         });
 
         $('input[name="paymentMethod"]').off('click').on('click', function () {
+            if ($(this).val() == 'NL') {
+                $('.boxContent').hide();
+                $('#nganluongContent').show();
+            }
+            else if ($(this).val() == 'ATM_ONLINE') {
+                $('.boxContent').hide();
+                $('#bankContent').show();
+            }
+            else {
+                $('.boxContent').hide();
+            }
+        });
+        $('input[type="radio"]').off('check').on('click', function () {
             if ($(this).val() == 'NL') {
                 $('.boxContent').hide();
                 $('#nganluongContent').show();
@@ -239,9 +259,7 @@ var cart = {
                             Amount: numeral(item.Quantity * item.Product.Price).format('0,0')
                         });
                     });
-
                     $('#cartBody').html(html);
-
                     if (html == '') {
                         $('#cartContent').html('Cart is currently empty.');
                     }

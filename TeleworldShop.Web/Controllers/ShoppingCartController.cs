@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNet.Identity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using TeleworldShop.Common;
@@ -19,8 +17,8 @@ namespace TeleworldShop.Web.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        IProductService _productService;
-        IOrderService _orderService;
+        private IProductService _productService;
+        private IOrderService _orderService;
         private ApplicationUserManager _userManager;
 
         private string merchantId = ConfigHelper.GetByKey("MerchantId");
@@ -33,6 +31,7 @@ namespace TeleworldShop.Web.Controllers
             this._userManager = userManager;
             this._orderService = orderService;
         }
+
         // GET: ShoppingCart
         public ActionResult Index()
         {
@@ -49,6 +48,7 @@ namespace TeleworldShop.Web.Controllers
             }
             return View();
         }
+
         public JsonResult GetUser()
         {
             if (Request.IsAuthenticated)
@@ -66,6 +66,7 @@ namespace TeleworldShop.Web.Controllers
                 status = false
             });
         }
+
         public ActionResult CreateOrder(string orderViewModel)
         {
             var order = new JavaScriptSerializer().Deserialize<OrderViewModel>(orderViewModel);
@@ -108,14 +109,11 @@ namespace TeleworldShop.Web.Controllers
                 }
                 else
                 {
-
                     var currentLink = ConfigHelper.GetByKey("CurrentLink");
                     RequestInfo info = new RequestInfo();
                     info.Merchant_id = merchantId;
                     info.Merchant_password = merchantPassword;
                     info.Receiver_email = merchantEmail;
-
-
 
                     info.cur_code = "vnd";
                     info.bank_code = order.BankCode;
@@ -150,7 +148,6 @@ namespace TeleworldShop.Web.Controllers
                             message = result.Description
                         });
                 }
-
             }
             else
             {
@@ -160,8 +157,8 @@ namespace TeleworldShop.Web.Controllers
                     message = "Available quantity is not enough."
                 });
             }
-
         }
+
         public JsonResult GetAll()
         {
             if (Session[CommonConstants.SessionCart] == null)
@@ -173,6 +170,7 @@ namespace TeleworldShop.Web.Controllers
                 status = true
             }, JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         public JsonResult Add(int productId)
         {
@@ -294,6 +292,7 @@ namespace TeleworldShop.Web.Controllers
             }
             return View();
         }
+
         public ActionResult CancelOrder()
         {
             return View();
