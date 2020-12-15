@@ -163,7 +163,7 @@ var cart = {
                         window.location.href = response.urlCheckout;
                     }
                     else {
-                        console.log('create order ok');
+                        console.log('Create order ok');
                         $('#divCheckout').hide();
                         cart.deleteAll();
                         setTimeout(function () {

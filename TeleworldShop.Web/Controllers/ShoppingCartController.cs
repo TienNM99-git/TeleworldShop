@@ -91,74 +91,71 @@ namespace TeleworldShop.Web.Controllers
                 detail.Quantity = item.Quantity;
                 detail.Price = item.Product.Price;
                 orderDetails.Add(detail);
-
                 isEnough = _productService.SellProduct(item.ProductId, item.Quantity);
-                break;
-            }
-            if (isEnough)
-            {
-                var orderReturn = _orderService.Create(ref orderNew, orderDetails);
-                _productService.Save();
-
-                if (order.PaymentMethod == "CASH")
+                if (isEnough)
                 {
-                    return Json(new
-                    {
-                        status = true
-                    });
+                    continue;
                 }
                 else
                 {
-                    var currentLink = ConfigHelper.GetByKey("CurrentLink");
-                    RequestInfo info = new RequestInfo();
-                    info.Merchant_id = merchantId;
-                    info.Merchant_password = merchantPassword;
-                    info.Receiver_email = merchantEmail;
-
-                    info.cur_code = "vnd";
-                    info.bank_code = order.BankCode;
-
-                    info.Order_code = orderReturn.Id.ToString();
-                    info.Total_amount = orderDetails.Sum(x => x.Quantity * x.Price).ToString();
-                    info.fee_shipping = "0";
-                    info.Discount_amount = "0";
-                    info.order_description = "Making payment in TeleworldShop";
-                    info.return_url = currentLink + "confirm-order.html";
-                    info.cancel_url = currentLink + "cancel-order.html";
-
-                    info.Buyer_fullname = order.CustomerName;
-                    info.Buyer_email = order.CustomerEmail;
-                    info.Buyer_mobile = order.CustomerMobile;
-
-                    APICheckoutV3 objNLChecout = new APICheckoutV3();
-                    ResponseInfo result = objNLChecout.GetUrlCheckout(info, order.PaymentMethod);
-                    if (result.Error_code == "00")
+                    return Json(new
                     {
-                        return Json(new
-                        {
-                            status = true,
-                            urlCheckout = result.Checkout_url,
-                            message = result.Description
-                        });
-                    }
-                    else
-                        return Json(new
-                        {
-                            status = false,
-                            message = result.Description
-                        });
-                }
+                        status = false,
+                        message = "Available quantity of " + item.Product.Name + " is not enough."
+                    });
+                }               
             }
-            else
+            var orderReturn = _orderService.Create(ref orderNew, orderDetails);
+            _productService.Save();
+            if (order.PaymentMethod == "CASH")
             {
                 return Json(new
                 {
-                    status = false,
-                    message = "Available quantity is not enough."
+                    status = true
                 });
             }
-        }
+            else
+            {
+                var currentLink = ConfigHelper.GetByKey("CurrentLink");
+                RequestInfo info = new RequestInfo();
+                info.Merchant_id = merchantId;
+                info.Merchant_password = merchantPassword;
+                info.Receiver_email = merchantEmail;
 
+                info.cur_code = "vnd";
+                info.bank_code = order.BankCode;
+
+                info.Order_code = orderReturn.Id.ToString();
+                info.Total_amount = orderDetails.Sum(x => x.Quantity * x.Price).ToString();
+                info.fee_shipping = "0";
+                info.Discount_amount = "0";
+                info.order_description = "Making payment in TeleworldShop";
+                info.return_url = currentLink + "confirm-order.html";
+                info.cancel_url = currentLink + "cancel-order.html";
+
+                info.Buyer_fullname = order.CustomerName;
+                info.Buyer_email = order.CustomerEmail;
+                info.Buyer_mobile = order.CustomerMobile;
+
+                APICheckoutV3 objNLChecout = new APICheckoutV3();
+                ResponseInfo result = objNLChecout.GetUrlCheckout(info, order.PaymentMethod);
+                if (result.Error_code == "00")
+                {
+                    return Json(new
+                    {
+                        status = true,
+                        urlCheckout = result.Checkout_url,
+                        message = result.Description
+                    });
+                }
+                else
+                    return Json(new
+                    {
+                        status = false,
+                        message = result.Description
+                    });
+            }
+        }
         public JsonResult GetAll()
         {
             if (Session[CommonConstants.SessionCart] == null)

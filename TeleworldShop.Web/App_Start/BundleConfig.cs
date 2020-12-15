@@ -17,7 +17,6 @@ namespace TeleworldShop.Web
                  "~/Assets/admin/libs/numeral/numeral.js",
                  "~/Assets/admin/libs/jquery-validation/jquery.validate.js",
                  "~/Assets/admin/libs/jquery-validation/additional-methods.min.js",
-                 "~/Assets/client/js/controllers/shoppingCart.js",
                  "~/Assets/client/js/common.js"
                 ));
 

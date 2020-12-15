@@ -188,70 +188,70 @@ namespace TeleworldShop.Web.Infrastructure.NganLuongAPI
             switch (_ErrorCode)
             {
                 case "00":
-                    _Message = "Giao dịch thành công";
+                    _Message = "Transaction processes successfully";
                     break;
                 case "01":
-                    _Message = "Lỗi, địa chỉ IP truy cập API của NgânLượng.vn bị từ chối";
+                    _Message = "Error!! The IP address of website NganLuong.vn was rejected";
                     break;
                 case "02":
-                    _Message = "Lỗi, tham số gửi từ merchant tới NgânLượng.vn chưa chính xác.";
+                    _Message = "Error!! Merchant parameters send to NganLuong.vn was not correct";
                     break;
                 case "03":
-                    _Message = "Lỗi, mã merchant không tồn tại hoặc merchant đang bị khóa kết nối tới NgânLượng.vn";
+                    _Message = "Error!! Merchant ID doesn't exist or being blocked by NganLuong.vn";
                     break;
                 case "04":
-                    _Message = "Lỗi, mã checksum không chính xác";
+                    _Message = "Error!! Incorrect checksum";
                     break;
                 case "05":
-                    _Message = "Tài khoản nhận tiền nạp của merchant không tồn tại";
+                    _Message = "Account for receiving money does not exist";
                     break;
                 case "06":
-                    _Message = "Tài khoản nhận tiền nạp của  merchant đang bị khóa hoặc bị phong tỏa, không thể thực hiện được giao dịch nạp tiền";
+                    _Message = "Account for receiving money was blocked or being locked down in the mean time, no transaction was made";
                     break;
                 case "07":
-                    _Message = "Thẻ đã được sử dụng";
+                    _Message = "Bank card has been used";
                     break;
                 case "08":
-                    _Message = "Thẻ bị khóa";
+                    _Message = "Bank card is being blocked";
                     break;
                 case "09":
-                    _Message = "Thẻ hết hạn sử dụng";
+                    _Message = "Bank card is out of date";
                     break;
                 case "10":
-                    _Message = "Thẻ chưa được kích hoạt hoặc không tồn tại";
+                    _Message = "Bank card has not been activated or does not exist";
                     break;
                 case "11":
-                    _Message = "Mã thẻ sai định dạng";
+                    _Message = "Bank card code was not in correct format";
                     break;
                 case "12":
-                    _Message = "Sai số serial của thẻ";
+                    _Message = "Wrong serial number";
                     break;
                 case "13":
-                    _Message = "Mã thẻ và số serial không khớp";
+                    _Message = "Bank card and serial number does not match";
                     break;
                 case "14":
-                    _Message = "Thẻ không tồn tại";
+                    _Message = "Bank card does not exist";
                     break;
                 case "15":
-                    _Message = "Thẻ không sử dụng được";
+                    _Message = "Bank card can not be used";
                     break;
                 case "16":
-                    _Message = "Số lần tưử của thẻ vượt quá giới hạn cho phép";
+                    _Message = "Error!! Exceed try limit";
                     break;
                 case "17":
-                    _Message = "Hệ thống Telco bị lỗi hoặc quá tải, thẻ chưa bị trừ";
+                    _Message = "Telco system was overloaded or run into troubles. No transaction was made";
                     break;
                 case "18":
-                    _Message = "Hệ thống Telco  bị lỗi hoặc quá tải, thẻ có thể bị trừ, cần phối hợp với nhà mạng để đối soát";
+                    _Message = "Telco system was overloaded or run into troubles, transaction may be made, please contact telephone admin to verify";
                     break;
                 case "19":
-                    _Message = "Kết nối NgânLượng với Telco bị lỗi, thẻ chưa bị trừ.";
+                    _Message = "Error connecting from NganLuong to Telco. No transaction was made";
                     break;
                 case "20":
-                    _Message = "Kết nối tới Telco thành công, thẻ bị trừ nhưng chưa cộng tiền trên NgânLượng.vn";
+                    _Message = "Connected to Telco, transaction made but NganLuong account was not updated";
                     break;
                 case "99":
-                    _Message = "Lỗi tuy nhiên lỗi chưa được định nghĩa hoặc chưa xác định được nguyên nhân";
+                    _Message = "Unrecognized error";
                     break;
             }
             return _Message;
