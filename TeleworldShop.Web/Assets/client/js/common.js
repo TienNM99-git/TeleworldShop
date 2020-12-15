@@ -42,7 +42,7 @@
                 dataType: 'json',
                 success: function (response) {
                     if (response.status) {
-                        alert('Thêm sản phẩm thành công.');
+                        alert('Add product to cart successfully.');
                     }
                     else {
                         alert(response.message);

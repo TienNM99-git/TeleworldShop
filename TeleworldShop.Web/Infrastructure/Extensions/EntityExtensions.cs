@@ -111,15 +111,24 @@ namespace TeleworldShop.Web.Infrastructure.Extensions
         public static void UpdateOrder(this Order order, OrderViewModel orderVm)
         {
             order.CustomerName = orderVm.CustomerName;
-            order.CustomerAddress = orderVm.CustomerName;
-            order.CustomerEmail = orderVm.CustomerName;
-            order.CustomerMobile = orderVm.CustomerName;
-            order.CustomerMessage = orderVm.CustomerName;
-            order.PaymentMethod = orderVm.CustomerName;
+            order.CustomerAddress = orderVm.CustomerAddress;
+            order.CustomerEmail = orderVm.CustomerEmail;
+            order.CustomerMobile = orderVm.CustomerMobile;
+            order.CustomerMessage = orderVm.CustomerMessage;
+            order.PaymentMethod = orderVm.PaymentMethod;
             order.CreatedDate = DateTime.Now;
             order.CreatedBy = orderVm.CreatedBy;
             order.Status = orderVm.Status;
             order.CustomerId = orderVm.CustomerId;
+            if (orderVm.PaymentMethod == "CASH")
+            {
+                order.PaymentStatus = "Unpaid";
+            }
+            else
+            {
+                order.PaymentStatus = "Processing";
+            }
+
         }
 
         //public static void UpdateApplicationGroup(this ApplicationGroup appGroup, ApplicationGroupViewModel appGroupViewModel)

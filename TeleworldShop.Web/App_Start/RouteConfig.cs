@@ -11,17 +11,17 @@ namespace TeleworldShop.Web
             // BotDetect requests must not be routed
             routes.IgnoreRoute("{*botdetect}", new { botdetect = @"(.*)BotDetectCaptcha\.ashx" });
 
-            //routes.MapRoute(
-            //name: "Confirm Order",
-            //url: "confirm-order.html",
-            //defaults: new { controller = "ShoppingCart", action = "ConfirmOrder", id = UrlParameter.Optional },
-            //namespaces: new string[] { "TeleworldShop.Web.Controllers" });
+            routes.MapRoute(
+            name: "Confirm Order",
+            url: "confirm-order.html",
+            defaults: new { controller = "ShoppingCart", action = "ConfirmOrder", id = UrlParameter.Optional },
+            namespaces: new string[] { "TeleworldShop.Web.Controllers" });
 
-            //routes.MapRoute(
-            //name: "Cancel Order",
-            //url: "cancel-order.html",
-            //defaults: new { controller = "ShoppingCart", action = "CancelOrder", id = UrlParameter.Optional },
-            //namespaces: new string[] { "TeleworldShop.Web.Controllers" });
+            routes.MapRoute(
+            name: "Cancel Order",
+            url: "cancel-order.html",
+            defaults: new { controller = "ShoppingCart", action = "CancelOrder", id = UrlParameter.Optional },
+            namespaces: new string[] { "TeleworldShop.Web.Controllers" });
 
             routes.MapRoute(
             name: "Contact",
@@ -47,17 +47,17 @@ namespace TeleworldShop.Web
             defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional },
             namespaces: new string[] { "TeleworldShop.Web.Controllers" });
 
-            //routes.MapRoute(
-            //name: "Cart",
-            //url: "cart.html",
-            //defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },
-            //namespaces: new string[] { "TeleworldShop.Web.Controllers" });
+            routes.MapRoute(
+            name: "Cart",
+            url: "cart.html",
+            defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },
+            namespaces: new string[] { "TeleworldShop.Web.Controllers" });
 
-            //routes.MapRoute(
-            //name: "Checkout",
-            //url: "check-out.html",
-            //defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },
-            //namespaces: new string[] { "TeleworldShop.Web.Controllers" });
+            routes.MapRoute(
+            name: "Checkout",
+            url: "check-out.html",
+            defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },
+            namespaces: new string[] { "TeleworldShop.Web.Controllers" });
 
             routes.MapRoute(
             name: "Page",
