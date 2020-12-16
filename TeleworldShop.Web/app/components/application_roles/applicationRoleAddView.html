@@ -1,49 +1,50 @@
 ﻿<section class="content-header">
-  <h1>
-    Add new role
-  </h1>
-  <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-dashboard"></i>Home Page</a></li>
-    <li><a ui-sref="app_roles">Roles</a></li>
-    <li class="active"><a href="#">Add new</a></li>
-  </ol>
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Role List</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i>Home Page</a></li>
+                    <li class="breadcrumb-item"><a href="#">Roles</a></li>
+                    <li class="breadcrumb-item active">Add new</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
 </section>
 <section class="content">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="box box-info">
-        <div class="box-header with-border">
-          <h3 class="box-title">{{role.Name}}</h3>
+    <div class="card card-info">
+        <div class="card-header">
+            <h3 class="card-title">Add new role</h3>
         </div><!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" role="form" novalidate name="frmAddAppRole" ng-submit="addAppRole()">
-          <div class="box-body">
-            <div class="col-md-8">
-              <div class="form-group" ng-class="{ 'has-error' : frmAddAppRole.name.$invalid && !frmAddAppRole.name.$pristine }">
-                <label class="col-sm-2 control-label">Role name</label>
-                <div class="col-sm-10">
-                  <input type="text" name="name" class="form-control"
-                         required reqired-message="Role name is required." ng-model="role.Name">
+        <form class="form-horizontal" role="form" novalidate name="frmAddAppGroup" ng-submit="addAppRole()">
+            <div class="card-body">
+                <div class="col-md-8">
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Role name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-maxlength="256" required name="name" ng-model="role.Name">
+                            <span ng-show="frmAddAppGroup.name.$invalid" class="has-error">Role name is required</span>
+                            <span ng-show="frmAddAppGroup.name.$error.maxlength" class="has-error">Role name can not exceed 256 digits</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Description</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" ng-maxlength="250" required name="description" ng-model="role.Description"></textarea>
+                            <span ng-show="frmAddAppGroup.description.$invalid" class="has-error">Description is required</span>
+                            <span ng-show="frmAddAppGroup.description.$error.maxlength" class="has-error">Description can not exceed 250 digits</span>
+                        </div>
+                    </div>                 
+                    <div class="card-footer">
+                        <button type="submit" ng-disabled="frmAddAppGroup.$invalid" class="btn btn-success">Save</button>
+                        <button ui-sref="application_roles" class="btn btn-default float-right">Cancel</button>
+                    </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Description</label>
-                <div class="col-sm-10">
-                  <textarea type="text" class="form-control" ng-model="role.Description"></textarea>
-
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                  <a ui-sref="app_roles" class="btn btn-default">Cancel</a>
-                  <input type="submit" ng-disabled="frmAddAppRole.$invalid" class="btn btn-primary" value="Save" />
-                </div>
-              </div>
-            </div>
-          </div><!-- /.box-body -->
+            </div><!-- /.card-body -->
         </form>
-      </div><!-- /.box -->
-    </div>
-  </div>
+    </div><!-- /.box -->
 </section>
