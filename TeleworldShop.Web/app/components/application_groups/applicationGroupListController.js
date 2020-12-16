@@ -28,10 +28,10 @@
                 }
             }
             apiService.del('api/applicationGroup/deletemulti', config, function (result) {
-                notificationService.displaySuccess('Xóa thành công ' + result.data + ' bản ghi.');
+                notificationService.displaySuccess('Delete successfully' + result.data + ' records.');
                 search();
             }, function (error) {
-                notificationService.displayError('Xóa không thành công');
+                notificationService.displayError('Delete failed');
             });
         }
 
@@ -61,7 +61,7 @@
         }, true);
 
         function deleteItem(id) {
-            $ngBootbox.confirm('Bạn có chắc muốn xóa?')
+            $ngBootbox.confirm('Are you sure that you want to delete?')
                 .then(function () {
                     var config = {
                         params: {
@@ -69,11 +69,11 @@
                         }
                     }
                     apiService.del('/api/applicationGroup/delete', config, function () {
-                        notificationService.displaySuccess('Đã xóa thành công.');
+                        notificationService.displaySuccess('Delete successfully.');
                         search();
                     },
                     function () {
-                        notificationService.displayError('Xóa không thành công.');
+                        notificationService.displayError('Delete failed.');
                     });
                 });
         }
@@ -114,4 +114,4 @@
 
         $scope.search();
     }
-})(angular.module('tedushop.application_groups'));
+})(angular.module('teleworldshop.application_groups'));

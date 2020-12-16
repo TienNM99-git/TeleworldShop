@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 using TeleworldShop.Common.Exceptions;
 using TeleworldShop.Model.Models;
 using TeleworldShop.Service;
@@ -85,8 +86,7 @@ namespace TeleworldShop.Web.Api
                 applicationUserViewModel.Groups = mapper.Map<IEnumerable<ApplicationGroup>, IEnumerable<ApplicationGroupViewModel>>(listGroup);
                 return request.CreateResponse(HttpStatusCode.OK, applicationUserViewModel);
             }
-        }
-
+        }   
         [HttpPost]
         [Route("add")]
         //[Authorize(Roles = "AddUser")]

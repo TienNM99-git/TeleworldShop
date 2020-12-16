@@ -197,7 +197,8 @@ namespace TeleworldShop.Web.Api
         [Route("delete")]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
-            var appGroup = _appGroupService.Delete(id);
+            var oldAppGroup = _appGroupService.GetDetail(id);
+            var appGroup = _appGroupService.Delete(oldAppGroup);
             _appGroupService.Save();
             return request.CreateResponse(HttpStatusCode.OK, appGroup);
         }
@@ -218,7 +219,8 @@ namespace TeleworldShop.Web.Api
                     var listItem = new JavaScriptSerializer().Deserialize<List<int>>(checkedList);
                     foreach (var item in listItem)
                     {
-                        _appGroupService.Delete(item);
+                        var deleteAppGroups = _appGroupService.GetDetail(item);
+                        _appGroupService.Delete(deleteAppGroups);
                     }
 
                     _appGroupService.Save();

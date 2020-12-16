@@ -1,7 +1,7 @@
 ﻿/// <reference path="../assets/admin/libs/angular/angular.js" />
 (function () {
     angular.module('teleworldshop',
-        ['teleworldshop.products',
+        [   'teleworldshop.products',
             'teleworldshop.application_groups',
             'teleworldshop.product_categories',            
             'teleworldshop.application_roles',

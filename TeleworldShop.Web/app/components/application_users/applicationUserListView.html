@@ -1,62 +1,110 @@
 ﻿<section class="content-header">
-  <h1>
-    USER LIST
-  </h1>
-  <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-dashboard"></i> Home page</a></li>
-    <li class="active"><a ui-sref="accounts">User List</a></li>
-  </ol>
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>User List</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i>Home Page</a></li>
+                    <li class="breadcrumb-item"><a href="#">Users</a></li>
+                    <li class="breadcrumb-item active">User list</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
 </section>
 <!-- Main content -->
 <section class="content">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="box">
-        <div class="box-header">
-          <div class="col-md-12">
-            <div class="col-md-6">
-              <input type="text" id="txtSearch" ng-model="filterExpression" class="form-control" placeholder="Enter keywords..." />
-            </div>
-            <div class="col-md-6">
 
-              <button class="btn btn-success pull-right" ui-sref="add_application_user"><i class="fa fa-plus"></i> Add new</button>
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Products</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-          </div>
-        </div><!-- /.box-header -->
-        <div class="box-body">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Full Name</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th style="width:10%"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="item in data | filter:filterExpression">
-                <td><a ui-sref="edit_application_user({id:item.Id})">{{item.FullName}}</a></td>
-                <td><a ui-sref="edit_application_user({id:item.Id})">{{item.UserName}}</a></td>
-                <td>{{item.Email}}</td>
-                <td>
-                  <a ui-sref="edit_application_user({id:item.Id})" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
-                  <button class="btn btn-sm btn-danger" ng-click="deleteItem(item.Id)"><i class="fa fa-trash-o"></i></button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div ng-if="loading">
-            <div class="col-xs-4"></div>
-            <div class="col-xs-4">
-              <i class="fa fa-refresh fa-4x fa-spin"></i> <label class="label label-primary">Loading...</label>
-            </div>
-            <div class="col-xs-4"></div>
-          </div>
-        </div><!-- /.box-body -->
-        <div class="box-footer clearfix">
-          <custom-pager page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></custom-pager>
         </div>
-      </div><!-- /.box -->
-    </div><!-- /.col -->
-  </div><!-- /.row -->
-</section><!-- /.content -->
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" id="txtSearch" ng-model="filterExpression" placeholder="Enter keyword...">
+                        <span class="input-group-append">
+                            <button class="btn btn-default" type="button" ng-click="search()" id="btnGroupAddon">Search</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-success" type="button" ui-sref="add_application_user" style="margin-bottom:5px">Add new</button>
+                    <button class="btn btn-danger" type="button" ng-click="deleteMultiple()" id="btnDelete" style="margin-bottom:5px" disabled="disabled">Delete</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td><label><input name="all" type="checkbox" ng-click="selectAll()" /></label></td>
+                                <th style="width: 35%">User's full name</th>
+                                <th style="width: 20%">Username</th>
+                                <th style="width: 10%">Email</th>
+                                <th style="width: 10%">Phone</th>
+                                <th style="width: 10%">Birthday</th>
+                                <th style="width: 10%">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in data | filter:filterExpression">
+                                <td><input type="checkbox" ng-model="item.checked" name="all" /></td>
+                                <td>{{item.FullName}}</td>
+                                <td>{{item.UserName}}</td>
+                                <td>{{item.Email}}</td>
+                                <td>{{item.PhoneNumber}}</td>
+                                <td>{{item.BirthDay | date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary" ui-sref="edit_application_user({id:item.Id})">
+                                        <i class="fa fa-pen"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" ng-click="deleteItem(item.Id)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="8">
+                                    <span class="pull-right">Page: {{page+1}} -- Total records: {{totalCount}}</span>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div ng-if="loading">
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-4">
+                            <i class="fa fa-refresh fa-4x fa-spin"></i> <label class="label label-primary">Loading...</label>
+                        </div>
+                        <div class="col-xs-4"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <pager-directive page="{{page}}"
+                                 custom-path="{{customPath}}"
+                                 pages-count="{{pagesCount}}"
+                                 total-count="{{totalCount}}"
+                                 search-func="search(page)">
+                </pager-directive>
+            </div>
+            <!-- /.card-footer-->
+        </div>
+        <!-- /.card -->
+    </div>
+</section>

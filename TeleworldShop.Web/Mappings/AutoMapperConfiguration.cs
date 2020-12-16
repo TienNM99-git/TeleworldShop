@@ -23,6 +23,9 @@ namespace TeleworldShop.Web.Mappings
                 cfg.CreateMap<ProductTag, ProductTagViewModel>();
                 cfg.CreateMap<ContactDetail, ContactDetailViewModel>();
                 cfg.CreateMap<Page, PageViewModel>();
+                cfg.CreateMap<ApplicationGroup, ApplicationGroupViewModel>();
+                cfg.CreateMap<ApplicationRole, ApplicationRoleViewModel>();
+                cfg.CreateMap<ApplicationUser, ApplicationUserViewModel>();
             });
             return config;
             //IMapper mapper = config.CreateMapper();

@@ -40,4 +40,4 @@
         loadRoles();
 
     }
-})(angular.module('tedushop.application_groups'));
+})(angular.module('teleworldshop.application_groups'));

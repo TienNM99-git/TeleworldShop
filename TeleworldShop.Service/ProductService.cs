@@ -13,7 +13,7 @@ namespace TeleworldShop.Service
 
         void Update(Product Product);
 
-        Product Delete(int Id);
+        void Delete(int Id);
 
         IEnumerable<Product> GetAll();
 
@@ -91,9 +91,10 @@ namespace TeleworldShop.Service
             return product;
         }
 
-        public Product Delete(int Id)
+        public void Delete(int Id)
         {
-            return _productRepository.Delete(Id);
+            var product = _productRepository.GetSingleById(Id);
+            _productRepository.Delete(product.Id);
         }
 
         public IEnumerable<Product> GetAll()

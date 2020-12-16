@@ -22,7 +22,7 @@ namespace TeleworldShop.Service
 
         void Update(ApplicationGroup appGroup);
 
-        ApplicationGroup Delete(int id);
+        ApplicationGroup Delete(ApplicationGroup applicationGroup);
 
         bool AddUserToGroups(IEnumerable<ApplicationUserGroup> groups, string userId);
 
@@ -54,12 +54,10 @@ namespace TeleworldShop.Service
             return _appGroupRepository.Add(appGroup);
         }
 
-        public ApplicationGroup Delete(int id)
+        public ApplicationGroup Delete(ApplicationGroup appGroup)
         {
-            var appGroup = this._appGroupRepository.GetSingleById(id);
             return _appGroupRepository.Delete(appGroup);
         }
-
         public IEnumerable<ApplicationGroup> GetAll()
         {
             return _appGroupRepository.GetAll();

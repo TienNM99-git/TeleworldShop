@@ -170,7 +170,9 @@ namespace TeleworldShop.Web.Api
                 }
                 else
                 {
-                    var oldProductCategory = _productCategoryService.Delete(id);
+                    var oldProductCategory = _productCategoryService.GetById(id);
+                    oldProductCategory.Status = false;
+                    _productCategoryService.Delete(oldProductCategory.Id);
                     _productCategoryService.Save();
                     var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
@@ -198,9 +200,10 @@ namespace TeleworldShop.Web.Api
                     var listProductCategory = new JavaScriptSerializer().Deserialize<List<int>>(checkedProductCategories);
                     foreach (var item in listProductCategory)
                     {
+                        var oldProductCategory = _productCategoryService.GetById(item);
+                        oldProductCategory.Status = false;
                         _productCategoryService.Delete(item);
                     }
-
                     _productCategoryService.Save();
 
                     response = request.CreateResponse(HttpStatusCode.OK, listProductCategory.Count);

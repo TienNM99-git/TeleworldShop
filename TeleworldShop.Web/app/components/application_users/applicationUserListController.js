@@ -13,7 +13,7 @@
         $scope.search = search;
         $scope.clearSearch = clearSearch;
         $scope.deleteItem = deleteItem;
-
+     
         function deleteItem(id) {
             $ngBootbox.confirm('Are you sure that you want to delete?')
                 .then(function () {

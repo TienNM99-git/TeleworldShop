@@ -12,7 +12,7 @@ namespace TeleworldShop.Service
 
         void Update(PostCategory postCategory);
 
-        PostCategory Delete(int id);
+        void Delete(int id);
 
         IEnumerable<PostCategory> GetAll();
 
@@ -39,9 +39,9 @@ namespace TeleworldShop.Service
             return _postCategoryRepository.Add(postCategory);
         }
 
-        public PostCategory Delete(int id)
+        public void Delete(int id)
         {
-           return _postCategoryRepository.Delete(id);
+           _postCategoryRepository.Delete(id);
         }
 
         public IEnumerable<PostCategory> GetAll()

@@ -25,7 +25,7 @@
         }
 
         function addSuccessed() {
-            notificationService.displaySuccess($scope.group.Name + ' đã được cập nhật thành công.');
+            notificationService.displaySuccess($scope.group.Name + ' updated successfully.');
 
             $location.url('application_groups');
         }
@@ -39,7 +39,7 @@
                 function (response) {
                     $scope.roles = response.data;
                 }, function (response) {
-                    notificationService.displayError('Không tải được danh sách quyền.');
+                    notificationService.displayError('Can not load role list.');
                 });
 
         }
@@ -47,4 +47,4 @@
         loadRoles();
         loadDetail();
     }
-})(angular.module('tedushop.application_groups'));
+})(angular.module('teleworldshop.application_groups'));
