@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TeleworldShop.Model.Models
 {
     [Table("ApplicationGroups")]
-    public class ApplicationGroup
+    public class ApplicationGroup   //Store list of user group
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -232,6 +232,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\AccountController.cs" />
+    <Compile Include="Api\ApplicationGroupController.cs" />
+    <Compile Include="Api\ApplicationRoleController.cs" />
+    <Compile Include="Api\ApplicationUserController.cs" />
     <Compile Include="Api\HomeController.cs" />
     <Compile Include="Api\PostCategoryController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />
@@ -260,6 +263,9 @@
     <Compile Include="Infrastructure\Extensions\EntityExtensions.cs" />
     <Compile Include="Infrastructure\NganLuongAPI\APICheckoutV3.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
+    <Compile Include="Models\ApplicationGroupViewModel.cs" />
+    <Compile Include="Models\ApplicationRoleViewModel.cs" />
+    <Compile Include="Models\ApplicationUserViewModel.cs" />
     <Compile Include="Models\ContactDetailViewModel.cs" />
     <Compile Include="Models\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\FeedbackViewModel.cs" />
@@ -283,6 +289,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\components\application_groups\applicationGroupAddController.js" />
+    <Content Include="app\components\application_groups\applicationGroupAddView.html" />
+    <Content Include="app\components\application_groups\applicationGroupEditController.js" />
+    <Content Include="app\components\application_groups\applicationGroupEditView.html" />
+    <Content Include="app\components\application_groups\applicationGroupListController.js" />
+    <Content Include="app\components\application_groups\applicationGroupListView.html" />
+    <Content Include="app\components\application_groups\applicationGroups.module.js" />
+    <Content Include="app\components\application_roles\applicationRoleAddController.js" />
+    <Content Include="app\components\application_roles\applicationRoleAddView.html" />
+    <Content Include="app\components\application_roles\applicationRoleEditController.js" />
+    <Content Include="app\components\application_roles\applicationRoleEditView.html" />
+    <Content Include="app\components\application_roles\applicationRoleListController.js" />
+    <Content Include="app\components\application_roles\applicationRoleListView.html" />
+    <Content Include="app\components\application_roles\applicationRoles.module.js" />
+    <Content Include="app\components\application_users\applicationUserAddController.js" />
+    <Content Include="app\components\application_users\applicationUserAddView.html" />
+    <Content Include="app\components\application_users\applicationUserEditController.js" />
+    <Content Include="app\components\application_users\applicationUserEditView.html" />
+    <Content Include="app\components\application_users\applicationUserListController.js" />
+    <Content Include="app\components\application_users\applicationUserListView.html" />
+    <Content Include="app\components\application_users\applicationUsers.module.js" />
     <Content Include="app\components\home\rootController.js" />
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\components\login\loginView.html" />
