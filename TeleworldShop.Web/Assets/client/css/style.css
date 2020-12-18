@@ -40,6 +40,9 @@ ul.support li  label{
 ul.support li.van a label{
 	background-position: -46px -25px;
 }
+ul.support li.intro a label {
+	background: url(../images/info.png);
+}
 ul.support li a {
 	text-decoration:none;
 	font-size: 1.1em;
