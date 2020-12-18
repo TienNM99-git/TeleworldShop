@@ -12,7 +12,7 @@ namespace TeleworldShop.Service
 
         void Update(ProductCategory productCategory);
 
-        ProductCategory Delete(int id);
+        void Delete(int id);
 
         IEnumerable<ProductCategory> GetAll();
 
@@ -41,9 +41,10 @@ namespace TeleworldShop.Service
             return _productCategoryRepository.Add(productCategory);
         }
 
-        public ProductCategory Delete(int id)
+        public void Delete(int id)
         {
-            return _productCategoryRepository.Delete(id);
+            var productCategory = _productCategoryRepository.GetSingleById(id);
+            _productCategoryRepository.Delete(productCategory.Id);
         }
 
         public IEnumerable<ProductCategory> GetAll()

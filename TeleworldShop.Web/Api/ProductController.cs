@@ -169,7 +169,9 @@ namespace TeleworldShop.Web.Api
                 }
                 else
                 {
-                    var oldProduct = _productService.Delete(id);
+                    var oldProduct = _productService.GetById(id);
+                    oldProduct.Status = false;
+                    _productService.Delete(oldProduct.Id);
                     _productService.Save();
 
                     var mapper = new Mapper(AutoMapperConfiguration.Configure());
@@ -198,6 +200,8 @@ namespace TeleworldShop.Web.Api
                     var listProduct = new JavaScriptSerializer().Deserialize<List<int>>(checkedProducts);
                     foreach (var item in listProduct)
                     {
+                        var oldProduct = _productService.GetById(item);
+                        oldProduct.Status = false;
                         _productService.Delete(item);
                     }
 

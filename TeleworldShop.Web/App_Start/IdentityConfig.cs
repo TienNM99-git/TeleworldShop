@@ -49,7 +49,7 @@ namespace TeleworldShop.Web.App_Start
 
             // Configure user lockout defaults
             manager.UserLockoutEnabledByDefault = true;
-            manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(60);
 
             manager.MaxFailedAccessAttemptsBeforeLockout = 5;
 

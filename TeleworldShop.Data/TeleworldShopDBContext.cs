@@ -36,6 +36,10 @@ namespace TeleworldShop.Data
         public DbSet<Error> Errors { get; set; }
         public DbSet<ContactDetail> ContactDetails { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<ApplicationGroup> ApplicationGroups { get; set; }
+        public DbSet<ApplicationRole> ApplicationRoles { get; set; }
+        public DbSet<ApplicationUserGroup> ApplicationUserGroups { get; set; }
+        public DbSet<ApplicationRoleGroup> ApplicationRoleGroups { get; set; }
         public static TeleworldShopDbContext Create()
         {
             return new TeleworldShopDbContext();

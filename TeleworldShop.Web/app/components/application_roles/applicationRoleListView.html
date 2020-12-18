@@ -1,0 +1,98 @@
+﻿<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Role List</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i>Home Page</a></li>
+                    <li class="breadcrumb-item"><a href="#">Roles</a></li>
+                    <li class="breadcrumb-item active">Role list</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Default card -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Roles</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" ng-model="keyword" placeholder="Enter keyword...">
+                        <span class="input-group-append">
+                            <button class="btn btn-default" type="button" ng-click="search()" id="btnGroupAddon">Search</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-success" type="button" ui-sref="add_application_role" style="margin-bottom:5px">Add new</button>
+                    <button class="btn btn-danger" type="button" ng-click="deleteMultiple()" id="btnDelete" style="margin-bottom:5px" disabled="disabled">Delete</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td><label><input name="all" type="checkbox" ng-click="selectAll()" /></label></td>
+                                <th style="width: 35%">Role name</th>
+                                <th style="width: 35%">Description</th>
+                                <th style="width: 20%">Discriminator</th>
+                                <th style="width: 10%">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in data">
+                                <td><input type="checkbox" ng-model="item.checked" name="all" /></td>
+                                <td>{{item.Name}}</td>
+                                <td>{{item.Description}}</td>
+                                <td>{{item.Discriminator}}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary" ui-sref="edit_application_role({id:item.Id})">
+                                        <i class="fa fa-pen"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" ng-click="deleteItem(item.Id)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="8">
+                                    <span class="pull-right">Page: {{page+1}} -- Total records: {{totalCount}}</span>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>                   
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <pager-directive page="{{page}}"
+                                 custom-path="{{customPath}}"
+                                 pages-count="{{pagesCount}}"
+                                 total-count="{{totalCount}}"
+                                 search-func="search(page)">
+                </pager-directive>
+            </div>
+            <!-- /.card-footer-->
+        </div>
+        <!-- /.card -->
+    </div><!-- /.box -->
+</section><!-- /.content -->

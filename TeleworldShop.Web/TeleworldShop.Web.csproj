@@ -232,6 +232,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\AccountController.cs" />
+    <Compile Include="Api\ApplicationGroupController.cs" />
+    <Compile Include="Api\ApplicationRoleController.cs" />
+    <Compile Include="Api\ApplicationUserController.cs" />
     <Compile Include="Api\HomeController.cs" />
     <Compile Include="Api\PostCategoryController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />
@@ -260,6 +263,9 @@
     <Compile Include="Infrastructure\Extensions\EntityExtensions.cs" />
     <Compile Include="Infrastructure\NganLuongAPI\APICheckoutV3.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
+    <Compile Include="Models\ApplicationGroupViewModel.cs" />
+    <Compile Include="Models\ApplicationRoleViewModel.cs" />
+    <Compile Include="Models\ApplicationUserViewModel.cs" />
     <Compile Include="Models\ContactDetailViewModel.cs" />
     <Compile Include="Models\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\FeedbackViewModel.cs" />
@@ -283,6 +289,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\components\application_groups\applicationGroupAddController.js" />
+    <Content Include="app\components\application_groups\applicationGroupAddView.html" />
+    <Content Include="app\components\application_groups\applicationGroupEditController.js" />
+    <Content Include="app\components\application_groups\applicationGroupEditView.html" />
+    <Content Include="app\components\application_groups\applicationGroupListController.js" />
+    <Content Include="app\components\application_groups\applicationGroupListView.html" />
+    <Content Include="app\components\application_groups\applicationGroups.module.js" />
+    <Content Include="app\components\application_roles\applicationRoleAddController.js" />
+    <Content Include="app\components\application_roles\applicationRoleAddView.html" />
+    <Content Include="app\components\application_roles\applicationRoleEditController.js" />
+    <Content Include="app\components\application_roles\applicationRoleEditView.html" />
+    <Content Include="app\components\application_roles\applicationRoleListController.js" />
+    <Content Include="app\components\application_roles\applicationRoleListView.html" />
+    <Content Include="app\components\application_roles\applicationRoles.module.js" />
+    <Content Include="app\components\application_users\applicationUserAddController.js" />
+    <Content Include="app\components\application_users\applicationUserAddView.html" />
+    <Content Include="app\components\application_users\applicationUserEditController.js" />
+    <Content Include="app\components\application_users\applicationUserEditView.html" />
+    <Content Include="app\components\application_users\applicationUserListController.js" />
+    <Content Include="app\components\application_users\applicationUserListView.html" />
+    <Content Include="app\components\application_users\applicationUsers.module.js" />
     <Content Include="app\components\home\rootController.js" />
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\components\login\loginView.html" />
@@ -301,6 +328,7 @@
     <Content Include="app\components\product_categories\productCategoryEditView.html" />
     <Content Include="app\components\product_categories\productCategoryListController.js" />
     <Content Include="app\components\product_categories\productCategoryListView.html" />
+    <Content Include="app\shared\directives\asDateDirective.js" />
     <Content Include="app\shared\directives\pagerDirective.html" />
     <Content Include="app\shared\directives\pagerDirective.js" />
     <Content Include="app\shared\filters\statusFilter.js" />
@@ -435,6 +463,8 @@
     <Content Include="Assets\admin\libs\chart.js\Chart.js" />
     <Content Include="Assets\admin\libs\chart.js\Chart.min.css" />
     <Content Include="Assets\admin\libs\chart.js\Chart.min.js" />
+    <Content Include="Assets\admin\libs\checklist-model\checklist-model.js" />
+    <Content Include="Assets\admin\libs\checklist-model\LICENSE.txt" />
     <Content Include="Assets\admin\libs\ckeditor\adapters\jquery.js" />
     <Content Include="Assets\admin\libs\ckeditor\ckeditor.js" />
     <Content Include="Assets\admin\libs\ckeditor\config.js" />
@@ -5654,8 +5684,6 @@
     <Content Include="Assets\client\images\b-arrow.png" />
     <Content Include="Assets\client\images\ba.jpg" />
     <Content Include="Assets\client\images\baa.jpg" />
-    <Content Include="Assets\client\images\bag.jpg" />
-    <Content Include="Assets\client\images\bag1.jpg" />
     <Content Include="Assets\client\images\bank_logo.png" />
     <Content Include="Assets\client\images\bo.jpg" />
     <Content Include="Assets\client\images\bott.jpg" />
@@ -5664,6 +5692,7 @@
     <Content Include="Assets\client\images\facebook.png" />
     <Content Include="Assets\client\images\gpluse.png" />
     <Content Include="Assets\client\images\img-sprite.png" />
+    <Content Include="Assets\client\images\info.png" />
     <Content Include="Assets\client\images\label_new.png" />
     <Content Include="Assets\client\images\pi.jpg" />
     <Content Include="Assets\client\images\pi1.jpg" />
@@ -5695,6 +5724,11 @@
     <Content Include="Assets\client\images\si2.jpg" />
     <Content Include="Assets\client\images\si3.jpg" />
     <Content Include="Assets\client\images\si4.jpg" />
+    <Content Include="Assets\client\images\slide.png" />
+    <Content Include="Assets\client\images\slide1.png" />
+    <Content Include="Assets\client\images\slide2.png" />
+    <Content Include="Assets\client\images\slide3.png" />
+    <Content Include="Assets\client\images\slide4.png" />
     <Content Include="Assets\client\images\star.png" />
     <Content Include="Assets\client\images\tick1.png" />
     <Content Include="Assets\client\images\twitter.png" />
@@ -5729,6 +5763,7 @@
     <Folder Include="app\components\users\" />
     <Folder Include="app\shared\footer\" />
     <Folder Include="app\shared\navigation\" />
+    <Folder Include="Assets\admin\libs\checklist-model\test\" />
     <Folder Include="Assets\forms\" />
     <Folder Include="Resources\" />
     <Folder Include="UploadedFiles\" />
@@ -5738,9 +5773,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Assets\admin\libs\angular-chart.js\.bower.json" />
     <Content Include="Assets\admin\libs\angular-chart.js\angular-chart.less" />
-    <Content Include="Assets\admin\libs\angular-chart.js\bower.json" />
     <Content Include="Assets\admin\libs\angular-chart.js\CONTRIBUTING.md" />
     <Content Include="Assets\admin\libs\angular-chart.js\dist\angular-chart.js.tar.gz" />
     <Content Include="Assets\admin\libs\angular-chart.js\dist\angular-chart.min.css.map" />
@@ -5978,6 +6011,7 @@
     <Content Include="Assets\admin\libs\numeral\LICENSE" />
     <Content Include="Assets\admin\libs\numeral\package.json" />
     <Content Include="Assets\admin\libs\numeral\README.md" />
+    <Content Include="Assets\admin\libs\checklist-model\readme.md" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\Layouts.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />

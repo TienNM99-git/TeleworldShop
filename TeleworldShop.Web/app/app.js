@@ -1,8 +1,11 @@
 ﻿/// <reference path="../assets/admin/libs/angular/angular.js" />
 (function () {
     angular.module('teleworldshop',
-        ['teleworldshop.products',
-            'teleworldshop.product_categories',
+        [   'teleworldshop.products',
+            'teleworldshop.application_groups',
+            'teleworldshop.product_categories',            
+            'teleworldshop.application_roles',
+            'teleworldshop.application_users',
             'teleworldshop.common'])
         .config(config)
         .config(configAuthentication);
@@ -25,7 +28,7 @@
                 templateUrl: "/app/components/home/homeView.html",
                 controller: "homeController"
             });
-        $urlRouterProvider.otherwise('/home');
+        $urlRouterProvider.otherwise('/login');
     }
     function configAuthentication($httpProvider) {
         $httpProvider.interceptors.push(function ($q, $location) {

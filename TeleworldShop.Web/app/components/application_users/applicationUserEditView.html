@@ -1,0 +1,88 @@
+﻿<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>User List</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i>Home Page</a></li>
+                    <li class="breadcrumb-item"><a href="#">Users</a></li>
+                    <li class="breadcrumb-item active">Update user</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+    <div class="card card-info">
+        <div class="card-header">
+            <h3 class="card-title">{{account.FullName}}</h3>
+        </div><!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" role="form" novalidate name="frmUpdateAccount" ng-submit="updateAccount()">
+            <div class="card-body">
+                <div class="col-md-8">
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">User's full name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-maxlength="256" required name="name" ng-model="account.FullName">
+                            <span ng-show="frmUpdateAccount.name.$invalid" class="has-error">User's full name is required</span>
+                            <span ng-show="frmUpdateAccount.name.$error.maxlength" class="has-error">User's full name can not exceed 256 digits</span>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Username</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="username" required ng-model="account.UserName">
+                            <span ng-show="frmUpdateAccount.username.$invalid" class="has-error">Username</span>
+                            <span ng-show="frmUpdateAccount.username.$error.maxlength" class="has-error">Username can not exceed 256 digits</span>
+
+                        </div>
+                    </div>
+                    <!--<div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" required name="password" ng-maxlength="500" ng-model="account.Password">
+                            <span ng-show="frmUpdateAccount.password.$error.maxlength" class="has-error">Password can not exceed 500 digits</span>
+                        </div>
+                    </div>-->
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" required name="email" ng-model="account.Email">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Phone number</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" required name="phone" ng-model="account.PhoneNumber">
+                            <span ng-show="frmUpdateAccount.phone.$invalid" class="has-error">Phone number is required</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Date of birth</label>
+                        <div class="col-sm-10">
+                            <input type="date" name="birthDate" class="form-control" required value="{{ account.BirthDay | date: 'yyyy-MM-dd' }}" ng-model="account.BirthDay">
+                            <span ng-show="frmUpdateAccount.birthDate.$invalid" class="has-error">Birthday is required</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Group</label>
+                        <div class="col-sm-10">
+                            <label ng-repeat="group in groups" style="margin-right:10px">
+                                <input type="checkbox" checklist-model="account.Groups" name="group" checklist-value="group"> {{group.Name}}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <button type="submit" ng-disabled="frmUpdateAccount.$invalid" class="btn btn-success">Save</button>
+                        <button ui-sref="application_users" class="btn btn-default float-right">Cancel</button>
+                    </div>
+                </div>
+            </div><!-- /.card-body -->
+        </form>
+    </div><!-- /.box -->
+</section>

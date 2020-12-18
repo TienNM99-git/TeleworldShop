@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TeleworldShop.Model.Models
 {
     [Table("ApplicationRoleGroups")]
-    public class ApplicationRoleGroup
+    public class ApplicationRoleGroup //N-N of roles and groups
     {
         [Key]
         [Column(Order = 1)]
