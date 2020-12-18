@@ -1,3 +1,3 @@
 ﻿(function () {
-    angular.module('teleworldshop.common', ['ui.router', 'ngBootbox','ngCkeditor'])
+    angular.module('teleworldshop.common', ['ui.router', 'ngBootbox','ngCkeditor','checklist-model'])
 })();

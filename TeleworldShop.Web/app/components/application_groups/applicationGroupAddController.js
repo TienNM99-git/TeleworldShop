@@ -18,7 +18,7 @@
         }
 
         function addSuccessed() {
-            notificationService.displaySuccess($scope.group.Name + ' đã được thêm mới.');
+            notificationService.displaySuccess($scope.group.Name + ' added.');
 
             $location.url('application_groups');
         }
@@ -32,7 +32,7 @@
                 function (response) {
                     $scope.roles = response.data;
                 }, function (response) {
-                    notificationService.displayError('Không tải được danh sách quyền.');
+                    notificationService.displayError('Can not load role list.');
                 });
 
         }

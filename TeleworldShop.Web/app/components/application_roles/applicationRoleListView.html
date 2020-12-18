@@ -50,9 +50,8 @@
                         <thead>
                             <tr>
                                 <td><label><input name="all" type="checkbox" ng-click="selectAll()" /></label></td>
-                                <th style="width: 5%">Id</th>
                                 <th style="width: 35%">Role name</th>
-                                <th style="width: 30%">Description</th>
+                                <th style="width: 35%">Description</th>
                                 <th style="width: 20%">Discriminator</th>
                                 <th style="width: 10%">Actions</th>
                             </tr>
@@ -60,7 +59,6 @@
                         <tbody>
                             <tr ng-repeat="item in data">
                                 <td><input type="checkbox" ng-model="item.checked" name="all" /></td>
-                                <td>{{item.Id}}</td>
                                 <td>{{item.Name}}</td>
                                 <td>{{item.Description}}</td>
                                 <td>{{item.Discriminator}}</td>

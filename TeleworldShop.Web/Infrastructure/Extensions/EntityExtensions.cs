@@ -135,6 +135,7 @@ namespace TeleworldShop.Web.Infrastructure.Extensions
         {
             appGroup.Id = appGroupViewModel.Id;
             appGroup.Name = appGroupViewModel.Name;
+            appGroup.Description = appGroupViewModel.Description;
         }
 
         public static void UpdateApplicationRole(this ApplicationRole appRole, ApplicationRoleViewModel appRoleViewModel, string action = "add")

@@ -160,7 +160,7 @@ namespace TeleworldShop.Web.Api
                     {
                         listRoleGroup.Add(new ApplicationRoleGroup()
                         {
-                            GroupId = appGroup.Id,
+                            GroupId = appGroup.Id,                            
                             RoleId = role.Id
                         });
                     }
