@@ -16,16 +16,16 @@
         }
         function loadDetail() {
             apiService.get('/api/applicationGroup/detail/' + $stateParams.id, null,
-            function (result) {
-                $scope.group = result.data;
-            },
-            function (result) {
-                notificationService.displayError(result.data);
-            });
+                function (result) {
+                    $scope.group = result.data;
+                },
+                function (result) {
+                    notificationService.displayError(result.data);
+                });
         }
 
         function addSuccessed() {
-            notificationService.displaySuccess($scope.group.Name + ' updated successfully.');
+            notificationService.displaySuccess($scope.group.Name + ' updated.');
 
             $location.url('application_groups');
         }
@@ -43,6 +43,7 @@
                 });
 
         }
+
         loadRoles();
         loadDetail();
     }

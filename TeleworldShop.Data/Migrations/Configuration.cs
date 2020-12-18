@@ -25,7 +25,7 @@
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
             CreateProductCategorySample(context);
-            //CreateUser(context);
+            CreateUser(context);
             CreateFooter(context);
             CreateSlide(context);
             CreatePage(context);
@@ -38,7 +38,7 @@
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new TeleworldShopDbContext()));
             var user = new ApplicationUser()
             {
-                UserName = "tiennm",
+                UserName = "admin",
                 Email = "tiennm1999@gmail.com",
                 EmailConfirmed = true,
                 BirthDay = new DateTime(1999, 3, 28),
@@ -48,7 +48,7 @@
                 Address = "51/39 10th Street, Linh Chieu Ward, Thu Duc District, Ho Chi Minh city",
             };
             manager.Create(user, "TienNM1999");
-            if (!roleManager.Roles.Any())
+            if (!roleManager.Roles.Any(x=>x.Name == "Admin" && x.Name == "User"))
             {
                 roleManager.Create(new IdentityRole { Name = "Admin" });
                 roleManager.Create(new IdentityRole { Name = "User" });
