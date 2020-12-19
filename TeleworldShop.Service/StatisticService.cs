@@ -1,10 +1,12 @@
-﻿using TeleworldShop.Data.Repositories;
+﻿using System.Collections.Generic;
+using TeleworldShop.Common.ViewModels;
+using TeleworldShop.Data.Repositories;
 
 namespace TeleworldShop.Service
 {
     public interface IStatisticService
     {
-        // IEnumerable<RevenueStatisticViewModel> GetRevenueStatistic(string fromDate, string toDate);
+        IEnumerable<RevenueStatisticViewModel> GetRevenueStatistic(string fromDate, string toDate);
     }
 
     public class StatisticService : IStatisticService
@@ -16,9 +18,9 @@ namespace TeleworldShop.Service
             _orderRepository = orderRepository;
         }
 
-        //public IEnumerable<RevenueStatisticViewModel> GetRevenueStatistic(string fromDate, string toDate)
-        //{
-        //    return _orderRepository.GetRevenueStatistic(fromDate, toDate);
-        //}
+        public IEnumerable<RevenueStatisticViewModel> GetRevenueStatistic(string fromDate, string toDate)
+        {
+            return _orderRepository.GetRevenueStatistic(fromDate, toDate);
+        }
     }
 }

@@ -1,0 +1,79 @@
+﻿   <!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Statistics</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i>Home Page</a></li>
+                    <li class="breadcrumb-item"><a href="#">Statistics</a></li>
+                    <li class="breadcrumb-item active">Revenue report</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-7">
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="nav-tabs-custom">
+                <!-- Tabs within a box -->
+                <ul class="nav nav-tabs pull-right">
+                    <li class="active"><a href="#revenue-chart" data-toggle="tab">Doanh thu</a></li>
+                </ul>
+                <div class="tab-content no-padding">
+                    <!-- Morris chart - Sales -->
+                    <canvas id="bar" class="chart chart-line"
+                            chart-data="chartdata" chart-labels="labels" chart-series="series"></canvas>
+                </div>
+            </div><!-- /.nav-tabs-custom -->
+
+        </section><!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-5">
+            <!-- Map box -->
+            <div class="box box-solid">
+                <div class="box-header">
+                    <!-- tools box -->
+                    <i class="fa fa-map-marker"></i>
+                    <h3 class="box-title">
+                        Dữ liệu thống kê
+                    </h3>
+                </div>
+                <div class="box-body">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td>Ngày</td>
+                                <td>Doanh số</td>
+                                <td>Lợi nhuận</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in tabledata">
+                                <td>
+                                    {{item.Date | date}}
+                                </td>
+                                <td>
+                                    {{item.Revenues | number}}
+                                </td>
+                                <td>
+                                    {{item.Benefit | number}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- /.box-body-->
+                <div class="box-footer no-border">
+                </div>
+            </div>
+        </section><!-- right col -->
+    </div><!-- /.row (main row) -->
+
+</section><!-- /.content -->

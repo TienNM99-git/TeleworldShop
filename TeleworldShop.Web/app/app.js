@@ -6,6 +6,7 @@
             'teleworldshop.product_categories',            
             'teleworldshop.application_roles',
             'teleworldshop.application_users',
+            'teleworldshop.statistics',
             'teleworldshop.common'])
         .config(config)
         .config(configAuthentication);
