@@ -1,8 +1,6 @@
 ﻿/// <reference path="../../../assets/admin/libs/angular/angular.js" />
-
 (function () {
     angular.module('teleworldshop.statistics', ['teleworldshop.common']).config(config);
-
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function config($stateProvider, $urlRouterProvider) {
