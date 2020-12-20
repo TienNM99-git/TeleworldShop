@@ -36,7 +36,7 @@ namespace TeleworldShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                var model = _productCategoryService.GetAll();
+                var model = _productCategoryService.GetAll().OrderByDescending(x=>x.Status).ThenByDescending(x => x.CreatedDate);
 
                 var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
@@ -74,7 +74,7 @@ namespace TeleworldShop.Web.Api
                 var model = _productCategoryService.GetAll(keyword);
 
                 totalRow = model.Count();
-                var query = model.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
+                var query = model.OrderByDescending(x => x.CreatedDate).ThenByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
 
                 var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
@@ -172,7 +172,7 @@ namespace TeleworldShop.Web.Api
                 {
                     var oldProductCategory = _productCategoryService.GetById(id);
                     oldProductCategory.Status = false;
-                    _productCategoryService.Delete(oldProductCategory.Id);
+                    _productCategoryService.Update(oldProductCategory);
                     _productCategoryService.Save();
                     var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
@@ -202,7 +202,7 @@ namespace TeleworldShop.Web.Api
                     {
                         var oldProductCategory = _productCategoryService.GetById(item);
                         oldProductCategory.Status = false;
-                        _productCategoryService.Delete(item);
+                        _productCategoryService.Update(oldProductCategory);
                     }
                     _productCategoryService.Save();
 

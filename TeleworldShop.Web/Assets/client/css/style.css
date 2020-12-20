@@ -482,10 +482,10 @@ span.reducedfrom {
 	font-size:1.1em; 
 }
 span.actual {
-	font-weight: 500; 
-	color:#1DBAA5;
-    font-weight: 700; 
-    font-size:1.2em;
+	font-weight: 500;
+	color: #eb2f1a;
+	font-weight: 700;
+	font-size: 1.2em;
 }
 span.dolor-left-grid{
 	font-size: 1.7em;

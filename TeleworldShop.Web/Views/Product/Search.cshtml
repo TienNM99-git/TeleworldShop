@@ -30,21 +30,21 @@
         @foreach (var product in Model.Items)
         {
           var url = "/" + product.Alias + ".p-" + product.Id;
-            <div class="product-grid">
+          <div class="product-grid">
               <div class="content_box">
-                <a href="@url">
-                  <div class="left-grid-view grid-view-left">
-                    <img src="@product.Image" width="250px" height="300px" class="img-responsive watch-right" alt="@product.Name" />
-                    <div class="mask">
-                      <div class="info">Quick view</div>
-                    </div>
-                  </div>
-                </a>
+                  <a href="@url">
+                      <div class="left-grid-view grid-view-left">
+                          <img src="@product.Image" width="250px" height="300px" class="img-responsive watch-right" alt="@product.Name" />
+                          <div class="mask">
+                              <div class="info">Quick view</div>
+                          </div>
+                      </div>
+                  </a>
               </div>
               <h4><a href="@url">@product.Name</a></h4>
               <p>@product.Description</p>
-              @(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N2"))
-            </div>
+              @(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N2")+ "₫")
+          </div>
         }
         <div class="clearfix"> </div>
         @if (Model.TotalPages > 1)

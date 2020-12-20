@@ -31,7 +31,9 @@ namespace TeleworldShop.Model.Models
         [Column(TypeName = "xml")]
         public string MoreImages { set; get; }
 
-        public decimal Price { set; get; }
+        public decimal Price { set; get; } /// <summary>
+        /// Sell price
+        /// </summary>
 
         public decimal? PromotionPrice { set; get; }
 
@@ -49,7 +51,9 @@ namespace TeleworldShop.Model.Models
 
         public int Quantity { set; get; }
 
-        public decimal OriginalPrice { set; get; }
+        public decimal OriginalPrice { set; get; } /// <summary>
+        /// Import price
+        /// </summary>
 
         [ForeignKey("CategoryId")]
         public virtual ProductCategory ProductCategory { set; get; }

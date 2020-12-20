@@ -26,7 +26,7 @@
                     checkedProductCategories: JSON.stringify(listId)
                 }
             }
-            apiService.del('api/productcategory/deletemulti', config, function (result) {
+            apiService.put('api/productcategory/deletemulti', config, function (result) {
                 notificationService.displaySuccess('Successful delete ' + result.data + ' records !!!');
                 search();
             }, function (error) {
@@ -66,7 +66,7 @@
                         id: id
                     }
                 }
-                apiService.del('api/productcategory/delete', config, function () {
+                apiService.put('api/productcategory/delete', config, function () {
                     notificationService.displaySuccess('Delete successful !!!');
                     search();
                 }, function () {
