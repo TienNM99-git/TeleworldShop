@@ -23,7 +23,7 @@ namespace TeleworldShop.Data.Repositories
                 new SqlParameter("@fromDate",fromDate),
                 new SqlParameter("@toDate",toDate)
             };
-            return DbContext.Database.SqlQuery<RevenueStatisticViewModel>("GetRevenueStatistic @fromDate,@toDate", parameters);
+            return DbContext.Database.SqlQuery<RevenueStatisticViewModel>("GetRevenueStatistics @fromDate,@toDate", parameters);
         }
     }
 }

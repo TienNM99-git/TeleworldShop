@@ -9,11 +9,11 @@ namespace TeleworldShop.Service
 {
     public interface IProductService
     {
-        Product Add(Product Product);
+        Product Add(Product product);
 
-        void Update(Product Product);
+        void Update(Product product);
 
-        void Delete(int Id);
+        Product Delete(int id);
 
         IEnumerable<Product> GetAll();
 
@@ -27,19 +27,19 @@ namespace TeleworldShop.Service
 
         IEnumerable<Product> Search(string keyword, int page, int pageSize, string sort, out int totalRow);
 
-        IEnumerable<Product> GetRelatedProducts(int Id, int top);
+        IEnumerable<Product> GetRelatedProducts(int id, int top);
 
         IEnumerable<string> GetListProductByName(string name);
 
-        Product GetById(int Id);
+        Product GetById(int id);
 
         void Save();
 
-        IEnumerable<Tag> GetListTagByProductId(int Id);
+        IEnumerable<Tag> GetListTagByProductId(int id);
 
         Tag GetTag(string tagId);
 
-        void IncreaseView(int Id);
+        void IncreaseView(int id);
 
         IEnumerable<Product> GetListProductByTag(string tagId, int page, int pagesize, out int totalRow);
 
@@ -91,10 +91,9 @@ namespace TeleworldShop.Service
             return product;
         }
 
-        public void Delete(int Id)
+        public Product Delete(int id)
         {
-            var product = _productRepository.GetSingleById(Id);
-            _productRepository.Delete(product.Id);
+            return _productRepository.Delete(id);
         }
 
         public IEnumerable<Product> GetAll()
@@ -120,12 +119,12 @@ namespace TeleworldShop.Service
             _unitOfWork.Commit();
         }
 
-        public void Update(Product Product)
+        public void Update(Product product)
         {
-            _productRepository.Update(Product);
-            if (!string.IsNullOrEmpty(Product.Tags))
+            _productRepository.Update(product);
+            if (!string.IsNullOrEmpty(product.Tags))
             {
-                string[] tags = Product.Tags.Split(',');
+                string[] tags = product.Tags.Split(',');
                 for (var i = 0; i < tags.Length; i++)
                 {
                     var tagId = StringHelper.ToUnsignString(tags[i]);
@@ -137,9 +136,9 @@ namespace TeleworldShop.Service
                         tag.Type = CommonConstants.ProductTag;
                         _tagRepository.Add(tag);
                     }
-                    _productTagRepository.DeleteMulti(x => x.ProductId == Product.Id);
+                    _productTagRepository.DeleteMulti(x => x.ProductId == product.Id);
                     ProductTag productTag = new ProductTag();
-                    productTag.ProductId = Product.Id;
+                    productTag.ProductId = product.Id;
                     productTag.TagId = tagId;
                     _productTagRepository.Add(productTag);
                 }

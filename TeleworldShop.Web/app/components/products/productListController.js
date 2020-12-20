@@ -67,12 +67,19 @@
                         id: id
                     }
                 }
-                apiService.del('api/product/delete', config, function () {
-                    notificationService.displaySuccess('Delete successful !!!');
-                    search();
-                }, function () {
-                    notificationService.displayError('Delete failed !!!');
-                })
+                //apiService.put('api/product/delete', config, function () {
+                //    notificationService.displaySuccess('Delete successful !!!');
+                //    search();
+                //}, function () {
+                //    notificationService.displayError('Delete failed !!!');
+                //})
+                apiService.del('api/product/delete', config,
+                    function (result) {
+                        notificationService.displaySuccess(result.data.Name + ' deleted !!!');
+                        search();
+                    }, function (error) {
+                        notificationService.displayError('Delete product failed');
+                    });
             });
         }
         function search() {

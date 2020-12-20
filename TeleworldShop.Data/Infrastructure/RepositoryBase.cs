@@ -51,11 +51,10 @@ namespace TeleworldShop.Data.Infrastructure
             return dbSet.Remove(entity);
         }
 
-        public virtual void Delete(int id)
+        public virtual T Delete(int id)
         {
             var entity = dbSet.Find(id);
-            dbSet.Attach(entity);
-            dataContext.Entry(entity).State = EntityState.Modified;
+            return dbSet.Remove(entity);
         }
 
         public virtual void DeleteMulti(Expression<Func<T, bool>> where)
@@ -63,8 +62,7 @@ namespace TeleworldShop.Data.Infrastructure
             IEnumerable<T> objects = dbSet.Where<T>(where).AsEnumerable();
             foreach (T obj in objects)
             {
-                dbSet.Attach(obj);
-                dataContext.Entry(obj).State = EntityState.Modified;
+                dbSet.Remove(obj);
             }
         }
 

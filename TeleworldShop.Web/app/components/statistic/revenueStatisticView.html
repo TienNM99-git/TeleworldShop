@@ -17,63 +17,76 @@
 </section>
 <!-- Main content -->
 <section class="content">
-    <div class="row">
-        <!-- Left col -->
-        <section class="col-lg-7">
-            <!-- Custom tabs (Charts with tabs)-->
-            <div class="nav-tabs-custom">
-                <!-- Tabs within a box -->
-                <ul class="nav nav-tabs pull-right">
-                    <li class="active"><a href="#revenue-chart" data-toggle="tab">Revenue</a></li>
-                </ul>
-                <div class="tab-content no-padding">
-                    <!-- Morris chart - Sales -->
-                    <canvas id="bar" class="chart chart-line"
-                            chart-data="chartdata" chart-labels="labels" chart-series="series"></canvas>
-                </div>
-            </div><!-- /.nav-tabs-custom -->
-
-        </section><!-- /.Left col -->
-        <!-- right col (We are only adding the ID to make the widgets sortable)-->
-        <section class="col-lg-5">
-            <!-- Map box -->
-            <div class="box box-solid">
-                <div class="box-header">
-                    <!-- tools box -->
-                    <i class="fa fa-map-marker"></i>
-                    <h3 class="box-title">
-                        Statistics
-                    </h3>
-                </div>
-                <div class="box-body">
-
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <td>Date</td>
-                                <td>Sell quantity</td>
-                                <td>Revenue</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="item in tabledata">
-                                <td>
-                                    {{item.Date | date}}
-                                </td>
-                                <td>
-                                    {{item.Revenues | number}}
-                                </td>
-                                <td>
-                                    {{item.Benefit | number}}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div><!-- /.box-body-->
-                <div class="box-footer no-border">
-                </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Products</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-        </section><!-- right col -->
-    </div><!-- /.row (main row) -->
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <!-- Left col -->
+            <section class="col-lg-7">
+                <!-- Custom tabs (Charts with tabs)-->
+                <div class="nav-tabs-custom">
+                    <!-- Tabs within a box -->
+                    <ul class="nav nav-tabs pull-right">
+                        <li class="active"><a href="#revenue-chart" data-toggle="tab">Revenue</a></li>
+                    </ul>
+                    <div class="tab-content no-padding">
+                        <!-- Morris chart - Sales -->
+                        <canvas id="bar" class="chart chart-line"
+                                chart-data="chartdata" chart-labels="labels" chart-series="series"></canvas>
+                    </div>
+                </div><!-- /.nav-tabs-custom -->
 
+            </section><!-- /.Left col -->
+            <!-- right col (We are only adding the ID to make the widgets sortable)-->
+            <section class="col-lg-5">
+                <!-- Map box -->
+                <div class="card card-solid">
+                    <div class="card-header">
+                        <!-- tools box -->
+                        <i class="fa fa-map-marker"></i>
+                        <h3 class="card-title">
+                            Statistics
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <td>Date</td>
+                                    <td>Sell quantity</td>
+                                    <td>Revenue</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in tabledata">
+                                    <td>
+                                        {{item.Date | date}}
+                                    </td>
+                                    <td>
+                                        {{item.Revenues | number}}
+                                    </td>
+                                    <td>
+                                        {{item.Benefit | number}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><!-- /.box-body-->
+                    <div class="card-footer no-border">
+                    </div>
+                </div>
+            </section><!-- right col -->
+        </div><!-- /.row (main row) -->
+    </div>
 </section><!-- /.content -->
