@@ -79,7 +79,7 @@
         <div class="desc1 span_3_of_2">
             <h4>@Model.Name</h4>
             <div class="cart-b">
-                <div class="left-n ">@(Model.Price == 0 ? "Contact: 0362537131" : Model.Price.ToString("N0"))</div>
+                <div class="left-n ">@(Model.Price == 0 ? "Contact: 0362537131" : Model.Price.ToString("N0"))₫</div>
                 <a class="now-get get-cart-in btnAddToCart" href="#" data-id="@Model.Id">Add to cart</a>
                 <div class="clearfix"></div>
             </div>
@@ -114,7 +114,7 @@
     <ul id="flexiselDemo1">
         @foreach (var product in relatedProducts)
         {
-            <li><img src="@product.Image" /><div class="grid-flex"><a href="/@(product.Alias).p-@(product.Id).html">@product.Name</a><p>@product.Price</p></div></li>
+            <li><img src="@product.Image" /><div class="grid-flex"><a href="/@(product.Alias).p-@(product.Id).html">@product.Name</a><p>@product.Price₫</p></div></li>
         }
     </ul>
 
