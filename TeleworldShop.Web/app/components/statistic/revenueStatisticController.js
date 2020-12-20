@@ -1,12 +1,12 @@
 ﻿(function (app) {
     app.controller('revenueStatisticController', revenueStatisticController);
 
-    revenueStatisticController.$inject = ['$scope', 'apiService', 'notificationService','$filter'];
+    revenueStatisticController.$inject = ['$scope', 'apiService', 'notificationService', '$filter'];
 
-    function revenueStatisticController($scope, apiService, notificationService,$filter) {
+    function revenueStatisticController($scope, apiService, notificationService, $filter) {
         $scope.tabledata = [];
         $scope.labels = [];
-        $scope.series = ['Turnover', 'Revenue'];
+        $scope.series = ['Sell Quantity', 'Revenue'];
 
         $scope.chartdata = [];
         function getStatistic() {
