@@ -5063,6 +5063,7 @@ input[type="button"].btn-block {
   text-decoration: none;
   background-color: #e9ecef;
   border-color: #dee2e6;
+  cursor: pointer !important;
 }
 
 .page-link:focus {
