@@ -39,16 +39,16 @@ namespace TeleworldShop.Web.Controllers
             var topSaleProductViewModel = mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(topSaleProductModel);
             homeViewModel.LastestProducts = lastestProductViewModel;
             homeViewModel.TopSaleProducts = topSaleProductViewModel;
-            //try
-            //{
-            //    homeViewModel.Title = _commonService.GetSystemConfig(CommonConstants.HomeTitle).ValueString;
-            //    homeViewModel.MetaKeyword = _commonService.GetSystemConfig(CommonConstants.HomeMetaKeyword).ValueString;
-            //    homeViewModel.MetaDescription = _commonService.GetSystemConfig(CommonConstants.HomeMetaDescription).ValueString;
-            //}
-            //catch
-            //{
+            try
+            {
+                homeViewModel.Title = _commonService.GetSystemConfig(CommonConstants.HomeTitle).ValueString;
+                homeViewModel.MetaKeyword = _commonService.GetSystemConfig(CommonConstants.HomeMetaKeyword).ValueString;
+                homeViewModel.MetaDescription = _commonService.GetSystemConfig(CommonConstants.HomeMetaDescription).ValueString;
+            }
+            catch
+            {
 
-            //}
+            }
             return View(homeViewModel);
         }
 

@@ -25,13 +25,43 @@
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
             CreateProductCategorySample(context);
-            CreateUser(context);
+            //CreateUser(context);
             CreateFooter(context);
             CreateSlide(context);
             CreatePage(context);
             CreateContactDetail(context);
+            CreateConfigTitle(context);
         }
+        private void CreateConfigTitle(TeleworldShopDbContext context)
+        {
+            if (!context.SystemConfigs.Any(x => x.Code == "HomeTitle"))
+            {
+                context.SystemConfigs.Add(new SystemConfig()
+                {
+                    Code = "HomeTitle",
+                    ValueString = "Home Page | TeleworldShop",
 
+                });
+            }
+            if (!context.SystemConfigs.Any(x => x.Code == "HomeMetaKeyword"))
+            {
+                context.SystemConfigs.Add(new SystemConfig()
+                {
+                    Code = "HomeMetaKeyword",
+                    ValueString = "Home Page | TeleworldShop",
+
+                });
+            }
+            if (!context.SystemConfigs.Any(x => x.Code == "HomeMetaDescription"))
+            {
+                context.SystemConfigs.Add(new SystemConfig()
+                {
+                    Code = "HomeMetaDescription",
+                    ValueString = "Home Page | TeleworldShop",
+
+                });
+            }
+        }
         private void CreateUser(TeleworldShopDbContext context)
         {
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new TeleworldShopDbContext()));
