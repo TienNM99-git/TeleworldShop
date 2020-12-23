@@ -38,7 +38,7 @@ namespace TeleworldShop.Web.App_Start
 
             });
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
-
+            app.UseKentorOwinCookieSaver();
             //Configure the sign in cookie
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
