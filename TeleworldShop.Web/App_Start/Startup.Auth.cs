@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using TeleworldShop.Data;
@@ -53,7 +54,7 @@ namespace TeleworldShop.Web.App_Start
                 }
             });
 
-            //app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
@@ -64,15 +65,15 @@ namespace TeleworldShop.Web.App_Start
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "1724156397871880",
-            //   appSecret: "398039cc7588d52f87a7adcefecc3210");
+            app.UseFacebookAuthentication(
+               appId: "459546158763370",
+               appSecret: "331f3b6129e688309682fadf9f696198");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "712161982861-4d9bdgfvf6pti1vviifjogopqdqlft56.apps.googleusercontent.com",
-            //    ClientSecret = "T0cgiSG6Gi7BKMr-fCCkdErO"
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "892950474986-436m94t7aadfchks1mrbuu7j55r1g6uk.apps.googleusercontent.com",
+                ClientSecret = "bR9i9gwkssvBEv3h_sg68T32"
+            });
         }
         public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
         {
