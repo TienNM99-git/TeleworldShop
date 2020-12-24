@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Microsoft.Owin.Host.SystemWeb;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
@@ -56,10 +57,10 @@ namespace TeleworldShop.Web.App_Start
 
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
-            // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+            //Uncomment the following lines to enable logging in with third party login providers
+            app.UseMicrosoftAccountAuthentication(
+                clientId: "853483bc-b8fa-4a60-8639-1b86af54f5f1",
+                clientSecret: "K_6dKEgs0pDAPF4V9B_NEw~wlqb_63r1F5");
 
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
