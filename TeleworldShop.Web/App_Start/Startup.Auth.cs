@@ -62,9 +62,9 @@ namespace TeleworldShop.Web.App_Start
                 clientId: "853483bc-b8fa-4a60-8639-1b86af54f5f1",
                 clientSecret: "K_6dKEgs0pDAPF4V9B_NEw~wlqb_63r1F5");
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
+            app.UseTwitterAuthentication(
+               consumerKey: "dOmYjHvi6pQ083TJKnYsBfczI",
+               consumerSecret: "MXtwGLuVh3tM6JBIYct0EZezaSWHe6HTnwl86qYBF0gujVgKco");
 
             app.UseFacebookAuthentication(
                appId: "459546158763370",
