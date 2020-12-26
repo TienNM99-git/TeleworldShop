@@ -43,7 +43,11 @@
               </div>
               <h4><a href="@url">@product.Name</a></h4>
               <p>@product.Description</p>
-              @(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N2")+ "₫")
+              @if (product.PromotionPrice.HasValue)
+              {
+                  <span class="actual">@product.PromotionPrice.Value.ToString("N0")₫</span>
+              }
+              <span class="reducedfrom"> @(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N0")+ "₫")</span>
           </div>
         }
         <div class="clearfix"> </div>
