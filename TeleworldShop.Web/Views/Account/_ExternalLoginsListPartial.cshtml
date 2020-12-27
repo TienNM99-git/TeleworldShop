@@ -1,23 +1,49 @@
 ﻿@model TeleworldShop.Web.Models.ExternalLoginListViewModel
 @using Microsoft.Owin.Security
+<link href="~/Assets/admin/libs/fontawesome-free/css/all.css" rel="stylesheet" />
 <h4>Login with social account</h4>
 <hr />
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    string btnType = "";
     if (loginProviders.Any())
     {
-      using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
-      {
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
+        {
             @Html.AntiForgeryToken()
-            <div id="socialLoginList">
-              <p>
-                @foreach (AuthenticationDescription p in loginProviders)
-                {
-                    <button type="submit" class="btn" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><i class="fa fa-@(p.AuthenticationType=="Microsoft"?"windows":p.AuthenticationType.ToLower())"></i> @p.AuthenticationType</button>
-                }
-              </p>
+            <div id="social-auth-links text-center mb-3">
+                <p>
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+                        switch (p.AuthenticationType)
+                        {
+                            case "Google":
+                                // code block
+                                btnType = "danger";
+                                break;
+                            case "Facebook":
+                                // code block
+                                btnType = "primary";
+                                break;
+                            case "Twitter":
+                                // code block
+                                btnType = "success";
+                                break;
+                            default:
+                                // code block
+                                btnType = "info";
+                                break;
+                        }
+                        <button type="submit" class="btn btn-block btn-@btnType"
+                                id="@p.AuthenticationType"
+                                name="provider"
+                                value="@p.AuthenticationType"
+                                title="Log in using your @p.Caption account">
+                            <i class="fab fa-@(p.AuthenticationType=="Microsoft"?"windows":p.AuthenticationType.ToLower()) mr-2"></i> Sign in using @p.AuthenticationType
+                        </button>
+                    }
+                </p>
             </div>
-      }
+        }
     }
-
 }
