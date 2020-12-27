@@ -16,7 +16,7 @@ using TeleworldShop.Web.Models;
 namespace TeleworldShop.Web.Api
 {
     [RoutePrefix("api/product")]
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class ProductController : ApiControllerBase
     {
         #region Initialize

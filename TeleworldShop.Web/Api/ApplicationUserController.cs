@@ -17,7 +17,7 @@ using TeleworldShop.Web.Models;
 
 namespace TeleworldShop.Web.Api
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     [RoutePrefix("api/applicationUser")]
     public class ApplicationUserController : ApiControllerBase
     {

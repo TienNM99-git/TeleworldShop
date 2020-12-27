@@ -9,7 +9,7 @@ using TeleworldShop.Web.Infrastructure.Core;
 
 namespace TeleworldShop.Web.Api
 {
-    //[Authorize]
+    [Authorize(Roles ="ViewStatistics")]
     [RoutePrefix("api/statistic")]
     public class StatisticController : ApiControllerBase
     {

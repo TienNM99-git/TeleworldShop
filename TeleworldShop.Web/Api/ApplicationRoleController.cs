@@ -17,7 +17,7 @@ using TeleworldShop.Web.Infrastructure.Extensions;
 namespace TeleworldShop.Web.Api
 {
     [RoutePrefix("api/applicationRole")]
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class ApplicationRoleController : ApiControllerBase
     {
         private IApplicationRoleService _appRoleService;
