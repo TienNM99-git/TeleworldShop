@@ -36,7 +36,7 @@ namespace TeleworldShop.Web.Api
         {
             Func<HttpResponseMessage> func = () =>
             {
-                var model = _productService.GetAll().OrderByDescending(x=>x.Status).ThenByDescending(x => x.CreatedDate);
+                var model = _productService.GetAll().Where(x=>x.Status==true).OrderByDescending(x => x.CreatedDate);
                 var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
                 var responseData = mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(model);
@@ -74,7 +74,7 @@ namespace TeleworldShop.Web.Api
                 var model = _productService.GetAll(keyword);
 
                 totalRow = model.Count();
-                var query = model.OrderByDescending(x => x.Status).ThenByDescending(x=>x.CreatedDate).Skip(page * pageSize).Take(pageSize);
+                var query = model.Where(x => x.Status==true).OrderByDescending(x=>x.CreatedDate).Skip(page * pageSize).Take(pageSize);
                 
                 var mapper = new Mapper(AutoMapperConfiguration.Configure());
 

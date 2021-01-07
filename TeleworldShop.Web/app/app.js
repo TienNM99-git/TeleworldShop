@@ -6,6 +6,7 @@
             'teleworldshop.product_categories',            
             'teleworldshop.application_roles',
             'teleworldshop.application_users',
+            'teleworldshop.orders',
             'teleworldshop.statistics',
             'teleworldshop.common'])
         .config(config)

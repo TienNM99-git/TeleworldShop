@@ -275,6 +275,7 @@
     <Compile Include="Api\HomeController.cs" />
     <Compile Include="Api\PostCategoryController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />
+    <Compile Include="Api\OrderController.cs" />
     <Compile Include="Api\ProductController.cs" />
     <Compile Include="Api\StatisticController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -353,6 +354,11 @@
     <Content Include="app\components\login\loginView.html" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\home\homeView.html" />
+    <Content Include="app\components\orders\orderDetailsController.js" />
+    <Content Include="app\components\orders\orderDetailsView.html" />
+    <Content Include="app\components\orders\orderListController.js" />
+    <Content Include="app\components\orders\orderListView.html" />
+    <Content Include="app\components\orders\orders.module.js" />
     <Content Include="app\components\products\productAddController.js" />
     <Content Include="app\components\products\productAddView.html" />
     <Content Include="app\components\products\productEditController.js" />
@@ -5789,6 +5795,7 @@
     <Content Include="Assets\client\images\zoom.png" />
     <Content Include="Assets\client\js\common.js" />
     <Content Include="Assets\client\js\controllers\contact.js" />
+    <Content Include="Assets\client\js\controllers\orderDetails.js" />
     <Content Include="Assets\client\js\controllers\shoppingCart.js" />
     <Content Include="Assets\client\js\jquery.etalage.min.js" />
     <Content Include="Assets\client\js\jquery.flexisel.js" />
@@ -5810,7 +5817,6 @@
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\components\orders\" />
     <Folder Include="app\components\roles\" />
     <Folder Include="app\components\users\" />
     <Folder Include="app\shared\footer\" />
