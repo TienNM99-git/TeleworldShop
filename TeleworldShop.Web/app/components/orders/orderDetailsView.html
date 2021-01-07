@@ -1,0 +1,114 @@
+﻿   <!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Edit order</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home Page</a></li>
+                    <li class="breadcrumb-item"><a href="#">Orders</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="orders">Order list</a></li>
+                    <li class="breadcrumb-item active">Update order</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="card card-info">
+        <div class="card-header">
+            <h3 class="card-title">Order Id: {{order.Name}}</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form class="form-horizontal" novalidate name="frmUpdateOrder" role="form" ng-submit="updateOrder()">
+            <div class="card-body">
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Customer Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" required name="name" ng-maxlength="256" ng-model="order.CustomerName">
+                        <span ng-show="frmUpdateOrder.name.$invalid" class="has-error">Customer name is required</span>
+                        <span ng-show="frmUpdateOrder.name.$error.maxlength" class="has-error">Customer name can not exceed 256 digits</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Customer Address</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="address" ng-maxlength="256" required ng-model="order.CustomerAddress">
+                        <span ng-show="frmUpdateOrder.address.$invalid" class="has-error">Address is required</span>
+                        <span ng-show="frmUpdateOrder.address.$error.maxlength" class="has-error">Address can not exceed 256 digits</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Customer Email</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="email" ng-maxlength="500" ng-model="order.CustomerEmail">
+                        <span ng-show="frmUpdateOrder.email.$error.maxlength" class="has-error">Email can not exceed 500 digits</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Customer Mobile</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="mobile" ng-maxlength="500" ng-model="order.CustomerMobile">
+                        <span ng-show="frmUpdateOrder.mobile.$error.maxlength" class="has-error">Phone number is required</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Payment Method</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="paymentType" ng-model="order.PaymentMethod">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Created Date</label>
+                    <div class="col-sm-10">
+                        <input type="date" name="createdDate" class="form-control" value="{{ order.CreatedDate | date: 'yyyy-MM-dd' }}" ng-model="order.CreatedDate">
+                    </div>
+                </div>
+                <div id="orderDetailContent">
+                    <table class="form-group table table-bordered">
+                        <thead>
+                            <tr>
+                                <td>STT</td>
+                                <td>Product Name</td>
+                                <td>Image</td>
+                                <td>Price</td>
+                                <td>Quantity</td>
+                                <td>Total Price</td>
+
+                            </tr>
+                            <tr colspan="6">Total Cost</tr>
+                        </thead>
+                        <tbody id="cartBody"></tbody>
+                    </table>
+                    <div class="pull-right">
+                        Total cost: <span id="lblTotalCost"></span>
+                    </div>
+                </div>              
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="submit" ng-disabled="frmUpdateOrder.$invalid" class="btn btn-success">Save</button>
+                <button ui-sref="orders" class="btn btn-default float-right">Cancel</button>
+            </div>
+            <!-- /.card-footer -->
+        </form>
+    </div>
+
+</section>
+<!-- /.content -->
+<script id="tplOrderDetail" type="x-tmpl-mustache">
+    <tr>
+        <td>{{ProductId}}</td>
+        <td>{{ProductName}}</td>
+        <td><img src="{{Image}}" height="50" /></td>
+        <td>{{PriceF}}</td>
+        <td><input type="number" min="0" data-id="{{ProductId}}" data-price="{{Price}}" value="{{Quantity}}" class="input txtQuantity" /></td>
+        <td id="amount_{{ProductId}}">{{Amount}}</td>
+    </tr>
+</script>

@@ -20,7 +20,7 @@ using TeleworldShop.Web.Models;
 namespace TeleworldShop.Web.Api
 {
     [RoutePrefix("api/applicationGroup")]
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class ApplicationGroupController : ApiControllerBase
     {
         private IApplicationGroupService _appGroupService;

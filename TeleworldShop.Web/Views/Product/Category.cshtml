@@ -18,7 +18,7 @@
                 <li><a class="active" href="?page=@Model.Page&sort=popular">Popular</a></li> |
                 <li><a href="?page=@Model.Page&sort=new">Latest</a></li> |
                 <li><a href="?page=@Model.Page&sort=discount">Sale</a></li> |
-                <li><a  class="fa fa-arrow-up" aria-hidden="true" href="?page=@Model.Page&sort=lowtohigh"></a></li>
+                <li><a class="fa fa-arrow-up" aria-hidden="true" href="?page=@Model.Page&sort=lowtohigh"></a></li>
                 <li><a class="fa fa-arrow-down" aria-hidden="true" href="?page=@Model.Page&sort=hightolow"></a></li>
                 <div class="clearfix"> </div>
             </ul>
@@ -45,7 +45,12 @@
                     </div>
                     <h4><a href="@url">@product.Name</a></h4>
                     <p>@product.Description</p>
-                    @(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N2")+ "₫")
+                    @if (product.PromotionPrice.HasValue)
+                    {
+                        <span class="actual">@product.PromotionPrice.Value.ToString("N0")₫</span>
+                    }
+                    <span class="reducedfrom"> @(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N0")+ "₫")</span>
+
                 </div>
             }
             <div class="clearfix"> </div>

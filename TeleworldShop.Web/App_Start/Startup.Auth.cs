@@ -5,7 +5,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Microsoft.Owin.Host.SystemWeb;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using TeleworldShop.Data;
@@ -37,7 +39,7 @@ namespace TeleworldShop.Web.App_Start
 
             });
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
-
+            app.UseKentorOwinCookieSaver();
             //Configure the sign in cookie
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
@@ -53,26 +55,26 @@ namespace TeleworldShop.Web.App_Start
                 }
             });
 
-            //app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
-            // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+            //Uncomment the following lines to enable logging in with third party login providers
+            app.UseMicrosoftAccountAuthentication(
+                clientId: "853483bc-b8fa-4a60-8639-1b86af54f5f1",
+                clientSecret: "K_6dKEgs0pDAPF4V9B_NEw~wlqb_63r1F5");
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
+            app.UseTwitterAuthentication(
+               consumerKey: "dOmYjHvi6pQ083TJKnYsBfczI",
+               consumerSecret: "MXtwGLuVh3tM6JBIYct0EZezaSWHe6HTnwl86qYBF0gujVgKco");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "1724156397871880",
-            //   appSecret: "398039cc7588d52f87a7adcefecc3210");
+            app.UseFacebookAuthentication(
+               appId: "459546158763370",
+               appSecret: "331f3b6129e688309682fadf9f696198");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "712161982861-4d9bdgfvf6pti1vviifjogopqdqlft56.apps.googleusercontent.com",
-            //    ClientSecret = "T0cgiSG6Gi7BKMr-fCCkdErO"
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "892950474986-436m94t7aadfchks1mrbuu7j55r1g6uk.apps.googleusercontent.com",
+                ClientSecret = "bR9i9gwkssvBEv3h_sg68T32"
+            });
         }
         public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
         {

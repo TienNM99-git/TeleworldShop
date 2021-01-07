@@ -8,8 +8,8 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i>Home Page</a></li>
-                    <li class="breadcrumb-item"><a href="#">Product</a></li>
-                    <li class="breadcrumb-item active">Product list</li>
+                    <li class="breadcrumb-item"><a href="#">Orders</a></li>
+                    <li class="breadcrumb-item active">Order list</li>
                 </ol>
             </div>
         </div>
@@ -21,7 +21,7 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Products</h3>
+            <h3 class="card-title">Orders</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i>
@@ -42,7 +42,6 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <button class="btn btn-success" type="button" ui-sref="add_product" style="margin-bottom:5px">Add new</button>
                     <button class="btn btn-danger" type="button" ng-click="deleteMultiple()" id="btnDelete" style="margin-bottom:5px" disabled="disabled">Delete</button>
                 </div>
             </div>
@@ -53,33 +52,29 @@
                             <tr>
                                 <td><label><input name="all" type="checkbox" ng-click="selectAll()" /></label></td>
                                 <th style="width: 5%">Id</th>
-                                <th style="width: 35%">Product name</th>
-                                <th style="width: 20%">Original Price</th>
-                                <th style="width: 20%">Created date</th>
-                                <th style="width: 10%">In-stock</th>
-                                <!--<th style="width: 10%">Status</th>-->
+                                <th style="width: 35%">Customer name</th>
+                                <th style="width: 20%">Address</th>
+                                <th style="width: 10%">Phone</th>
+                                <th style="width: 10%">Created date</th>
+                                <th style="width: 10%">Payment method</th>
                                 <th style="width: 10%">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="item in products">
+                            <tr ng-repeat="item in orders">
                                 <td><input type="checkbox" ng-model="item.checked" name="all" /></td>
                                 <td>{{item.Id}}</td>
-                                <td>{{item.Name}}</td>
-                                <td>{{item.OriginalPrice}} VND</td>
+                                <td>{{item.CustomerName}}</td>
+                                <td>{{item.CustomerAddress}}</td>
+                                <td>{{item.CustomerMobile}}</td>
                                 <td>{{item.CreatedDate | date:'dd/MM/yyyy hh:mm:ss'}}</td>
-                                <td>{{item.Quantity}}</td>
-                                <!-- class="badge bg-danger-->
-                                <!--<td>
-                                    <span ng-class="{'badge bg-danger':item.Status==false,'badge bg-success':item.Status==true}">
-                                        {{item.Status | statusFilter}}
-                                    </span>
-                                </td>-->
+                                <td>{{item.PaymentMethod}}</td>
+                                <!-- class="badge bg-danger-->                              
                                 <td>
-                                    <button class="btn btn-sm btn-primary" ui-sref="edit_product({id:item.Id})">
-                                        <i class="fa fa-pen"></i>
+                                    <button class="btn btn-sm btn-primary" ui-sref="order_details({id:item.Id})">
+                                        <i class="fa fa-info-circle"></i>
                                     </button>
-                                    <button class="btn btn-sm btn-danger" ng-click="deleteProduct(item.Id)">
+                                    <button class="btn btn-sm btn-danger" ng-click="deleteOrder(item.Id)">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </td>
@@ -101,7 +96,7 @@
                                  custom-path="{{customPath}}"
                                  pages-count="{{pagesCount}}"
                                  total-count="{{totalCount}}"
-                                 search-func="getProducts(page)">
+                                 search-func="getOrders(page)">
                 </pager-directive>
             </div>
             <!-- /.card-footer-->

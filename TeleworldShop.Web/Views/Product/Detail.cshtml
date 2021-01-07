@@ -79,7 +79,13 @@
         <div class="desc1 span_3_of_2">
             <h4>@Model.Name</h4>
             <div class="cart-b">
-                <div class="left-n ">@(Model.Price == 0 ? "Contact: 0362537131" : Model.Price.ToString("N0"))₫</div>
+                <div class="left-n ">
+                    @if (Model.PromotionPrice.HasValue)
+                    {
+                        <span class="actual">@Model.PromotionPrice.Value.ToString("N0")₫</span>
+                    }
+                    <span class="reducedfrom"> @(Model.Price == 0 ? "Contact: 0362537131" : Model.Price.ToString("N0")+ "₫")</span>
+                </div>
                 <a class="now-get get-cart-in btnAddToCart" href="#" data-id="@Model.Id">Add to cart</a>
                 <div class="clearfix"></div>
             </div>

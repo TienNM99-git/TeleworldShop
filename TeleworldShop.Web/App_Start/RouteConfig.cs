@@ -42,6 +42,12 @@ namespace TeleworldShop.Web
             namespaces: new string[] { "TeleworldShop.Web.Controllers" });
 
             routes.MapRoute(
+            name: "Forgot Password",
+            url: "forgot-password.html",
+            defaults: new { controller = "Account", action = "ForgotPassword", id = UrlParameter.Optional },
+            namespaces: new string[] { "TeleworldShop.Web.Controllers" });
+
+            routes.MapRoute(
             name: "Register",
             url: "register.html",
             defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional },
