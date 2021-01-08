@@ -100,13 +100,12 @@ namespace TeleworldShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                var model = _orderService.GetById(id);
+                var model = _orderService.GetOrderedProducts(id);
 
                 var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
-                var responseData = mapper.Map<Order, OrderViewModel>(model);
 
-                //  var responseData = mapper.Map<IEnumerable<OrderDetail>, IEnumerable<OrderDetailViewModel>>(order.OrderDetails);
+                var responseData = mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(model);
 
                 var response = request.CreateResponse(HttpStatusCode.OK, responseData);
 

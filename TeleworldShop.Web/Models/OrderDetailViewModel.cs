@@ -13,6 +13,6 @@ namespace TeleworldShop.Web.Models
         public int ProductId { set; get; }
 
         public int Quantity { set; get; }
-        public virtual Product Product { set; get; }
+       // public virtual Product Product { set; get; }
     }
 }

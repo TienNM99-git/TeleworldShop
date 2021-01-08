@@ -91,6 +91,12 @@ namespace TeleworldShop.Web
             namespaces: new string[] { "TeleworldShop.Web.Controllers" });
 
             routes.MapRoute(
+            name: "Account",
+            url: "account.html",
+            defaults: new { controller = "Account", action = "Index", tagId = UrlParameter.Optional },
+            namespaces: new string[] { "TeleworldShop.Web.Controllers" });
+
+            routes.MapRoute(
             name: "Default",
             url: "{controller}/{action}/{id}",
             defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
