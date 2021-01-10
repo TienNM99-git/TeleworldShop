@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Script.Serialization;
+using TeleworldShop.Common;
 using TeleworldShop.Model.Models;
 using TeleworldShop.Service;
 using TeleworldShop.Web.Infrastructure.Core;
@@ -41,7 +42,7 @@ namespace TeleworldShop.Web.Api
                 var model = _orderService.GetAll(keyword);
 
                 totalRow = model.Count();
-                var query = model.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
+                var query = model.OrderByDescending(x => x.Status==false).ThenByDescending(x=>x.CreatedDate).Skip(page * pageSize).Take(pageSize);
 
                 var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
@@ -65,7 +66,7 @@ namespace TeleworldShop.Web.Api
         {
             Func<HttpResponseMessage> func = () =>
             {
-                var model = _orderService.GetAll().OrderByDescending(x => x.CreatedDate);
+                var model = _orderService.GetAll().OrderByDescending(x => x.Status==false).ThenByDescending(x=>x.CreatedDate);
                 var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
                 var responseData = mapper.Map<IEnumerable<Order>, IEnumerable<OrderViewModel>>(model);
@@ -100,13 +101,12 @@ namespace TeleworldShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                var model = _orderService.GetById(id);
+                var model = _orderService.GetOrderedProducts(id);
 
                 var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
-                var responseData = mapper.Map<Order, OrderViewModel>(model);
 
-                //  var responseData = mapper.Map<IEnumerable<OrderDetail>, IEnumerable<OrderDetailViewModel>>(order.OrderDetails);
+                var responseData = mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(model);
 
                 var response = request.CreateResponse(HttpStatusCode.OK, responseData);
 
@@ -130,8 +130,13 @@ namespace TeleworldShop.Web.Api
                     var dbOrder = _orderService.GetById(orderViewModel.Id);
 
                     dbOrder.UpdateOrder(orderViewModel);
+                    dbOrder.Status = true;
                     _orderService.Update(dbOrder);
                     _orderService.Save();
+
+                    string verifyContent = "Your order has been verified by administrtors!! We'll soon have it delivered to you";
+                    var receiver = orderViewModel.CustomerEmail;
+                    MailHelper.SendMail(receiver, "Contact from website: Order verified", verifyContent);
 
                     var mapper = new Mapper(AutoMapperConfiguration.Configure());
                     var responseData = mapper.Map<Order, OrderViewModel>(dbOrder);

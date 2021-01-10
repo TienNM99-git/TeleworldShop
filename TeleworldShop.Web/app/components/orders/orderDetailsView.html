@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Edit order</h1>
+                <h1>View Details</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -22,7 +22,7 @@
     <!-- Default box -->
     <div class="card card-info">
         <div class="card-header">
-            <h3 class="card-title">Order Id: {{order.Name}}</h3>
+            <h3 class="card-title">Order Id: {{order.Id}}</h3>
         </div>
         <!-- /.card-header -->
         <!-- form start -->
@@ -74,26 +74,24 @@
                     <table class="form-group table table-bordered">
                         <thead>
                             <tr>
-                                <td>STT</td>
+                                <td>Product Id</td>
                                 <td>Product Name</td>
                                 <td>Image</td>
                                 <td>Price</td>
                                 <td>Quantity</td>
                                 <td>Total Price</td>
-
                             </tr>
-                            <tr colspan="6">Total Cost</tr>
                         </thead>
-                        <tbody id="cartBody"></tbody>
+                        <tbody id="orderDetailBody"></tbody>
                     </table>
-                    <div class="pull-right">
-                        Total cost: <span id="lblTotalCost"></span>
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Total Cost: <span id="lblTotalCost"></span></label>                        
                     </div>
-                </div>              
+                </div>
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-                <button type="submit" ng-disabled="frmUpdateOrder.$invalid" class="btn btn-success">Save</button>
+                <button type="submit" ng-disabled="frmUpdateOrder.$invalid" class="btn btn-success">Verify</button>
                 <button ui-sref="orders" class="btn btn-default float-right">Cancel</button>
             </div>
             <!-- /.card-footer -->
@@ -101,6 +99,8 @@
     </div>
 
 </section>
+<script src="../../../Assets/admin/libs/numeral/numeral.js"></script>
+<script src="../../../Assets/admin/libs/mustache/mustache.js"></script>
 <!-- /.content -->
 <script id="tplOrderDetail" type="x-tmpl-mustache">
     <tr>
@@ -108,7 +108,7 @@
         <td>{{ProductName}}</td>
         <td><img src="{{Image}}" height="50" /></td>
         <td>{{PriceF}}</td>
-        <td><input type="number" min="0" data-id="{{ProductId}}" data-price="{{Price}}" value="{{Quantity}}" class="input txtQuantity" /></td>
+        <td><input type="text" data-id="{{ProductId}}" data-price="{{Price}}" value="{{Quantity}}" class="input txtOrderedQuantity"/></td>
         <td id="amount_{{ProductId}}">{{Amount}}</td>
     </tr>
 </script>

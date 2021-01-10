@@ -5736,6 +5736,7 @@
     <Content Include="Assets\client\font-awesome-4.6.3\fonts\fontawesome-webfont.svg" />
     <Content Include="Assets\client\font-awesome-4.6.3\HELP-US-OUT.txt" />
     <Content Include="Assets\client\images\a-star.png" />
+    <Content Include="Assets\client\images\ads.jpg" />
     <Content Include="Assets\client\images\arrow1.png" />
     <Content Include="Assets\client\images\arrow2.png" />
     <Content Include="Assets\client\images\avatar.png" />
@@ -5795,7 +5796,6 @@
     <Content Include="Assets\client\images\zoom.png" />
     <Content Include="Assets\client\js\common.js" />
     <Content Include="Assets\client\js\controllers\contact.js" />
-    <Content Include="Assets\client\js\controllers\orderDetails.js" />
     <Content Include="Assets\client\js\controllers\shoppingCart.js" />
     <Content Include="Assets\client\js\jquery.etalage.min.js" />
     <Content Include="Assets\client\js\jquery.flexisel.js" />
@@ -5817,8 +5817,6 @@
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\components\roles\" />
-    <Folder Include="app\components\users\" />
     <Folder Include="app\shared\footer\" />
     <Folder Include="app\shared\navigation\" />
     <Folder Include="Assets\admin\libs\checklist-model\test\" />
@@ -6092,6 +6090,7 @@
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\ConfirmOrder.cshtml" />
     <Content Include="Views\ShoppingCart\CancelOrder.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TeleworldShop.Common\TeleworldShop.Common.csproj">

@@ -20,18 +20,21 @@ namespace TeleworldShop.Service
         Order Delete(int id);
         IEnumerable<Order> GetAll(string keyword);
         Order GetById(int id);
+        List<Product> GetOrderedProducts(int orderId);
         IEnumerable<Order> Search(string keyword, int page, int pageSize, string sort, out int totalRow);
     }
     public class OrderService : IOrderService
     {
         IOrderRepository _orderRepository;
         IOrderDetailRepository _orderDetailRepository;
+        IProductRepository _productRepository;
         IUnitOfWork _unitOfWork;
 
-        public OrderService(IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository, IUnitOfWork unitOfWork)
+        public OrderService(IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository, IProductRepository productRepository, IUnitOfWork unitOfWork)
         {
             this._orderRepository = orderRepository;
             this._orderDetailRepository = orderDetailRepository;
+            this._productRepository = productRepository;
             this._unitOfWork = unitOfWork;
         }
         public Order Create(ref Order order, List<OrderDetail> orderDetails)
@@ -110,6 +113,18 @@ namespace TeleworldShop.Service
                 _orderDetailRepository.Delete(item);
             }
             return _orderRepository.Delete(id);
+        }
+
+        public List<Product> GetOrderedProducts(int orderId)
+        {
+            List<Product> orderedDetails = new List<Product>();
+            var detailList = _orderDetailRepository.GetMulti(x=>x.OrderId==orderId).Select(ordered=> new { ordered.ProductId, ordered.Quantity});
+            for(int i = 0; i < detailList.Count(); i++)
+            {
+                orderedDetails.Add(_productRepository.GetSingleById(detailList.ElementAt(i).ProductId));
+                orderedDetails.ElementAt(i).Quantity = detailList.ElementAt(i).Quantity;
+            }        
+            return orderedDetails;
         }
     }
 }

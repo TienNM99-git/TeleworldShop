@@ -166,7 +166,11 @@ namespace TeleworldShop.Web.Controllers
         {
             return View();
         }
-
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return View();
+        }
         [HttpPost]
         [CaptchaValidationActionFilter("CaptchaCode", "registerCaptcha", "Invalid captcha")]
         public async Task<ActionResult> Register(RegisterViewModel model)
