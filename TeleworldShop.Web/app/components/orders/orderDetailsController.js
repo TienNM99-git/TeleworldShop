@@ -93,10 +93,10 @@
             //$scope.order.MoreImages = JSON.stringify($scope.moreImages)
             apiService.put('api/order/update', $scope.order,
                 function (result) {
-                    notificationService.displaySuccess(result.data.Name + ' updated !!!');
+                    notificationService.displaySuccess(result.data.Name + ' verified !!!');
                     $state.go('orders');
                 }, function (error) {
-                    notificationService.displayError('Update order failed');
+                    notificationService.displayError('Verified order failed');
                 });
         }
         loadOrderDetail();

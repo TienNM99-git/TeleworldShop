@@ -5736,6 +5736,7 @@
     <Content Include="Assets\client\font-awesome-4.6.3\fonts\fontawesome-webfont.svg" />
     <Content Include="Assets\client\font-awesome-4.6.3\HELP-US-OUT.txt" />
     <Content Include="Assets\client\images\a-star.png" />
+    <Content Include="Assets\client\images\ads.jpg" />
     <Content Include="Assets\client\images\arrow1.png" />
     <Content Include="Assets\client\images\arrow2.png" />
     <Content Include="Assets\client\images\avatar.png" />

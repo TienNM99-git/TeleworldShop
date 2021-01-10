@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -83,13 +85,17 @@ namespace TeleworldShop.Web.Controllers
 
             var cart = (List<ShoppingCartViewModel>)Session[CommonConstants.SessionCart];
             List<OrderDetail> orderDetails = new List<OrderDetail>();
+            string orderContent = "<br />Ordered items: <br />";
+            decimal totalCost = 0;
             bool isEnough = true;
             foreach (var item in cart)
             {
                 var detail = new OrderDetail();
+                orderContent += "Product name: " + item.Product.Name + " : " + "Quantity: " + item.Quantity.ToString() + "<br />";
                 detail.ProductId = item.ProductId;
                 detail.Quantity = item.Quantity;
                 detail.Price = item.Product.Price;
+                totalCost += item.Quantity * item.Product.Price;
                 orderDetails.Add(detail);
                 isEnough = _productService.SellProduct(item.ProductId, item.Quantity);
                 if (isEnough)
@@ -105,7 +111,17 @@ namespace TeleworldShop.Web.Controllers
                     });
                 }               
             }
+            CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");   // try with "en-US"
+            string a = decimal.Parse(totalCost.ToString()).ToString("#,###", cul.NumberFormat);
+            orderContent += "Total cost: "+ totalCost.ToString() + "<br />" + "Please wait for the administrators to verify your order!! Thanks for using our services";
             var orderReturn = _orderService.Create(ref orderNew, orderDetails);
+            string content = System.IO.File.ReadAllText(Server.MapPath("~/Assets/client/template/contact_template.html"));
+            content = content.Replace("{{Name}}", orderNew.CustomerName);
+            content = content.Replace("{{Email}}", orderNew.CustomerEmail);
+            content = content.Replace("{{Message}}", orderNew.CustomerMessage);
+            content = content.Replace("{{OrderContent}}", orderContent);
+            var receiver = orderNew.CustomerEmail;
+            MailHelper.SendMail(receiver, "Contact from website", content);
             _productService.Save();
             if (order.PaymentMethod == "CASH")
             {
