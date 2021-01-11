@@ -51,8 +51,8 @@
                             <tr>
                                 <td><label><input name="all" type="checkbox" ng-click="selectAll()" /></label></td>
                                 <th style="width: 35%">Role name</th>
-                                <th style="width: 35%">Description</th>
-                                <th style="width: 20%">Discriminator</th>
+                                <th style="width: 55%">Description</th>
+                                <!--<th style="width: 20%">Discriminator</th>-->
                                 <th style="width: 10%">Actions</th>
                             </tr>
                         </thead>
@@ -61,7 +61,7 @@
                                 <td><input type="checkbox" ng-model="item.checked" name="all" /></td>
                                 <td>{{item.Name}}</td>
                                 <td>{{item.Description}}</td>
-                                <td>{{item.Discriminator}}</td>
+                                <!--<td>{{item.Discriminator}}</td>-->
                                 <td>
                                     <button class="btn btn-sm btn-primary" ui-sref="edit_application_role({id:item.Id})">
                                         <i class="fa fa-pen"></i>
