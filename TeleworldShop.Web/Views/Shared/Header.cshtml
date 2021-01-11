@@ -1,12 +1,15 @@
 ﻿@using Microsoft.AspNet.Identity;
+@{
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
 <div class="header">
     <div class="top-header">
         <div class="container">
             <div class="top-header-left">
                 @*<ul class="support">
-                    <li class="van"><a href="#"><label> </label></a></li>
-                    <li><a href="#">Free shipping <span class="live">on order over 500</span></a></li>
-                </ul>*@
+                        <li class="van"><a href="#"><label> </label></a></li>
+                        <li><a href="#">Free shipping <span class="live">on order over 500</span></a></li>
+                    </ul>*@
                 <ul class="support">
                     <li><a href="/page/introduction.html"><label> </label></a></li>
                     <li><a href="/page/introduction.html">Introduction</a></li>
@@ -50,7 +53,7 @@
                     <form action="/search.html" method="get">
                         <input type="text" id="txtKeyword" placeholder="Enter keywords here..." name="keyword" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
                         <input type="submit" value="SEARCH" id="btnSearch">
-                    </form>                 
+                    </form>
                 </div>
                 <div class="clearfix"> </div>
             </div>
