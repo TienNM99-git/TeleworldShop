@@ -9,7 +9,7 @@ using TeleworldShop.Web.Infrastructure.Core;
 
 namespace TeleworldShop.Web.Api
 {
-    [Authorize(Roles ="ViewStatistics")]
+   
     [RoutePrefix("api/statistic")]
     public class StatisticController : ApiControllerBase
     {
@@ -18,7 +18,7 @@ namespace TeleworldShop.Web.Api
         {
             _statisticService = statisticService;
         }
-
+        [Authorize(Roles = "ViewStatistics")]
         [Route("getrevenue")]
         [HttpGet]
         public HttpResponseMessage GetRevenueStatistic(HttpRequestMessage request, string fromDate, string toDate)
