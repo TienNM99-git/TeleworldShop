@@ -12,7 +12,7 @@ namespace TeleworldShop.Web.Models
         public DateTime BirthDay { set; get; }
         public string Bio { set; get; }
         public string Email { set; get; }
-        public string Password { set; get; }
+        public string PasswordHash { set; get; }
         public string UserName { set; get; }
 
         public string PhoneNumber { set; get; }

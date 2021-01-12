@@ -99,7 +99,7 @@ namespace TeleworldShop.Web.Api
                 try
                 {
                     newAppUser.Id = Guid.NewGuid().ToString();
-                    var result = await _userManager.CreateAsync(newAppUser, applicationUserViewModel.Password);
+                    var result = await _userManager.CreateAsync(newAppUser, applicationUserViewModel.PasswordHash);
                     if (result.Succeeded)
                     {
                         var listAppUserGroup = new List<ApplicationUserGroup>();
@@ -171,9 +171,10 @@ namespace TeleworldShop.Web.Api
                                 await _userManager.AddToRoleAsync(appUser.Id, role.Name);
                             }
                         }
-                        _appGroupService.AddUserToGroups(listAppUserGroup, applicationUserViewModel.Id);
+                        _appGroupService.AddUserToGroups(listAppUserGroup, appUser.Id);
                         _appGroupService.Save();
                         return request.CreateResponse(HttpStatusCode.OK, applicationUserViewModel);
+
                     }
                     else
                         return request.CreateErrorResponse(HttpStatusCode.BadRequest, string.Join(",", result.Errors));
