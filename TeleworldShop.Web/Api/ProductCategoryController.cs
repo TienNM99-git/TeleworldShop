@@ -16,7 +16,6 @@ using TeleworldShop.Web.Mappings;
 namespace TeleworldShop.Web.Api
 {
     [RoutePrefix("api/productcategory")]
-    [Authorize]
     public class ProductCategoryController : ApiControllerBase
     {
         #region Initialize
@@ -94,10 +93,10 @@ namespace TeleworldShop.Web.Api
             });
         }
 
-        [Authorize(Roles = "AddCategory")]
+        
         [Route("create")]
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "AddCategory")]
         public HttpResponseMessage Create(HttpRequestMessage request, ProductCategoryViewModel productCategoryVm)
         {
             return CreateHttpResponse(request, () =>
@@ -129,7 +128,6 @@ namespace TeleworldShop.Web.Api
         [Route("update")]
         [Authorize(Roles = "UpdateCategory")]
         [HttpPut]
-        [AllowAnonymous]
         public HttpResponseMessage Update(HttpRequestMessage request, ProductCategoryViewModel productCategoryVm)
         {
             return CreateHttpResponse(request, () =>
@@ -161,7 +159,6 @@ namespace TeleworldShop.Web.Api
         [Authorize(Roles = "DeleteCategory")]
         [Route("delete")]
         [HttpDelete]
-        [AllowAnonymous]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>
@@ -189,7 +186,6 @@ namespace TeleworldShop.Web.Api
         [Route("deletemulti")]
         [Authorize(Roles = "DeleteCategory")]
         [HttpDelete]
-        [AllowAnonymous]
         public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedProductCategories)
         {
             return CreateHttpResponse(request, () =>

@@ -16,7 +16,7 @@ using TeleworldShop.Web.Models;
 namespace TeleworldShop.Web.Api
 {
     [RoutePrefix("api/product")]
-    [Authorize(Roles ="Admin")]
+    
     public class ProductController : ApiControllerBase
     {
         #region Initialize
@@ -31,6 +31,7 @@ namespace TeleworldShop.Web.Api
         #endregion
 
         [Route("getallparents")]
+        [Authorize(Roles = "ViewProduct")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
@@ -47,6 +48,7 @@ namespace TeleworldShop.Web.Api
             return CreateHttpResponse(request, func);
         }
         [Route("getbyid/{id:int}")]
+        [Authorize(Roles = "ViewProduct")]
         [HttpGet]
         public HttpResponseMessage GetById(HttpRequestMessage request, int id)
         {
@@ -65,6 +67,7 @@ namespace TeleworldShop.Web.Api
         }
 
         [Route("getall")]
+        [Authorize(Roles = "ViewProduct")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request, string keyword, int page, int pageSize = 20)
         {
@@ -94,8 +97,8 @@ namespace TeleworldShop.Web.Api
 
 
         [Route("create")]
+        [Authorize(Roles = "AddProduct")]
         [HttpPost]
-        [AllowAnonymous]
         public HttpResponseMessage Create(HttpRequestMessage request, ProductViewModel productVm)
         {
             return CreateHttpResponse(request, () =>
@@ -125,8 +128,8 @@ namespace TeleworldShop.Web.Api
         }
 
         [Route("update")]
+        [Authorize(Roles = "UpdateProduct")]
         [HttpPut]
-        [AllowAnonymous]
         public HttpResponseMessage Update(HttpRequestMessage request, ProductViewModel productVm)
         {
             return CreateHttpResponse(request, () =>
@@ -156,8 +159,8 @@ namespace TeleworldShop.Web.Api
         }
 
         [Route("delete")]
+        [Authorize(Roles = "DeleteProduct")]
         [HttpDelete]
-        [AllowAnonymous]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>
@@ -184,8 +187,8 @@ namespace TeleworldShop.Web.Api
             });
         }
         [Route("deletemulti")]
+        [Authorize(Roles = "DeleteProduct")]
         [HttpDelete]
-        [AllowAnonymous]
         public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedProducts)
         {
             return CreateHttpResponse(request, () =>
