@@ -28,14 +28,14 @@
                 </button>
                 <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
                     <i class="fas fa-times"></i>
-                </button>
+                </button>              
             </div>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
                     <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" ng-model="keyword"  placeholder="Keyword">
+                        <input type="text" class="form-control" ng-model="keyword" placeholder="Keyword">
                         <span class="input-group-append">
                             <button class="btn btn-default" type="button" ng-click="search()" id="btnGroupAddon">Search</button>
                         </span>
@@ -44,6 +44,7 @@
                 <div class="col-md-6">
                     <button class="btn btn-success" type="button" ui-sref="add_product" style="margin-bottom:5px">Add new</button>
                     <button class="btn btn-danger" type="button" ng-click="deleteMultiple()" id="btnDelete" style="margin-bottom:5px" disabled="disabled">Delete</button>
+                    <input type="file" id="file" style="margin-bottom:5px">
                 </div>
             </div>
             <div class="row">

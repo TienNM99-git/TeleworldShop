@@ -1,6 +1,11 @@
 ﻿using AutoMapper;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -12,6 +17,7 @@ using TeleworldShop.Web.Infrastructure.Core;
 using TeleworldShop.Web.Infrastructure.Extensions;
 using TeleworldShop.Web.Mappings;
 using TeleworldShop.Web.Models;
+
 
 namespace TeleworldShop.Web.Api
 {
@@ -216,5 +222,96 @@ namespace TeleworldShop.Web.Api
                 return response;
             });
         }
+        [Route("export")]
+        [HttpPost]
+        public HttpResponseMessage Export([FromBody] int productId)
+        {
+            var productData = _productService.GetAll();
+
+            List<ExportProductViewModel> productVMs = new List<ExportProductViewModel>();
+
+            foreach (var product in productData)
+            {
+                ExportProductViewModel p = new ExportProductViewModel()
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Alias = product.Alias,
+                    CategoryId = product.CategoryId,
+                    Content = product.Content,
+                    Image = product.Image,
+                    MoreImages = product.MoreImages,
+                    Price = product.Price,
+                    PromotionPrice = product.PromotionPrice,
+                    Warranty = product.Warranty,
+                    HomeFlag = product.HomeFlag,
+                    HotFlag = product.HotFlag,
+                    ViewCount = product.ViewCount,
+
+                    CreatedDate = product.CreatedDate,
+                    CreatedBy = product.CreatedBy,
+                    UpdatedDate = product.UpdatedDate,
+                    UpdatedBy = product.UpdatedBy,
+                    MetaKeyword = product.MetaKeyword,
+                    MetaDescription = product.MetaDescription,
+                    Status = product.Status,
+                    Tags = product.Tags,
+                    Quantity = product.Quantity,
+                    OriginalPrice = product.OriginalPrice
+                };
+                productVMs.Add(p);
+            }
+            DataTable pTable = (DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(productVMs), (typeof(DataTable)));
+
+            var now = DateTime.Now.ToString();
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create($"D:/{Guid.NewGuid()}.xlsx", SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = document.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                var sheetData = new SheetData();
+                worksheetPart.Worksheet = new Worksheet(sheetData);
+
+                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Sheet1" };
+
+                sheets.Append(sheet);
+
+                //p header
+                Row pHeaderRow = new Row();
+
+                List<string> pColumns = new List<string>();
+                foreach (DataColumn column in pTable.Columns)
+                {
+                    pColumns.Add(column.ColumnName);
+
+                    Cell cell = new Cell();
+                    cell.DataType = CellValues.String;
+                    cell.CellValue = new CellValue(column.ColumnName);
+                    pHeaderRow.AppendChild(cell);
+                }
+                sheetData.AppendChild(pHeaderRow);
+             
+                //Write Data
+                foreach (DataRow pRow in pTable.Rows)
+                {
+                    Row newRow = new Row();
+                    foreach (String pCol in pColumns)
+                    {
+                        Cell cell = new Cell();
+                        cell.DataType = CellValues.String;
+                        cell.CellValue = new CellValue(pRow[pCol].ToString());
+                        newRow.AppendChild(cell);
+                    }
+                    sheetData.AppendChild(newRow);                  
+                }
+
+                workbookPart.Workbook.Save();
+            }
+            return null;
+        }
+
     }
 }
