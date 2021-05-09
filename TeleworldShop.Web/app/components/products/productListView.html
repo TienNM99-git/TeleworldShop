@@ -42,9 +42,11 @@
                     </div>
                 </div>
                 <div class="col-md-6">
+                    <a class="btn btn-warning" href="../../../Assets/admin/templates/ProductImportTemplate.xlsx" style="margin-bottom:5px">Download template</a>
+                    <button class="btn btn-primary" type="button" ui-sref="product_import" style="margin-bottom:5px">Import product</button>
                     <button class="btn btn-success" type="button" ui-sref="add_product" style="margin-bottom:5px">Add new</button>
                     <button class="btn btn-danger" type="button" ng-click="deleteMultiple()" id="btnDelete" style="margin-bottom:5px" disabled="disabled">Delete</button>
-                    <input type="file" id="file" style="margin-bottom:5px">
+                    <button class="btn btn-info" ng-click="exportExcel()" style="margin-bottom:5px">Export to Excel</button>
                 </div>
             </div>
             <div class="row">

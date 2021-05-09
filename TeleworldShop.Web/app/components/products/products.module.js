@@ -19,6 +19,13 @@
                 controller: 'productAddController'
             },
             {
+                name: 'product_import',
+                url: '/product_import',
+                parent: 'base',
+                templateUrl: '/app/components/products/productImportView.html',
+                controller: 'productImportController'
+            },
+            {
                 name: 'edit_product',
                 url: '/edit_product/:id',
                 parent: 'base',
