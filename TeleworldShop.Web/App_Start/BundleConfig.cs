@@ -36,6 +36,7 @@ namespace TeleworldShop.Web
                 .Include("~/Assets/admin/libs/jquery-ui/themes/smoothness/jquery-ui.min.css", new CssRewriteUrlTransform())
                 .Include("~/Assets/client/css/style.css", new CssRewriteUrlTransform())
                 .Include("~/Assets/client/css/custom.css", new CssRewriteUrlTransform())
+                .Include("~/Assets/client/css/userInfor.css", new CssRewriteUrlTransform())
                 );
             BundleTable.EnableOptimizations = bool.Parse(ConfigHelper.GetByKey("EnableBundles"));
         }

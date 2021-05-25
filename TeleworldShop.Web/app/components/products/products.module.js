@@ -3,11 +3,11 @@
     angular.module('teleworldshop.products', ['teleworldshop.common']).config(config);
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
     function config($stateProvider, $urlRouterProvider) {
-        var states = [         
+        var states = [
             {
                 name: 'products',
                 url: '/products',
-                parent:'base',
+                parent: 'base',
                 templateUrl: '/app/components/products/productListView.html',
                 controller: 'productListController'
             },

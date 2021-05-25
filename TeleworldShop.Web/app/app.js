@@ -8,6 +8,7 @@
             'teleworldshop.application_users',
             'teleworldshop.orders',
             'teleworldshop.statistics',
+            'teleworldshop.promotions',
             'teleworldshop.common'])
         .config(config)
         .config(configAuthentication);
@@ -29,7 +30,7 @@
                 parent: 'base',
                 templateUrl: "/app/components/home/homeView.html",
                 controller: "homeController"
-            });
+            })
         $urlRouterProvider.otherwise('/login');
     }
     function configAuthentication($httpProvider) {

@@ -17,6 +17,7 @@
         function loadDetail() {
             apiService.get('/api/applicationGroup/detail/' + $stateParams.id, null,
                 function (result) {
+                    console.log(result.data);
                     $scope.group = result.data;
                 },
                 function (result) {

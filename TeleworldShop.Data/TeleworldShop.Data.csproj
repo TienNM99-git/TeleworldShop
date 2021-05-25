@@ -64,45 +64,17 @@
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\202010111636302_Initial.cs" />
-    <Compile Include="Migrations\202010111636302_Initial.designer.cs">
-      <DependentUpon>202010111636302_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202105091517090_InitialDB.cs" />
+    <Compile Include="Migrations\202105091517090_InitialDB.designer.cs">
+      <DependentUpon>202105091517090_InitialDB.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202010131319534_ChangeKey.cs" />
-    <Compile Include="Migrations\202010131319534_ChangeKey.designer.cs">
-      <DependentUpon>202010131319534_ChangeKey.cs</DependentUpon>
+    <Compile Include="Migrations\202105091543588_UpdateDB_1.cs" />
+    <Compile Include="Migrations\202105091543588_UpdateDB_1.designer.cs">
+      <DependentUpon>202105091543588_UpdateDB_1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011050752151_UpdateAll.cs" />
-    <Compile Include="Migrations\202011050752151_UpdateAll.designer.cs">
-      <DependentUpon>202011050752151_UpdateAll.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011110232094_AddContentToSlide.cs" />
-    <Compile Include="Migrations\202011110232094_AddContentToSlide.designer.cs">
-      <DependentUpon>202011110232094_AddContentToSlide.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012011258033_AddIntroPage.cs" />
-    <Compile Include="Migrations\202012011258033_AddIntroPage.designer.cs">
-      <DependentUpon>202012011258033_AddIntroPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012011336007_AddTableContactDetails.cs" />
-    <Compile Include="Migrations\202012011336007_AddTableContactDetails.designer.cs">
-      <DependentUpon>202012011336007_AddTableContactDetails.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012011406406_AddFeedBackTable.cs" />
-    <Compile Include="Migrations\202012011406406_AddFeedBackTable.designer.cs">
-      <DependentUpon>202012011406406_AddFeedBackTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012130830046_UpdateOrderModel.cs" />
-    <Compile Include="Migrations\202012130830046_UpdateOrderModel.designer.cs">
-      <DependentUpon>202012130830046_UpdateOrderModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012160309223_AddGroupUser.cs" />
-    <Compile Include="Migrations\202012160309223_AddGroupUser.designer.cs">
-      <DependentUpon>202012160309223_AddGroupUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012200621239_RevenueStatisticsSP.cs" />
-    <Compile Include="Migrations\202012200621239_RevenueStatisticsSP.designer.cs">
-      <DependentUpon>202012200621239_RevenueStatisticsSP.cs</DependentUpon>
+    <Compile Include="Migrations\202105100136124_UpdateDB_2.cs" />
+    <Compile Include="Migrations\202105100136124_UpdateDB_2.designer.cs">
+      <DependentUpon>202105100136124_UpdateDB_2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -125,6 +97,8 @@
     <Compile Include="Repositories\ProductCategoryRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\ProductTagRepository.cs" />
+    <Compile Include="Repositories\PromotionDetailRepository.cs" />
+    <Compile Include="Repositories\PromotionRepository.cs" />
     <Compile Include="Repositories\SlideRepository.cs" />
     <Compile Include="Repositories\SupportOnlineRepository.cs" />
     <Compile Include="Repositories\SystemConfigRepository.cs" />
@@ -133,7 +107,9 @@
     <Compile Include="TeleworldShopDbContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -147,35 +123,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202010111636302_Initial.resx">
-      <DependentUpon>202010111636302_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105091517090_InitialDB.resx">
+      <DependentUpon>202105091517090_InitialDB.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010131319534_ChangeKey.resx">
-      <DependentUpon>202010131319534_ChangeKey.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105091543588_UpdateDB_1.resx">
+      <DependentUpon>202105091543588_UpdateDB_1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011050752151_UpdateAll.resx">
-      <DependentUpon>202011050752151_UpdateAll.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011110232094_AddContentToSlide.resx">
-      <DependentUpon>202011110232094_AddContentToSlide.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012011258033_AddIntroPage.resx">
-      <DependentUpon>202012011258033_AddIntroPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012011336007_AddTableContactDetails.resx">
-      <DependentUpon>202012011336007_AddTableContactDetails.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012011406406_AddFeedBackTable.resx">
-      <DependentUpon>202012011406406_AddFeedBackTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012130830046_UpdateOrderModel.resx">
-      <DependentUpon>202012130830046_UpdateOrderModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012160309223_AddGroupUser.resx">
-      <DependentUpon>202012160309223_AddGroupUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012200621239_RevenueStatisticsSP.resx">
-      <DependentUpon>202012200621239_RevenueStatisticsSP.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105100136124_UpdateDB_2.resx">
+      <DependentUpon>202105100136124_UpdateDB_2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

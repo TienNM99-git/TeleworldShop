@@ -28,6 +28,8 @@ namespace TeleworldShop.Web.Mappings
                 cfg.CreateMap<ApplicationUser, ApplicationUserViewModel>();
                 cfg.CreateMap<Order, OrderViewModel>();
                 cfg.CreateMap<OrderDetail, OrderDetailViewModel>();
+                cfg.CreateMap<Promotion, PromotionViewModel>();
+                cfg.CreateMap<PromotionDetail, PromotionDetailViewModel>();
             });
             return config;
             //IMapper mapper = config.CreateMapper();

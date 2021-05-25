@@ -53,7 +53,7 @@ namespace TeleworldShop.Service
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 

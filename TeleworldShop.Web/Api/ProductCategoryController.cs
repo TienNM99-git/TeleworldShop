@@ -93,6 +93,22 @@ namespace TeleworldShop.Web.Api
         }
 
 
+        [Route("getListAvailableCategory")]
+        [HttpGet]
+        public HttpResponseMessage GetCategoryByPromotionId(HttpRequestMessage request)
+        {       
+            var listCategory = _productCategoryService.GetListAvailableCategory();
+
+            var mapper = new Mapper(AutoMapperConfiguration.Configure());
+
+            var responseData = mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(listCategory);
+
+            var response = request.CreateResponse(HttpStatusCode.OK, responseData);
+            return response;
+
+        }
+
+
         [Route("create")]
         [HttpPost]
         [AllowAnonymous]

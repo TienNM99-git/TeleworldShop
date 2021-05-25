@@ -8,6 +8,10 @@ namespace TeleworldShop.Data.Repositories
     public interface IProductCategoryRepository : IRepository<ProductCategory>
     {
         IEnumerable<ProductCategory> GetByAlias(string alias);
+
+        IEnumerable<ProductCategory> GetListCategoryByPromotionId(int promotionId);
+
+        IEnumerable<ProductCategory> GetListAvailableCategory();
     }
 
     public class ProductCategoryRepository : RepositoryBase<ProductCategory>, IProductCategoryRepository
@@ -20,6 +24,28 @@ namespace TeleworldShop.Data.Repositories
         public IEnumerable<ProductCategory> GetByAlias(string alias)
         {
             return this.DbContext.ProductCategories.Where(x => x.Alias == alias);
+        }
+
+        public IEnumerable<ProductCategory> GetListCategoryByPromotionId(int promotionId)
+        {
+            var query = from pc in DbContext.ProductCategories
+                        join pd in DbContext.PromotionDetails
+                        on pc.Id equals pd.CategoryId
+                        where pd.PromotionId == promotionId
+                        select pc;
+
+            return query;
+        }
+
+        public IEnumerable<ProductCategory> GetListAvailableCategory()
+        {
+            var query = from pc in DbContext.ProductCategories
+                        where 
+                        !(from pd in DbContext.PromotionDetails
+                          select pd.CategoryId).Contains(pc.Id)
+                        select pc;
+
+            return query;
         }
     }
 }
