@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNet.Identity;
+
+<aside class="user-info-sidebar">
+    <div class="sidebar-avatar">
+        <img alt="avatar" />
+        <div class="info">
+            "Tài khoản của"
+            <strong>@User.Identity.GetUserName()</strong>
+        </div>
+    </div>
+    <ul class="sidebar-nav">
+        <li>
+            <a>
+                <span>Thông tin tài khoản</span>
+            </a>
+        </li>
+        <li>
+            <a>
+                <span>Quản lý đơn hàng</span>
+            </a>
+        </li>
+    </ul>
+</aside>
