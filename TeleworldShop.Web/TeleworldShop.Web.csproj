@@ -408,6 +408,7 @@
     <Content Include="app\components\statistic\revenueStatisticView.html" />
     <Content Include="app\components\statistic\statistic.module.js" />
     <Content Include="app\shared\directives\asDateDirective.js" />
+    <Content Include="app\shared\directives\fileUploadDirective.js" />
     <Content Include="app\shared\directives\pagerDirective.html" />
     <Content Include="app\shared\directives\pagerDirective.js" />
     <Content Include="app\shared\filters\statusFilter.js" />

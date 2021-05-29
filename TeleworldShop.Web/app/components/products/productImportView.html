@@ -29,7 +29,7 @@
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Choose an Excel file</label>
                     <div class="col-sm-10">
-                        <input type="file" class="form-control" name="file" required />
+                        <input type="file" file-upload class="form-control" name="file" required />
                         <span ng-show="frmImportProduct.file.$invalid" class="has-error">No file chosen</span>
                     </div>
                 </div>
@@ -37,10 +37,9 @@
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Category</label>
                     <div class="col-sm-10">
                         <select name="parentId" class="form-control" ng-model="categoryId" ng-options="option.Id as option.Name for option in flatFolders">
-                            <option value="">Category</option>
+                            <option value="">--Choose Category--</option>
                         </select>
                         <span ng-show="frmImportProduct.categoryId.$invalid" class="has-error">No category chosen</span>
-
                         <input type="hidden" class="form-control" name="categoryId" ng-model="categoryId" />
                     </div>
                 </div>

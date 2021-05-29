@@ -32,5 +32,30 @@ namespace TeleworldShop.Web.Api
             });
         }
 
+        [Route("getorderstatistics")]
+        [HttpGet]
+        public HttpResponseMessage GetOrderStatistic(HttpRequestMessage request, string fromDate, string toDate)
+        {
+
+            return CreateHttpResponse(request, () =>
+            {
+                var model = _statisticService.GetOrderStatistic(fromDate, toDate);
+                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, model);
+                return response;
+            });
+        }
+
+        [Route("getsellstatistics")]
+        [HttpGet]
+        public HttpResponseMessage GetSellStatistic(HttpRequestMessage request, string fromDate, string toDate)
+        {
+
+            return CreateHttpResponse(request, () =>
+            {
+                var model = _statisticService.GetSellStatistic(fromDate, toDate);
+                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, model);
+                return response;
+            });
+        }
     }
 }

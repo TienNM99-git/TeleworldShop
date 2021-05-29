@@ -77,7 +77,7 @@
         function recur(item, level, arr) {
             arr.push({
                 Name: times(level, '–') + ' ' + item.Name,
-                ID: item.ID,
+                Id: item.Id,
                 Level: level,
                 Indent: times(level, '–')
             });
