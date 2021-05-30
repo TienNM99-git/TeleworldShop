@@ -8,7 +8,7 @@ namespace TeleworldShop.Common.ViewModels
 {
     public class SellStatisticViewModel
     {
-        public DateTime Date { set; get; }
+        public string Brand { set; get; }
         public decimal Percentage { set; get; }
     }
 }

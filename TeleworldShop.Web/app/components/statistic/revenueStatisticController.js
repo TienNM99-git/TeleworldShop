@@ -10,17 +10,18 @@
         $scope.series = ['Revenues', 'Benefit'];
         $scope.userCount = 0;
         $scope.chartdata = [];
-        $scope.lineChartData = [];
-        $scope.lineChartLabels = [];
-        $scope.lineChartSerie = 'Total Order';
+        $scope.tablechartData = [];
+        $scope.linechartData = [];
+        $scope.linechartLabels = [];
+        $scope.linechartSerie = 'Total Order';
 
         //$scope.datasetOverride = [];
         function getStatistic() {
             var config = {
                 param: {
                     //mm/dd/yyyy
-                    fromDate: '01/12/2020',
-                    toDate: '01/01/2021'
+                    fromDate: '01/01/2021',
+                    toDate: '01/01/2022'
                 }
             }
             apiService.get('api/statistic/getrevenue?fromDate=' + config.param.fromDate + "&toDate=" + config.param.toDate, null, function (response) {
@@ -30,7 +31,7 @@
                 var revenues = [];
                 var benefits = [];
                 $.each(response.data, function (i, item) {
-                    labels.push($filter('date')(item.Date, 'dd/MM/yyyy'));
+                    labels.push($filter('date')(item.Date, 'MM/yyyy'));
                     revenues.push(item.Revenues);
                     benefits.push(item.Benefit);
                 });
@@ -39,21 +40,6 @@
 
                 $scope.chartdata = chartData;
                 $scope.labels = labels;
-                //$scope.datasetOverride.push(
-                //    {
-                //        label: $scope.labels[0],
-                //        borderWidth: 1,
-                //        type: 'bar',
-                //        data: chartData[0]
-                //    },
-                //    {
-                //        label: $scope.labels[1],
-                //        borderWidth: 3,
-                //        hoverBackgroundColor: "rgba(255,99,132,0.4)",
-                //        hoverBorderColor: "rgba(255,99,132,1)",
-                //        type: 'line',
-                //        data: chartData[1]
-                //    });
             }, function (response) {
                 notificationService.displayError('Can not load data');
             });
@@ -62,38 +48,23 @@
             var config = {
                 param: {
                     //mm/dd/yyyy
-                    fromDate: '01/12/2020',
-                    toDate: '01/01/2021'
+                    fromDate: '01/01/2021',
+                    toDate: '01/01/2022'
                 }
             }
             apiService.get('api/statistic/getorderstatistics?fromDate=' + config.param.fromDate + "&toDate=" + config.param.toDate, null, function (response) {
-                $scope.tabledata = response.data;
-                var labels = [];
+                $scope.tablechartData = response.data;
+                var lineChartLabels = [];
                 var lineChartData = [];
                 var orderCount = [];
                 $.each(response.data, function (i, item) {
-                    labels.push($filter('date')(item.Date, 'dd/MM/yyyy'));
+                    lineChartLabels.push(item.Date);
                     orderCount.push(item.OrderCount);
                 });
                 lineChartData.push(orderCount);
 
-                $scope.chartdata = chartData;
-                $scope.labels = labels;
-                //$scope.datasetOverride.push(
-                //    {
-                //        label: $scope.labels[0],
-                //        borderWidth: 1,
-                //        type: 'bar',
-                //        data: chartData[0]
-                //    },
-                //    {
-                //        label: $scope.labels[1],
-                //        borderWidth: 3,
-                //        hoverBackgroundColor: "rgba(255,99,132,0.4)",
-                //        hoverBorderColor: "rgba(255,99,132,1)",
-                //        type: 'line',
-                //        data: chartData[1]
-                //    });
+                $scope.linechartData = lineChartData;
+                $scope.linechartLabels = lineChartLabels;
             }, function (response) {
                 notificationService.displayError('Can not load data');
             });
@@ -102,8 +73,8 @@
             var config = {
                 param: {
                     //mm/dd/yyyy
-                    fromDate: '01/12/2020',
-                    toDate: '01/01/2021'
+                    fromDate: '01/01/2021',
+                    toDate: '01/01/2022'
                 }
             }
             apiService.get('api/statistic/getuserstatistics?fromDate=' + config.param.fromDate + "&toDate=" + config.param.toDate, null, function (response) {
