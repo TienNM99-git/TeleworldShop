@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace TeleworldShop.Common.ViewModels
 {
-    public class SellStatisticViewModel
+    public class InventoryStatisticViewModel
     {
-        public int ProductId { set; get; }
         public string Name { set; get; }
-        public int TotalSold { set; get; }
+        public int RemainQuantity { set; get; }
     }
 }

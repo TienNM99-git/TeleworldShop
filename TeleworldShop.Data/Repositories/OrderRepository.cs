@@ -11,6 +11,7 @@ namespace TeleworldShop.Data.Repositories
         IEnumerable<RevenueStatisticViewModel> GetRevenueStatistic(string fromDate, string toDate);
         IEnumerable<OrderStatisticViewModel> GetOrderStatistic(string fromDate, string toDate);
         IEnumerable<SellStatisticViewModel> GetSellStatistic(string fromDate, string toDate);
+        IEnumerable<InventoryStatisticViewModel> GetInventoryStatistic(string fromDate, string toDate);
     }
 
     public class OrderRepository : RepositoryBase<Order>, IOrderRepository
@@ -42,6 +43,14 @@ namespace TeleworldShop.Data.Repositories
                 new SqlParameter("@toDate",toDate)
             };
             return DbContext.Database.SqlQuery<SellStatisticViewModel>("GetSellStatistics @fromDate, @toDate", parameters);
+        }
+        public IEnumerable<InventoryStatisticViewModel> GetInventoryStatistic(string fromDate, string toDate)
+        {
+            var parameters = new SqlParameter[]{
+                new SqlParameter("@fromDate",fromDate),
+                new SqlParameter("@toDate",toDate)
+            };
+            return DbContext.Database.SqlQuery<InventoryStatisticViewModel>("GetInventoryStatistics @fromDate, @toDate", parameters);
         }
     }
 }

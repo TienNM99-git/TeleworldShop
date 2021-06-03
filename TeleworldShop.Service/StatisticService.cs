@@ -9,6 +9,7 @@ namespace TeleworldShop.Service
         IEnumerable<RevenueStatisticViewModel> GetRevenueStatistic(string fromDate, string toDate);
         IEnumerable<OrderStatisticViewModel> GetOrderStatistic(string fromDate, string toDate);
         IEnumerable<SellStatisticViewModel> GetSellStatistic(string fromDate, string toDate);
+        IEnumerable<InventoryStatisticViewModel> GetInventoryStatistic(string fromDate, string toDate);
     }
 
     public class StatisticService : IStatisticService
@@ -31,6 +32,11 @@ namespace TeleworldShop.Service
         public IEnumerable<SellStatisticViewModel> GetSellStatistic(string fromDate, string toDate)
         {
             return _orderRepository.GetSellStatistic(fromDate, toDate);
+        }
+
+        public IEnumerable<InventoryStatisticViewModel> GetInventoryStatistic(string fromDate, string toDate)
+        {
+            return _orderRepository.GetInventoryStatistic(fromDate, toDate);
         }
     }
 }

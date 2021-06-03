@@ -57,5 +57,17 @@ namespace TeleworldShop.Web.Api
                 return response;
             });
         }
+        [Route("getinventorystatistics")]
+        [HttpGet]
+        public HttpResponseMessage GetInventoryStatistic(HttpRequestMessage request, string fromDate, string toDate)
+        {
+
+            return CreateHttpResponse(request, () =>
+            {
+                var model = _statisticService.GetInventoryStatistic(fromDate, toDate);
+                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, model);
+                return response;
+            });
+        }
     }
 }
