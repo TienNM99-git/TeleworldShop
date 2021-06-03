@@ -17,7 +17,7 @@ using TeleworldShop.Web.Models;
 namespace TeleworldShop.Web.Api
 {
     [RoutePrefix("api/order")]
-    //[Authorize(Roles ="Admin")]
+    [Authorize(Roles ="Admin")]
     public class OrderController : ApiControllerBase
     {
         #region Initialize

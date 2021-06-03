@@ -16,7 +16,6 @@ using TeleworldShop.Web.Mappings;
 namespace TeleworldShop.Web.Api
 {
     [RoutePrefix("api/productcategory")]
-    [Authorize]
     public class ProductCategoryController : ApiControllerBase
     {
         #region Initialize
@@ -29,7 +28,7 @@ namespace TeleworldShop.Web.Api
         }
 
         #endregion
-
+        [Authorize(Roles = "ViewCategory")]
         [Route("getallparents")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
@@ -46,6 +45,7 @@ namespace TeleworldShop.Web.Api
                 return response;
             });
         }
+        [Authorize(Roles = "ViewCategory")]
         [Route("getbyid/{id:int}")]
         [HttpGet]
         public HttpResponseMessage GetById(HttpRequestMessage request, int id)
@@ -63,9 +63,10 @@ namespace TeleworldShop.Web.Api
                 return response;
             });
         }
-
+       
         [Route("getall")]
         [HttpGet]
+        [Authorize(Roles = "ViewCategory")]
         public HttpResponseMessage GetAll(HttpRequestMessage request, string keyword, int page, int pageSize = 20)
         {
             return CreateHttpResponse(request, () =>
@@ -74,7 +75,7 @@ namespace TeleworldShop.Web.Api
                 var model = _productCategoryService.GetAll(keyword);
 
                 totalRow = model.Count();
-                var query = model.OrderByDescending(x => x.CreatedDate).ThenByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
+                var query = model.OrderByDescending(x => x.Status).ThenByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
 
                 var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
@@ -92,10 +93,10 @@ namespace TeleworldShop.Web.Api
             });
         }
 
-
+        
         [Route("create")]
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "AddCategory")]
         public HttpResponseMessage Create(HttpRequestMessage request, ProductCategoryViewModel productCategoryVm)
         {
             return CreateHttpResponse(request, () =>
@@ -125,8 +126,8 @@ namespace TeleworldShop.Web.Api
         }
 
         [Route("update")]
+        [Authorize(Roles = "UpdateCategory")]
         [HttpPut]
-        [AllowAnonymous]
         public HttpResponseMessage Update(HttpRequestMessage request, ProductCategoryViewModel productCategoryVm)
         {
             return CreateHttpResponse(request, () =>
@@ -155,10 +156,9 @@ namespace TeleworldShop.Web.Api
                 return response;
             });
         }
-
+        [Authorize(Roles = "DeleteCategory")]
         [Route("delete")]
         [HttpDelete]
-        [AllowAnonymous]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>
@@ -184,8 +184,8 @@ namespace TeleworldShop.Web.Api
             });
         }
         [Route("deletemulti")]
+        [Authorize(Roles = "DeleteCategory")]
         [HttpDelete]
-        [AllowAnonymous]
         public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedProductCategories)
         {
             return CreateHttpResponse(request, () =>

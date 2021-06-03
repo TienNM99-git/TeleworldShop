@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace TeleworldShop.Common.ViewModels
 {
-    public class RevenueStatisticViewModel
+    public class SellStatisticViewModel
     {
-        public string Date { set; get; }
-        public decimal Revenues { set; get; }
-        public decimal Benefit { set; get; }
+        public int ProductId { set; get; }
+        public string Name { set; get; }
+        public int TotalSold { set; get; }
     }
 }

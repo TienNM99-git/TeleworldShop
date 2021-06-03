@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace TeleworldShop.Common.ViewModels
 {
-    public class RevenueStatisticViewModel
+    public class InventoryStatisticViewModel
     {
-        public string Date { set; get; }
-        public decimal Revenues { set; get; }
-        public decimal Benefit { set; get; }
+        public string Name { set; get; }
+        public int RemainQuantity { set; get; }
     }
 }
