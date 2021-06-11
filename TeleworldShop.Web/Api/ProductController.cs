@@ -350,7 +350,7 @@ namespace TeleworldShop.Web.Api
         {
             using (var package = new ExcelPackage(new FileInfo(fullPath)))
             {
-                ExcelWorksheet workSheet = package.Workbook.Worksheets[1];
+                ExcelWorksheet workSheet = package.Workbook.Worksheets[0];
                 List<Product> listProduct = new List<Product>();
                 ProductViewModel productViewModel;
                 Product product;
