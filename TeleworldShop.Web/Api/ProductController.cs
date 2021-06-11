@@ -88,7 +88,7 @@ namespace TeleworldShop.Web.Api
                 int totalRow = 0;
                 var model = _productService.GetAll(keyword);
 
-                totalRow = model.Count();
+                totalRow = model.Where(x => x.Status == true).Count();
                 var query = model.Where(x => x.Status==true).OrderByDescending(x=>x.CreatedDate).Skip(page * pageSize).Take(pageSize);
                 
                 var mapper = new Mapper(AutoMapperConfiguration.Configure());
@@ -358,7 +358,7 @@ namespace TeleworldShop.Web.Api
                 decimal originalPrice = 0;
                 decimal price = 0;
                 decimal promotionPrice;
-
+                int quantity = 0;
 
                 bool status = false;
                 bool showHome = false;
@@ -391,20 +391,27 @@ namespace TeleworldShop.Web.Api
                         productViewModel.PromotionPrice = promotionPrice;
 
                     }
+                    if (int.TryParse(workSheet.Cells[i, 7].Value.ToString(), out quantity))
+                    {
+                        productViewModel.Quantity = quantity;
 
-                    productViewModel.Content = workSheet.Cells[i, 7].Value.ToString();
+                    }
+                 
                     productViewModel.MetaKeyword = workSheet.Cells[i, 8].Value.ToString();
                     productViewModel.MetaDescription = workSheet.Cells[i, 9].Value.ToString();
+                    productViewModel.Content = workSheet.Cells[i, 10].Value.ToString();
 
                     productViewModel.CategoryId = categoryId;
+                    productViewModel.CreatedDate = DateTime.Now;
+                    productViewModel.CreatedBy = "admin";
 
-                    bool.TryParse(workSheet.Cells[i, 10].Value.ToString(), out status);
+                    bool.TryParse(workSheet.Cells[i, 11].Value.ToString(), out status);
                     productViewModel.Status = status;
 
-                    bool.TryParse(workSheet.Cells[i, 11].Value.ToString(), out showHome);
+                    bool.TryParse(workSheet.Cells[i, 12].Value.ToString(), out showHome);
                     productViewModel.HomeFlag = showHome;
 
-                    bool.TryParse(workSheet.Cells[i, 12].Value.ToString(), out isHot);
+                    bool.TryParse(workSheet.Cells[i, 13].Value.ToString(), out isHot);
                     productViewModel.HotFlag = isHot;
 
                     product.UpdateProduct(productViewModel);
