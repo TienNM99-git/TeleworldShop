@@ -42,7 +42,7 @@ namespace TeleworldShop.Web.Api
                 var model = _orderService.GetAll(keyword);
 
                 totalRow = model.Count();
-                var query = model.OrderByDescending(x => x.Status==false).ThenByDescending(x=>x.CreatedDate).Skip(page * pageSize).Take(pageSize);
+                var query = model.Where(x => x.OrderStatus != "Canceled").OrderByDescending(x=>x.CreatedDate).Skip(page * pageSize).Take(pageSize);
 
                 var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
@@ -131,6 +131,7 @@ namespace TeleworldShop.Web.Api
 
                     dbOrder.UpdateOrder(orderViewModel);
                     dbOrder.Status = true;
+                    dbOrder.OrderStatus = "Verified";
                     _orderService.Update(dbOrder);
                     _orderService.Save();
 

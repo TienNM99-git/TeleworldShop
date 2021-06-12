@@ -23,25 +23,29 @@
             @foreach (var product in Model.Items)
             {
                 var url = "/" + product.Alias + ".p-" + product.Id + ".html";
-                <div class="product-grid">
-                    <div class="content_box">
-                        <a href="@url">
-                            <div class="left-grid-view grid-view-left">
-                                <img src="@product.Image" width="250px" height="300px" class="img-responsive watch-right" alt="@product.Name" />
-                                <div class="mask">
-                                    <div class="info">View</div>
-                                </div>
+            <div class="product-grid">
+                <div class="content_box">
+                    <a href="@url">
+                        <div class="left-grid-view grid-view-left">
+                            <img src="@product.Image" width="250px" height="300px" class="img-responsive watch-right" alt="@product.Name" />
+                            <div class="mask">
+                                <div class="info">View</div>
                             </div>
-                        </a>
-                    </div>
-                    <h4><a href="@url">@product.Name</a></h4>
-                    <p>@product.Description</p>
-                    @if (product.PromotionPrice.HasValue)
-                    {
-                        <span class="actual">@product.PromotionPrice.Value.ToString("N0")₫</span>
-                    }
-                    <span class="reducedfrom"> @(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N0")+ "₫")</span>
+                        </div>
+                    </a>
                 </div>
+                <h4><a href="@url">@product.Name</a></h4>
+                <p>@product.Description</p>
+                @if (product.PromotionPrice.HasValue)
+                {
+                    <span class="actual">@product.PromotionPrice.Value.ToString("N0")₫</span>
+                    <span class="reducedfrom"> @(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N0") + "₫")</span>
+                }
+                else
+                {
+                    <span class="actual">@(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N0") + "₫")</span>
+                }
+            </div>
             }
             <div class="clearfix"> </div>
             @if (Model.TotalPages > 1)

@@ -20,15 +20,15 @@ namespace TeleworldShop.Service
 
         void UpdateProductPromotionPrice(Promotion Promotion, List<PromotionDetail> promotionDetails);
 
-        Promotion GetDetail(int id);
+        void UpdateProductPromotionPrice(int promotionId);
+
+        Promotion GetById(int id);
 
         IEnumerable<Promotion> GetAll();
 
         IEnumerable<Promotion> GetAll(string keyword);
 
         void Save();
-
-        //void Update(Promotion promotion);
 
         //Promotion Delete(int id);
 
@@ -50,8 +50,8 @@ namespace TeleworldShop.Service
 
         private IUnitOfWork _unitOfWork;
 
-        public PromotionService(IPromotionRepository promotionRepository, IPromotionDetailRepository promotionDetailRepository, 
-            IProductRepository productRepository ,IUnitOfWork unitOfWork)
+        public PromotionService(IPromotionRepository promotionRepository, IPromotionDetailRepository promotionDetailRepository,
+            IProductRepository productRepository, IUnitOfWork unitOfWork)
         {
             this._promotionRepository = promotionRepository;
             this._promotionDetailRepository = promotionDetailRepository;
@@ -89,7 +89,7 @@ namespace TeleworldShop.Service
             {
                 throw ex;
             }
-            
+
         }
 
         public void UpdateProductPromotionPrice(Promotion Promotion, List<PromotionDetail> promotionDetails)
@@ -133,7 +133,31 @@ namespace TeleworldShop.Service
             }
         }
 
-        public Promotion GetDetail(int id)
+        public void UpdateProductPromotionPrice(int promotionId)
+        {
+            try
+            {
+                List<PromotionDetail> promotionDetails = _promotionDetailRepository.GetMulti(x => x.PromotionId == promotionId).ToList();
+                foreach (PromotionDetail promotionDetail in promotionDetails)
+                {
+                    List<Product> products = _productRepository.GetMulti(
+                            x => x.Status == true && x.CategoryId == promotionDetail.CategoryId
+                        ).ToList();
+
+                    foreach (Product product in products)
+                    {
+                        product.PromotionPrice = null;
+                        _productRepository.Update(product);
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        public Promotion GetById(int id)
         {
             return _promotionRepository.GetSingleById(id);
         }

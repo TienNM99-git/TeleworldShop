@@ -16,6 +16,10 @@
         $scope.keyword = '';
 
         $scope.isAll = false;
+
+        $scope.deleteMultiple = deleteMultiple;
+        $scope.deletePromotion = deletePromotion;
+
         function selectAll() {
             if ($scope.isAll === false) {
                 angular.forEach($scope.promotions, function (item) {
@@ -28,6 +32,41 @@
                 });
                 $scope.isAll = false;
             }
+        }
+
+        function deleteMultiple() {
+            var listId = [];
+            $.each($scope.selected, function (i, item) {
+                listId.push(item.Id);
+            });
+            var config = {
+                params: {
+                    checkedPromotions: JSON.stringify(listId)
+                }
+            }
+            apiService.del('api/promotion/deletemulti', config, function (result) {
+                notificationService.displaySuccess('Successful delete ' + result.data + ' records !!!');
+                search();
+            }, function (error) {
+                notificationService.displayError('Delete failed');
+            });
+        }
+
+        function deletePromotion(id) {
+            $ngBootbox.confirm('Are you sure that you want to delete?').then(function () {
+                var config = {
+                    params: {
+                        id: id
+                    }
+                }
+                apiService.del('api/promotion/delete', config,
+                    function (result) {
+                        notificationService.displaySuccess(result.data.Name + ' deleted !!!');
+                        search();
+                    }, function (error) {
+                        notificationService.displayError('Delete promotion failed');
+                    });
+            });
         }
 
         $scope.$watch("promotions", function (n, o) {
@@ -54,7 +93,7 @@
                 params: {
                     keyword: $scope.keyword,
                     page: page,
-                    pageSize: 6
+                    pageSize: 10
                 }
             };
 
@@ -63,7 +102,6 @@
                     return notificationService.displayWarning('No item found !');
 
                 $scope.promotions = result.data.Items;
-                console.log($scope.promotions[0].ExpireDate);
                 $scope.page = result.data.Page;
                 $scope.pagesCount = result.data.TotalPages;
                 $scope.totalCount = result.data.TotalCount;

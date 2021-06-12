@@ -9,21 +9,33 @@
 }
 
 <div class="user-orders-container">
-    <div class="heading">My orders</div>
-    <div class="inner" >
-        <table id="purchaseHistoryTable">
-            <thead>
-                <tr>
-                    <th>Order Id</th>
-                    <th>Purchase date</th>
-                    <th>Product</th>
-                    <th>Total</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
+    @if (Request.IsAuthenticated)
+    {
+        <div class="heading">My orders</div>
+        <div class="inner">
+            <table id="purchaseHistoryTable">
+                <thead>
+                    <tr>
+                        <th>Order Id</th>
+                        <th>Purchase date</th>
+                        <th>Product</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="edAZXd">
+            <div class="require-login">
+                <p>
+                    Please sign in to use this feature.
+                </p>
+            </div>
+        </div>
+    }
 </div>
 

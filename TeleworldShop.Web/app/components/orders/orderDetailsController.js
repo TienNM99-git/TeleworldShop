@@ -12,52 +12,13 @@
 
         function loadOrderDetail() {
             apiService.get('api/order/getbyid/' + $stateParams.id, null, function (result) {
-                console.log(result.data);
                 $scope.order = result.data;
-                //$scope.moreImages = JSON.parse($scope.order.MoreImages);
             }, function (error) {
                 notificationService.displayError(error.data);
             });
-            //apiService.get('api/order/getorderedproduct/' + $stateParams.id, null, function (result) {
-            //    console.log(result.data);
-            //    $scope.orderedProduct = result.data;
-            //    //$scope.moreImages = JSON.parse($scope.order.MoreImages);
-            //}, function (error) {
-            //    notificationService.displayError(error.data);
-            //});
         }
         function loadOrderedItem() {
-            //$.ajax({
-            //    url: '/api/order/getorderedproduct/' + $stateParams.id,
-            //    type: 'GET',
-            //    dataType: 'json',
-            //    success: function (res) {
-            //        if (res.status) {
-            //            var template = $('#tplOrderDetail').html();
-            //            var html = '';
-            //            $scope.orderedProduct = res.data;
-            //            $.each($scope.orderedProduct, function (i, item) {
-            //                html += Mustache.render(template, {
-            //                    ProductId: item.ProductId,
-            //                    ProductName: item.Product.Name,
-            //                    Image: item.Product.Image,
-            //                    Price: item.Product.Price,
-            //                    PriceF: numeral(item.Product.Price).format('0,0'),
-            //                    Quantity: item.Quantity,
-            //                    Amount: numeral(item.Quantity * item.Product.Price).format('0,0')
-            //                });
-            //            });
-            //            $('#orderDetailBody').html(html);
-            //            if (html == '') {
-            //                $('#orderDetailContent').html('No item found');
-            //            }
-            //            $('#lblTotalCost').text(numeral(getTotalCost()).format('0,0'));
-
-            //        }
-            //    }
-            //})
             apiService.get('api/order/getorderedproduct/' + $stateParams.id, null, function (result) {
-                console.log(result.data);
                 $scope.orderedProduct = result.data;
                 var template = $('#tplOrderDetail').html();
                 var html = '';

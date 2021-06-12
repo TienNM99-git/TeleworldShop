@@ -16,6 +16,8 @@ namespace TeleworldShop.Web.Models
         public string Password { set; get; }
         public string UserName { set; get; }
 
+        public string Address { set; get; }
+
         public string PhoneNumber { set; get; }
 
         public IEnumerable<ApplicationGroupViewModel> Groups { set; get; }

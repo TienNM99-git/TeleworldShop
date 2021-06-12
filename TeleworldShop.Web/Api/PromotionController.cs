@@ -136,7 +136,7 @@ namespace TeleworldShop.Web.Api
             {
                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, nameof(id) + " is required.");
             }
-            Promotion promotion = _promotionService.GetDetail(id);
+            Promotion promotion = _promotionService.GetById(id);
             var mapper = new Mapper(AutoMapperConfiguration.Configure());
             var promotionVm = mapper.Map<Promotion, PromotionViewModel>(promotion);
 
@@ -157,7 +157,7 @@ namespace TeleworldShop.Web.Api
         {
             if (ModelState.IsValid)
             {
-                var promotion = _promotionService.GetDetail(promotionVm.Id);
+                var promotion = _promotionService.GetById(promotionVm.Id);
                 try
                 {
                     promotion.UpdatePromotion(promotionVm);
@@ -198,6 +198,69 @@ namespace TeleworldShop.Web.Api
             {
                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
+        }
+
+        [Route("delete")]
+        [HttpDelete]
+        public HttpResponseMessage Delete(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    var promotion = _promotionService.GetById(id);
+                    promotion.Status = false;
+                    _promotionService.Update(promotion);
+                    _promotionService.Save();
+
+                    _promotionService.UpdateProductPromotionPrice(id);
+                    _promotionService.Save();
+
+                    var mapper = new Mapper(AutoMapperConfiguration.Configure());
+
+                    var responseData = mapper.Map<Promotion, PromotionViewModel>(promotion);
+                    response = request.CreateResponse(HttpStatusCode.Created, responseData);
+                }
+
+                return response;
+            });
+        }
+
+        [Route("deletemulti")]
+        [HttpDelete]
+        public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedPromotions)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    var listPromotion = new JavaScriptSerializer().Deserialize<List<int>>(checkedPromotions);
+                    foreach (var item in listPromotion)
+                    {
+                        var promotion = _promotionService.GetById(item);
+                        promotion.Status = false;
+                        _promotionService.Update(promotion);
+
+                        _promotionService.UpdateProductPromotionPrice(item);
+                    }
+
+                    _promotionService.Save();
+
+                    response = request.CreateResponse(HttpStatusCode.OK, listPromotion.Count);
+                }
+
+                return response;
+            });
         }
     }
 }

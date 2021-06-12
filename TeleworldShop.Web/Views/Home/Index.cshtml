@@ -60,15 +60,19 @@
                             @if (product.PromotionPrice.HasValue)
                             {
                                 <span class="actual">@product.PromotionPrice.Value.ToString("N0")₫</span>
+                                <span class="reducedfrom"> @(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N0") + "₫")</span>
                             }
-                            <span class="reducedfrom">@product.Price.ToString("N0")₫</span>
+                            else
+                            {
+                                <span class="actual">@(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N0") + "₫")</span>
+                            }
                             <span class="rating">
                                 @for (int i = 5; i <= 5 && i >= 1; i--)
                                 {
                                     <input type="radio" class="rating-input" id="rating-input-1-@i" name="rating-input-1">
                                     <label for="rating-input-1-@i" class="rating-star"> </label>
                                 }
-                            </span>                           
+                            </span>
                         </div>
                         <a class="now-get get-cart btnAddToCart" data-id="@product.Id" href="#">Add to cart</a>
                         <div class="clearfix"> </div>
@@ -97,8 +101,12 @@
                             @if (product.PromotionPrice.HasValue)
                             {
                                 <span class="actual">@product.PromotionPrice.Value.ToString("N0")₫</span>
+                                <span class="reducedfrom"> @(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N0") + "₫")</span>
                             }
-                            <span class="reducedfrom">@product.Price.ToString("N0")₫</span>
+                            else
+                            {
+                                <span class="actual">@(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N0") + "₫")</span>
+                            }
                             <span class="rating">
                                 <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
                                 <label for="rating-input-1-5" class="rating-star1"> </label>

@@ -180,6 +180,7 @@ namespace TeleworldShop.Web.Infrastructure.Extensions
             appUser.FullName = appUserViewModel.FullName;
             appUser.BirthDay = appUserViewModel.BirthDay;
             appUser.Email = appUserViewModel.Email;
+            appUser.Address = appUserViewModel.Address;
             appUser.UserName = appUserViewModel.UserName;
             appUser.PhoneNumber = appUserViewModel.PhoneNumber;
         }

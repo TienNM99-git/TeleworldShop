@@ -256,7 +256,8 @@ var cart = {
                             Price: item.Product.PromotionPrice ? item.Product.PromotionPrice : item.Product.Price,
                             PriceF: numeral(item.Product.PromotionPrice ? item.Product.PromotionPrice : item.Product.Price).format('0,0'),
                             Quantity: item.Quantity,
-                            Amount: numeral(item.Quantity * item.Product.Price).format('0,0')
+                            Amount: numeral(item.Product.PromotionPrice ? item.Quantity * item.Product.PromotionPrice : item.Quantity * item.Product.Price)
+                                .format('0,0')
                         });
                     });
                     $('#cartBody').html(html);

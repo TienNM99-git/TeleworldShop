@@ -36,7 +36,7 @@
                     console.log(result.data);
                     $scope.promotion = result.data;
                     $scope.promotion.Categories.forEach(x => $scope.categories.unshift(x));
-                    $scope.promotion.PromotionPrice = result.data.PromotionPrice.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    $scope.promotion.PromotionPrice = result.data.PromotionPrice;
                     $scope.promotion.StartDate = new Date($scope.promotion.StartDate);
                     $scope.promotion.ExpireDate = new Date($scope.promotion.ExpireDate);
                 },
@@ -63,7 +63,6 @@
             if ($scope.promotion.Categories.length > 0) {
                 apiService.put('api/promotion/update', $scope.promotion,
                     function (result) {
-                        console.log(result)
                         notificationService.displaySuccess(result.data.Name + ' updated !!!');
                     }, function (error) {
                         notificationService.displayError('Failed to update !!!');
@@ -74,16 +73,16 @@
             }
         }
 
-        function loadCategory() {
+        function loadCategory(callback) {
             apiService.get('api/productcategory/getListAvailableCategory', null, function (result) {
                 $scope.categories = result.data;
+                callback();
             }, function () {
                 console.log('Cannot get list parent');
             });
         }
 
-        loadCategory();
-        loadDetail();
+        loadCategory(loadDetail);
         
     }
 })(angular.module('teleworldshop.promotions'));

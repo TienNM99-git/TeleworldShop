@@ -78,7 +78,7 @@
                                 <button class="btn btn-sm btn-primary" ui-sref="promotions_edit({id:item.Id})">
                                     <i class="fa fa-pen"></i>
                                 </button>
-                                <button class="btn btn-sm btn-danger" ng-click="deleteProduct(item.Id)">
+                                <button class="btn btn-sm btn-danger" ng-click="deletePromotion(item.Id)">
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </td>
@@ -95,7 +95,7 @@
                     custom-path="{{customPath}}"
                     pages-count="{{pagesCount}}"
                     total-count="{{totalCount}}"
-                    search-func="getProducts(page)"
+                    search-func="getPromotion(page)"
                 >
 
                 </pager-directive>

@@ -13,11 +13,11 @@ const userInfo = {
                 if (response.status) {
                     var user = response.data;
                     user.BirthDay = new Date(parseInt(user.BirthDay.replace("/Date(", "").replace(")/", ""), 10));
-                    console.log(user);
                     $('#txtUserId').val(user.Id);
                     $('#txtUserName').val(user.UserName);
                     $('#txtName').val(user.FullName);
                     $('#txtEmail').val(user.Email);
+                    $('#txtAddress').val(user.Address);
                     $('#txtPhone').val(user.PhoneNumber);
                     $('#txtBirthday').val(moment(user.BirthDay).format('YYYY-MM-DD'));
                 }
@@ -38,6 +38,7 @@ const userInfo = {
                     required: true,
                     email: true
                 },
+                address: "required",
                 phone: {
                     required: true,
                     number: true
@@ -56,6 +57,7 @@ const userInfo = {
                 oldPassword: "Current password is required",
                 newPassword: "New password is required",
                 name: "Fullname is required",
+                name: "Address is required",
                 email: {
                     required: "Email is required",
                     email: "Invalid email address"
@@ -110,6 +112,7 @@ const userInfo = {
             FullName: $('#txtName').val(),
             PhoneNumber: $('#txtPhone').val(),
             BirthDay: $('#txtBirthday').val(),
+            Address: $('#txtAddress').val(),
             OldPassword: $('#txtOldPassword').val(),
             Password: $('#txtNewPassword').val(),
         }

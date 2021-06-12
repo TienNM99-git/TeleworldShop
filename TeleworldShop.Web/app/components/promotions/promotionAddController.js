@@ -45,7 +45,6 @@
             if ($scope.promotion.Categories.length > 0) {
                 apiService.post('api/promotion/create', $scope.promotion,
                     function (result) {
-                        console.log(result)
                         notificationService.displaySuccess(result.data.Name + ' added !!!');
                         $state.go('promotions');
                     }, function (error) {
@@ -73,7 +72,7 @@
         };
 
         function loadCategory() {
-            apiService.get('api/productcategory/getallparents', null, function (result) {
+            apiService.get('api/productcategory/getListAvailableCategory', null, function (result) {
                 $scope.categories = result.data;
             }, function () {
                 console.log('Cannot get list parent');
