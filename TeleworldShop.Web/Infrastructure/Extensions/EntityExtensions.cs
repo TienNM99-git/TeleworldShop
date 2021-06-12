@@ -128,7 +128,7 @@ namespace TeleworldShop.Web.Infrastructure.Extensions
             {
                 order.PaymentStatus = "Processing";
             }
-
+            order.OrderStatus = "Waiting for verfication";
         }
 
         public static void UpdatePromotion(this Promotion promotion, PromotionViewModel promotionViewModel)

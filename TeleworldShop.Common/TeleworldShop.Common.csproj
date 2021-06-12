@@ -49,6 +49,7 @@
     <Compile Include="MailHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringHelper.cs" />
+    <Compile Include="ViewModels\PurchaseHistoryViewModel.cs" />
     <Compile Include="ViewModels\RevenueStatisticViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

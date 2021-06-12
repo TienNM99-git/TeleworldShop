@@ -22,6 +22,8 @@ namespace TeleworldShop.Service
         Order GetById(int id);
         List<Product> GetOrderedProducts(int orderId);
         IEnumerable<Order> Search(string keyword, int page, int pageSize, string sort, out int totalRow);
+
+        List<PurchaseHistoryViewModel> GetOrdersByUserId(string userId);
     }
     public class OrderService : IOrderService
     {
@@ -71,7 +73,7 @@ namespace TeleworldShop.Service
 
         public IEnumerable<Order> GetAll()
         {
-            return _orderRepository.GetAll().OrderByDescending(x=>x.CreatedDate);
+            return _orderRepository.GetAll().OrderByDescending(x => x.CreatedDate);
         }
 
         public IEnumerable<Order> GetAll(string keyword)
@@ -93,7 +95,7 @@ namespace TeleworldShop.Service
 
         public IEnumerable<Order> Search(string keyword, int page, int pageSize, string sort, out int totalRow)
         {
-            var query = _orderRepository.GetAll().OrderByDescending(x=>x.CreatedDate);
+            var query = _orderRepository.GetAll().OrderByDescending(x => x.CreatedDate);
 
             totalRow = query.Count();
 
@@ -102,7 +104,7 @@ namespace TeleworldShop.Service
 
         public void Update(Order order)
         {
-            _orderRepository.Update(order);         
+            _orderRepository.Update(order);
         }
 
         public Order Delete(int id)
@@ -118,13 +120,20 @@ namespace TeleworldShop.Service
         public List<Product> GetOrderedProducts(int orderId)
         {
             List<Product> orderedDetails = new List<Product>();
-            var detailList = _orderDetailRepository.GetMulti(x=>x.OrderId==orderId).Select(ordered=> new { ordered.ProductId, ordered.Quantity});
-            for(int i = 0; i < detailList.Count(); i++)
+            var detailList = _orderDetailRepository.GetMulti(x => x.OrderId == orderId).Select(ordered =>
+                new { ordered.ProductId, ordered.Quantity, ordered.Price });
+            for (int i = 0; i < detailList.Count(); i++)
             {
                 orderedDetails.Add(_productRepository.GetSingleById(detailList.ElementAt(i).ProductId));
                 orderedDetails.ElementAt(i).Quantity = detailList.ElementAt(i).Quantity;
-            }        
+                orderedDetails.ElementAt(i).Price = detailList.ElementAt(i).Price;
+            }
             return orderedDetails;
+        }
+
+        public List<PurchaseHistoryViewModel> GetOrdersByUserId(string userId)
+        {
+            return _orderRepository.GetOrdersByUserId(userId);
         }
     }
 }

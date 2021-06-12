@@ -253,8 +253,8 @@ var cart = {
                             ProductId: item.ProductId,
                             ProductName: item.Product.Name,
                             Image: item.Product.Image,
-                            Price: item.Product.Price,
-                            PriceF: numeral(item.Product.Price).format('0,0'),
+                            Price: item.Product.PromotionPrice ? item.Product.PromotionPrice : item.Product.Price,
+                            PriceF: numeral(item.Product.PromotionPrice ? item.Product.PromotionPrice : item.Product.Price).format('0,0'),
                             Quantity: item.Quantity,
                             Amount: numeral(item.Quantity * item.Product.Price).format('0,0')
                         });

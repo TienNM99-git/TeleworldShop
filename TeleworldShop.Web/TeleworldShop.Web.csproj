@@ -5767,6 +5767,7 @@
     <Content Include="Assets\client\images\img-sprite.png" />
     <Content Include="Assets\client\images\info.png" />
     <Content Include="Assets\client\images\label_new.png" />
+    <Content Include="Assets\client\images\order.png" />
     <Content Include="Assets\client\images\pi.jpg" />
     <Content Include="Assets\client\images\pi1.jpg" />
     <Content Include="Assets\client\images\pi2.jpg" />
@@ -5805,12 +5806,15 @@
     <Content Include="Assets\client\images\star.png" />
     <Content Include="Assets\client\images\tick1.png" />
     <Content Include="Assets\client\images\twitter.png" />
+    <Content Include="Assets\client\images\user.png" />
     <Content Include="Assets\client\images\wa.jpg" />
     <Content Include="Assets\client\images\wat.jpg" />
     <Content Include="Assets\client\images\zoom.png" />
     <Content Include="Assets\client\js\common.js" />
     <Content Include="Assets\client\js\controllers\contact.js" />
     <Content Include="Assets\client\js\controllers\shoppingCart.js" />
+    <Content Include="Assets\client\js\controllers\userInfo.js" />
+    <Content Include="Assets\client\js\controllers\userOrders.js" />
     <Content Include="Assets\client\js\jquery.etalage.min.js" />
     <Content Include="Assets\client\js\jquery.flexisel.js" />
     <Content Include="Assets\client\js\jquery.min.js" />
@@ -5841,7 +5845,6 @@
     <Folder Include="Resources\" />
     <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -6110,10 +6113,11 @@
     <Content Include="Views\ShoppingCart\ConfirmOrder.cshtml" />
     <Content Include="Views\ShoppingCart\CancelOrder.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\UserLayouts.cshtml" />
-    <Content Include="Views\UserInfo\UserInfoSidebar.cshtml" />
+    <Content Include="Views\User\Sidebar.cshtml" />
+    <Content Include="Views\User\Info.cshtml" />
+    <Content Include="Views\User\Orders.cshtml" />
+    <Content Include="Views\User\OrderDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TeleworldShop.Common\TeleworldShop.Common.csproj">

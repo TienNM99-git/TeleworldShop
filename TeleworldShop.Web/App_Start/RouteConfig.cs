@@ -97,6 +97,24 @@ namespace TeleworldShop.Web
             namespaces: new string[] { "TeleworldShop.Web.Controllers" });
 
             routes.MapRoute(
+            name: "User information",
+            url: "info.html",
+            defaults: new { controller = "User", action = "Info", tagId = UrlParameter.Optional },
+            namespaces: new string[] { "TeleworldShop.Web.Controllers" });
+
+            routes.MapRoute(
+            name: "User purchase history",
+            url: "orders/history.html",
+            defaults: new { controller = "User", action = "Orders", tagId = UrlParameter.Optional },
+            namespaces: new string[] { "TeleworldShop.Web.Controllers" });
+
+            routes.MapRoute(
+            name: "Purchase history detail",
+            url: "orders/history/{orderId}.html",
+            defaults: new { controller = "User", action = "OrderDetail", orderId = UrlParameter.Optional },
+            namespaces: new string[] { "TeleworldShop.Web.Controllers" });
+
+            routes.MapRoute(
             name: "Default",
             url: "{controller}/{action}/{id}",
             defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },

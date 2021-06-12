@@ -232,7 +232,7 @@
             var init = function() {
                 var slide = $(slides[currentIndex]);
                 var img = slide.find('img');
-                img.load(function() {
+                img.on('load', function() {
                     wrapper.show();
                     $this.animate({ height: slide.innerHeight() });
                 });

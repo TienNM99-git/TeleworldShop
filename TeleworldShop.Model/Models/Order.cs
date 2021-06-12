@@ -36,8 +36,13 @@ namespace TeleworldShop.Model.Models
         public string PaymentMethod { set; get; }
 
         public DateTime? CreatedDate { set; get; }
+
         public string CreatedBy { set; get; }
+
         public string PaymentStatus { set; get; }
+
+        public string OrderStatus { get; set; }
+
         public bool Status { set; get; }
 
         [StringLength(128)]
