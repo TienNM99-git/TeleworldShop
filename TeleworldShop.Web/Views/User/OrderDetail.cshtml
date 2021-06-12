@@ -1,0 +1,203 @@
+﻿
+@using TeleworldShop.Web.Mappings;
+@using AutoMapper;
+@using TeleworldShop.Model.Models;
+@using TeleworldShop.Web.Models;
+@{
+    ViewBag.Title = "My order";
+    Layout = "~/Views/Shared/UserLayouts.cshtml";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+@{
+    var mapper = new Mapper(AutoMapperConfiguration.Configure());
+    var user = mapper.Map<ApplicationUser, ApplicationUserViewModel>(ViewData["User"] as ApplicationUser);
+    var order = mapper.Map<Order, OrderViewModel>(ViewData["Order"] as Order);
+    var orderDetail = mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(ViewData["OrderDetail"] as IEnumerable<Product>);
+    var totalQuantity = 0;
+    decimal totalCost = 0;
+    foreach (var product in orderDetail)
+    {
+        totalQuantity += product.Quantity;
+        totalCost += product.Quantity * product.Price;
+    }
+
+}
+
+@section footerJS{
+    <script>
+
+        $(".cancel-order").off('click').on('click', function (e) {
+            e.preventDefault();
+            var orderId = parseInt($(this).data('id'));
+            $('#myModal').modal('show');
+            $("#handleConfirmCancel").off('click').on('click', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '/User/CancelOrder',
+                    data: {
+                        orderId: orderId
+                    },
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.status) {
+                            $('#myModal').modal('hide');
+                            window.location.reload();
+                        }
+                        else {
+                            $('#myModal').modal('hide');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<div class="user-ordersDetail-container">
+    @if (Request.IsAuthenticated)
+    {
+        <div class="bqOhOA">
+            <div class="heading">
+                <span>Order detail #@order.Id</span>
+                <span class="split">-</span>
+                <span class="status">@order.OrderStatus</span>
+            </div>
+            <div class="created-date">
+                Order date: @order.CreatedDate
+            </div>
+            <div class="kHWfJY">
+                <div class="ipnhKS">
+                    <div class="title">
+                        Customer address
+                    </div>
+                    <div class="content">
+                        <p class="name">@user.FullName</p>
+                        <p class="address">
+                            <span>Address:</span>
+                            @order.CustomerAddress
+                        </p>
+                        <p class="phone">
+                            <span>Phone number</span>
+                            @user.PhoneNumber
+                        </p>
+                    </div>
+                </div>
+                <div class="ipnhKS">
+                    <div class="title">
+                        Payment method
+                    </div>
+                    <div class="content">
+                        @if (order.PaymentMethod == "CASH")
+                        {
+                            <p class="">Cash on delivery</p>
+                        }
+                        else if (order.PaymentMethod == "ATM_ONLINE")
+                        {
+                            <p class="">ATM card/Internet Banking</p>
+                        }
+                        else if (order.PaymentMethod == "NL")
+                        {
+                            <p class="">Ngân lượng</p>
+                        }
+                    </div>
+
+                </div>
+            </div>
+            <table class="cbhdrn">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in orderDetail)
+                    {
+                        var url = "/" + product.Alias + ".p-" + product.Id + ".html";
+                        var rawCost = product.Quantity * product.Price;
+                        <tr>
+                            <td>
+                                <div class="product-item">
+                                    <img src="@product.Image" alt="@product.Name" />
+                                    <div class="product-info">
+                                        <a target="_blank" href="@url" class="product-name">
+                                            @product.Name
+                                        </a>
+                                        <div class="product-review">
+                                            <a target="_blank" href="@url">Buy</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </td>
+                            <td class="price">@product.Price.ToString("N0")₫</td>
+                            <td class="quantity" style="text-align:center">@product.Quantity</td>
+                            <td class="raw-total">@rawCost.ToString("N0")₫</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">
+                            <span>Total quantity</span>
+                        </td>
+                        <td>@totalQuantity</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <span>Total cost</span>
+                        </td>
+                        <td>
+                            <span class="sum">@totalCost.ToString("N0")₫</span>
+                        </td>
+                    </tr>
+                    @if (order.OrderStatus != "Canceled")
+                    {
+                        <tr>
+                            <td colspan="3"></td>
+                            <td>
+                                <a data-id="@order.Id" title="Cancel order" class="cancel-order">Cancel order</a>
+                            </td>
+                        </tr>
+                    }
+                </tfoot>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="edAZXd">
+            <div class="require-login">
+                <p>
+                    Please sign in to use this feature.
+                </p>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="font-size: 20px" class="modal-title" id="exampleModalLongTitle">Confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div style="font-size: 20px" class="modal-body">
+                Are you sure that you want to cancel this order?
+            </div>
+            <div class="modal-footer">
+                <button style="font-size: 20px" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="handleConfirmCancel" style="font-size: 20px" type="button" class="btn btn-primary">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

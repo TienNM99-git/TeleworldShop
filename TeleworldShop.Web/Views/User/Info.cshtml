@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Info";
+    Layout = "~/Views/Shared/UserLayouts.cshtml";
+}
+
+@section footerJS{
+    <script src="~/Assets/client/js/controllers/userInfo.js"></script>
+}
+
+<div class="user-info-detail">
+    <h3 class="title">Thông tin tài khoản</h3>
+    <div class="detail-content">
+        <form method="post" id="frmUpdateUserInfo">
+            <input type="text" id="txtUserId" name="id" hidden>
+            <input type="text" id="txtUserName" name="username" hidden>
+            <div class="info-form-control">
+                <label class="input-label">Full name</label>
+                <div>
+                    <input type="text" maxlength="128" class="bYlDgr" id="txtName" name="name" placeholder="Fullname" data-error="error-message">
+                </div>
+            </div>
+            <div class="info-form-control">
+                <label class="input-label">Phone number</label>
+                <div>
+                    <input type="text" class="bYlDgr" id="txtPhone" name="phone" placeholder="Phone number" />
+
+                </div>
+            </div>
+            <div class="info-form-control">
+                <label class="input-label">Email</label>
+                <div>
+                    <input type="text" class="bYlDgr" id="txtEmail" disabled name="email" placeholder="Email" />
+
+                </div>
+            </div>
+            <div class="info-form-control">
+                <label class="input-label">Birthday</label>
+                <div>
+                    <input type="date" class="bYlDgr" id="txtBirthday" name="birthday" />
+
+                </div>
+            </div>
+            <div class="info-form-control">
+                <label class="input-label">&nbsp;</label>
+                <label class="style-checkbox gkoeQY">
+                    <input type="checkbox" id="chkUpdatePwd" />
+                    <span class="checkbox-fake"></span>
+                    <span class="checkbox-label">Change password</span>
+                </label>
+            </div>
+            <div class="info-form-control">
+                <label class="input-label">&nbsp;</label>
+                <div>
+                    <button type="submit" id="btnUpdateUserInfo" class="btn-submit">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
