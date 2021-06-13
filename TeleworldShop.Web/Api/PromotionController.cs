@@ -18,7 +18,6 @@ using TeleworldShop.Web.Models;
 namespace TeleworldShop.Web.Api
 {
     [RoutePrefix("api/promotion")]
-    [Authorize(Roles = "Admin")]
     public class PromotionController : ApiControllerBase
     {
 
