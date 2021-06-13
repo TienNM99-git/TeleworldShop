@@ -37,7 +37,7 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>4</h3>
+                            <h3>12</h3>
 
                             <p>New Orders</p>
                         </div>
@@ -67,7 +67,7 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>44</h3>
+                            <h3>9</h3>
 
                             <p>User Registrations</p>
                         </div>
@@ -82,7 +82,7 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>65</h3>
+                            <h3>3</h3>
 
                             <p>Unique Visitors</p>
                         </div>
@@ -105,9 +105,9 @@
                                 Sales
                             </h3>
                             <div class="card-tools">
-                                    <i class="nav-item">
-                                        <a class="nav-link" href="javascript:void(0)" data-toggle="tab">Revenues & Benefits</a>
-                                    </i>
+                                <i class="nav-item">
+                                    <a class="nav-link" href="javascript:void(0)" data-toggle="tab">Revenues & Benefits</a>
+                                </i>
                             </div>
                         </div>
                         <div class="card-body">
@@ -116,9 +116,9 @@
                                 <div class="chart tab-pane active" id="revenue-chart"
                                      style="position: relative;">
                                     <canvas class="chart chart-bar" id="revenue-chart-canvas" chart-colors="colors"
-                                             chart-dataset-override="datasetOverride" 
-                                             chart-labels="labels" chart-series="series" 
-                                             chart-data="chartdata"></canvas>
+                                            chart-dataset-override="datasetOverride"
+                                            chart-labels="labels" chart-series="series"
+                                            chart-data="chartdata"></canvas>
                                 </div>
                             </div>
                         </div><!-- /.card-body -->
@@ -161,8 +161,8 @@
                                 <thead>
                                     <tr>
                                         <td>Date</td>
-                                        <td>Revenue</td>
-                                        <td>Benefit</td>
+                                        <td>Revenue (VND)</td>
+                                        <td>Benefit (VND)</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -185,7 +185,275 @@
                         </div>
                     </div>
                 </section><!-- right col -->
-            </div><!-- /.row (main row) -->
+            </div><!-- /.row (main row - Revenue and Benifits) -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-7">
+                    <div class="card">
+                        <!--Card header-->
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-chart-pie mr-1"></i>
+                                Order Statistics
+                            </h3>
+                            <div class="card-tools">
+                                <i class="nav-item">
+                                    <a class="nav-link" href="javascript:void(0)" data-toggle="tab">Order Statistics</a>
+                                </i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content p-0">
+                                <!-- Morris chart - Sales -->
+                                <div class="chart tab-pane active" id="order-chart"
+                                     style="position: relative;">
+                                    <canvas class="chart chart-line" id="order-chart-canvas" chart-colors="colors"
+                                            chart-dataset-override="datasetOverride"
+                                            chart-labels="linechartLabels" chart-series="linechartSerie"
+                                            chart-data="linechartData"></canvas>
+                                </div>
+                            </div>
+                        </div><!-- /.card-body -->
+
+                    </div>
+                </section><!-- /.Left col -->
+                <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                <section class="col-lg-5">
+                    <!-- Map box -->
+                    <div class="card card-solid">
+                        <div class="card bg-gradient-info">
+                            <div class="card-header border-0">
+                                <h3 class="card-title">
+                                    <i class="fas fa-map-marker-alt mr-1"></i>
+                                    Order Statistics
+                                </h3>
+                                <!-- card tools -->
+                                <div class="card-tools">
+                                    <button type="button"
+                                            class="btn btn-info btn-sm daterange"
+                                            data-toggle="tooltip"
+                                            title="Date range">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </button>
+                                    <button type="button"
+                                            class="btn btn-info btn-sm"
+                                            data-card-widget="collapse"
+                                            data-toggle="tooltip"
+                                            title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                                <!-- /.card-tools -->
+                            </div>
+
+                        </div>
+                        <!-- /.card-body-->
+                        <div class="card-footer bg-transparent">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td>Date</td>
+                                        <td>Total Order</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in tablechartData">
+                                        <td>
+                                            {{item.Date | date}}
+                                        </td>
+                                        <td>
+                                            {{item.OrderCount | number}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- /.row -->
+                        </div>
+                        <div class="card-footer no-border">
+                        </div>
+                    </div>
+                </section><!-- right col -->
+            </div><!-- /.row (main row - Order Statistics) -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-7">
+                    <div class="card">
+                        <!--Card header-->
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-chart-pie mr-1"></i>
+                                Sell Statistics
+                            </h3>
+                            <div class="card-tools">
+                                <i class="nav-item">
+                                    <a class="nav-link" href="javascript:void(0)" data-toggle="tab">Sell Statistics</a>
+                                </i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content p-0">
+                                <!-- Morris chart - Sales -->
+                                <div class="chart tab-pane active" id="sell-chart"
+                                     style="position: relative;">
+                                    <canvas class="chart chart-bar" id="sell-chart-canvas" chart-colors="colors"
+                                            chart-dataset-override="datasetOverride"
+                                            chart-labels="sellchartLabels" chart-series="sellSeries"
+                                            chart-data="sellchartData"></canvas>
+                                </div>
+                            </div>
+                        </div><!-- /.card-body -->
+
+                    </div>
+                </section><!-- /.Left col -->
+                <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                <section class="col-lg-5">
+                    <!-- Map box -->
+                    <div class="card card-solid">
+                        <div class="card bg-gradient-info">
+                            <div class="card-header border-0">
+                                <h3 class="card-title">
+                                    <i class="fas fa-map-marker-alt mr-1"></i>
+                                    Sell Statistics
+                                </h3>
+                                <!-- card tools -->
+                                <div class="card-tools">
+                                    <button type="button"
+                                            class="btn btn-info btn-sm daterange"
+                                            data-toggle="tooltip"
+                                            title="Date range">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </button>
+                                    <button type="button"
+                                            class="btn btn-info btn-sm"
+                                            data-card-widget="collapse"
+                                            data-toggle="tooltip"
+                                            title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                                <!-- /.card-tools -->
+                            </div>
+
+                        </div>
+                        <!-- /.card-body-->
+                        <div class="card-footer bg-transparent">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td>Id</td>
+                                        <td>Name</td>
+                                        <td>Total Sold</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in sellData">
+                                        <td>
+                                            {{item.ProductId}}
+                                        </td>
+                                        <td>
+                                            {{item.Name}}
+                                        </td>
+                                        <td>
+                                            {{item.TotalSold}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- /.row -->
+                        </div>
+                        <div class="card-footer no-border">
+                        </div>
+                    </div>
+                </section><!-- right col -->
+            </div><!-- /.row (main row - Sell Statistics) -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-7">
+                    <div class="card">
+                        <!--Card header-->
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-chart-pie mr-1"></i>
+                                Inventory Statistics
+                            </h3>
+                            <div class="card-tools">
+                                <i class="nav-item">
+                                    <a class="nav-link" href="javascript:void(0)" data-toggle="tab">Inventory Statistics</a>
+                                </i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content p-0">
+                                <!-- Morris chart - Sales -->
+                                <div class="chart tab-pane active" id="inventory-chart"
+                                     style="position: relative;">
+                                    <canvas class="chart chart-pie" id="inventory-chart-canvas" chart-colors="colors"
+                                            chart-dataset-override="datasetOverride"
+                                            chart-labels="inventorychartLabels" chart-series="inventorySeries"
+                                            chart-data="inventorychartData"></canvas>
+                                </div>
+                            </div>
+                        </div><!-- /.card-body -->
+
+                    </div>
+                </section><!-- /.Left col -->
+                <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                <section class="col-lg-5">
+                    <!-- Map box -->
+                    <div class="card card-solid">
+                        <div class="card bg-gradient-info">
+                            <div class="card-header border-0">
+                                <h3 class="card-title">
+                                    <i class="fas fa-map-marker-alt mr-1"></i>
+                                    Sell Statistics
+                                </h3>
+                                <!-- card tools -->
+                                <div class="card-tools">
+                                    <button type="button"
+                                            class="btn btn-info btn-sm daterange"
+                                            data-toggle="tooltip"
+                                            title="Date range">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </button>
+                                    <button type="button"
+                                            class="btn btn-info btn-sm"
+                                            data-card-widget="collapse"
+                                            data-toggle="tooltip"
+                                            title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                                <!-- /.card-tools -->
+                            </div>
+
+                        </div>
+                        <!-- /.card-body-->
+                        <div class="card-footer bg-transparent">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>Remain Quantity</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in inventoryData">
+                                        <td>
+                                            {{item.Name}}
+                                        </td>
+                                        <td>
+                                            {{item.RemainQuantity}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- /.row -->
+                        </div>
+                        <div class="card-footer no-border">
+                        </div>
+                    </div>
+                </section><!-- right col -->
+            </div><!-- /.row (main row - Inventory Statistics) -->
         </div>
     </div>
 

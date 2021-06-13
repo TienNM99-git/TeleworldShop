@@ -10,8 +10,10 @@ namespace TeleworldShop.Data.Repositories
     public interface IOrderRepository : IRepository<Order>
     {
         IEnumerable<RevenueStatisticViewModel> GetRevenueStatistic(string fromDate, string toDate);
-
         List<PurchaseHistoryViewModel> GetOrdersByUserId(string userId);
+        IEnumerable<OrderStatisticViewModel> GetOrderStatistic(string fromDate, string toDate);
+        IEnumerable<SellStatisticViewModel> GetSellStatistic(string fromDate, string toDate);
+        IEnumerable<InventoryStatisticViewModel> GetInventoryStatistic(string fromDate, string toDate);
     }
 
     public class OrderRepository : RepositoryBase<Order>, IOrderRepository
@@ -28,7 +30,6 @@ namespace TeleworldShop.Data.Repositories
             };
             return DbContext.Database.SqlQuery<RevenueStatisticViewModel>("GetRevenueStatistics @fromDate,@toDate", parameters);
         }
-
         public List<PurchaseHistoryViewModel> GetOrdersByUserId(string userId)
         {
             var parameters = new SqlParameter[]{
@@ -36,6 +37,29 @@ namespace TeleworldShop.Data.Repositories
             };
 
             return DbContext.Database.SqlQuery<PurchaseHistoryViewModel>("GetOrdersByUserId @userId", parameters).ToList();
+        public IEnumerable<OrderStatisticViewModel> GetOrderStatistic(string fromDate, string toDate)
+        {
+            var parameters = new SqlParameter[]{
+                new SqlParameter("@fromDate",fromDate),
+                new SqlParameter("@toDate",toDate)
+            };
+            return DbContext.Database.SqlQuery<OrderStatisticViewModel>("GetOrderStatistics @fromDate, @toDate", parameters);
+        }
+        public IEnumerable<SellStatisticViewModel> GetSellStatistic(string fromDate, string toDate)
+        {
+            var parameters = new SqlParameter[]{
+                new SqlParameter("@fromDate",fromDate),
+                new SqlParameter("@toDate",toDate)
+            };
+            return DbContext.Database.SqlQuery<SellStatisticViewModel>("GetSellStatistics @fromDate, @toDate", parameters);
+        }
+        public IEnumerable<InventoryStatisticViewModel> GetInventoryStatistic(string fromDate, string toDate)
+        {
+            var parameters = new SqlParameter[]{
+                new SqlParameter("@fromDate",fromDate),
+                new SqlParameter("@toDate",toDate)
+            };
+            return DbContext.Database.SqlQuery<InventoryStatisticViewModel>("GetInventoryStatistics @fromDate, @toDate", parameters);
         }
     }
 }

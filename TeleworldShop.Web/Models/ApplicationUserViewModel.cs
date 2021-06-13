@@ -14,6 +14,7 @@ namespace TeleworldShop.Web.Models
         public string Email { set; get; }
         public string OldPassword { set; get; }
         public string Password { set; get; }
+        public string PasswordHash { set; get; }
         public string UserName { set; get; }
 
         public string Address { set; get; }

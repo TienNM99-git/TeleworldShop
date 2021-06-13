@@ -2,9 +2,9 @@
     app.filter('statusFilter', function () {
         return function (input) {
             if (input == true)
-                return 'Available';
+                return 'Verified';
             else
-                return 'Unavailable';
+                return 'Unverified';
         }
     });
 })(angular.module('teleworldshop.common'));

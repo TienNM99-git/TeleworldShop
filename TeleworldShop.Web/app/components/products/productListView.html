@@ -28,22 +28,25 @@
                 </button>
                 <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
                     <i class="fas fa-times"></i>
-                </button>
+                </button>              
             </div>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
                     <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" ng-model="keyword"  placeholder="Keyword">
+                        <input type="text" class="form-control" ng-model="keyword" placeholder="Keyword">
                         <span class="input-group-append">
                             <button class="btn btn-default" type="button" ng-click="search()" id="btnGroupAddon">Search</button>
                         </span>
                     </div>
                 </div>
                 <div class="col-md-6">
+                    <a class="btn btn-warning" href="../../../Assets/admin/templates/ProductImportTemplate.xlsx" style="margin-bottom:5px">Download template</a>
+                    <button class="btn btn-primary" type="button" ui-sref="product_import" style="margin-bottom:5px">Import product</button>
                     <button class="btn btn-success" type="button" ui-sref="add_product" style="margin-bottom:5px">Add new</button>
                     <button class="btn btn-danger" type="button" ng-click="deleteMultiple()" id="btnDelete" style="margin-bottom:5px" disabled="disabled">Delete</button>
+                    <button class="btn btn-info" ng-click="exportExcel()" style="margin-bottom:5px">Export to Excel</button>
                 </div>
             </div>
             <div class="row">
