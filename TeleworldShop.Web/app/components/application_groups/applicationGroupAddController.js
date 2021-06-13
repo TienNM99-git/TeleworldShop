@@ -31,6 +31,7 @@
                 null,
                 function (response) {
                     $scope.roles = response.data;
+                    console.log(response.data);
                 }, function (response) {
                     notificationService.displayError('Can not load role list.');
                 });

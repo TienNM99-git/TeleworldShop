@@ -22,7 +22,12 @@ namespace TeleworldShop.Service
 
         ProductCategory GetById(int id);
 
+        IEnumerable<ProductCategory> GetListCategoryByPromotionId(int promotionId);
+
+        IEnumerable<ProductCategory> GetListAvailableCategory();
+
         void Save();
+
     }
 
     public class ProductCategoryService : IProductCategoryService
@@ -78,6 +83,16 @@ namespace TeleworldShop.Service
         public void Update(ProductCategory productCategory)
         {
             _productCategoryRepository.Update(productCategory);
+        }
+
+        public IEnumerable<ProductCategory> GetListCategoryByPromotionId(int promotionId)
+        {
+            return _productCategoryRepository.GetListCategoryByPromotionId(promotionId);
+        }
+
+        public IEnumerable<ProductCategory> GetListAvailableCategory()
+        {
+            return _productCategoryRepository.GetListAvailableCategory();
         }
     }
 }

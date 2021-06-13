@@ -1,0 +1,110 @@
+﻿   <!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Edit promotion</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home Page</a></li>
+                    <li class="breadcrumb-item"><a href="#">Promotion</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="promotions">Promotion list</a></li>
+                    <li class="breadcrumb-item active">Update promotion</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="card card-info">
+
+        <!-- /.card-header -->
+        <div class="card-header">
+            <h3 class="card-title">{{promotion.Name}}</h3>
+        </div>
+
+        <!-- form start -->
+        <form class="form-horizontal" novalidate name="frmEditPromotion" role="form" ng-submit="updatePromotion()">
+            <div class="card-body">
+                <div class="form-group row">
+                    <label for="promotionName" class="col-sm-2 col-form-label">Promotion name</label>
+                    <div class="col-sm-10">
+                        <input placeholder="Promotion name" type="text" class="form-control" ng-maxlength="256" required name="name" ng-model="promotion.Name">
+                        <span ng-show="frmEditPromotion.name.$error.required" class="has-error">Promotion name is required</span>
+                        <span ng-show="frmEditPromotion.name.$error.maxlength" class="has-error">Promotion name can not exceed 256 digits</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="promotionType" class="col-sm-2 col-form-label mt-2">Promotion type</label>
+                    <div class="col-sm-3">
+                        <select name="type" class="form-control mt-2"
+                                required ng-model="promotion.Type"
+                                ng-change="onPromotionTypeChange()"
+                                ng-options="option.Id as option.Name for option in promotionType"></select>
+                        <span ng-show="frmEditPromotion.type.$error.required" class="has-error">Type is required</span>
+                    </div>
+
+                    <label for="promotionDiscount" class="col-sm-1 col-form-label mt-2">Discount</label>
+                    <div class="col-sm-2" ng-switch="promotion.Type">
+                        <div ng-switch-when="1">
+                            <input type="text" class="form-control mt-2 text-right"
+                                   required name="promotionVND"
+                                   ng-maxlength="256"
+                                   ng-keyup="onDiscountVNDKeyUp()"
+                                   ng-model="promotion.PromotionPrice">
+                            <span ng-show="frmEditPromotion.promotionVND.$error.required" class="has-error">Discount is required</span>
+                        </div>
+                        <div ng-switch-when="2">
+                            <input type="number" class="form-control mt-2 text-right"
+                                   min="0" max="100" step="10" required name="promotionPercent"
+                                   ng-blur="onDiscountPercentKeyUp()"
+                                   ng-model="promotion.PromotionPrice">
+                            <span ng-show="frmEditPromotion.promotionPercent.$error.required" class="has-error">Discount is required</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-switch="promotion.Apply">
+                    <div ng-switch-when="1">
+                        <div class="form-group row">
+                            <label for="promotionCategory" class="col-sm-2 col-form-label mt-2">Apply for</label>
+                            <div class="col-sm-8 mt-2">
+                                <label ng-repeat="category in categories" style="margin-right:20px">
+                                    <input type="checkbox" checklist-model="promotion.Categories" checklist-value="category">
+                                    {{category.Name}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Start date</label>
+                    <div class="col-sm-3">
+                        <input type="datetime-local" name="startDate" class="form-control"
+                               ng-model="promotion.StartDate">
+                        <span ng-show="frmEditPromotion.startDate.$error.required" class="has-error">Start date is required</span>
+                    </div>
+
+                    <label class="col-sm-2 col-form-label">Expire date</label>
+                    <div class="col-sm-3">
+                        <input type="datetime-local" name="expiredDate" class="form-control"
+                               ng-model="promotion.ExpireDate">
+                        <span ng-show="frmEditPromotion.expireDate.$error.required" class="has-error">Expire date is required</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- /.card-footer -->
+            <div class="card-footer">
+                <button type="submit" ng-disabled="frmEditPromotion.$invalid" class="btn btn-success">Save</button>
+                <button ui-sref="promotions" class="btn btn-default float-right">Cancel</button>
+            </div>
+
+        </form>
+    </div>
+</section>

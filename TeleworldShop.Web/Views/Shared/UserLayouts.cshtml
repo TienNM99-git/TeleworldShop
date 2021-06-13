@@ -1,0 +1,54 @@
+﻿<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="@ViewBag.MetaKeyword">
+    <meta name="keywords" content="@ViewBag.MetaDescription">
+    <link href="~/Assets/client/css/bootstrap.css" rel="stylesheet" />
+    @*<link href="~/Assets/client/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="~/Assets/client/css/style.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="~/Assets/admin/libs/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+        <link href="~/Assets/admin/libs/fontawesome-free/css/all.min.css" rel="stylesheet" />
+        <link href="~/Assets/client/css/custom.css" rel="stylesheet" />*@
+
+    @Styles.Render("~/css/base")
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--//fonts-->
+</head>
+<body>
+    <!--header-->
+    @{ Html.RenderAction("Header", "Home");}
+    <!---->
+    <main class="info-main">
+        <div class="info-container">
+            <div class="user-info-container">
+                @{ Html.RenderAction("Sidebar", "User");}
+                @RenderBody()
+            </div>
+        </div>
+    </main>
+
+    @{ Html.RenderAction("Footer", "Home");}
+    <!---->
+    @*<script src="~/Assets/client/js/jquery.min.js"></script>
+        <script src="~/Assets/admin/libs/jquery-ui/jquery-ui.min.js"></script>
+        <script src="~/Assets/admin/libs/mustache/mustache.js"></script>
+        <script src="~/Assets/admin/libs/jquery-validation/jquery.validate.js"></script>
+        <script src="~/Assets/admin/libs/numeral/numeral.js"></script>
+        <script src="~/Assets/client/js/common.js"></script>
+        <script src="~/Assets/client/js/controllers/shoppingCart.js"></script>*@
+    <!--script-->
+    @Scripts.Render("~/js/jquery")
+    @Scripts.Render("~/js/plugins")
+    @RenderSection("footerJS", required: false)
+</body>
+</html>

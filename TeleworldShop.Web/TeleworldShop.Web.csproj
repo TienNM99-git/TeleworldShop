@@ -303,6 +303,7 @@
     <Compile Include="Api\ProductCategoryController.cs" />
     <Compile Include="Api\OrderController.cs" />
     <Compile Include="Api\ProductController.cs" />
+    <Compile Include="Api\PromotionController.cs" />
     <Compile Include="Api\StatisticController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -321,6 +322,7 @@
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -350,6 +352,8 @@
     <Compile Include="Models\ProductCategoryViewModel.cs" />
     <Compile Include="Models\ProductTagViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
+    <Compile Include="Models\PromotionDetailViewModel.cs" />
+    <Compile Include="Models\PromotionViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ShoppingCartViewModel.cs" />
     <Compile Include="Models\SlideViewModel.cs" />
@@ -404,6 +408,13 @@
     <Content Include="app\components\product_categories\productCategoryEditView.html" />
     <Content Include="app\components\product_categories\productCategoryListController.js" />
     <Content Include="app\components\product_categories\productCategoryListView.html" />
+    <Content Include="app\components\promotions\promotionAddView.html" />
+    <Content Include="app\components\promotions\promotionAddController.js" />
+    <Content Include="app\components\promotions\promotionEditController.js" />
+    <Content Include="app\components\promotions\promotions.module.js" />
+    <Content Include="app\components\promotions\promotionListController.js" />
+    <Content Include="app\components\promotions\promotionListView.html" />
+    <Content Include="app\components\promotions\promotionEditView.html" />
     <Content Include="app\components\statistic\revenueStatisticController.js" />
     <Content Include="app\components\statistic\revenueStatisticView.html" />
     <Content Include="app\components\statistic\statistic.module.js" />
@@ -411,6 +422,7 @@
     <Content Include="app\shared\directives\fileUploadDirective.js" />
     <Content Include="app\shared\directives\pagerDirective.html" />
     <Content Include="app\shared\directives\pagerDirective.js" />
+    <Content Include="app\shared\filters\promotionTypeFilter.js" />
     <Content Include="app\shared\filters\statusFilter.js" />
     <Content Include="app\shared\services\apiService.js" />
     <Content Include="app\shared\services\authData.js" />
@@ -5765,6 +5777,7 @@
     <Content Include="Assets\client\css\etalage.css" />
     <Content Include="Assets\client\css\form.css" />
     <Content Include="Assets\client\css\style.css" />
+    <Content Include="Assets\client\css\userInfor.css" />
     <Content Include="Assets\client\font-awesome-4.6.3\css\font-awesome.css" />
     <Content Include="Assets\client\font-awesome-4.6.3\css\font-awesome.min.css" />
     <Content Include="Assets\client\font-awesome-4.6.3\fonts\fontawesome-webfont.svg" />
@@ -5781,6 +5794,8 @@
     <Content Include="Assets\client\images\img-sprite.png" />
     <Content Include="Assets\client\images\info.png" />
     <Content Include="Assets\client\images\label_new.png" />
+    <Content Include="Assets\client\images\order.png" />
+    <Content Include="Assets\client\images\pi.jpg" />
     <Content Include="Assets\client\images\pi1.jpg" />
     <Content Include="Assets\client\images\pi2.jpg" />
     <Content Include="Assets\client\images\pi4.jpg" />
@@ -5805,22 +5820,28 @@
     <Content Include="Assets\client\images\star.png" />
     <Content Include="Assets\client\images\tick1.png" />
     <Content Include="Assets\client\images\twitter.png" />
+    <Content Include="Assets\client\images\user_icon.png" />
     <Content Include="Assets\client\images\wa.jpg" />
     <Content Include="Assets\client\images\wat.jpg" />
     <Content Include="Assets\client\images\zoom.png" />
     <Content Include="Assets\client\js\common.js" />
     <Content Include="Assets\client\js\controllers\contact.js" />
     <Content Include="Assets\client\js\controllers\shoppingCart.js" />
+    <Content Include="Assets\client\js\controllers\userInfo.js" />
+    <Content Include="Assets\client\js\controllers\userOrders.js" />
     <Content Include="Assets\client\js\jquery.etalage.min.js" />
     <Content Include="Assets\client\js\jquery.flexisel.js" />
     <Content Include="Assets\client\js\jquery.min.js" />
     <Content Include="Assets\client\js\jquery.wmuSlider.js" />
     <Content Include="Assets\client\template\contact_template.html" />
     <Content Include="Assets\client\template\newuser.html" />
+    <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Libs\CKFinder.dll" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -6108,6 +6129,11 @@
     <Content Include="Views\ShoppingCart\ConfirmOrder.cshtml" />
     <Content Include="Views\ShoppingCart\CancelOrder.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Shared\UserLayouts.cshtml" />
+    <Content Include="Views\User\Sidebar.cshtml" />
+    <Content Include="Views\User\Info.cshtml" />
+    <Content Include="Views\User\Orders.cshtml" />
+    <Content Include="Views\User\OrderDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TeleworldShop.Common\TeleworldShop.Common.csproj">

@@ -94,7 +94,7 @@ namespace TeleworldShop.Web.Controllers
                 orderContent += "Product name: " + item.Product.Name + " : " + "Quantity: " + item.Quantity.ToString() + "<br />";
                 detail.ProductId = item.ProductId;
                 detail.Quantity = item.Quantity;
-                detail.Price = item.Product.Price;
+                detail.Price = item.Product.PromotionPrice != null ? Decimal.Parse(item.Product.PromotionPrice.ToString()) : item.Product.Price;
                 totalCost += item.Quantity * item.Product.Price;
                 orderDetails.Add(detail);
                 isEnough = _productService.SellProduct(item.ProductId, item.Quantity);
@@ -310,5 +310,6 @@ namespace TeleworldShop.Web.Controllers
         {
             return View();
         }
+
     }
 }

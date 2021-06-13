@@ -128,7 +128,33 @@ namespace TeleworldShop.Web.Infrastructure.Extensions
             {
                 order.PaymentStatus = "Processing";
             }
+            order.OrderStatus = "Waiting for verfication";
+        }
 
+        public static void UpdatePromotion(this Promotion promotion, PromotionViewModel promotionViewModel)
+        {
+            promotion.Id = promotionViewModel.Id;
+            promotion.Name = promotionViewModel.Name;
+            promotion.Type = promotionViewModel.Type;
+            promotion.PromotionPrice = promotionViewModel.PromotionPrice;
+            promotion.Apply = promotionViewModel.Apply;
+            promotion.Name = promotionViewModel.Name;
+            promotion.StartDate = promotionViewModel.StartDate;
+            promotion.ExpireDate = promotionViewModel.ExpireDate;
+
+            promotion.CreatedDate = promotionViewModel.CreatedDate;
+            promotion.CreatedBy = promotionViewModel.CreatedBy;
+            promotion.UpdatedDate = promotionViewModel.UpdatedDate;
+            promotion.UpdatedBy = promotionViewModel.UpdatedBy;
+            promotion.MetaKeyword = promotionViewModel.MetaKeyword;
+            promotion.MetaDescription = promotionViewModel.MetaDescription;
+            promotion.Status = promotionViewModel.Status;
+        }
+
+        public static void UpdatePromotionDetail(this PromotionDetail promotionDetail, PromotionDetailViewModel promotionDetailViewModel)
+        {
+            promotionDetail.PromotionId = promotionDetailViewModel.PromotionId;
+            promotionDetail.CategoryId = promotionDetailViewModel.CategoryId;
         }
 
         public static void UpdateApplicationGroup(this ApplicationGroup appGroup, ApplicationGroupViewModel appGroupViewModel)
@@ -154,6 +180,7 @@ namespace TeleworldShop.Web.Infrastructure.Extensions
             appUser.FullName = appUserViewModel.FullName;
             appUser.BirthDay = appUserViewModel.BirthDay;
             appUser.Email = appUserViewModel.Email;
+            appUser.Address = appUserViewModel.Address;
             appUser.UserName = appUserViewModel.UserName;
             appUser.PhoneNumber = appUserViewModel.PhoneNumber;
         }
