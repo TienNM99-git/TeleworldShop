@@ -217,7 +217,7 @@ namespace TeleworldShop.Web.Controllers
 
                 ViewData["SuccessMsg"] = "Register successful";
             }
-
+            MvcCaptcha.ResetCaptcha("registerCaptcha");
             return View();
         }
 
