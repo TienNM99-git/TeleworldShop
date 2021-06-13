@@ -68,10 +68,6 @@
     <Compile Include="Migrations\202105091517090_InitialDB.designer.cs">
       <DependentUpon>202105091517090_InitialDB.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202105091543588_UpdateDB_1.cs" />
-    <Compile Include="Migrations\202105091543588_UpdateDB_1.designer.cs">
-      <DependentUpon>202105091543588_UpdateDB_1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202105100136124_UpdateDB_2.cs" />
     <Compile Include="Migrations\202105100136124_UpdateDB_2.designer.cs">
       <DependentUpon>202105100136124_UpdateDB_2.cs</DependentUpon>
@@ -129,9 +125,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202105091517090_InitialDB.resx">
       <DependentUpon>202105091517090_InitialDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105091543588_UpdateDB_1.resx">
-      <DependentUpon>202105091543588_UpdateDB_1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105100136124_UpdateDB_2.resx">
       <DependentUpon>202105100136124_UpdateDB_2.cs</DependentUpon>
