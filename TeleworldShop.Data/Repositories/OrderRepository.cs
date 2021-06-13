@@ -37,6 +37,7 @@ namespace TeleworldShop.Data.Repositories
             };
 
             return DbContext.Database.SqlQuery<PurchaseHistoryViewModel>("GetOrdersByUserId @userId", parameters).ToList();
+        }
         public IEnumerable<OrderStatisticViewModel> GetOrderStatistic(string fromDate, string toDate)
         {
             var parameters = new SqlParameter[]{
