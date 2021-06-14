@@ -18,18 +18,41 @@
                 });
             },
             focus: function (event, ui) {
-                $("#txtKeyword").val(ui.item.label);
+                $("#txtKeyword").val(ui.item.Name);
                 return false;
             },
             select: function (event, ui) {
-                $("#txtKeyword").val(ui.item.label);
+                $("#txtKeyword").val(ui.item.Name);
                 return false;
             }
         }).autocomplete("instance")._renderItem = function (ul, item) {
-            return $("<li>")
-              .append("<a>" + item.label + "</a>")
+            const promotionPrice = item.PromotionPrice ? 
+                item.PromotionPrice.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "₫" : null;
+            const price = item.Price.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "₫";
+
+            const promotionPriceDiv = promotionPrice ? `<div class="box-p"> 
+                    <p class="price-old black">${price}</p>
+                </div>` : `<div></div>`
+
+            const itemImg = `<div class="item-img">
+                    <img src="${item.Image}" />
+                 </div>`;
+            const itemInfo = `<div class="item-info">
+                    <h3>${item.Name}</h3>
+                    <strong class="price">${promotionPrice ? promotionPrice : price}</strong>
+                    ${promotionPriceDiv}
+                </div>`;
+
+            const productSuggest = `<a>
+                    ${itemImg}
+                    ${itemInfo}
+                </a>`;
+
+            return $(`<li class="product-suggest"></li>`)
+              .append(productSuggest)
               .appendTo(ul);
         };
+
         $('.btnAddToCart').off('click').on('click', function (e) {
             e.preventDefault();
             var productId = parseInt($(this).data('id'));
@@ -50,6 +73,7 @@
                 }
             });
         });
+
         $('#btnLogout').off('click').on('click', function (e) {
             e.preventDefault();
             $('#frmLogout').submit();

@@ -30,7 +30,7 @@ namespace TeleworldShop.Service
 
         IEnumerable<Product> GetRelatedProducts(int id, int top);
 
-        IEnumerable<string> GetListProductByName(string name);
+        IEnumerable<object> GetListProductByName(string name);
 
         Product GetById(int id);
 
@@ -188,9 +188,9 @@ namespace TeleworldShop.Service
             return query.Skip((page - 1) * pageSize).Take(pageSize);
         }
 
-        public IEnumerable<string> GetListProductByName(string name)
+        public IEnumerable<object> GetListProductByName(string name)
         {
-            return _productRepository.GetMulti(x => x.Status && x.Name.Contains(name)).Select(y => y.Name);
+            return _productRepository.GetMulti(x => x.Status && x.Name.Contains(name)).Select(y => new { y.Name, y.Image, y.PromotionPrice, y.Price});
         }
 
         public IEnumerable<Product> Search(string keyword, int page, int pageSize, string sort, out int totalRow)
