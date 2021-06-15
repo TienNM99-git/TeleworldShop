@@ -20,6 +20,13 @@
                 controller: 'productCategoryAddController'
             },
             {
+                name: 'category_import',
+                url: '/category_import',
+                parent: 'base',
+                templateUrl: '/app/components/product_categories/productCategoryImportView.html',
+                controller: 'productCategoryImportController'
+            },
+            {
                 name: 'edit_product_category',
                 url: '/edit_product_category/:id',
                 templateUrl: '/app/components/product_categories/productCategoryEditView.html',

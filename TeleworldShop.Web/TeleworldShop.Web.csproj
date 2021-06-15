@@ -408,6 +408,8 @@
     <Content Include="app\components\product_categories\productCategoryEditView.html" />
     <Content Include="app\components\product_categories\productCategoryListController.js" />
     <Content Include="app\components\product_categories\productCategoryListView.html" />
+    <Content Include="app\components\product_categories\productCategoryImportController.js" />
+    <Content Include="app\components\product_categories\productCategoryImportView.html" />
     <Content Include="app\components\promotions\promotionAddView.html" />
     <Content Include="app\components\promotions\promotionAddController.js" />
     <Content Include="app\components\promotions\promotionEditController.js" />

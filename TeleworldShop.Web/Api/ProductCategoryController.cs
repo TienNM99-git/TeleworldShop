@@ -12,6 +12,12 @@ using TeleworldShop.Web.Models;
 using TeleworldShop.Web.Infrastructure.Extensions;
 using System.Web.Script.Serialization;
 using TeleworldShop.Web.Mappings;
+using System.IO;
+using System.Web;
+using System.Threading.Tasks;
+using OfficeOpenXml;
+using TeleworldShop.Common;
+using TeduShop.Common;
 
 namespace TeleworldShop.Web.Api
 {
@@ -35,7 +41,7 @@ namespace TeleworldShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                var model = _productCategoryService.GetAll().OrderByDescending(x=>x.Status).ThenByDescending(x => x.CreatedDate);
+                var model = _productCategoryService.GetAll().Where(x=>x.Status).OrderByDescending(x=>x.Status).ThenByDescending(x => x.CreatedDate);
 
                 var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
@@ -72,7 +78,7 @@ namespace TeleworldShop.Web.Api
             return CreateHttpResponse(request, () =>
             {
                 int totalRow = 0;
-                var model = _productCategoryService.GetAll(keyword);
+                var model = _productCategoryService.GetAll(keyword).Where(x => x.Status);
 
                 totalRow = model.Count();
                 var query = model.OrderByDescending(x => x.Status).ThenByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
@@ -223,6 +229,136 @@ namespace TeleworldShop.Web.Api
 
                 return response;
             });
+        }
+        [Route("import")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> Import()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                Request.CreateErrorResponse(HttpStatusCode.UnsupportedMediaType, "Not supported format");
+            }
+
+            var root = HttpContext.Current.Server.MapPath("~/UploadedFiles/Excels");
+            if (!Directory.Exists(root))
+            {
+                Directory.CreateDirectory(root);
+            }
+
+            var provider = new MultipartFormDataStreamProvider(root);
+            var result = await Request.Content.ReadAsMultipartAsync(provider);
+            int? parentCategoryId = 0;
+            //do stuff with files if you wish
+            if (result.FormData["parentCategoryId"] == null)
+            {
+                parentCategoryId = null;
+            }
+            int pid = 0;
+            int.TryParse(result.FormData["parentCategoryId"], out pid);
+            parentCategoryId = (int)pid;    
+            //Upload files
+            int addedCount = 0;
+
+            foreach (MultipartFileData fileData in result.FileData)
+            {
+                if (string.IsNullOrEmpty(fileData.Headers.ContentDisposition.FileName))
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotAcceptable, "Request not in valid format");
+                }
+                string fileName = fileData.Headers.ContentDisposition.FileName;
+                if (fileName.StartsWith("\"") && fileName.EndsWith("\""))
+                {
+                    fileName = fileName.Trim('"');
+                }
+                if (fileName.Contains(@"/") || fileName.Contains(@"\"))
+                {
+                    fileName = Path.GetFileName(fileName);
+                }
+
+                var fullPath = Path.Combine(root, fileName);
+                File.Copy(fileData.LocalFileName, fullPath, true);
+
+                //insert to DB
+                var listProductCategory = this.ReadCategoryFromExcel(fullPath, parentCategoryId);
+                if (listProductCategory.Count > 0)
+                {
+                    foreach (var product in listProductCategory)
+                    {
+                        _productCategoryService.Add(product);
+                        addedCount++;
+                    }
+                    _productCategoryService.Save();
+                }
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, "Imported successfully " + addedCount + " items.");
+        }
+
+        [HttpGet]
+        [Route("ExportXls")]
+        public async Task<HttpResponseMessage> ExportXls(HttpRequestMessage request, string filter = null)
+        {
+            string fileName = string.Concat("Product Categories_" + DateTime.Now.ToString("yyyyMMddhhmmsss") + ".xlsx");
+            var folderReport = ConfigHelper.GetByKey("ReportFolder");
+            string filePath = HttpContext.Current.Server.MapPath(folderReport);
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
+            string fullPath = Path.Combine(filePath, fileName);
+            try
+            {
+                var data = _productCategoryService.GetListAvailableCategory().ToList();
+                await ReportHelper.GenerateXls(data, fullPath);
+                return request.CreateErrorResponse(HttpStatusCode.OK, Path.Combine(folderReport, fileName));
+            }
+            catch (Exception ex)
+            {
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+        private List<ProductCategory> ReadCategoryFromExcel(string fullPath, int? parentCategoryId)
+        {
+            using (var package = new ExcelPackage(new FileInfo(fullPath)))
+            {
+                ExcelWorksheet workSheet = package.Workbook.Worksheets[0];
+                List<ProductCategory> listProductCategory = new List<ProductCategory>();
+                ProductCategoryViewModel productCategoryViewModel;
+                ProductCategory category;
+
+                bool status = false;
+                bool showHome = false;
+                int displayOrder;
+
+                for (int i = workSheet.Dimension.Start.Row + 1; i <= workSheet.Dimension.End.Row; i++)
+                {
+                    productCategoryViewModel = new ProductCategoryViewModel();
+                    category = new ProductCategory();
+
+                    productCategoryViewModel.Name = workSheet.Cells[i, 1].Value.ToString();
+                    productCategoryViewModel.Alias = StringHelper.ToUnsignString(productCategoryViewModel.Name);
+                    productCategoryViewModel.Description = workSheet.Cells[i, 2].Value.ToString();
+
+                    if (int.TryParse(workSheet.Cells[i, 3].Value.ToString(), out displayOrder))
+                    {
+                        productCategoryViewModel.DisplayOrder = displayOrder;
+
+                    }
+                    productCategoryViewModel.ParentId = parentCategoryId;
+                    productCategoryViewModel.CreatedDate = Convert.ToDateTime(DateTime.Now.ToString("dddd, dd MMMM yyyy"));
+                    productCategoryViewModel.UpdatedDate = Convert.ToDateTime(DateTime.Now.ToString("dddd, dd MMMM yyyy"));
+                    productCategoryViewModel.CreatedBy = "admin";
+                    productCategoryViewModel.UpdatedBy = "admin";
+
+                    bool.TryParse(workSheet.Cells[i, 4].Value.ToString(), out showHome);
+                    productCategoryViewModel.HomeFlag = showHome;
+                    bool.TryParse(workSheet.Cells[i, 5].Value.ToString(), out status);
+                    productCategoryViewModel.Status = status;
+
+                    category.UpdateProductCategory(productCategoryViewModel);
+                    listProductCategory.Add(category);
+                }
+                return listProductCategory;
+            }
         }
     }
 }
