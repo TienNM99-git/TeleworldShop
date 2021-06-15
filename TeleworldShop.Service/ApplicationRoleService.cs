@@ -20,7 +20,7 @@ namespace TeleworldShop.Service
 
         ApplicationRole Add(ApplicationRole appRole);
 
-        void Update(ApplicationRole AppRole);
+        void Update(ApplicationRole appRole);
 
         void Delete(string id);
 
@@ -94,11 +94,11 @@ namespace TeleworldShop.Service
             _unitOfWork.Commit();
         }
 
-        public void Update(ApplicationRole AppRole)
+        public void Update(ApplicationRole appRole)
         {
-            if (_appRoleRepository.CheckContains(x => x.Description == AppRole.Description && x.Id != AppRole.Id))
+            if (_appRoleRepository.CheckContains(x => x.Description == appRole.Description && x.Id != appRole.Id))
                 throw new NameDuplicatedException("Role name can not be duplicated.");
-            _appRoleRepository.Update(AppRole);
+            _appRoleRepository.Update(appRole);
         }
 
         public IEnumerable<ApplicationRole> GetListRoleByGroupId(int groupId)

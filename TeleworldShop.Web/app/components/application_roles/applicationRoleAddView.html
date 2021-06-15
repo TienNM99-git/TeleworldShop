@@ -20,27 +20,27 @@
             <h3 class="card-title">Add new role</h3>
         </div><!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" role="form" novalidate name="frmAddAppGroup" ng-submit="addAppRole()">
+        <form class="form-horizontal" role="form" novalidate name="frmAddAppRole" ng-submit="addAppRole()">
             <div class="card-body">
                 <div class="col-md-8">
                     <div class="form-group row">
                         <label for="inputPassword3" class="col-sm-2 col-form-label">Role name</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" ng-maxlength="256" required name="name" ng-model="role.Name">
-                            <span ng-show="frmAddAppGroup.name.$invalid" class="has-error">Role name is required</span>
-                            <span ng-show="frmAddAppGroup.name.$error.maxlength" class="has-error">Role name can not exceed 256 digits</span>
+                            <span ng-show="frmAddAppRole.name.$invalid" class="has-error">Role name is required</span>
+                            <span ng-show="frmAddAppRole.name.$error.maxlength" class="has-error">Role name can not exceed 256 digits</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputPassword3" class="col-sm-2 col-form-label">Description</label>
                         <div class="col-sm-10">
                             <textarea class="form-control" ng-maxlength="250" required name="description" ng-model="role.Description"></textarea>
-                            <span ng-show="frmAddAppGroup.description.$invalid" class="has-error">Description is required</span>
-                            <span ng-show="frmAddAppGroup.description.$error.maxlength" class="has-error">Description can not exceed 250 digits</span>
+                            <span ng-show="frmAddAppRole.description.$invalid" class="has-error">Description is required</span>
+                            <span ng-show="frmAddAppRole.description.$error.maxlength" class="has-error">Description can not exceed 250 digits</span>
                         </div>
                     </div>                 
                     <div class="card-footer">
-                        <button type="submit" ng-disabled="frmAddAppGroup.$invalid" class="btn btn-success">Save</button>
+                        <button type="submit" ng-disabled="frmAddAppRole.$invalid" class="btn btn-success">Save</button>
                         <button ui-sref="application_roles" class="btn btn-default float-right">Cancel</button>
                     </div>
                 </div>
