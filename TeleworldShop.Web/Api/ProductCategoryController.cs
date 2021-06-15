@@ -17,7 +17,6 @@ using System.Web;
 using System.Threading.Tasks;
 using OfficeOpenXml;
 using TeleworldShop.Common;
-using TeduShop.Common;
 
 namespace TeleworldShop.Web.Api
 {

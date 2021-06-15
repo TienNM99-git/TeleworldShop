@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Script.Serialization;
-using TeduShop.Common;
 using TeleworldShop.Common;
 using TeleworldShop.Model.Models;
 using TeleworldShop.Service;

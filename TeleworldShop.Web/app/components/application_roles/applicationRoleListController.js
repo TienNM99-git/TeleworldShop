@@ -16,6 +16,40 @@
         $scope.selectAll = selectAll;
         $scope.deleteMultiple = deleteMultiple;
 
+        $scope.exportRoleExcel = exportRoleExcel;
+        $scope.exportRolePdf = exportRolePdf;
+        function exportRoleExcel() {
+            var config = {
+                params: {
+                    filter: $scope.keyword
+                }
+            }
+            apiService.get('/api/applicationRole/ExportXls', config, function (response) {
+                if (response.status = 200) {
+                    window.location.href = response.data.Message;
+                }
+            }, function (error) {
+                notificationService.displayError(error);
+
+            });
+        }
+
+        function exportRolePdf(productId) {
+            var config = {
+                params: {
+                    id: productId
+                }
+            }
+            apiService.get('/api/applicationRole/ExportPdf', config, function (response) {
+                if (response.status = 200) {
+                    window.location.href = response.data.Message;
+                }
+            }, function (error) {
+                notificationService.displayError(error);
+
+            });
+        }
+
         function deleteMultiple() {
             var listId = [];
             $.each($scope.selected, function (i, item) {

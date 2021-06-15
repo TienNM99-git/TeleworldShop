@@ -23,6 +23,12 @@
                 templateUrl: "/app/components/application_users/applicationUserEditView.html",
                 controller: "applicationUserEditController",
                 parent: 'base',
+            })
+            .state('import_application_user', {
+                url: "/import_application_user",
+                templateUrl: "/app/components/application_users/applicationUserImportView.html",
+                controller: "applicationUserImportController",
+                parent: 'base',
             });
     }
 })();

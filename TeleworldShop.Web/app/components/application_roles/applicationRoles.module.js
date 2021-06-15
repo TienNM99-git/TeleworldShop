@@ -26,6 +26,13 @@
                 parent: 'base',
                 templateUrl: '/app/components/application_roles/applicationRoleEditView.html',
                 controller: 'applicationRoleEditController'
+            },
+            {
+                name: 'import_application_role',
+                url: '/import_application_role',
+                parent: 'base',
+                templateUrl: '/app/components/application_roles/applicationRoleImportView.html',
+                controller: 'applicationRoleImportController'
             }
         ];
         states.forEach((state) => $stateProvider.state(state));

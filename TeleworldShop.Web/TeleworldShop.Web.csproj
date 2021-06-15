@@ -376,6 +376,10 @@
     <Content Include="app\components\application_roles\applicationRoleListController.js" />
     <Content Include="app\components\application_roles\applicationRoleListView.html" />
     <Content Include="app\components\application_roles\applicationRoles.module.js" />
+    <Content Include="app\components\application_roles\applicationRoleImportController.js" />
+    <Content Include="app\components\application_roles\applicationRoleImportView.html" />
+    <Content Include="app\components\application_users\applicationUserImportController.js" />
+    <Content Include="app\components\application_users\applicationUserImportView.html" />
     <Content Include="app\components\application_users\applicationUserAddController.js" />
     <Content Include="app\components\application_users\applicationUserAddView.html" />
     <Content Include="app\components\application_users\applicationUserEditController.js" />
