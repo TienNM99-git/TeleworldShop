@@ -10,7 +10,6 @@
             success: function (response) {
                 if (response.status) {
                     var dataSource = response.data;
-                    console.log(dataSource);
                     $('#purchaseHistoryTable').DataTable({
                         searching: false,
                         paging: true,
@@ -39,7 +38,7 @@
                                     return `${newTotal}đ`
                                 }
                             },
-                            { data: 'Status' },
+                            { data: 'OrderStatus' },
                         ],
                         pageLength: 10
                     });

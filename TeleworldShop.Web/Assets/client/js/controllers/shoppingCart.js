@@ -163,7 +163,6 @@ var cart = {
                         window.location.href = response.urlCheckout;
                     }
                     else {
-                        console.log('Create order ok');
                         $('#divCheckout').hide();
                         cart.deleteAll();
                         setTimeout(function () {
@@ -195,7 +194,6 @@ var cart = {
             success: function (response) {
                 if (response.status) {
                     cart.loadData();
-
                 }
             }
         });
@@ -218,7 +216,6 @@ var cart = {
             success: function (response) {
                 if (response.status) {
                     cart.loadData();
-                    console.log('Update ok');
                 }
             }
         });
@@ -260,6 +257,10 @@ var cart = {
                                 .format('0,0')
                         });
                     });
+                    var totalQuantity = data.reduce(function (total, currentValue) {
+                        return total + currentValue.Quantity
+                    }, 0);
+                    $(".jJyMq").html(`${totalQuantity.toString()}`);
                     $('#cartBody').html(html);
                     if (html == '') {
                         $('#cartContent').html('Cart is currently empty.');

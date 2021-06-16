@@ -1,5 +1,6 @@
 ﻿var common = {
     init: function () {
+        common.getCart();
         common.registerEvents();
     },
     registerEvents: function () {
@@ -66,6 +67,7 @@
                 success: function (response) {
                     if (response.status) {
                         alert('Add product to cart successfully.');
+                        common.getCart();
                     }
                     else {
                         alert(response.message);
@@ -77,6 +79,24 @@
         $('#btnLogout').off('click').on('click', function (e) {
             e.preventDefault();
             $('#frmLogout').submit();
+        });
+    },
+    getCart: function () {
+        $.ajax({
+            url: '/ShoppingCart/GetCart',
+            type: 'POST',
+            dataType: 'json',
+            success: function (response) {
+                if (response.status) {
+                    var cart = response.cart;
+                    var totalQuantity = cart.reduce(function (total, currentValue) {
+                        return total + currentValue.Quantity
+                    }, 0);
+                    $(".jJyMq").html(`${totalQuantity.toString()}`);
+                } else {
+                    $(".jJyMq").html(`0`);
+                }
+            }
         });
     }
 }

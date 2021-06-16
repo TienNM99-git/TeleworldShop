@@ -107,6 +107,7 @@ ul.support {
 
 .cart {
     width: 24%;
+    position:relative;
 }
 
 .account a span {
@@ -123,13 +124,59 @@ ul.support {
     color: #000;
 }
 
-    .cart a span {
+    .cart a .cart-icon {
         background: url(../images/img-sprite.png) -172px -28px;
-        width: 26px;
-        height: 26px;
+        width: 32px;
+        height: 32px;
+        margin-right: 5px;
         display: inline-block;
         vertical-align: middle;
+        position: relative;
     }
+
+.gBdTNJ {
+    cursor: pointer;
+    margin: 0px 0px 0px 16px;
+    -webkit-box-align: center;
+    display: flex;
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+    position: relative;
+    letter-spacing: 0.7px;
+    align-items: flex-end;
+    letter-spacing: normal;
+}
+
+.jJyMq {
+    color: rgb(36, 36, 36);
+    background: rgb(255, 255, 255);
+    height: 20px;
+    left: 12px;
+    top: -10px;
+    border-radius: 40px;
+    border: 1px solid;
+    border-color: #f97f77;
+    display: inline-block;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    position: absolute;
+    padding: 0px 5px;
+}
+
+.cart-wrapper {
+    position: relative;
+    margin-right: 8px;
+    display: flex;
+}
+
+.cart-text {
+    position: absolute;
+    margin-top: 11px;
+    font-size: 12px;
+    right: 15px;
+}
 
 ul.login {
     float: left;
