@@ -135,7 +135,7 @@ namespace TeleworldShop.Web.Api
                     _orderService.Update(dbOrder);
                     _orderService.Save();
 
-                    string verifyContent = "Your order has been verified by administrtors!! We'll soon have it delivered to you";
+                    string verifyContent = "Your order with Id: "+orderViewModel.Id.ToString()+ " has been verified by administrtors!! We'll soon have it delivered to you";
                     var receiver = orderViewModel.CustomerEmail;
                     MailHelper.SendMail(receiver, "Contact from website: Order verified", verifyContent);
 
