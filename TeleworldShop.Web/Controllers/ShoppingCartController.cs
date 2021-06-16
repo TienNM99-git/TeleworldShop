@@ -305,7 +305,22 @@ namespace TeleworldShop.Web.Controllers
             }
             return View();
         }
-
+        public JsonResult GetCart()
+        {
+            var cart = (List<ShoppingCartViewModel>)Session[CommonConstants.SessionCart];
+            if (cart == null)
+            {
+                return Json(new
+                {
+                    status = false
+                });
+            }
+            return Json(new
+            {
+                cart,
+                status = true
+            });
+        }
         public ActionResult CancelOrder()
         {
             return View();

@@ -39,7 +39,7 @@
                                     return `${newTotal}đ`
                                 }
                             },
-                            { data: 'Status' },
+                            { data: 'OrderStatus' },
                         ],
                         pageLength: 10
                     });

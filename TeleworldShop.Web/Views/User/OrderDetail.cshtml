@@ -154,7 +154,7 @@
                             <span class="sum">@totalCost.ToString("N0")₫</span>
                         </td>
                     </tr>
-                    @if (order.OrderStatus != "Canceled")
+                    @if (order.OrderStatus == "Waiting for verfication")
                     {
                         <tr>
                             <td colspan="3"></td>
