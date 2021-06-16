@@ -1,0 +1,43 @@
+﻿  <!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Import User</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home Page</a></li>
+                    <li class="breadcrumb-item"><a href="#">User</a></li>
+                    <li class="breadcrumb-item"><a ui-sref="application_users">Application User list</a></li>
+                    <li class="breadcrumb-item active">Import User</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Horizontal Form -->
+    <div class="card card-info">
+        <div class="card-header with-border">
+            <h3 class="card-title">Import User</h3>
+        </div><!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" novalidate name="frmImportApplicationUser" role="form" ng-submit="ImportUser()">
+            <div class="card-body">
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Choose an Excel file</label>
+                    <div class="col-sm-10">
+                        <input type="file" file-upload class="form-control" name="file" required />
+                        <span ng-show="frmImportApplicationUser.file.$invalid" class="has-error">No file chosen</span>
+                    </div>
+                </div>              
+            </div><!-- /.box-body -->
+              <div class="card-footer">
+                <button type="submit" ng-disabled="frmImportApplicationUser.$invalid" class="btn btn-success">Save</button>
+                <button ui-sref="products" class="btn btn-default float-md-right">Cancel</button>
+            </div><!-- /.box-footer -->
+        </form>
+    </div><!-- /.box -->
+</section><!-- /.content -->

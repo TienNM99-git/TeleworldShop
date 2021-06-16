@@ -89,7 +89,7 @@
                     <div class="input-group mb-3" style="justify-content:center">
                         @{
                             MvcCaptcha registerCaptcha = new MvcCaptcha("registerCaptcha");
-                            registerCaptcha.UserInputID = "registerCaptcha";
+                            registerCaptcha.UserInputID = "CaptchaCode";
                         }
                         @Html.Captcha(registerCaptcha)
                     </div>

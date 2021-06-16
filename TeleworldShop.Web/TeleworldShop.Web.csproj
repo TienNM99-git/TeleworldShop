@@ -200,14 +200,14 @@
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Threading.Tasks" />
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -376,6 +376,10 @@
     <Content Include="app\components\application_roles\applicationRoleListController.js" />
     <Content Include="app\components\application_roles\applicationRoleListView.html" />
     <Content Include="app\components\application_roles\applicationRoles.module.js" />
+    <Content Include="app\components\application_roles\applicationRoleImportController.js" />
+    <Content Include="app\components\application_roles\applicationRoleImportView.html" />
+    <Content Include="app\components\application_users\applicationUserImportController.js" />
+    <Content Include="app\components\application_users\applicationUserImportView.html" />
     <Content Include="app\components\application_users\applicationUserAddController.js" />
     <Content Include="app\components\application_users\applicationUserAddView.html" />
     <Content Include="app\components\application_users\applicationUserEditController.js" />
@@ -408,6 +412,8 @@
     <Content Include="app\components\product_categories\productCategoryEditView.html" />
     <Content Include="app\components\product_categories\productCategoryListController.js" />
     <Content Include="app\components\product_categories\productCategoryListView.html" />
+    <Content Include="app\components\product_categories\productCategoryImportController.js" />
+    <Content Include="app\components\product_categories\productCategoryImportView.html" />
     <Content Include="app\components\promotions\promotionAddView.html" />
     <Content Include="app\components\promotions\promotionAddController.js" />
     <Content Include="app\components\promotions\promotionEditController.js" />

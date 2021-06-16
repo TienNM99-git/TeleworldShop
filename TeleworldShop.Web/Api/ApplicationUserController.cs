@@ -1,11 +1,15 @@
 ﻿using AutoMapper;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Script.Serialization;
+using TeleworldShop.Common;
 using TeleworldShop.Common.Exceptions;
 using TeleworldShop.Model.Models;
 using TeleworldShop.Service;
@@ -201,6 +205,109 @@ namespace TeleworldShop.Web.Api
                 return request.CreateResponse(HttpStatusCode.OK, id);
             else
                 return request.CreateErrorResponse(HttpStatusCode.OK, string.Join(",", result.Errors));
+        }
+        [Route("import")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> Import()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                Request.CreateErrorResponse(HttpStatusCode.UnsupportedMediaType, "Not supported format");
+            }
+
+            var root = HttpContext.Current.Server.MapPath("~/UploadedFiles/Excels");
+            if (!Directory.Exists(root))
+            {
+                Directory.CreateDirectory(root);
+            }
+
+            var provider = new MultipartFormDataStreamProvider(root);
+            var result = await Request.Content.ReadAsMultipartAsync(provider);
+
+            //Upload files
+            int addedCount = 0;
+
+            foreach (MultipartFileData fileData in result.FileData)
+            {
+                if (string.IsNullOrEmpty(fileData.Headers.ContentDisposition.FileName))
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotAcceptable, "Request not in valid format");
+                }
+                string fileName = fileData.Headers.ContentDisposition.FileName;
+                if (fileName.StartsWith("\"") && fileName.EndsWith("\""))
+                {
+                    fileName = fileName.Trim('"');
+                }
+                if (fileName.Contains(@"/") || fileName.Contains(@"\"))
+                {
+                    fileName = Path.GetFileName(fileName);
+                }
+
+                var fullPath = Path.Combine(root, fileName);
+                File.Copy(fileData.LocalFileName, fullPath, true);
+
+                //insert to DB
+                var listUser = this.ReadUserFromExcel(fullPath);
+                if (listUser.Count > 0)
+                {
+                    foreach (var user in listUser)
+                    {
+                        await _userManager.CreateAsync(user,"123456");
+                        addedCount++;
+                    }
+                }
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, "Imported successfully " + addedCount + " items.");
+        }
+
+        [HttpGet]
+        [Route("ExportXls")]
+        public async Task<HttpResponseMessage> ExportXls(HttpRequestMessage request, string filter = null)
+        {
+            string fileName = string.Concat("Application Users_" + DateTime.Now.ToString("yyyyMMddhhmmsss") + ".xlsx");
+            var folderReport = ConfigHelper.GetByKey("ReportFolder");
+            string filePath = HttpContext.Current.Server.MapPath(folderReport);
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
+            string fullPath = Path.Combine(filePath, fileName);
+            try
+            {
+                var data = _userManager.Users;
+                var mapper = new Mapper(AutoMapperConfiguration.Configure());
+                IEnumerable<ApplicationUserViewModel> modelVm = mapper.Map<IEnumerable<ApplicationUser>, IEnumerable<ApplicationUserViewModel>>(data);
+                await ReportHelper.GenerateXls(modelVm, fullPath);
+                return request.CreateErrorResponse(HttpStatusCode.OK, Path.Combine(folderReport, fileName));
+            }
+            catch (Exception ex)
+            {
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+        private List<ApplicationUser> ReadUserFromExcel(string fullPath)
+        {
+            using (var package = new ExcelPackage(new FileInfo(fullPath)))
+            {
+                ExcelWorksheet workSheet = package.Workbook.Worksheets[0];
+                List<ApplicationUser> listUser = new List<ApplicationUser>();
+                ApplicationUserViewModel applicationUserViewModel;
+                ApplicationUser user;
+                DateTime birthday = DateTime.Now;
+
+                for (int i = workSheet.Dimension.Start.Row + 1; i <= workSheet.Dimension.End.Row; i++)
+                {
+                    applicationUserViewModel = new ApplicationUserViewModel();
+                    user = new ApplicationUser();
+                    applicationUserViewModel.Id = Guid.NewGuid().ToString();
+                    applicationUserViewModel.FullName = workSheet.Cells[i, 1].Value.ToString();
+                    applicationUserViewModel.UserName = workSheet.Cells[i, 2].Value.ToString();
+                    applicationUserViewModel.Address = workSheet.Cells[i, 3].Value.ToString();
+                    user.UpdateUser(applicationUserViewModel);
+                    listUser.Add(user);
+                }
+                return listUser;
+            }
         }
     }
 }

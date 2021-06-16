@@ -13,7 +13,41 @@
         $scope.search = search;
         $scope.clearSearch = clearSearch;
         $scope.deleteItem = deleteItem;
-     
+
+        $scope.exportUserExcel = exportUserExcel;
+        $scope.exportUserPdf = exportUserPdf;
+        function exportUserExcel() {
+            var config = {
+                params: {
+                    filter: $scope.keyword
+                }
+            }
+            apiService.get('/api/applicationUser/ExportXls', config, function (response) {
+                if (response.status = 200) {
+                    window.location.href = response.data.Message;
+                }
+            }, function (error) {
+                notificationService.displayError(error);
+
+            });
+        }
+
+        function exportUserPdf(userId) {
+            var config = {
+                params: {
+                    id: userId
+                }
+            }
+            apiService.get('/api/applicationUser/ExportPdf', config, function (response) {
+                if (response.status = 200) {
+                    window.location.href = response.data.Message;
+                }
+            }, function (error) {
+                notificationService.displayError(error);
+
+            });
+        }
+
         function deleteItem(id) {
             $ngBootbox.confirm('Are you sure that you want to delete?')
                 .then(function () {

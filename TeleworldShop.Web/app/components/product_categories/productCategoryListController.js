@@ -16,6 +16,39 @@
 
         $scope.deleteMultiple = deleteMultiple;
 
+        $scope.exportCategoryExcel = exportCategoryExcel;
+        $scope.exportCategoryPdf = exportCategoryPdf;
+        function exportCategoryExcel() {
+            var config = {
+                params: {
+                    filter: $scope.keyword
+                }
+            }
+            apiService.get('/api/productcategory/ExportXls', config, function (response) {
+                if (response.status = 200) {
+                    window.location.href = response.data.Message;
+                }
+            }, function (error) {
+                notificationService.displayError(error);
+
+            });
+        }
+
+        function exportCategoryPdf(productId) {
+            var config = {
+                params: {
+                    id: productId
+                }
+            }
+            apiService.get('/api/productcategory/ExportPdf', config, function (response) {
+                if (response.status = 200) {
+                    window.location.href = response.data.Message;
+                }
+            }, function (error) {
+                notificationService.displayError(error);
+
+            });
+        }
         function deleteMultiple() {
             var listId = [];
             $.each($scope.selected, function (i, item) {

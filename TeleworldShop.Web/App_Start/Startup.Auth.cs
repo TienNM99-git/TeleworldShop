@@ -58,13 +58,9 @@ namespace TeleworldShop.Web.App_Start
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             //Uncomment the following lines to enable logging in with third party login providers
-            app.UseMicrosoftAccountAuthentication(
-                clientId: "853483bc-b8fa-4a60-8639-1b86af54f5f1",
-                clientSecret: "K_6dKEgs0pDAPF4V9B_NEw~wlqb_63r1F5");
-
             app.UseTwitterAuthentication(
-               consumerKey: "dOmYjHvi6pQ083TJKnYsBfczI",
-               consumerSecret: "MXtwGLuVh3tM6JBIYct0EZezaSWHe6HTnwl86qYBF0gujVgKco");
+               consumerKey: "8vitOm3Ha8jk8I74Ec5nXJGQs",
+               consumerSecret: "YghYul1B7mjxwR7HqkvjXEZda4s7OK7g9w1cAgdSjl0BBm58yk");
 
             app.UseFacebookAuthentication(
                appId: "459546158763370",
