@@ -5801,7 +5801,6 @@
     <Content Include="Assets\client\images\info.png" />
     <Content Include="Assets\client\images\label_new.png" />
     <Content Include="Assets\client\images\order.png" />
-    <Content Include="Assets\client\images\pi.jpg" />
     <Content Include="Assets\client\images\pi1.jpg" />
     <Content Include="Assets\client\images\pi2.jpg" />
     <Content Include="Assets\client\images\pi4.jpg" />
@@ -6115,8 +6114,6 @@
     <Content Include="Assets\admin\libs\angular-ui-select\package.json" />
     <Content Include="Assets\admin\libs\angular-ui-select\README.md" />
     <Content Include="Assets\admin\libs\angular-chart\angular-chart.min.js.map" />
-    <Content Include="Assets\admin\templates\ProductImportTemplate.xlsx" />
-    <Content Include="Assets\admin\templates\~%24ProductImportTemplate.xlsx" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\Layouts.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />

@@ -21,7 +21,8 @@ namespace TeleworldShop.Web
                  "~/Assets/admin/libs/datatables/jquery.dataTables.min.js",
                  "~/Assets/admin/libs/datatables-bs4/js/dataTables.bootstrap4.min.js",
                  "~/Assets/client/js/common.js",
-                 "~/Assets/admin/libs/bootstrap/js/bootstrap.min.js"
+                 "~/Assets/admin/libs/bootstrap/js/bootstrap.min.js",
+                 "~/Assets/admin/libs/toastr/toastr.min.js"
                 ));
             bundles.Add(new ScriptBundle("~/js/forms").Include(
                 "~/Assets/admin/libs/jquery/jquery.min.js",

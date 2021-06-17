@@ -40,14 +40,38 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     @{ Html.RenderAction("Footer", "Home");}
 
     <div class="clearfix"> </div>
+
+    <!-- Messenger Chat plugin Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Chat plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "111572294495045");
+        chatbox.setAttribute("attribution", "biz_inbox");
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v11.0'
+            });
+        };
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
     <!---->
     @*<script src="~/Assets/client/js/jquery.min.js"></script>
-    <script src="~/Assets/admin/libs/jquery-ui/jquery-ui.min.js"></script>
-    <script src="~/Assets/admin/libs/mustache/mustache.js"></script>
-    <script src="~/Assets/admin/libs/jquery-validation/jquery.validate.js"></script>
-    <script src="~/Assets/admin/libs/numeral/numeral.js"></script>
-    <script src="~/Assets/client/js/common.js"></script>
-    <script src="~/Assets/client/js/controllers/shoppingCart.js"></script>*@
+        <script src="~/Assets/admin/libs/jquery-ui/jquery-ui.min.js"></script>
+        <script src="~/Assets/admin/libs/mustache/mustache.js"></script>
+        <script src="~/Assets/admin/libs/jquery-validation/jquery.validate.js"></script>
+        <script src="~/Assets/admin/libs/numeral/numeral.js"></script>
+        <script src="~/Assets/client/js/common.js"></script>
+        <script src="~/Assets/client/js/controllers/shoppingCart.js"></script>*@
     <!--script-->
     @Scripts.Render("~/js/jquery")
     @Scripts.Render("~/js/plugins")

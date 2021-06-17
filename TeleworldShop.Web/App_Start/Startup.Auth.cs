@@ -63,8 +63,8 @@ namespace TeleworldShop.Web.App_Start
                consumerSecret: "YghYul1B7mjxwR7HqkvjXEZda4s7OK7g9w1cAgdSjl0BBm58yk");
 
             app.UseFacebookAuthentication(
-               appId: "459546158763370",
-               appSecret: "331f3b6129e688309682fadf9f696198");
+               appId: "816007609023453",
+               appSecret: "dde5d85c7f48048a65886e3630a33f67");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {

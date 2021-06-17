@@ -61,13 +61,17 @@
 
         $scope.updatePromotion = function () {
             if ($scope.promotion.Categories.length > 0) {
-                apiService.put('api/promotion/update', $scope.promotion,
-                    function (result) {
-                        notificationService.displaySuccess(result.data.Name + ' updated !!!');
-                    }, function (error) {
-                        notificationService.displayError('Failed to update !!!');
-                    }
-                );
+                if ($scope.promotion.ExpireDate.getTime() > $scope.promotion.StartDate.getTime()) {
+                    apiService.put('api/promotion/update', $scope.promotion,
+                        function (result) {
+                            notificationService.displaySuccess(result.data.Name + ' updated !!!');
+                        }, function (error) {
+                            notificationService.displayError('Failed to update !!!');
+                        }
+                    );
+                } else {
+                    notificationService.displayError('The expire day must be greater than the start day !!!');
+                }
             } else {
                 notificationService.displayError('Please select at least 1 category !');
             }
