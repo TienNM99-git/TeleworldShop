@@ -33,7 +33,6 @@
         function loadDetail() {
             apiService.get('/api/promotion/detail/' + $stateParams.id, null,
                 function (result) {
-                    console.log(result.data);
                     $scope.promotion = result.data;
                     $scope.promotion.Categories.forEach(x => $scope.categories.unshift(x));
                     $scope.promotion.PromotionPrice = result.data.PromotionPrice;
@@ -61,13 +60,17 @@
 
         $scope.updatePromotion = function () {
             if ($scope.promotion.Categories.length > 0) {
-                apiService.put('api/promotion/update', $scope.promotion,
-                    function (result) {
-                        notificationService.displaySuccess(result.data.Name + ' updated !!!');
-                    }, function (error) {
-                        notificationService.displayError('Failed to update !!!');
-                    }
-                );
+                if ($scope.promotion.ExpireDate.getTime() > $scope.promotion.StartDate.getTime()) {
+                    apiService.put('api/promotion/update', $scope.promotion,
+                        function (result) {
+                            notificationService.displaySuccess(result.data.Name + ' updated !!!');
+                        }, function (error) {
+                            notificationService.displayError('Failed to update !!!');
+                        }
+                    );
+                } else {
+                    notificationService.displayError('The expire day must be greater than the start day !!!');
+                }               
             } else {
                 notificationService.displayError('Please select at least 1 category !');
             }
@@ -78,7 +81,7 @@
                 $scope.categories = result.data;
                 callback();
             }, function () {
-                console.log('Cannot get list parent');
+                notificationService.displayError('Cannot get category list !!!');
             });
         }
 

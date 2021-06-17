@@ -42,6 +42,9 @@ namespace TeleworldShop.Data.Repositories
             var query = from pc in DbContext.ProductCategories
                         where 
                         !(from pd in DbContext.PromotionDetails
+                          join promotion in DbContext.Promotions
+                          on pd.PromotionId equals promotion.Id
+                          where promotion.Status == true
                           select pd.CategoryId).Contains(pc.Id)
                         select pc;
 

@@ -164,10 +164,6 @@ namespace TeleworldShop.Service
 
         public void Update(Promotion promotion)
         {
-            if (_promotionRepository.CheckContains(x => x.Name == promotion.Name && x.Id != promotion.Id))
-            {
-                throw new NameDuplicatedException("Promotion name can not be duplicated");
-            }
             _promotionRepository.Update(promotion);
         }
 

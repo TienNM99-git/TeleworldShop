@@ -1,4 +1,41 @@
-﻿var common = {
+﻿function notificationService() {
+    toastr.options = {
+        "debug": false,
+        "positionClass": "toast-top-right",
+        "onclick": null,
+        "fadeIn": 300,
+        "fadeOut": 1000,
+        "timeOut": 3000,
+        "extendedTimeOut": 1000
+    };
+
+    function displaySuccess(message) {
+        toastr.success(message);
+    }
+
+    function displayWarning(message) {
+        return toastr.warning(message);
+    }
+
+    function displayError(error) {
+        if (Array.isArray(error)) {
+            error.each(function (err) {
+                toastr.error(err);
+            });
+        }
+        else {
+            toastr.error(error);
+        }
+    }
+
+    return {
+        displaySuccess: displaySuccess,
+        displayError: displayError,
+        displayWarning: displayWarning,
+    }
+}
+
+var common = {
     init: function () {
         common.getCart();
         common.registerEvents();
@@ -27,7 +64,7 @@
                 return false;
             }
         }).autocomplete("instance")._renderItem = function (ul, item) {
-            const promotionPrice = item.PromotionPrice ? 
+            const promotionPrice = item.PromotionPrice ?
                 item.PromotionPrice.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "₫" : null;
             const price = item.Price.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "₫";
 
@@ -50,8 +87,8 @@
                 </a>`;
 
             return $(`<li class="product-suggest"></li>`)
-              .append(productSuggest)
-              .appendTo(ul);
+                .append(productSuggest)
+                .appendTo(ul);
         };
 
         $('.btnAddToCart').off('click').on('click', function (e) {
@@ -66,11 +103,11 @@
                 dataType: 'json',
                 success: function (response) {
                     if (response.status) {
-                        alert('Add product to cart successfully.');
+                        notificationService().displaySuccess("Add product to cart successfully.");
                         common.getCart();
                     }
                     else {
-                        alert(response.message);
+                        notificationService().displayError("Cannot add product to cart !!!.");
                     }
                 }
             });

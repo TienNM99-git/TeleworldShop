@@ -132,9 +132,7 @@ const userInfo = {
                     $('#txtNewPassword').val('');
                     $('#txtRetypePwd').val('');
                     if ($("#chkUpdatePwd").prop("checked")) {
-                        $("#chkUpdatePwd").prop("checked", false);
                         $("#chkUpdatePwd").trigger("click");
-                        $("#chkUpdatePwd").prop("checked", false);
                     }
                     $(".user-info-detail .alert").removeClass("fail-alert");
                     $(".user-info-detail .alert").addClass("success-alert");

@@ -21,7 +21,8 @@ namespace TeleworldShop.Web
                  "~/Assets/admin/libs/datatables/jquery.dataTables.min.js",
                  "~/Assets/admin/libs/datatables-bs4/js/dataTables.bootstrap4.min.js",
                  "~/Assets/client/js/common.js",
-                 "~/Assets/admin/libs/bootstrap/js/bootstrap.min.js"
+                 "~/Assets/admin/libs/bootstrap/js/bootstrap.min.js",
+                 "~/Assets/admin/libs/toastr/toastr.min.js"
                 ));
             bundles.Add(new ScriptBundle("~/js/forms").Include(
                 "~/Assets/admin/libs/jquery/jquery.min.js",
@@ -35,13 +36,14 @@ namespace TeleworldShop.Web
                .Include("~/Assets/client/css/custom.css", new CssRewriteUrlTransform())
                );
             bundles.Add(new StyleBundle("~/css/base")
-                .Include("~/Assets/client/css/bootstrap.css.map", new CssRewriteUrlTransform())
+                .Include("~/Assets/client/css/bootstrap.css", new CssRewriteUrlTransform())
                 .Include("~/Assets/client/font-awesome-4.6.3/css/font-awesome.css", new CssRewriteUrlTransform())
                 .Include("~/Assets/admin/libs/jquery-ui/themes/smoothness/jquery-ui.min.css", new CssRewriteUrlTransform())
                 .Include("~/Assets/admin/libs/datatables-bs4/css/dataTables.bootstrap4.min.css", new CssRewriteUrlTransform())
                 .Include("~/Assets/client/css/style.css", new CssRewriteUrlTransform())
                 .Include("~/Assets/client/css/custom.css", new CssRewriteUrlTransform())
                 .Include("~/Assets/client/css/userInfor.css", new CssRewriteUrlTransform())
+                .Include("~/Assets/admin/libs/toastr/toastr.css", new CssRewriteUrlTransform())
                 );
             BundleTable.EnableOptimizations = bool.Parse(ConfigHelper.GetByKey("EnableBundles"));
         }

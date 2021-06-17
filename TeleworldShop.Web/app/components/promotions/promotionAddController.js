@@ -7,7 +7,7 @@
         $scope.promotion = {
             Name: 'Chương trình giảm giá',
             Type: 1,
-            PromotionPrice: 0,
+            PromotionPrice: null,
             Apply: 1,
             Categories: [],
             Tags: [],
@@ -41,20 +41,22 @@
         $scope.onPromotionTypeChange = onPromotionTypeChange;
 
         $scope.createPromotion = function () {
-
             if ($scope.promotion.Categories.length > 0) {
-                apiService.post('api/promotion/create', $scope.promotion,
-                    function (result) {
-                        notificationService.displaySuccess(result.data.Name + ' added !!!');
-                        $state.go('promotions');
-                    }, function (error) {
-                        notificationService.displayError('Add new promotion failed !!!');
-                    }
-                );
+                if ($scope.promotion.ExpireDate.getTime() > $scope.promotion.StartDate.getTime()) {
+                    apiService.post('api/promotion/create', $scope.promotion,
+                        function (result) {
+                            notificationService.displaySuccess(result.data.Name + ' added !!!');
+                            $state.go('promotions');
+                        }, function (error) {
+                            notificationService.displayError('Add new promotion failed !!!');
+                        }
+                    );
+                } else {
+                    notificationService.displayError('The expire day must be greater than the start day !!!');
+                }
             } else {
                 notificationService.displayError('Please select at least 1 category !');
             }
-
         }
 
         function onPromotionTypeChange() {
@@ -75,7 +77,7 @@
             apiService.get('api/productcategory/getListAvailableCategory', null, function (result) {
                 $scope.categories = result.data;
             }, function () {
-                console.log('Cannot get list parent');
+                notificationService.displayError('Cannot get category list !!!');
             });
         }
 
