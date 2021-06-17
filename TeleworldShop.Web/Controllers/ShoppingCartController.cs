@@ -130,9 +130,9 @@ namespace TeleworldShop.Web.Controllers
             }
             CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");   // try with "en-US"
             string a = decimal.Parse(totalCost.ToString()).ToString("#,###", cul.NumberFormat);
-            orderContent += "Total cost: "+ totalCost.ToString() + "<br />" + "Please wait for the administrators to verify your order!! Thanks for using our services";
+            orderContent += "Total cost: "+ totalCost.ToString("N0");
             var orderReturn = _orderService.Create(ref orderNew, orderDetails);
-            string content = System.IO.File.ReadAllText(Server.MapPath("~/Assets/client/template/contact_template.html"));
+            string content = System.IO.File.ReadAllText(Server.MapPath("~/Assets/client/template/order_template.html"));
             content = content.Replace("{{Name}}", orderNew.CustomerName);
             content = content.Replace("{{Email}}", orderNew.CustomerEmail);
             content = content.Replace("{{Message}}", orderNew.CustomerMessage);
@@ -322,7 +322,22 @@ namespace TeleworldShop.Web.Controllers
             }
             return View();
         }
-
+        public JsonResult GetCart()
+        {
+            var cart = (List<ShoppingCartViewModel>)Session[CommonConstants.SessionCart];
+            if (cart == null)
+            {
+                return Json(new
+                {
+                    status = false
+                });
+            }
+            return Json(new
+            {
+                cart,
+                status = true
+            });
+        }
         public ActionResult CancelOrder()
         {
             return View();

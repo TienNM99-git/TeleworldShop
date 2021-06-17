@@ -39,7 +39,6 @@ namespace TeleworldShop.Common
                 mail.BodyEncoding = System.Text.Encoding.UTF8;
                 mail.IsBodyHtml = true;
                 mail.Priority = MailPriority.High;
-
                 smtpClient.Send(mail);
 
                 return true;

@@ -45,6 +45,7 @@ namespace TeleworldShop.Service
         IEnumerable<Product> GetListProductByTag(string tagId, int page, int pagesize, out int totalRow);
 
         bool SellProduct(int productId, int quantity);
+
     }
 
     public class ProductService : IProductService
@@ -190,7 +191,7 @@ namespace TeleworldShop.Service
 
         public IEnumerable<object> GetListProductByName(string name)
         {
-            return _productRepository.GetMulti(x => x.Status && x.Name.Contains(name)).Select(y => new { y.Name, y.Image, y.PromotionPrice, y.Price});
+            return _productRepository.GetMulti(x => x.Status && x.Name.Contains(name)).Select(y => new { y.Name, y.Image, y.PromotionPrice, y.Price });
         }
 
         public IEnumerable<Product> Search(string keyword, int page, int pageSize, string sort, out int totalRow)
@@ -274,5 +275,6 @@ namespace TeleworldShop.Service
                 query = _productRepository.GetAll();
             return query;
         }
+
     }
 }
