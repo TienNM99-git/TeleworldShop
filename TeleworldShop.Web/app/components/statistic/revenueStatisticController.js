@@ -146,7 +146,7 @@
                 $scope.inventorychartData = inventoryChartData;
                 $scope.inventorychartLabels = inventoryChartLabels;
             }, function (response) {
-                notificationService.displayError('Can not load data');
+                notificationService.displayError('Load data successfully !');
             });
         }
 
