@@ -47,7 +47,7 @@
                     <button class="btn btn-danger" type="button" ng-click="deleteMultiple()" id="btnDelete" style="margin-bottom:5px" disabled="disabled">Delete</button>
                 </div>
             </div>
-
+            
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-bordered">
@@ -95,21 +95,17 @@
             </div>
         </div>
 
-        
+        <!-- Card footer-->
+        <div class="card-footer">
+            <pager-directive page="{{page}}"
+                             custom-path="{{customPath}}"
+                             pages-count="{{pagesCount}}"
+                             total-count="{{totalCount}}"
+                             search-func="getPromotion(page)">
 
-            <!-- Card footer-->
-            <div class="card-footer">
-                <pager-directive page="{{page}}"
-                    custom-path="{{customPath}}"
-                    pages-count="{{pagesCount}}"
-                    total-count="{{totalCount}}"
-                    search-func="getPromotion(page)"
-                >
-
-                </pager-directive>
-            </div>
-
+            </pager-directive>
         </div>
 
+    </div>
 </section>
 <!-- /.content -->

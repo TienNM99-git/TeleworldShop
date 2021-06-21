@@ -43,7 +43,7 @@
                     notificationService.displayError(result.data);
                 });
         }
-     
+
         function onPromotionTypeChange() {
             $scope.promotion.Discount = '';
         };
@@ -70,7 +70,7 @@
                     );
                 } else {
                     notificationService.displayError('The expire day must be greater than the start day !!!');
-                }               
+                }
             } else {
                 notificationService.displayError('Please select at least 1 category !');
             }
@@ -86,6 +86,6 @@
         }
 
         loadCategory(loadDetail);
-        
+
     }
 })(angular.module('teleworldshop.promotions'));

@@ -5,7 +5,7 @@
 
     function promotionAddController(apiService, $scope, notificationService, $state, commonService) {
         $scope.promotion = {
-            Name: 'Chương trình giảm giá',
+            Name: 'Promotions',
             Type: 1,
             PromotionPrice: null,
             Apply: 1,
