@@ -103,6 +103,12 @@
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -326,6 +332,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\TeleworldShopHub.cs" />
     <Compile Include="Infrastructure\Core\ApiControllerBase.cs" />
     <Compile Include="Infrastructure\Core\PaginationSet.cs" />
     <Compile Include="Infrastructure\Extensions\EntityExtensions.cs" />
@@ -5610,6 +5617,8 @@
     <Content Include="Assets\admin\libs\select2\js\select2.full.min.js" />
     <Content Include="Assets\admin\libs\select2\js\select2.js" />
     <Content Include="Assets\admin\libs\select2\js\select2.min.js" />
+    <Content Include="Assets\admin\libs\signalR\jquery.signalR-2.2.2.js" />
+    <Content Include="Assets\admin\libs\signalR\jquery.signalR-2.2.2.min.js" />
     <Content Include="Assets\admin\libs\sparklines\sparkline.js" />
     <Content Include="Assets\admin\libs\summernote\lang\summernote-ar-AR.js" />
     <Content Include="Assets\admin\libs\summernote\lang\summernote-ar-AR.min.js" />
@@ -5846,6 +5855,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Libs\CKFinder.dll" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -6114,6 +6125,7 @@
     <Content Include="Assets\admin\libs\angular-ui-select\package.json" />
     <Content Include="Assets\admin\libs\angular-ui-select\README.md" />
     <Content Include="Assets\admin\libs\angular-chart\angular-chart.min.js.map" />
+    <Compile Include="Hubs\Startup.Hub.cs" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\Layouts.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />

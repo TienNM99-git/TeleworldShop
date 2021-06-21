@@ -1,9 +1,9 @@
 ﻿(function (app) {
     app.controller('revenueStatisticController', revenueStatisticController);
 
-    revenueStatisticController.$inject = ['$scope', 'apiService', 'notificationService', '$filter'];
+    revenueStatisticController.$inject = ['$scope', 'apiService', 'notificationService', '$filter', '$rootScope'];
 
-    function revenueStatisticController($scope, apiService, notificationService, $filter) {
+    function revenueStatisticController($scope, apiService, notificationService, $filter, $rootScope) {
         $scope.colors = ['#45b7cd', '#ff6384', '#ff8e72'];
         $scope.tabledata = []; //for revenues statistic
         $scope.labels = [];
@@ -25,6 +25,14 @@
         $scope.inventorychartData = [];
         $scope.inventorychartLabels = [];
         $scope.inventorySeries = 'Remain Quantity';
+        $scope.$on('UpdateDashBoard', function () {
+            notificationService.displaySuccess('Can not load data');
+            getInventoryStatistic();
+            getSellStatistic();
+            getOrderStatistic();
+            getStatistic();
+            $rootScope.$apply();
+        })
         //$scope.datasetOverride = [];
         function getStatistic() {
             var config = {
@@ -135,7 +143,7 @@
                 $scope.inventorychartData = inventoryChartData;
                 $scope.inventorychartLabels = inventoryChartLabels;
             }, function (response) {
-                notificationService.displayError('Can not load data');
+                    notificationService.displaySuccess('Load data successfully !');
             });
         }
         getInventoryStatistic();
