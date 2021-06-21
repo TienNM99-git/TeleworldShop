@@ -91,7 +91,7 @@
         @foreach (var product in Model.TopSaleProducts)
         {
             var url = "/" + product.Alias + ".p-" + product.Id + ".html";
-            <div class="col-md-4 chain-grid grid-top-chain">
+            <div class="col-md-4 chain-grid  grid-top-chain">
                 <a href="@url"><img class="img-responsive chain" width="100%" height="100%" src="@product.Image" /></a>
                 <span class="star"> </span>
                 <div class="grid-chain-bottom">

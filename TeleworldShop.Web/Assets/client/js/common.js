@@ -41,6 +41,7 @@ var common = {
         common.registerEvents();
     },
     registerEvents: function () {
+
         $("#txtKeyword").autocomplete({
             minLength: 0,
             source: function (request, response) {
@@ -135,6 +136,6 @@ var common = {
                 }
             }
         });
-    }
+    },
 }
 common.init();

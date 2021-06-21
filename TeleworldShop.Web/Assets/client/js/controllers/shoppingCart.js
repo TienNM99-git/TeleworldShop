@@ -5,6 +5,9 @@ var cart = {
         cart.registerEvent();
     },
     registerEvent: function () {
+
+        var teleworldHub = $.connection.teleworldHub;
+
         $('#frmPayment').validate({
             rules: {
                 name: "required",
@@ -29,9 +32,9 @@ var cart = {
                     required: "Phone is required",
                     number: "Invalid phone number"
                 }
-            },          
+            },
         });
-        $('.btnDeleteItem').off('click').on('click', function (e) {           
+        $('.btnDeleteItem').off('click').on('click', function (e) {
             var result = confirm("Do you want to remove this item from cart?");
             if (result) {
                 e.preventDefault();
@@ -43,7 +46,7 @@ var cart = {
             var quantity = parseInt($(this).val());
             var productid = parseInt($(this).data('id'));
             var price = parseFloat($(this).data('price'));
-          
+
             if (isNaN(quantity) == false) {
                 var amount = quantity * price;
                 $('#amount_' + productid).text(numeral(amount).format('0,0'));
@@ -70,7 +73,7 @@ var cart = {
             if (result) {
                 e.preventDefault();
                 cart.deleteAll();
-            }           
+            }
         });
         $('#btnCheckout').off('click').on('click', function (e) {
             e.preventDefault();
@@ -86,13 +89,18 @@ var cart = {
                 $('#txtPhone').val('');
             }
         });
-        $('#btnCreateOrder').off('click').on('click', function (e) {
-            e.preventDefault();
-            var isValid = $('#frmPayment').valid();
-            if (isValid) {
-                cart.createOrder();
-            }
-        });
+
+        $.connection.hub.start().done(function () {
+            console.log('SignalR connection started');
+            $('#btnCreateOrder').off('click').on('click', function (e) {
+                e.preventDefault();
+                var isValid = $('#frmPayment').valid();
+                if (isValid) {
+                    cart.createOrder(teleworldHub);
+                }
+            });
+        })
+        
 
         $('input[name="paymentMethod"]').off('click').on('click', function () {
             if ($(this).val() == 'NL') {
@@ -138,7 +146,7 @@ var cart = {
         });
     },
 
-    createOrder: function () {
+    createOrder: function (teleworldHub) {
         var order = {
             CustomerName: $('#txtName').val(),
             CustomerAddress: $('#txtAddress').val(),
@@ -158,11 +166,12 @@ var cart = {
             },
             success: function (response) {
                 if (response.status) {
+                    teleworldHub.server.updateDashBoard();
                     if (response.urlCheckout != undefined && response.urlCheckout != '') {
-
                         window.location.href = response.urlCheckout;
                     }
                     else {
+                        console.log('Create order ok');
                         $('#divCheckout').hide();
                         cart.deleteAll();
                         setTimeout(function () {
@@ -194,6 +203,7 @@ var cart = {
             success: function (response) {
                 if (response.status) {
                     cart.loadData();
+
                 }
             }
         });
@@ -216,6 +226,7 @@ var cart = {
             success: function (response) {
                 if (response.status) {
                     cart.loadData();
+                    console.log('Update ok');
                 }
             }
         });

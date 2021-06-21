@@ -72,7 +72,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <script src="~/Assets/client/js/controllers/shoppingCart.js"></script>*@
     <!--script-->
     @Scripts.Render("~/js/jquery")
+    <script src="~/Assets/admin/libs/signalR/jquery.signalR-2.2.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
     @Scripts.Render("~/js/plugins")
+
     @RenderSection("footerJS", required: false)
 
 </body>
