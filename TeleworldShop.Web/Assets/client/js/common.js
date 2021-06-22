@@ -101,7 +101,7 @@ var common = {
                 dataType: 'json',
                 success: function (response) {
                     if (response.status) {
-                        alert('Add product to cart successfully.');
+                        notificationService().displaySuccess("Add product to cart successfully");
                         common.getCart();
                     }
                     else {
