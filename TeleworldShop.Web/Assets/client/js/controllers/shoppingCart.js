@@ -107,6 +107,10 @@ var cart = {
                 $('.boxContent').hide();
                 $('#bankContent').show();
             }
+            else if ($(this).val() == 'VISA') {
+                $('.boxContent').hide();
+                $('#bankContent').hide();
+            }
             else {
                 $('.boxContent').hide();
             }
@@ -143,6 +147,13 @@ var cart = {
     },
 
     createOrder: function (teleworldHub) {
+        var bank_code = null;
+        if ($('input[name="paymentMethod"]:checked').val() == 'VISA') {
+            bank_code = 'VISA';
+        }
+        else {
+            bank_code = $('input[groupname="bankcode"]:checked').prop('id');
+        }
         var order = {
             CustomerName: $('#txtName').val(),
             CustomerAddress: $('#txtAddress').val(),
@@ -150,7 +161,7 @@ var cart = {
             CustomerMobile: $('#txtPhone').val(),
             CustomerMessage: $('#txtMessage').val(),
             PaymentMethod: $('input[name="paymentMethod"]:checked').val(),
-            BankCode: $('input[groupname="bankcode"]:checked').prop('id'),
+            BankCode: bank_code,
             Status: false
         }
         $.ajax({
