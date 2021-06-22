@@ -3,7 +3,7 @@
 
     rootController.$inject = ['$state', 'authData', 'loginService', '$scope', 'authenticationService', '$rootScope'];
 
-    function rootController($state, authData, loginService, $scope, authenticationService, , $rootScope) {
+    function rootController($state, authData, loginService, $scope, authenticationService, $rootScope) {
         $scope.logOut = function () {
             loginService.logOut();
             $state.go('login');

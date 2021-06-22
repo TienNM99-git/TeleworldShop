@@ -59,7 +59,7 @@
                 $scope.chartdata = chartData;
                 $scope.labels = labels;
             }, function (response) {
-                notificationService.displayError('Can not load data');
+                notificationService.displaySuccess('Load data successfully !');
             });
         }
         function getOrderStatistic() {
