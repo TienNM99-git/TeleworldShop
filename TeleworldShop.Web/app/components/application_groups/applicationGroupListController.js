@@ -3,7 +3,7 @@
 
     app.controller('applicationGroupListController', applicationGroupListController);
 
-    applicationGroupListController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox','$filter'];
+    applicationGroupListController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox', '$filter'];
 
     function applicationGroupListController($scope, apiService, notificationService, $ngBootbox, $filter) {
         $scope.loading = true;
@@ -14,6 +14,7 @@
         $scope.clearSearch = clearSearch;
         $scope.deleteItem = deleteItem;
         $scope.selectAll = selectAll;
+        $scope.keyword = '';
 
         $scope.deleteMultiple = deleteMultiple;
 
@@ -22,16 +23,19 @@
             $.each($scope.selected, function (i, item) {
                 listId.push(item.ID);
             });
-            var config = {
-                params: {
-                    checkedList: JSON.stringify(listId)
+
+            $ngBootbox.confirm('Are you sure that you want to delete these record?').then(function () {
+                var config = {
+                    params: {
+                        checkedList: JSON.stringify(listId)
+                    }
                 }
-            }
-            apiService.del('api/applicationGroup/deletemulti', config, function (result) {
-                notificationService.displaySuccess('Delete successfully' + result.data + ' records.');
-                search();
-            }, function (error) {
-                notificationService.displayError('Delete failed');
+                apiService.del('api/applicationGroup/deletemulti', config, function (result) {
+                    notificationService.displaySuccess('Delete successfully' + result.data + ' records.');
+                    search();
+                }, function (error) {
+                    notificationService.displayError('Delete failed');
+                });
             });
         }
 
@@ -72,20 +76,19 @@
                         notificationService.displaySuccess('Delete successfully.');
                         search();
                     },
-                    function () {
-                        notificationService.displayError('Delete failed.');
-                    });
+                        function () {
+                            notificationService.displayError('Delete failed.');
+                        });
                 });
         }
         function search(page) {
             page = page || 0;
-
             $scope.loading = true;
             var config = {
                 params: {
                     page: page,
                     pageSize: 10,
-                    filter: $scope.filterExpression
+                    filter: $scope.keyword
                 }
             }
 

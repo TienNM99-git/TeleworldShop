@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" ng-model="keyword"  placeholder="Keyword">
+                        <input type="text" class="form-control" ng-model="keyword" placeholder="Keyword">
                         <span class="input-group-append">
                             <button class="btn btn-default" type="button" ng-click="search()" id="btnGroupAddon">Search</button>
                         </span>
@@ -56,8 +56,9 @@
                                 <th style="width: 15%">Address</th>
                                 <th style="width: 10%">Phone</th>
                                 <th style="width: 15%">Created date</th>
-                                <th style="width: 15%">Payment method</th>
-                                <th style="width: 10%">Status</th>
+                                <th style="width: auto">Payment method</th>
+                                <th style="width: auto">Payment status</th>
+                                <th style="width: auto">Status</th>
                                 <th style="width: 10%">Actions</th>
                             </tr>
                         </thead>
@@ -71,11 +72,15 @@
                                 <td>{{item.CreatedDate | date:'dd/MM/yyyy hh:mm:ss'}}</td>
                                 <td>{{item.PaymentMethod}}</td>
                                 <td>
+                                    <span ng-class="{'badge bg-danger':item.PaymentStatus=='Unpaid','badge bg-success':item.PaymentStatus=='Paid'}">
+                                        {{item.PaymentStatus}}
+                                    </span>
+                                </td>
+                                <td>
                                     <span ng-class="{'badge bg-danger':item.Status==false,'badge bg-success':item.Status==true}">
                                         {{item.Status | statusFilter}}
                                     </span>
                                 </td>
-                                <!-- class="badge bg-danger-->
                                 <td>
                                     <button class="btn btn-sm btn-primary" ui-sref="order_details({id:item.Id})">
                                         <i class="fa fa-info-circle"></i>
@@ -88,7 +93,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="9">
+                                <td colspan="10">
                                     <span class="pull-right">Page: {{page+1}} -- Total records: {{totalCount}}</span>
                                 </td>
                             </tr>
@@ -98,7 +103,7 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-                <pager-directive  page="{{page}}"
+                <pager-directive page="{{page}}"
                                  custom-path="{{customPath}}"
                                  pages-count="{{pagesCount}}"
                                  total-count="{{totalCount}}"

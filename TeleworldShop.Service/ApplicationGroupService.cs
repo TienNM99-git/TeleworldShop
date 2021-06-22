@@ -67,7 +67,7 @@ namespace TeleworldShop.Service
         {
             var query = _appGroupRepository.GetAll();
             if (!string.IsNullOrEmpty(filter))
-                query = query.Where(x => x.Name.Contains(filter));
+                query = _appGroupRepository.GetMulti(x => x.Name.Contains(filter));
 
             totalRow = query.Count();
             return query.OrderBy(x => x.Name).Skip(page * pageSize).Take(pageSize);

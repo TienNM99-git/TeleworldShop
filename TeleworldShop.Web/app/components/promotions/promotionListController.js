@@ -39,16 +39,19 @@
             $.each($scope.selected, function (i, item) {
                 listId.push(item.Id);
             });
-            var config = {
-                params: {
-                    checkedPromotions: JSON.stringify(listId)
+
+            $ngBootbox.confirm('Are you sure that you want to delete these record?').then(function () {
+                var config = {
+                    params: {
+                        checkedPromotions: JSON.stringify(listId)
+                    }
                 }
-            }
-            apiService.del('api/promotion/deletemulti', config, function (result) {
-                notificationService.displaySuccess('Successful delete ' + result.data + ' records !!!');
-                search();
-            }, function (error) {
-                notificationService.displayError('Delete failed');
+                apiService.del('api/promotion/deletemulti', config, function (result) {
+                    notificationService.displaySuccess('Successful delete ' + result.data + ' records !!!');
+                    search();
+                }, function (error) {
+                    notificationService.displayError('Delete failed');
+                });
             });
         }
 
