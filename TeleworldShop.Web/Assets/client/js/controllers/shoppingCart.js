@@ -100,30 +100,30 @@ var cart = {
 
         $('input[name="paymentMethod"]').off('click').on('click', function () {
             if ($(this).val() == 'NL') {
-                $('.boxContent').hide();
+                $('#bankContent').hide();
                 $('#nganluongContent').show();
             }
             else if ($(this).val() == 'ATM_ONLINE') {
-                $('.boxContent').hide();
+                $('#nganluongContent').hide();
                 $('#bankContent').show();
             }
             else {
                 $('.boxContent').hide();
             }
         });
-        $('input[type="radio"]').off('check').on('click', function () {
-            if ($(this).val() == 'NL') {
-                $('.boxContent').hide();
-                $('#nganluongContent').show();
-            }
-            else if ($(this).val() == 'ATM_ONLINE') {
-                $('.boxContent').hide();
-                $('#bankContent').show();
-            }
-            else {
-                $('.boxContent').hide();
-            }
-        });
+        //$('input[type="radio"]').off('check').on('click', function () {
+        //    if ($(this).val() == 'NL') {
+        //        $('.boxContent').hide();
+        //        $('#nganluongContent').show();
+        //    }
+        //    else if ($(this).val() == 'ATM_ONLINE') {
+        //        $('.boxContent').hide();
+        //        $('#bankContent').show();
+        //    }
+        //    else {
+        //        $('.boxContent').hide();
+        //    }
+        //});
     },
     getLoginUser: function () {
         $.ajax({
@@ -143,6 +143,7 @@ var cart = {
     },
 
     createOrder: function (teleworldHub) {
+        $('#btnCreateOrder').prop("disabled", true);
         var order = {
             CustomerName: $('#txtName').val(),
             CustomerAddress: $('#txtAddress').val(),
@@ -150,9 +151,10 @@ var cart = {
             CustomerMobile: $('#txtPhone').val(),
             CustomerMessage: $('#txtMessage').val(),
             PaymentMethod: $('input[name="paymentMethod"]:checked').val(),
-            BankCode: $('input[groupname="bankcode"]:checked').prop('id'),
+            BankCode: $('input[name="bankcode"]:checked').prop('id'),
             Status: false
         }
+
         $.ajax({
             url: '/ShoppingCart/CreateOrder',
             type: 'POST',
@@ -164,18 +166,15 @@ var cart = {
                 if (response.status) {
                     teleworldHub.server.updateDashBoard();
                     if (response.urlCheckout != undefined && response.urlCheckout != '') {
-
                         window.location.href = response.urlCheckout;
                     }
                     else {
-                        console.log('Create order ok');
                         $('#divCheckout').hide();
                         cart.deleteAll();
                         setTimeout(function () {
                             $('#cartContent').html('Order successful. We will contact to you soon');
                         }, 2000);
                     }
-
                 }
                 else {
                     $('#divMessage').show();

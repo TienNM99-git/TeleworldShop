@@ -17,5 +17,7 @@ namespace TeleworldShop.Common.ViewModels
         public DateTime CreatedDate { get; set; }
 
         public bool Status { get; set; }
+
+        public string OrderStatus { get; set; }
     }
 }

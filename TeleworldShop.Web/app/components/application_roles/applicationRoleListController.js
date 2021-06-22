@@ -55,16 +55,18 @@
             $.each($scope.selected, function (i, item) {
                 listId.push(item.Id);
             });
-            var config = {
-                params: {
-                    checkedList: JSON.stringify(listId)
+            $ngBootbox.confirm('Are you sure that you want to delete these record?').then(function () {
+                var config = {
+                    params: {
+                        checkedList: JSON.stringify(listId)
+                    }
                 }
-            }
-            apiService.del('api/applicationRole/deletemulti', config, function (result) {
-                notificationService.displaySuccess('Deleted ' + result.data + ' records.');
-                search();
-            }, function (error) {
-                notificationService.displayError('Delete failed');
+                apiService.del('api/applicationRole/deletemulti', config, function (result) {
+                    notificationService.displaySuccess('Deleted ' + result.data + ' records.');
+                    search();
+                }, function (error) {
+                    notificationService.displayError('Delete failed');
+                });
             });
         }
 
@@ -105,9 +107,9 @@
                         notificationService.displaySuccess('Delete successful.');
                         search();
                     },
-                    function () {
-                        notificationService.displayError('Delete failed.');
-                    });
+                        function () {
+                            notificationService.displayError('Delete failed.');
+                        });
                 });
         }
         function search(page) {

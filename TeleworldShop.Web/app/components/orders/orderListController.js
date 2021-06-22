@@ -8,7 +8,7 @@
         $scope.page = 0;
         $scope.pagesCount = 0;
         $scope.keyword = '';
-        
+
         $scope.getOrders = getOrders;
         $scope.search = search;
 
@@ -22,16 +22,19 @@
             $.each($scope.selected, function (i, item) {
                 listId.push(item.Id);
             });
-            var config = {
-                params: {
-                    checkedorders: JSON.stringify(listId)
+
+            $ngBootbox.confirm('Are you sure that you want to delete these record?').then(function () {
+                var config = {
+                    params: {
+                        checkedorders: JSON.stringify(listId)
+                    }
                 }
-            }
-            apiService.del('api/order/deletemulti', config, function (result) {
-                notificationService.displaySuccess('Successful delete ' + result.data + ' records !!!');
-                search();
-            }, function (error) {
-                notificationService.displayError('Delete failed');
+                apiService.del('api/order/deletemulti', config, function (result) {
+                    notificationService.displaySuccess('Successful delete ' + result.data + ' records !!!');
+                    search();
+                }, function (error) {
+                    notificationService.displayError('Delete failed');
+                });
             });
         }
 
@@ -83,7 +86,7 @@
             });
         }
         function search() {
-            getorders();
+            $scope.getOrders();
         }
         function getOrders(page) {
             page = page || 0;
