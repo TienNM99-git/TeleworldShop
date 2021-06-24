@@ -143,6 +143,13 @@ var cart = {
     },
 
     createOrder: function (teleworldHub) {
+        var bank_code = null;
+        if ($('input[name="paymentMethod"]:checked').val() == 'VISA') {
+            bank_code = 'VISA';
+        }
+        else {
+            bank_code = $('input[name="bankcode"]:checked').prop('id');
+        }
         $('#btnCreateOrder').prop("disabled", true);
         var order = {
             CustomerName: $('#txtName').val(),
@@ -151,7 +158,7 @@ var cart = {
             CustomerMobile: $('#txtPhone').val(),
             CustomerMessage: $('#txtMessage').val(),
             PaymentMethod: $('input[name="paymentMethod"]:checked').val(),
-            BankCode: $('input[name="bankcode"]:checked').prop('id'),
+            BankCode: bank_code,
             Status: false
         }
 
