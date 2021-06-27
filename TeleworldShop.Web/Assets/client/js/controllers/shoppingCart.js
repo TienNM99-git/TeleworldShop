@@ -103,7 +103,7 @@ var cart = {
                 $('#bankContent').hide();
                 $('#nganluongContent').show();
             }
-            else if ($(this).val() == 'IB_ONLINE') {
+            else if ($(this).val() == 'ATM_ONLINE') {
                 $('#nganluongContent').hide();
                 $('#bankContent').show();
             }
