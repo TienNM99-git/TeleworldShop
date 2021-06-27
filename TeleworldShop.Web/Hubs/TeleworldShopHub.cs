@@ -12,5 +12,10 @@ namespace TeleworldShop.Web.App_Start
         {
             Clients.All.UpdateDashBoard();
         }
+
+        public void UpdateOrderList()
+        {
+            Clients.All.UpdateOrderList();
+        }
     }
 }

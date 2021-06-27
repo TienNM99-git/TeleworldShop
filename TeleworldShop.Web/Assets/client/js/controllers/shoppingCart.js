@@ -103,7 +103,7 @@ var cart = {
                 $('#bankContent').hide();
                 $('#nganluongContent').show();
             }
-            else if ($(this).val() == 'ATM_ONLINE') {
+            else if ($(this).val() == 'IB_ONLINE') {
                 $('#nganluongContent').hide();
                 $('#bankContent').show();
             }
@@ -165,6 +165,7 @@ var cart = {
             success: function (response) {
                 if (response.status) {
                     teleworldHub.server.updateDashBoard();
+                    teleworldHub.server.updateOrderList();
                     if (response.urlCheckout != undefined && response.urlCheckout != '') {
                         window.location.href = response.urlCheckout;
                     }

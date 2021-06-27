@@ -17,6 +17,10 @@
 
         $scope.deleteMultiple = deleteMultiple;
 
+        $scope.$on('UpdateOrderList', function () {
+            notificationService.displaySuccess('You have new order');
+            search();
+        });
         function deleteMultiple() {
             var listId = [];
             $.each($scope.selected, function (i, item) {
