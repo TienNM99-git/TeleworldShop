@@ -42,7 +42,7 @@ namespace TeleworldShop.Web.Api
                 var model = _orderService.GetAll(keyword);
 
                 totalRow = model.Count();
-                var query = model.Where(x => x.OrderStatus != "Canceled").OrderByDescending(x=>x.CreatedDate).Skip(page * pageSize).Take(pageSize);
+                var query = model.Where(x => x.OrderStatus != "Canceled").OrderByDescending(x=>x.CreatedDate).ThenBy(x=>x.OrderStatus).ThenByDescending(x=>x.PaymentStatus).Skip(page * pageSize).Take(pageSize);
 
                 var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
@@ -134,8 +134,38 @@ namespace TeleworldShop.Web.Api
                     dbOrder.OrderStatus = "Verified";
                     _orderService.Update(dbOrder);
                     _orderService.Save();
+                    string verifyContent = "Your order with Id: " + orderViewModel.Id.ToString() + " has been verified by administrtors!! We'll soon have it delivered to you";
+                    var receiver = orderViewModel.CustomerEmail;
+                    MailHelper.SendMail(receiver, "Contact from website: Order paid successfully", verifyContent);
 
-                    string verifyContent = "Your order with Id: "+orderViewModel.Id.ToString()+ " has been verified by administrtors!! We'll soon have it delivered to you";
+                    var mapper = new Mapper(AutoMapperConfiguration.Configure());
+                    var responseData = mapper.Map<Order, OrderViewModel>(dbOrder);
+                    response = request.CreateResponse(HttpStatusCode.Created, responseData);
+                }
+
+                return response;
+            });
+        }
+        [Route("markaspaid")]
+        [HttpPut]
+        [AllowAnonymous]
+        public HttpResponseMessage MarkOrderAsPaid(HttpRequestMessage request, OrderViewModel orderViewModel)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    var dbOrder = _orderService.GetById(orderViewModel.Id);
+                    dbOrder.PaymentStatus = "Paid";
+                    _orderService.Update(dbOrder);
+                    _orderService.Save();
+
+                    string verifyContent = "Making payment order with Id: " + orderViewModel.Id.ToString() + " successfully";
                     var receiver = orderViewModel.CustomerEmail;
                     MailHelper.SendMail(receiver, "Contact from website: Order verified", verifyContent);
 

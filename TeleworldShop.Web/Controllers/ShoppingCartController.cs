@@ -85,13 +85,13 @@ namespace TeleworldShop.Web.Controllers
 
             var cart = (List<ShoppingCartViewModel>)Session[CommonConstants.SessionCart];
             List<OrderDetail> orderDetails = new List<OrderDetail>();
-            string orderContent = "<br />Ordered items: <br />";
+            string orderContent = "<br />Ordered items<br />";
             decimal totalCost = 0;
             bool isEnough = true;
             foreach (var item in cart)
             {
                 var detail = new OrderDetail();
-                orderContent += "Product name: " + item.Product.Name + " : " + "Quantity: " + item.Quantity.ToString() + "<br />";
+                orderContent += "Product name: " + item.Product.Name + " - " + "Quantity: " + item.Quantity.ToString() + "<br />";
                 detail.ProductId = item.ProductId;
                 detail.Quantity = item.Quantity;
                 detail.Price = item.Product.PromotionPrice != null ? Decimal.Parse(item.Product.PromotionPrice.ToString()) : item.Product.Price;

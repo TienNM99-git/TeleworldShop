@@ -10,6 +10,8 @@
 
         $scope.updateOrder = updateOrder;
 
+        $scope.markOrderAsPaid = markOrderAsPaid;
+
         function loadOrderDetail() {
             apiService.get('api/order/getbyid/' + $stateParams.id, null, function (result) {
                 $scope.order = result.data;
@@ -54,10 +56,20 @@
             //$scope.order.MoreImages = JSON.stringify($scope.moreImages)
             apiService.put('api/order/update', $scope.order,
                 function (result) {
-                    notificationService.displaySuccess(result.data.Name + ' verified !!!');
+                    notificationService.displaySuccess('Order Id: '+ result.data.Id + ' verified !!!');
                     $state.go('orders');
                 }, function (error) {
                     notificationService.displayError('Verified order failed');
+                });
+        }
+        function markOrderAsPaid() {
+            //$scope.order.MoreImages = JSON.stringify($scope.moreImages)
+            apiService.put('api/order/markaspaid', $scope.order,
+                function (result) {
+                    notificationService.displaySuccess('Order Id: ' + result.data.Id + ' marked as paid !!!');
+                    $state.go('orders');
+                }, function (error) {
+                    notificationService.displayError('Mark order as paid failed');
                 });
         }
         loadOrderDetail();
