@@ -15,6 +15,10 @@
             $rootScope.$broadcast('UpdateDashBoard', '');
         }
 
+        teleworldHub.client.updateOrderList = function () {
+            $rootScope.$broadcast('UpdateOrderList', '');
+        }
+
         $.connection.hub.start().done(function () {
             console.log('SignalR connection started');
         });

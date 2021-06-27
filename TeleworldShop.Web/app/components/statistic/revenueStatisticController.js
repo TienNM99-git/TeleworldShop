@@ -26,7 +26,7 @@
         $scope.inventorychartLabels = [];
         $scope.inventorySeries = 'Remain Quantity';
         $scope.$on('UpdateDashBoard', function () {
-            notificationService.displaySuccess('Can not load data');
+            notificationService.displaySuccess('Load data successfully !');
             getInventoryStatistic();
             getSellStatistic();
             getOrderStatistic();
@@ -59,7 +59,7 @@
                 $scope.chartdata = chartData;
                 $scope.labels = labels;
             }, function (response) {
-                notificationService.displaySuccess('Load data successfully !');
+                notificationService.displaySuccess('Can not load data');
             });
         }
         function getOrderStatistic() {
@@ -143,7 +143,7 @@
                 $scope.inventorychartData = inventoryChartData;
                 $scope.inventorychartLabels = inventoryChartLabels;
             }, function (response) {
-                    notificationService.displaySuccess('Load data successfully !');
+                notificationService.displaySuccess('Can not load data');
             });
         }
         getInventoryStatistic();

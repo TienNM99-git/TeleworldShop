@@ -172,6 +172,7 @@ var cart = {
             success: function (response) {
                 if (response.status) {
                     teleworldHub.server.updateDashBoard();
+                    teleworldHub.server.updateOrderList();
                     if (response.urlCheckout != undefined && response.urlCheckout != '') {
                         window.location.href = response.urlCheckout;
                     }
