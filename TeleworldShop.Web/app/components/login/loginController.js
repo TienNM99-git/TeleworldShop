@@ -9,7 +9,7 @@
 
             $scope.loginSubmit = function () {
                 loginService.login($scope.loginData.userName, $scope.loginData.password).then(function (response) {
-                    if (response != null && response.error != undefined) {
+                    if (response != null && response.data.error == "invalid_grant") {
                         notificationService.displayError("Access denied. Please check your username or password");
                         stateService.go('home');
                     }
