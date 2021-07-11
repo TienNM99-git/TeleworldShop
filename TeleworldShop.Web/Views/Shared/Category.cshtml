@@ -23,10 +23,10 @@
     <div class="top-nav rsidebar span_1_of_left">
         <h3 class="cate">CATEGORIES</h3>
         <ul class="menu">
-            @foreach (var category in Model.Where(x => x.ParentId == null))
+            @foreach (var category in Model.Where(x => x.ParentId == null && x.Status == true))
             {
                 var url = "/" + category.Alias + ".pc-" + category.Id + ".html";
-                var childCategories = Model.Where(x => x.ParentId == category.Id);
+                var childCategories = Model.Where(x => x.ParentId == category.Id && x.Status == true);
                 <li class="item1">
 
                     @if (childCategories.Count() > 0)

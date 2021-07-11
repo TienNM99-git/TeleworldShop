@@ -25,29 +25,31 @@
 
 @section footerJS{
     <script>
-
-        $(".cancel-order").off('click').on('click', function (e) {
-            e.preventDefault();
-            var orderId = parseInt($(this).data('id'));
-            $('#myModal').modal('show');
-            $("#handleConfirmCancel").off('click').on('click', function (e) {
+        var teleworldHub = $.connection.teleworldHub;
+        $.connection.hub.start().done(function () {
+            console.log('SignalR connection started');
+            $(".cancel-order").off('click').on('click', function (e) {
                 e.preventDefault();
-                $.ajax({
-                    url: '/User/CancelOrder',
-                    data: {
-                        orderId: orderId
-                    },
-                    type: 'POST',
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.status) {
-                            $('#myModal').modal('hide');
-                            window.location.reload();
+                var orderId = parseInt($(this).data('id'));
+                $('#myModal').modal('show');
+                $("#handleConfirmCancel").off('click').on('click', function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: '/User/CancelOrder',
+                        data: { orderId: orderId },
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.status) {
+                                teleworldHub.server.updateDashBoard();
+                                $('#myModal').modal('hide');
+                                window.location.reload();
+                            }
+                            else {
+                                $('#myModal').modal('hide');
+                            }
                         }
-                        else {
-                            $('#myModal').modal('hide');
-                        }
-                    }
+                    });
                 });
             });
         });
