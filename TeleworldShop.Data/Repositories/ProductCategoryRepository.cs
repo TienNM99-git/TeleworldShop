@@ -40,7 +40,7 @@ namespace TeleworldShop.Data.Repositories
         public IEnumerable<ProductCategory> GetListAvailableCategory()
         {
             var query = from pc in DbContext.ProductCategories
-                        where 
+                        where pc.Status == true &&
                         !(from pd in DbContext.PromotionDetails
                           join promotion in DbContext.Promotions
                           on pd.PromotionId equals promotion.Id
