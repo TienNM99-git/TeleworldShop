@@ -38,16 +38,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </main>
 
     @{ Html.RenderAction("Footer", "Home");}
-    <!---->
-    @*<script src="~/Assets/client/js/jquery.min.js"></script>
-        <script src="~/Assets/admin/libs/jquery-ui/jquery-ui.min.js"></script>
-        <script src="~/Assets/admin/libs/mustache/mustache.js"></script>
-        <script src="~/Assets/admin/libs/jquery-validation/jquery.validate.js"></script>
-        <script src="~/Assets/admin/libs/numeral/numeral.js"></script>
-        <script src="~/Assets/client/js/common.js"></script>
-        <script src="~/Assets/client/js/controllers/shoppingCart.js"></script>*@
-    <!--script-->
     @Scripts.Render("~/js/jquery")
+    <script src="~/Assets/admin/libs/signalR/jquery.signalR-2.2.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
     @Scripts.Render("~/js/plugins")
     @RenderSection("footerJS", required: false)
 </body>

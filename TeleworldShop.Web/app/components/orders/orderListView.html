@@ -72,7 +72,11 @@
                                 <td>{{item.CreatedDate | date:'dd/MM/yyyy hh:mm:ss'}}</td>
                                 <td>{{item.PaymentMethod}}</td>
                                 <td>
-                                    <span ng-class="{'badge bg-danger':item.PaymentStatus=='Unpaid','badge bg-success':item.PaymentStatus=='Paid'}">
+                                    <span ng-class="{
+                                          'badge bg-danger':item.PaymentStatus=='Unpaid',
+                                          'badge bg-success':item.PaymentStatus=='Paid',
+                                          'badge bg-primary':item.PaymentStatus=='Processing',
+                                          }">
                                         {{item.PaymentStatus}}
                                     </span>
                                 </td>

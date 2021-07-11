@@ -18,7 +18,6 @@ using TeleworldShop.Web.Models;
 namespace TeleworldShop.Web.Api
 {
     [RoutePrefix("api/promotion")]
-    [Authorize(Roles = "Admin")]
     public class PromotionController : ApiControllerBase
     {
 
@@ -34,9 +33,9 @@ namespace TeleworldShop.Web.Api
         }
         #endregion
 
+        [Authorize(Roles = "AddPromotion")]
         [Route("create")]
         [HttpPost]
-        [AllowAnonymous]
         public HttpResponseMessage Create(HttpRequestMessage request, PromotionViewModel promotionVm)
         {
             return CreateHttpResponse(request, () =>
@@ -99,6 +98,7 @@ namespace TeleworldShop.Web.Api
             });
         }
 
+        [Authorize(Roles = "ViewPromotion")]
         [Route("getall")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request, string keyword, int page, int pageSize = 20)
@@ -128,6 +128,7 @@ namespace TeleworldShop.Web.Api
             });
         }
 
+        [Authorize(Roles = "ViewPromotion")]
         [Route("detail/{id:int}")]
         [HttpGet]
         public HttpResponseMessage Details(HttpRequestMessage request, int id)
@@ -151,6 +152,7 @@ namespace TeleworldShop.Web.Api
             return request.CreateResponse(HttpStatusCode.OK, promotionVm);
         }
 
+        [Authorize(Roles = "UpdatePromotion")]
         [HttpPut]
         [Route("update")]
         public HttpResponseMessage Update(HttpRequestMessage request, PromotionViewModel promotionVm)
@@ -200,6 +202,7 @@ namespace TeleworldShop.Web.Api
             }
         }
 
+        [Authorize(Roles = "DeletePromotion")]
         [Route("delete")]
         [HttpDelete]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
@@ -231,6 +234,7 @@ namespace TeleworldShop.Web.Api
             });
         }
 
+        [Authorize(Roles = "DeletePromotion")]
         [Route("deletemulti")]
         [HttpDelete]
         public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedPromotions)
