@@ -103,7 +103,7 @@ var cart = {
                 $('#bankContent').hide();
                 $('#nganluongContent').show();
             }
-            else if ($(this).val() == 'ATM_ONLINE') {
+            else if ($(this).val() == 'ATM_ONLINE' || $(this).val() == 'IB_ONLINE') {
                 $('#nganluongContent').hide();
                 $('#bankContent').show();
             }
@@ -111,19 +111,6 @@ var cart = {
                 $('.boxContent').hide();
             }
         });
-        //$('input[type="radio"]').off('check').on('click', function () {
-        //    if ($(this).val() == 'NL') {
-        //        $('.boxContent').hide();
-        //        $('#nganluongContent').show();
-        //    }
-        //    else if ($(this).val() == 'ATM_ONLINE') {
-        //        $('.boxContent').hide();
-        //        $('#bankContent').show();
-        //    }
-        //    else {
-        //        $('.boxContent').hide();
-        //    }
-        //});
     },
     getLoginUser: function () {
         $.ajax({
