@@ -16,7 +16,6 @@ namespace TeleworldShop.Web.Controllers
     {
         private ApplicationUserManager _userManager;
         IOrderService _orderService;
-        // GET: User
 
         public UserController(ApplicationUserManager userManager, IOrderService orderService)
         {
@@ -51,6 +50,9 @@ namespace TeleworldShop.Web.Controllers
                 dbOrder.OrderStatus = "Canceled";
                 _orderService.Update(dbOrder);
                 _orderService.Save();
+
+                // Return product quantity
+                _orderService.RollBackOrder(orderId);
 
                 return Json(new
                 {
