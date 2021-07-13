@@ -25,7 +25,7 @@ namespace TeleworldShop.Data.Repositories
             var query = from p in DbContext.Products
                         join pt in DbContext.ProductTags
                         on p.Id equals pt.ProductId
-                        where pt.TagId == tagId
+                        where pt.TagId == tagId && p.Status == true
                         select p;
             totalRow = query.Count();
             return query.OrderByDescending(x=>x.CreatedDate).Skip((page - 1) * pageSize).Take(pageSize);

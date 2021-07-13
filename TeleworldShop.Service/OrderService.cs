@@ -17,6 +17,7 @@ namespace TeleworldShop.Service
         void Save();
         IEnumerable<Order> GetAll();
         void Update(Order product);
+        void RollBackOrder(int orderId);
         Order Delete(int id);
         IEnumerable<Order> GetAll(string keyword);
         Order GetById(int id);
@@ -129,6 +130,20 @@ namespace TeleworldShop.Service
                 orderedDetails.ElementAt(i).Price = detailList.ElementAt(i).Price;
             }
             return orderedDetails;
+        }
+
+        public void RollBackOrder(int orderId)
+        {
+            List<OrderDetail> orderDetails = new List<OrderDetail>();
+            orderDetails = _orderDetailRepository.GetMulti(x => x.OrderId == orderId).ToList();
+            foreach (OrderDetail orderDetail in orderDetails)
+            {
+                Product product = new Product();
+                product = _productRepository.GetSingleById(orderDetail.ProductId);
+                product.Quantity += orderDetail.Quantity;
+                _productRepository.Update(product);
+                _unitOfWork.Commit();
+            }
         }
 
         public List<PurchaseHistoryViewModel> GetOrdersByUserId(string userId)
