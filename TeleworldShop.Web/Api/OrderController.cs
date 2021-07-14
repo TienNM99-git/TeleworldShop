@@ -136,7 +136,7 @@ namespace TeleworldShop.Web.Api
                     _orderService.Save();
                     string verifyContent = "Your order with Id: " + orderViewModel.Id.ToString() + " has been verified by administrtors!! We'll soon have it delivered to you";
                     var receiver = orderViewModel.CustomerEmail;
-                    MailHelper.SendMail(receiver, "Contact from website: Order paid successfully", verifyContent);
+                    MailHelper.SendMail(receiver, "Contact from website: Order verified successfully", verifyContent);
 
                     var mapper = new Mapper(AutoMapperConfiguration.Configure());
                     var responseData = mapper.Map<Order, OrderViewModel>(dbOrder);
@@ -167,7 +167,7 @@ namespace TeleworldShop.Web.Api
 
                     string verifyContent = "Making payment order with Id: " + orderViewModel.Id.ToString() + " successfully";
                     var receiver = orderViewModel.CustomerEmail;
-                    MailHelper.SendMail(receiver, "Contact from website: Order verified", verifyContent);
+                    MailHelper.SendMail(receiver, "Contact from website: Order paid successfully", verifyContent);
 
                     var mapper = new Mapper(AutoMapperConfiguration.Configure());
                     var responseData = mapper.Map<Order, OrderViewModel>(dbOrder);
