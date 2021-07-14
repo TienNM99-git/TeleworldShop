@@ -4,17 +4,30 @@
     revenueStatisticController.$inject = ['$scope', 'apiService', 'notificationService', '$filter', '$rootScope'];
 
     function revenueStatisticController($scope, apiService, notificationService, $filter, $rootScope) {
+
         $scope.colors = ['#45b7cd', '#ff6384', '#ff8e72'];
         $scope.tabledata = []; //for revenues statistic
         $scope.labels = [];
         $scope.series = ['Revenues', 'Benefit'];
         $scope.userCount = 0;
         $scope.chartdata = [];
+        $scope.revenueToday = revenueToday;
+        $scope.revenueLastWeek = revenueLastWeek;
+        $scope.revenueThisWeek = revenueThisWeek;
+        $scope.revenueLastMonth = revenueLastMonth;
+        $scope.revenueThisMonth = revenueThisMonth;
+        $scope.revenueThisYear = revenueThisYear;
 
         $scope.tablechartData = []; //for order statistic
         $scope.linechartData = [];
         $scope.linechartLabels = [];
         $scope.linechartSerie = 'Total Order';
+        $scope.orderToday = orderToday;
+        $scope.orderLastWeek = orderLastWeek;
+        $scope.orderThisWeek = orderThisWeek;
+        $scope.orderLastMonth = orderLastMonth;
+        $scope.orderThisMonth = orderThisMonth;
+        $scope.orderThisYear = orderThisYear;
 
         $scope.sellData = [];      //for sell statistic
         $scope.sellchartData = [];
@@ -27,85 +40,165 @@
         $scope.inventorySeries = 'Remain Quantity';
         $scope.$on('UpdateDashBoard', function () {
             notificationService.displaySuccess('Load data successfully !');
+            revenueToday();
+            orderToday();
             getInventoryStatistic();
             getSellStatistic();
-            getOrderStatistic();
-            getStatistic();
             $rootScope.$apply();
         })
-        //$scope.datasetOverride = [];
-        function getStatistic() {
-            var config = {
-                param: {
-                    //mm/dd/yyyy
-                    fromDate: '01/01/2021',
-                    toDate: '01/01/2022'
-                }
-            }
-            apiService.get('api/statistic/getrevenue?fromDate=' + config.param.fromDate + "&toDate=" + config.param.toDate, null, function (response) {
-                $scope.tabledata = response.data;
-                var labels = [];
-                var chartData = [];
-                var revenues = [];
-                var benefits = [];
-                $.each(response.data, function (i, item) {
-                    labels.push($filter('date')(item.Date, 'MM/yyyy'));
-                    revenues.push(item.Revenues);
-                    benefits.push(item.Benefit);
-                });
-                chartData.push(revenues);
-                chartData.push(benefits);
 
-                $scope.chartdata = chartData;
-                $scope.labels = labels;
-            }, function (response) {
-                notificationService.displaySuccess('Can not load data');
-            });
-        }
-        function getOrderStatistic() {
-            var config = {
-                param: {
-                    //mm/dd/yyyy
-                    fromDate: '01/01/2021',
-                    toDate: '01/01/2022'
-                }
+        // Revenue statistic
+        function revenueToday() {
+            var date = new Date();
+            const dateRange = {
+                fromDate: moment(date).format("MM/DD/YYYY"),
+                toDate: moment(date.setDate(date.getDate() + 1)).format("MM/DD/YYYY")
             }
-            apiService.get('api/statistic/getorderstatistics?fromDate=' + config.param.fromDate + "&toDate=" + config.param.toDate, null, function (response) {
-                $scope.tablechartData = response.data;
-                var lineChartLabels = [];
-                var lineChartData = [];
-                var orderCount = [];
-                $.each(response.data, function (i, item) {
-                    lineChartLabels.push(item.Date);
-                    orderCount.push(item.OrderCount);
-                });
-                lineChartData.push(orderCount);
-
-                $scope.linechartData = lineChartData;
-                $scope.linechartLabels = lineChartLabels;
-            }, function (response) {
-                notificationService.displayError('Can not load data');
-            });
+            getRevenueStatistic(dateRange)
         }
-        //function getUserStatistic() {
-        //    var config = {
-        //        param: {
-        //            //mm/dd/yyyy
-        //            fromDate: '01/01/2021',
-        //            toDate: '01/01/2022'
-        //        }
-        //    }
-        //    apiService.get('api/statistic/getuserstatistics?fromDate=' + config.param.fromDate + "&toDate=" + config.param.toDate, null, function (response) {
-        //        $scope.orderCount = response.data;
-        //    }, function (response) {
-        //        notificationService.displayError('Can not load data');
-        //    });
-        //}
-        //getUserStatistic();
+
+        function revenueLastWeek() {
+            const dateRange = {
+                fromDate: moment().startOf('week').subtract(7, 'days').format("MM/DD/YYYY"),
+                toDate: moment().endOf('week').subtract(7, 'days').format("MM/DD/YYYY"),
+            }
+            getRevenueStatistic(dateRange)
+        }
+
+        function revenueThisWeek() {
+            const dateRange = {
+                fromDate: moment().startOf('week').format("MM/DD/YYYY"),
+                toDate: moment().endOf('week').format("MM/DD/YYYY"),
+            }
+            getRevenueStatistic(dateRange)
+        }
+
+        function revenueLastMonth() {
+            const dateRange = {
+                fromDate: moment().startOf('month').subtract(1, 'months').format("MM/DD/YYYY"),
+                toDate: moment().endOf('month').subtract(1, 'months').format("MM/DD/YYYY"),
+            }
+            getRevenueStatistic(dateRange)
+        }
+
+        function revenueThisMonth() {
+            const dateRange = {
+                fromDate: moment().startOf('month').format("MM/DD/YYYY"),
+                toDate: moment().endOf('month').format("MM/DD/YYYY"),
+            }
+            getRevenueStatistic(dateRange)
+        }
+
+        function revenueThisYear() {
+            const dateRange = {
+                fromDate: moment().startOf('year').format("MM/DD/YYYY"),
+                toDate: moment().endOf('year').format("MM/DD/YYYY"),
+            }
+            console.log(dateRange);
+            getRevenueStatistic(dateRange)
+        }
+
+        function getRevenueStatistic(dateRange) {
+            apiService.get('api/statistic/getrevenue?fromDate=' + dateRange.fromDate
+                + "&toDate=" + dateRange.toDate,
+                null,
+                function (response) {
+                    $scope.tabledata = response.data;
+                    var labels = [];
+                    var chartData = [];
+                    var revenues = [];
+                    var benefits = [];
+                    $.each(response.data, function (i, item) {
+                        labels.push(item.Date);
+                        revenues.push(item.Revenues);
+                        benefits.push(item.Benefit);
+                    });
+                    chartData.push(revenues);
+                    chartData.push(benefits);
+
+                    $scope.chartdata = chartData;
+                    $scope.labels = labels;
+                }, function (response) {
+                    notificationService.displaySuccess('Can not load data');
+                });
+        }
+
+        // Order statistic
+        function orderToday() {
+            var date = new Date();
+            const dateRange = {
+                fromDate: moment(date).format("MM/DD/YYYY"),
+                toDate: moment(date.setDate(date.getDate() + 1)).format("MM/DD/YYYY")
+            }
+            getOrderStatistic(dateRange)
+        }
+
+        function orderLastWeek() {
+            const dateRange = {
+                fromDate: moment().startOf('week').subtract(7, 'days').format("MM/DD/YYYY"),
+                toDate: moment().endOf('week').subtract(7, 'days').format("MM/DD/YYYY"),
+            }
+            getOrderStatistic(dateRange)
+        }
+
+        function orderThisWeek() {
+            const dateRange = {
+                fromDate: moment().startOf('week').format("MM/DD/YYYY"),
+                toDate: moment().endOf('week').format("MM/DD/YYYY"),
+            }
+            getOrderStatistic(dateRange)
+        }
+
+        function orderLastMonth() {
+            const dateRange = {
+                fromDate: moment().startOf('month').subtract(1, 'months').format("MM/DD/YYYY"),
+                toDate: moment().endOf('month').subtract(1, 'months').format("MM/DD/YYYY"),
+            }
+            getOrderStatistic(dateRange)
+        }
+
+        function orderThisMonth() {
+            const dateRange = {
+                fromDate: moment().startOf('month').format("MM/DD/YYYY"),
+                toDate: moment().endOf('month').format("MM/DD/YYYY"),
+            }
+            getOrderStatistic(dateRange)
+        }
+
+        function orderThisYear() {
+            const dateRange = {
+                fromDate: moment().startOf('year').format("MM/DD/YYYY"),
+                toDate: moment().endOf('year').format("MM/DD/YYYY"),
+            }
+            getOrderStatistic(dateRange)
+        }
+
+        function getOrderStatistic(dateRange) {
+            apiService.get('api/statistic/getorderstatistics?fromDate=' + dateRange.fromDate
+                + "&toDate=" + dateRange.toDate,
+                null,
+                function (response) {
+                    $scope.tablechartData = response.data;
+                    console.log(response.data);
+                    var lineChartLabels = [];
+                    var lineChartData = [];
+                    var orderCount = [];
+                    $.each(response.data, function (i, item) {
+                        lineChartLabels.push(item.Date);
+                        orderCount.push(item.OrderCount);
+                    });
+                    lineChartData.push(orderCount);
+
+                    $scope.linechartData = lineChartData;
+                    $scope.linechartLabels = lineChartLabels;
+                }, function (response) {
+                    notificationService.displayError('Can not load data');
+                });
+        }
+
         function getSellStatistic() {
             var config = {
                 param: {
-                    //mm/dd/yyyy
                     fromDate: '01/01/2021',
                     toDate: '01/01/2022'
                 }
@@ -127,7 +220,6 @@
         function getInventoryStatistic() {
             var config = {
                 param: {
-                    //mm/dd/yyyy
                     fromDate: '01/01/2021',
                     toDate: '01/01/2022'
                 }
@@ -146,10 +238,12 @@
                 notificationService.displaySuccess('Can not load data');
             });
         }
+
+        revenueToday();
+        orderToday();
         getInventoryStatistic();
         getSellStatistic();
-        getOrderStatistic();
-        getStatistic();
+       
     }
 
 })(angular.module('teleworldshop.statistics'));
