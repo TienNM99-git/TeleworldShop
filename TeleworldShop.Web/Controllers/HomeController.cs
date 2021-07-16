@@ -33,8 +33,8 @@ namespace TeleworldShop.Web.Controllers
             var homeViewModel = new HomeViewModel();
             homeViewModel.Slides = slideView;
 
-            var lastestProductModel = _productService.GetLastest(3);
-            var topSaleProductModel = _productService.GetHotProduct(3);
+            var lastestProductModel = _productService.GetLastest(10);
+            var topSaleProductModel = _productService.GetHotProduct(10);
             var lastestProductViewModel = mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(lastestProductModel);
             var topSaleProductViewModel = mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(topSaleProductModel);
             homeViewModel.LastestProducts = lastestProductViewModel;

@@ -108,8 +108,8 @@ namespace TeleworldShop.Web.Api
                 int totalRow = 0;
                 var model = _promotionService.GetAll(keyword);
 
-                totalRow = model.Count();
                 var query = model.Where(x => x.Status == true).OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
+                totalRow = query.Count();
 
                 var mapper = new Mapper(AutoMapperConfiguration.Configure());
 

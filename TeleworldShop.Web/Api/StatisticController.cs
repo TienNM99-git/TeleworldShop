@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TeleworldShop.Service;
@@ -13,7 +10,8 @@ namespace TeleworldShop.Web.Api
     [RoutePrefix("api/statistic")]
     public class StatisticController : ApiControllerBase
     {
-        IStatisticService _statisticService;
+        private IStatisticService _statisticService;
+
         public StatisticController(IErrorService errorService, IStatisticService statisticService) : base(errorService)
         {
             _statisticService = statisticService;
@@ -23,7 +21,6 @@ namespace TeleworldShop.Web.Api
         [HttpGet]
         public HttpResponseMessage GetRevenueStatistic(HttpRequestMessage request, string fromDate, string toDate)
         {
-
             return CreateHttpResponse(request, () =>
             {
                 var model = _statisticService.GetRevenueStatistic(fromDate, toDate);
@@ -36,7 +33,6 @@ namespace TeleworldShop.Web.Api
         [HttpGet]
         public HttpResponseMessage GetOrderStatistic(HttpRequestMessage request, string fromDate, string toDate)
         {
-
             return CreateHttpResponse(request, () =>
             {
                 var model = _statisticService.GetOrderStatistic(fromDate, toDate);
@@ -49,7 +45,6 @@ namespace TeleworldShop.Web.Api
         [HttpGet]
         public HttpResponseMessage GetSellStatistic(HttpRequestMessage request, string fromDate, string toDate)
         {
-
             return CreateHttpResponse(request, () =>
             {
                 var model = _statisticService.GetSellStatistic(fromDate, toDate);
@@ -57,11 +52,11 @@ namespace TeleworldShop.Web.Api
                 return response;
             });
         }
+
         [Route("getinventorystatistics")]
         [HttpGet]
         public HttpResponseMessage GetInventoryStatistic(HttpRequestMessage request, string fromDate, string toDate)
         {
-
             return CreateHttpResponse(request, () =>
             {
                 var model = _statisticService.GetInventoryStatistic(fromDate, toDate);

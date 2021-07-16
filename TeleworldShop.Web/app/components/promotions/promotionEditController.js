@@ -33,7 +33,6 @@
         function loadDetail() {
             apiService.get('/api/promotion/detail/' + $stateParams.id, null,
                 function (result) {
-                    console.log(result.data);
                     $scope.promotion = result.data;
                     $scope.promotion.Categories.forEach(x => $scope.categories.unshift(x));
                     $scope.promotion.PromotionPrice = result.data.PromotionPrice;

@@ -109,7 +109,7 @@ namespace TeleworldShop.Web.Controllers
         }
         public JsonResult GetListProductByName(string keyword)
         {
-            var model = _productService.GetListProductByName(keyword);
+            var model = _productService.GetListProductByName(keyword, 5);
 
             //var mapper = new Mapper(AutoMapperConfiguration.Configure());
 
