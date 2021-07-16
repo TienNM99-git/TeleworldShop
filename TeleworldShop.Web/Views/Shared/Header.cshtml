@@ -2,14 +2,15 @@
 @{
     var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
 }
-    <div class="header">
-        <div class="top-header">
+<div class="header">
+    <div class="header--fixed">
+        <div class="header__top">
             <div class="container">
                 <div class="top-header-left">
                     @*<ul class="support">
-                        <li class="van"><a href="#"><label> </label></a></li>
-                        <li><a href="#">Free shipping <span class="live">on order over 500</span></a></li>
-                    </ul>*@
+                            <li class="van"><a href="#"><label> </label></a></li>
+                            <li><a href="#">Free shipping <span class="live">on order over 500</span></a></li>
+                        </ul>*@
                     <ul class="support">
                         <li><a href="/page/introduction.html"><label> </label></a></li>
                         <li><a href="/page/introduction.html">Introduction</a></li>
@@ -43,55 +44,90 @@
                 <div class="clearfix"> </div>
             </div>
         </div>
-        <div class="bottom-header">
-            <div class="container">
-                <div class="header-bottom-left">
-                    <div class="logo">
-                        <a href="/"><img width="310px" height="100px" src="~/Assets/client/images/pinterest_board_photo.png" alt=" " /></a>
-                    </div>
-                    <div class="search">
-                        <form action="/search.html" method="get">
-                            <input type="text" id="txtKeyword" placeholder="Enter keywords here..." name="keyword" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
-                            <input type="submit" value="SEARCH" id="btnSearch">
-                        </form>
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-                <div class="header-bottom-right">
-                    @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { @id = "frmLogout" }))
-                    {
-                        if (Request.IsAuthenticated)
-                        {
-                            @Html.AntiForgeryToken()
-                            <ul class="login">
-                                <li><a href="/info.html"><span> </span>WELCOME: @User.Identity.GetUserName()</a></li> |
-                                <li><a href="#" id="btnLogout">LOGOUT</a></li>
-                            </ul>
-                        }
-                        else
-                        {
-                            <ul class="login">
-                                <li><a href="/login.html"><span> </span>LOGIN</a></li> |
-                                <li><a href="/register.html">REGISTER</a></li>
-                            </ul>
-                        }
-                    }
-                    <div class="cart">
-                        <a href="/cart.html">
-                            <span class="cart-icon">
-                                <span class="jJyMq">0</span>
-                            </span>
-
-                            <span class="cart-text">CART</span>
-
+        <div class="header__bottom">
+            <div style="max-width:1280px" class="container header__bottom-content-section">
+                <div class="row">
+                    <div class="header-bottom-left">
+                        <a href="/">
+                            <img src="~/Assets/client/images/pinterest_board_photo.png" alt="Logo" />
                         </a>
                     </div>
-                    <div class="clearfix"> </div>
+                    <div class="header-bottom-right">
+                        <div class="pd5 fl1">
+                            <div id="search">
+                                <div class="search">
+                                    <form action="/search.html" method="get">
+                                        <input type="text" id="txtKeyword" placeholder="Enter keywords here..." name="keyword" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
+                                        <button type="submit" value="SEARCH" id="btnSearch" class="btn btn-link">
+                                            <span class="fa fa-search" aria-hidden="true"></span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fl1">
+                            <div class="right-top-block">
+                                @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { @id = "frmLogout" }))
+                                {
+                                    if (Request.IsAuthenticated)
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <a href="/info.html" class="header-top-item">
+                                            <span class="fa fa-user" aria-hidden="true"></span>
+                                            <div class="header-top-item__description">
+                                                <div class="header-top-item__text">
+                                                    @User.Identity.GetUserName()
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#" id="btnLogout" class="header-top-item">
+                                            <span class="fa fa-sign-out" aria-hidden="true"></span>
+                                            <div class="header-top-item__description">
+                                                <div class="header-top-item__text">
+                                                    Log out
+                                                </div>
+                                            </div>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/login.html" class="header-top-item">
+                                            <span class="fa fa-sign-in" aria-hidden="true"></span>
+                                            <div class="header-top-item__description">
+                                                <div class="header-top-item__text">
+                                                    Log in
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="/register.html" class="header-top-item">
+                                            <span class="fa fa-check-circle" aria-hidden="true"></span>
+                                            <div class="header-top-item__description">
+                                                <div class="header-top-item__text">
+                                                    Register
+                                                </div>
+                                            </div>
+                                        </a>
+                                    }
+                                    <a href="/cart.html" class="header-top-item">
+                                        <span class="fa fa-shopping-cart cart__icon" aria-hidden="true">
+                                            <span class="jJyMq">0</span>
+                                        </span>
+                                        <div class="header-top-item__description">
+                                            <div class="header-top-item__text">
+                                                Cart
+                                            </div>
+                                        </div>
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="clearfix"> </div>
             </div>
         </div>
-        <div id="search-result" style="display:block">
-
-        </div>
+        @{ Html.RenderAction("Category", "Home");}
     </div>
+    <div id="search-result" style="display:block">
+
+    </div>
+</div>

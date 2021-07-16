@@ -1,9 +1,9 @@
 ﻿(function (app) {
     app.controller('revenueStatisticController', revenueStatisticController);
 
-    revenueStatisticController.$inject = ['$scope', 'apiService', 'notificationService', '$filter', '$rootScope'];
+    revenueStatisticController.$inject = ['$scope', '$http', 'apiService', 'notificationService', '$filter', '$rootScope'];
 
-    function revenueStatisticController($scope, apiService, notificationService, $filter, $rootScope) {
+    function revenueStatisticController($scope, $http, apiService, notificationService, $filter, $rootScope) {
 
         $scope.colors = ['#45b7cd', '#ff6384', '#ff8e72'];
         $scope.tabledata = []; //for revenues statistic
@@ -22,6 +22,7 @@
         $scope.linechartData = [];
         $scope.linechartLabels = [];
         $scope.linechartSerie = 'Total Order';
+        $scope.orderCount = 0;
         $scope.orderToday = orderToday;
         $scope.orderLastWeek = orderLastWeek;
         $scope.orderThisWeek = orderThisWeek;
@@ -40,6 +41,7 @@
         $scope.inventorySeries = 'Remain Quantity';
         $scope.$on('UpdateDashBoard', function () {
             notificationService.displaySuccess('Load data successfully !');
+            getNumberOfOrder();
             revenueToday();
             orderToday();
             getInventoryStatistic();
@@ -94,7 +96,6 @@
                 fromDate: moment().startOf('year').format("MM/DD/YYYY"),
                 toDate: moment().endOf('year').format("MM/DD/YYYY"),
             }
-            console.log(dateRange);
             getRevenueStatistic(dateRange)
         }
 
@@ -124,8 +125,29 @@
         }
 
         // Order statistic
+        function getNumberOfOrder() {
+            const date = new Date();
+            const dateRange = {
+                fromDate: moment(date).format("MM/DD/YYYY"),
+                toDate: moment(date.setDate(date.getDate() + 1)).format("MM/DD/YYYY")
+            }
+            apiService.get('api/statistic/getorderstatistics?fromDate=' + dateRange.fromDate
+                + "&toDate=" + dateRange.toDate, null,
+                function (response) {
+                    console.log(response);
+                    $.each(response.data, function (i, item) {
+                        $scope.orderCount += item.OrderCount;
+                    });
+                    console.log($scope.orderCount)
+                },
+                function () {
+                    notificationService.displayError('Can not load data');
+                }
+            );
+        }
+
         function orderToday() {
-            var date = new Date();
+            const date = new Date();
             const dateRange = {
                 fromDate: moment(date).format("MM/DD/YYYY"),
                 toDate: moment(date.setDate(date.getDate() + 1)).format("MM/DD/YYYY")
@@ -179,7 +201,6 @@
                 null,
                 function (response) {
                     $scope.tablechartData = response.data;
-                    console.log(response.data);
                     var lineChartLabels = [];
                     var lineChartData = [];
                     var orderCount = [];
@@ -239,11 +260,11 @@
             });
         }
 
-        revenueToday();
-        orderToday();
+        getNumberOfOrder();
+        revenueThisYear();
+        orderThisYear();
         getInventoryStatistic();
         getSellStatistic();
-       
     }
 
 })(angular.module('teleworldshop.statistics'));

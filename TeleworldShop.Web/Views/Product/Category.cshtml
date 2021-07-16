@@ -1,5 +1,4 @@
 ﻿@model TeleworldShop.Web.Infrastructure.Core.PaginationSet<TeleworldShop.Web.Models.ProductViewModel>
-
 @{
     var category = (TeleworldShop.Web.Models.ProductCategoryViewModel)ViewBag.Category;
     var pageIndex = Model.Page;
@@ -7,9 +6,8 @@
     ViewBag.MetaKeyword = pageIndex == 1 ? category.MetaKeyword : category.MetaKeyword + " - Page " + pageIndex;
     ViewBag.MetaDescription = pageIndex == 1 ? category.MetaDescription : category.MetaDescription + " - Page " + pageIndex;
     Layout = "~/Views/Shared/Layouts.cshtml";
-
 }
-<div class="women-product">
+<div style="margin-top:180px" class="women-product">
     <div class="w_content">
         <div class="women">
             <a href="/@(category.Alias).pc-@(category.Id).html"><h4>@category.Name - <span>@Model.TotalCount items</span> </h4></a>
@@ -32,39 +30,56 @@
             @foreach (var product in Model.Items)
             {
                 var url = "/" + product.Alias + ".p-" + product.Id + ".html";
-            <div class="product-grid">
-                <div class="content_box">
-                    <a href="@url">
-                        <div class="left-grid-view grid-view-left">
-                            <img src="@product.Image" class="img-responsive watch-right product__image" alt="@product.Name" />
-                            <div class="mask">
-                                <div class="info">View</div>
+                <div class="col-sm-4 col-xs-12 padding-none col-fix20">
+                    <div class="product-row">
+                        <a href="@url"></a>
+                        <div class="product-row-img">
+                            <a href="@url">
+                                <img class="product-row-thumbnail" src="@product.Image" alt="@product.Name" />
+                            </a>
+                            <div class="product-row-price-hover">
+                                <a href="@url">
+                                    <div class="product-row-note pull-left">
+                                        Click to view detail
+                                    </div>
+                                </a>
+                                <a class="product-row-btnbuy pull-right btnAddToCart" data-id="@product.Id" href="#">
+                                    Add to cart
+                                </a>
                             </div>
                         </div>
-                    </a>
+                        <h2 class="product-row-name">@product.Name</h2>
+                        <div class="product-row-info">
+                            <p>@product.Description</p>
+                            <div class="product-row-price pull-left">
+                                @if (product.PromotionPrice.HasValue)
+                                {
+                                    <del>@product.PromotionPrice.Value.ToString("N0")₫</del>
+                                    <br />
+                                    <span class="product-row-sale">
+                                        @(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N0") + "₫")
+                                    </span>
+                                }
+                                else
+                                {
+                                    <br />
+                                    <span class="product-row-sale">
+                                        @(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N0") + "₫")
+                                    </span>
+                                }
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>
                 </div>
-                <h4><a href="@url">@product.Name</a></h4>
-                <p>@product.Description</p>
-                @if (product.PromotionPrice.HasValue)
-                {
-                    <span class="actual">@product.PromotionPrice.Value.ToString("N0")₫</span>
-                    <span class="reducedfrom"> @(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N0") + "₫")</span>
-                }
-                else
-                {
-                    <span class="actual">@(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N0") + "₫")</span>
-                }
-
-            </div>
             }
-            <div class="clearfix"> </div>
             @if (Model.TotalPages > 1)
             {
                 // Create numeric links
                 var startPageIndex = Math.Max(1, Model.Page - Model.MaxPage / 2);
                 var endPageIndex = Math.Min(Model.TotalPages, Model.Page + Model.MaxPage / 2);
 
-                <nav>
+                <nav style="text-align:center">
                     <ul class="pagination">
                         @if (Model.Page > 1)
                         {
