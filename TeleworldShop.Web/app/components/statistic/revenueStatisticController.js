@@ -42,8 +42,8 @@
         $scope.$on('UpdateDashBoard', function () {
             notificationService.displaySuccess('Load data successfully !');
             getNumberOfOrder();
-            revenueToday();
-            orderToday();
+            revenueThisYear();
+            orderThisYear();
             getInventoryStatistic();
             getSellStatistic();
             $rootScope.$apply();
@@ -134,11 +134,11 @@
             apiService.get('api/statistic/getorderstatistics?fromDate=' + dateRange.fromDate
                 + "&toDate=" + dateRange.toDate, null,
                 function (response) {
-                    console.log(response);
+                    var count = 0;
                     $.each(response.data, function (i, item) {
-                        $scope.orderCount += item.OrderCount;
+                        count += item.OrderCount;
                     });
-                    console.log($scope.orderCount)
+                    $scope.orderCount = count;
                 },
                 function () {
                     notificationService.displayError('Can not load data');
