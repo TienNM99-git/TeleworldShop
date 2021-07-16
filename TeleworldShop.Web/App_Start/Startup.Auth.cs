@@ -68,7 +68,8 @@ namespace TeleworldShop.Web.App_Start
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = "892950474986-436m94t7aadfchks1mrbuu7j55r1g6uk.apps.googleusercontent.com",
-                ClientSecret = "bR9i9gwkssvBEv3h_sg68T32"
+                ClientSecret = "bR9i9gwkssvBEv3h_sg68T32",
+                UserInformationEndpoint = "https://www.googleapis.com/oauth2/v2/userinfo"
             });
         }
         public class AuthorizationServerProvider : OAuthAuthorizationServerProvider

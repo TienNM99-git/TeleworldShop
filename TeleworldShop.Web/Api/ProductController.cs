@@ -395,22 +395,23 @@ namespace TeleworldShop.Web.Api
                         productViewModel.Quantity = quantity;
 
                     }
-                 
-                    productViewModel.MetaKeyword = workSheet.Cells[i, 8].Value.ToString();
-                    productViewModel.MetaDescription = workSheet.Cells[i, 9].Value.ToString();
-                    productViewModel.Content = workSheet.Cells[i, 10].Value.ToString();
+                    productViewModel.Image = workSheet.Cells[i, 8].Value.ToString();
+                    productViewModel.MoreImages = "[]";
+                    productViewModel.MetaKeyword = workSheet.Cells[i, 9].Value.ToString();
+                    productViewModel.MetaDescription = workSheet.Cells[i, 10].Value.ToString();
+                    productViewModel.Content = workSheet.Cells[i, 11].Value.ToString();
 
                     productViewModel.CategoryId = categoryId;
                     productViewModel.CreatedDate = DateTime.Now;
                     productViewModel.CreatedBy = "admin";
 
-                    bool.TryParse(workSheet.Cells[i, 11].Value.ToString(), out status);
+                    bool.TryParse(workSheet.Cells[i, 12].Value.ToString(), out status);
                     productViewModel.Status = status;
 
-                    bool.TryParse(workSheet.Cells[i, 12].Value.ToString(), out showHome);
+                    bool.TryParse(workSheet.Cells[i, 13].Value.ToString(), out showHome);
                     productViewModel.HomeFlag = showHome;
 
-                    bool.TryParse(workSheet.Cells[i, 13].Value.ToString(), out isHot);
+                    bool.TryParse(workSheet.Cells[i, 14].Value.ToString(), out isHot);
                     productViewModel.HotFlag = isHot;
 
                     product.UpdateProduct(productViewModel);
