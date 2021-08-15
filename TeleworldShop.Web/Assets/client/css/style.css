@@ -825,6 +825,9 @@ span.dolor-left-grid {
 
 .toogle {
     margin-top: 4%;
+    max-width: 1100px;
+    margin-left: auto;
+    text-align: justify;
 }
 
 p.m_text {
