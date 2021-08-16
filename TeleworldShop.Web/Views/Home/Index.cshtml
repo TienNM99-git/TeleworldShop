@@ -72,10 +72,10 @@
                         <div class="product-row-price pull-left">
                             @if (product.PromotionPrice.HasValue)
                             {
-                                <del>@product.PromotionPrice.Value.ToString("N0")₫</del>
+                                <del>@product.Price.ToString("N0")₫</del>
                                 <br />
                                 <span class="product-row-sale">
-                                    @(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N0") + "₫")
+                                    @(product.Quantity == 0 ? "Contact: 0362537131" : product.PromotionPrice.Value.ToString("N0") + "₫")
                                 </span>
 
                             }
@@ -83,7 +83,7 @@
                             {
                                 <br />
                                 <span class="product-row-sale">
-                                    @(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N0") + "₫")
+                                    @(product.Quantity == 0 ? "Contact: 0362537131" : product.PromotionPrice.Value.ToString("N0") + "₫")
                                 </span>
                             }
                         </div>
@@ -125,10 +125,10 @@
                         <div class="product-row-price pull-left">
                             @if (product.PromotionPrice.HasValue)
                             {
-                                <del>@product.PromotionPrice.Value.ToString("N0")₫</del>
+                                <del>@product.Price.ToString("N0")₫</del>
                                 <br />
                                 <span class="product-row-sale">
-                                    @(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N0") + "₫")
+                                    @(product.Quantity == 0 ? "Contact: 0362537131" : product.PromotionPrice.Value.ToString("N0") + "₫")
                                 </span>
 
                             }
@@ -136,7 +136,7 @@
                             {
                                 <br />
                                 <span class="product-row-sale">
-                                    @(product.Price == 0 ? "Contact: 0362537131" : product.Price.ToString("N0") + "₫")
+                                    @(product.Quantity == 0 ? "Contact: 0362537131" : product.Price.ToString("N0") + "₫")
                                 </span>
                             }
                         </div>
