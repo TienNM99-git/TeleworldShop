@@ -64,6 +64,7 @@ namespace TeleworldShop.Service
         {
             var order = _orderRepository.GetSingleById(orderId);
             order.Status = true;
+            order.OrderStatus = "Paid";
             _orderRepository.Update(order);
         }
 

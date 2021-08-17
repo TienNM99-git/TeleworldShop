@@ -300,7 +300,7 @@ namespace TeleworldShop.Web.Controllers
             }
             else
             {
-                ViewBag.IsSuccess = true;
+                ViewBag.IsSuccess = false;
                 ViewBag.Result = "Oops!! An error has occured. Please contact admin (tiennm1999@gmail.com) for more information.";
             }
             return View();

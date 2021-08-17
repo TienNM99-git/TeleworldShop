@@ -124,7 +124,20 @@
     <ul id="flexiselDemo1">
         @foreach (var product in relatedProducts)
         {
-            <li><img src="@product.Image" /><div class="grid-flex"><a href="/@(product.Alias).p-@(product.Id).html">@product.Name</a><p>@product.PromotionPrice.Value.ToString("N0")₫</p></div></li>
+            <li>
+                <img src="@product.Image" />
+                <div class="grid-flex">
+                    <a href="/@(product.Alias).p-@(product.Id).html">@product.Name</a>
+                    @if (product.PromotionPrice.HasValue)
+                    {
+                        <p>@product.PromotionPrice.Value.ToString("N0")₫</p>
+                    }
+                    else
+                    {
+                        <p>@product.Price.ToString("N0")₫</p>
+                    }
+                </div>
+            </li>
         }
     </ul>
 
