@@ -58,7 +58,7 @@
                                 <th style="width: 15%">Created date</th>
                                 <th style="width: auto">Payment method</th>
                                 <th style="width: auto">Payment status</th>
-                                <th style="width: auto">Status</th>
+                                <th style="width: auto">Order Status</th>
                                 <th style="width: 10%">Actions</th>
                             </tr>
                         </thead>
@@ -74,15 +74,20 @@
                                 <td>
                                     <span ng-class="{
                                           'badge bg-danger':item.PaymentStatus=='Unpaid',
-                                          'badge bg-success':item.PaymentStatus=='Paid',
-                                          'badge bg-primary':item.PaymentStatus=='Processing',
+                                          'badge bg-success':item.PaymentStatus=='Paid'
                                           }">
                                         {{item.PaymentStatus}}
                                     </span>
                                 </td>
                                 <td>
-                                    <span ng-class="{'badge bg-danger':item.Status==false,'badge bg-success':item.Status==true}">
-                                        {{item.Status | statusFilter}}
+                                    <span ng-class="{
+                                          'badge bg-danger':item.OrderStatus=='Unverified',
+                                          'badge bg-secondary':item.OrderStatus=='Verified',
+                                          'badge bg-primary':item.OrderStatus=='Waiting for shipping',
+                                          'badge bg-success':item.OrderStatus=='Done',
+                                          'badge bg-warning':item.OrderStatus=='Cancelled',
+                                          }">
+                                        {{item.OrderStatus}}
                                     </span>
                                 </td>
                                 <td>

@@ -13,7 +13,7 @@ namespace TeleworldShop.Service
     public interface IOrderService
     {
         Order Create(ref Order order, List<OrderDetail> orderDetails);
-        void UpdateStatus(int orderId);
+        void UpdateStatus(int orderId, string orderStatus);
         void Save();
         IEnumerable<Order> GetAll();
         void Update(Order product);
@@ -60,11 +60,12 @@ namespace TeleworldShop.Service
             }
         }
 
-        public void UpdateStatus(int orderId)
+        public void UpdateStatus(int orderId, string orderStatus)
         {
             var order = _orderRepository.GetSingleById(orderId);
             order.Status = true;
-            order.OrderStatus = "Verified";
+            order.PaymentStatus = orderStatus =="Verified" ? "Paid" : "Unpaid";
+            order.OrderStatus = orderStatus;
             _orderRepository.Update(order);
         }
 

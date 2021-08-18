@@ -131,7 +131,18 @@ namespace TeleworldShop.Web.Api
 
                     dbOrder.UpdateOrder(orderViewModel);
                     dbOrder.Status = true;
-                    dbOrder.OrderStatus = "Verified";
+                    if(dbOrder.PaymentMethod == "CASH")
+                    {
+                        dbOrder.OrderStatus = "Waiting for shipping";
+                    }
+                    else if(dbOrder.PaymentMethod != "CASH" && dbOrder.OrderStatus == "Waiting for shipping")
+                    {
+                        dbOrder.OrderStatus = "Done";
+                    }
+                    else
+                    {
+                        dbOrder.OrderStatus = "Verified";
+                    }
                     _orderService.Update(dbOrder);
                     _orderService.Save();
                     string verifyContent = "Your order with Id: " + orderViewModel.Id.ToString() + " has been verified by administrtors!! We'll soon have it delivered to you";
@@ -161,7 +172,16 @@ namespace TeleworldShop.Web.Api
                 else
                 {
                     var dbOrder = _orderService.GetById(orderViewModel.Id);
-                    dbOrder.PaymentStatus = "Paid";
+                    if(dbOrder.PaymentMethod == "CASH")
+                    {
+                        dbOrder.OrderStatus = "Done";
+                        dbOrder.PaymentStatus = "Paid";
+                    }
+                    else
+                    {
+                        dbOrder.OrderStatus = "Waiting for shipping";
+                        dbOrder.PaymentStatus = "Paid";
+                    }
                     _orderService.Update(dbOrder);
                     _orderService.Save();
 

@@ -120,15 +120,8 @@ namespace TeleworldShop.Web.Infrastructure.Extensions
             order.CreatedBy = orderVm.CreatedBy;
             order.Status = orderVm.Status;
             order.CustomerId = orderVm.CustomerId;
-            if (orderVm.PaymentMethod == "CASH")
-            {
-                order.PaymentStatus = "Unpaid";
-            }
-            else 
-            {
-                order.PaymentStatus = "Processing";
-            }
-            order.OrderStatus = "Waiting for verfication";
+            order.PaymentStatus = "Unpaid";
+            order.OrderStatus = "Unverified";
         }
 
         public static void UpdatePromotion(this Promotion promotion, PromotionViewModel promotionViewModel)

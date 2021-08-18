@@ -47,7 +47,7 @@ namespace TeleworldShop.Web.Controllers
             if (Request.IsAuthenticated)
             {
                 var dbOrder = _orderService.GetById(orderId);
-                dbOrder.OrderStatus = "Canceled";
+                dbOrder.OrderStatus = "Cancelled";
                 _orderService.Update(dbOrder);
                 _orderService.Save();
 

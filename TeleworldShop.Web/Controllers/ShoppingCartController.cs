@@ -293,13 +293,15 @@ namespace TeleworldShop.Web.Controllers
             if (result.errorCode == "00")
             {
                 //update status order
-                _orderService.UpdateStatus(int.Parse(result.order_code));
+                _orderService.UpdateStatus(int.Parse(result.order_code), "Verified");
                 _orderService.Save();
                 ViewBag.IsSuccess = true;
                 ViewBag.Result = "Payment finished successfully. We'll contact you soon !!!";
             }
             else
             {
+                _orderService.UpdateStatus(int.Parse(result.order_code), "Cancelled");
+                _orderService.Save();
                 ViewBag.IsSuccess = false;
                 ViewBag.Result = "Oops!! An error has occured. Please contact admin (tiennm1999@gmail.com) for more information.";
             }
