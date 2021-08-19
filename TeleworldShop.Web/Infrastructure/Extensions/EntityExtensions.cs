@@ -139,19 +139,22 @@ namespace TeleworldShop.Web.Infrastructure.Extensions
                 }
                             
             }         
-            if (orderVm.PaymentMethod != "CASH" && orderVm.PaymentStatus == "Paid" && orderVm.OrderStatus == "Waiting for shipping")
+            if (orderVm.PaymentMethod != "CASH")
             {
-                order.OrderStatus = "Done";
-            }
-            else if (orderVm.PaymentMethod != "CASH" && orderVm.PaymentStatus == "Paid" && orderVm.OrderStatus == "Verified")
-            {
-                order.OrderStatus = "Waiting for shipping";
-            }
-            else
-            {
-                order.PaymentStatus = "Unpaid";
-                order.OrderStatus = "Unverified";
-            }
+                if (orderVm.OrderStatus == "Waiting for shipping" && orderVm.PaymentStatus == "Paid")
+                { 
+                    order.OrderStatus = "Done"; 
+                }
+                else if (orderVm.OrderStatus == "Verified" && orderVm.PaymentStatus == "Paid")
+                {
+                    order.OrderStatus = "Waiting for shipping";
+                }
+                else
+                {
+                    order.PaymentStatus = "Unpaid";
+                    order.OrderStatus = "Unverified";
+                }
+            }          
         }
 
         public static void UpdatePromotion(this Promotion promotion, PromotionViewModel promotionViewModel)
