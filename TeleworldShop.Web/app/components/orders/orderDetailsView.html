@@ -91,8 +91,8 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-                <button type="button" ng-click="updateOrder()" ng-disabled="frmUpdateOrder.$invalid" class="btn btn-success">Verify/Mark as shipping</button>
-                <button type="button" ng-click="markOrderAsPaid()" ng-disabled="frmUpdateOrder.$invalid" class="btn btn-info">Mark as paid</button>
+                <button type="button" ng-click="updateOrder()" ng-disabled="frmUpdateOrder.$invalid || order.OrderStatus == 'Done'" class="btn btn-success">Verify/Ship/Done (Online Payment)</button>
+                <button type="button" ng-click="markOrderAsPaid()" ng-disabled="frmUpdateOrder.$invalid || order.OrderStatus == 'Done'" class="btn btn-info">Mark as paid (Cash)</button>
                 <button ui-sref="orders" class="btn btn-default float-right">Cancel</button>
             </div>
             <!-- /.card-footer -->

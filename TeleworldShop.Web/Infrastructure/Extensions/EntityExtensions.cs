@@ -120,8 +120,19 @@ namespace TeleworldShop.Web.Infrastructure.Extensions
             order.CreatedBy = orderVm.CreatedBy;
             order.Status = orderVm.Status;
             order.CustomerId = orderVm.CustomerId;
-            order.PaymentStatus = "Unpaid";
-            order.OrderStatus = "Unverified";
+            if(orderVm.PaymentMethod != "CASH" && orderVm.PaymentStatus == "Paid" && orderVm.OrderStatus == "Waiting for shipping")
+            {
+                order.OrderStatus = "Done";
+            }
+            else if (orderVm.PaymentMethod != "CASH" && orderVm.PaymentStatus == "Paid" &&orderVm.OrderStatus == "Verified")
+            {
+                order.OrderStatus = "Waiting for shipping";
+            }
+            else
+            {
+                order.PaymentStatus = "Unpaid";
+                order.OrderStatus = "Unverified";
+            }
         }
 
         public static void UpdatePromotion(this Promotion promotion, PromotionViewModel promotionViewModel)
